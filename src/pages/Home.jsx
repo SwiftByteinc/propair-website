@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Smartphone, CreditCard, Bell, MessageCircle, Star } from 'lucide-react';
+import { ArrowRight, Smartphone, CreditCard, Bell, MessageCircle, Star, MapPin, Navigation } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 
@@ -61,52 +61,63 @@ export default function Home() {
                  {/* Notch */}
                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-2xl z-20"></div>
 
-                 {/* Screen Content */}
-                 <div className="w-full h-full bg-slate-50 relative overflow-hidden flex flex-col">
-                    {/* App Header */}
-                    <div className="h-24 bg-brand rounded-b-[40px] shadow-lg flex items-end justify-center pb-4">
-                       <span className="text-white font-bold text-xl">ProPair</span>
+                 {/* Screen Content - MAP UI */}
+                 <div className="w-full h-full bg-slate-100 relative overflow-hidden flex flex-col">
+
+                    {/* Map Background Roads */}
+                    <div className="absolute inset-0 z-0">
+                        {/* Vertical Roads */}
+                        <div className="absolute left-[20%] h-full w-4 bg-white/70"></div>
+                        <div className="absolute left-[60%] h-full w-6 bg-white/70"></div>
+                        <div className="absolute right-[10%] h-full w-3 bg-white/70"></div>
+
+                        {/* Horizontal Roads */}
+                        <div className="absolute top-[30%] w-full h-5 bg-white/70"></div>
+                        <div className="absolute top-[70%] w-full h-4 bg-white/70"></div>
+
+                        {/* Diagonal/Rotated */}
+                        <div className="absolute top-[40%] left-[-10%] w-[120%] h-4 bg-white/70 rotate-12 origin-left"></div>
                     </div>
 
-                    {/* App Body Placeholder */}
-                    <div className="p-6 space-y-4 flex-1">
-                       {/* Mock Notification */}
-                       <div className="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-3 animate-pulse">
-                          <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-brand">
-                             <Bell size={18} />
-                          </div>
-                          <div>
-                             <div className="h-3 w-24 bg-slate-200 rounded mb-1"></div>
-                             <div className="h-2 w-32 bg-slate-100 rounded"></div>
-                          </div>
-                       </div>
-
-                       {/* Mock Cards */}
-                       <div className="h-32 bg-gradient-to-br from-slate-100 to-white rounded-2xl border border-slate-100 p-4">
-                          <div className="flex justify-between items-start">
-                             <div className="w-12 h-12 rounded-xl bg-orange-100"></div>
-                             <div className="w-8 h-4 bg-green-100 rounded-full"></div>
-                          </div>
-                          <div className="mt-4 space-y-2">
-                             <div className="h-3 w-3/4 bg-slate-200 rounded"></div>
-                             <div className="h-2 w-1/2 bg-slate-100 rounded"></div>
-                          </div>
-                       </div>
-
-                       <div className="h-32 bg-gradient-to-br from-slate-100 to-white rounded-2xl border border-slate-100 p-4 opacity-70">
-                          <div className="mt-4 space-y-2">
-                             <div className="h-3 w-3/4 bg-slate-200 rounded"></div>
-                             <div className="h-2 w-1/2 bg-slate-100 rounded"></div>
-                          </div>
-                       </div>
+                    {/* Pins */}
+                    <div className="absolute top-[35%] left-[25%] z-10 text-teal-500 drop-shadow-md animate-bounce" style={{ animationDuration: '2s' }}>
+                        <MapPin size={32} fill="currentColor" />
+                    </div>
+                    <div className="absolute top-[60%] right-[20%] z-10 text-teal-500 drop-shadow-md animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}>
+                        <MapPin size={32} fill="currentColor" />
+                    </div>
+                     <div className="absolute top-[15%] right-[30%] z-10 text-slate-400 drop-shadow-md">
+                        <MapPin size={24} fill="currentColor" />
                     </div>
 
-                    {/* App Tab Bar */}
-                    <div className="h-20 bg-white border-t border-slate-100 flex items-center justify-around px-6 pb-4">
-                       <div className="text-brand"><Star size={24} fill="currentColor" /></div>
-                       <div className="text-slate-300"><MessageCircle size={24} /></div>
-                       <div className="text-slate-300"><Bell size={24} /></div>
+                    {/* Top Search Bar Simulation */}
+                     <div className="absolute top-12 left-4 right-4 bg-white rounded-full shadow-md p-3 flex items-center gap-2 z-20">
+                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                             <Navigation size={14} />
+                        </div>
+                        <div className="h-2 w-24 bg-slate-200 rounded"></div>
+                     </div>
+
+                    {/* Pro Card (Bottom) */}
+                    <div className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-xl p-4 z-20">
+                        <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-full bg-slate-200 overflow-hidden relative border-2 border-white shadow-sm">
+                                {/* Simple Avatar Placeholder */}
+                                <div className="absolute inset-0 bg-slate-300 flex items-center justify-center text-slate-500 text-xs font-bold">TP</div>
+                            </div>
+                            <div className="flex-1">
+                                <h4 className="font-bold text-slate-900 text-sm">Thomas Plomberie</h4>
+                                <div className="flex items-center gap-1">
+                                    <Star size={12} className="text-yellow-400 fill-current" />
+                                    <span className="text-xs text-slate-600 font-medium">4.9 (124 avis)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-3 flex gap-2">
+                             <Button size="sm" className="w-full text-xs py-2 h-auto">Contacter</Button>
+                        </div>
                     </div>
+
                  </div>
 
                  {/* Reflection */}
