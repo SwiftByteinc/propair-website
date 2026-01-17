@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: '#0E7490', // Teal-700
+      }
+    },
   },
   plugins: [],
 }
