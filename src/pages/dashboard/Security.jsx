@@ -21,6 +21,7 @@ export default function Security() {
   const [showPassword, setShowPassword] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [passwords, setPasswords] = useState({
@@ -84,10 +85,26 @@ export default function Security() {
     alert('Fonctionnalité à venir: Vérification par SMS');
   };
 
-  const handleDeleteAccount = () => {
-    // TODO: Connect to Edge Function for RGPD-compliant deletion
-    alert('Demande de suppression envoyée. Votre compte sera supprimé dans les 30 jours.');
-    setShowDeleteModal(false);
+  const handleDeleteAccount = async () => {
+    try {
+      setIsDeleting(true);
+
+      // Appel à l'Edge Function sécurisée pour suppression RGPD
+      const { error } = await supabase.functions.invoke('delete-user-account');
+
+      if (error) throw error;
+
+      // Déconnexion locale et redirection
+      await supabase.auth.signOut();
+      window.location.href = '/';
+
+    } catch (error) {
+      console.error('Erreur suppression:', error);
+      alert('Erreur lors de la suppression. Veuillez contacter support@propairapp.com');
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteModal(false);
+    }
   };
 
   return (
@@ -325,15 +342,24 @@ export default function Security() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowDeleteModal(false)}
-                className="flex-1 py-2.5 bg-gray-100 text-gray-700 rounded-lg font-semibold text-sm hover:bg-gray-200 transition-colors"
+                disabled={isDeleting}
+                className="flex-1 py-2.5 bg-gray-100 text-gray-700 rounded-lg font-semibold text-sm hover:bg-gray-200 transition-colors disabled:opacity-50"
               >
                 Annuler
               </button>
               <button
                 onClick={handleDeleteAccount}
-                className="flex-1 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors"
+                disabled={isDeleting}
+                className="flex-1 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                Supprimer
+                {isDeleting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Suppression...
+                  </>
+                ) : (
+                  'Supprimer'
+                )}
               </button>
             </div>
           </motion.div>

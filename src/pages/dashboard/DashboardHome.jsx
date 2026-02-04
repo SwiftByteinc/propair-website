@@ -14,25 +14,29 @@ import {
   HelpCircle,
   Shield
 } from 'lucide-react';
+import { useReferralStats } from '../../hooks/useReferralStats';
 
 export default function DashboardHome() {
   const { user } = useOutletContext();
   const isEntrepreneur = user.role === 'entrepreneur';
   const [copied, setCopied] = useState(false);
 
+  // ✅ Connexion aux vraies stats de parrainage
+  const { stats: referralStats, loading: loadingStats } = useReferralStats(user?.id);
+
   // Data from user profile (passed via context)
   const proMonthsEarned = user.pro_months_balance || 0;
-  const connectionsTotal = 3;
+  const connectionsTotal = 3; // Limite essai gratuit
   const referralCode = user.referral_code || 'PROPAIR2024';
   const referralLink = `https://propairapp.com/login?ref=${referralCode}`;
   const referralGoal = 3;
 
   // Calculate connections used (for trial users)
   const connectionsUsed = user?.trial_connections_count || 0;
-  const connectionsRemaining = Math.max(0, connectionsTotal - connectionsUsed);
+  const connectionsRemaining = user?.isPro ? 999 : Math.max(0, connectionsTotal - connectionsUsed);
 
-  // Referral count - placeholder until referral_events table is set up
-  const referralCount = 0;
+  // ✅ Vraies données de parrainage depuis Supabase
+  const referralCount = loadingStats ? 0 : (referralStats?.validatedReferrals || 0);
 
   const copyReferralLink = () => {
     navigator.clipboard.writeText(referralLink);

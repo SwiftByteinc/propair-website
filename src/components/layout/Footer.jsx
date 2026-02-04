@@ -26,25 +26,16 @@ export default function Footer() {
               <MapPin size={16} className="text-teal" />
               <span>Magog, Québec</span>
             </div>
+            {/* Réseaux sociaux - À activer quand les pages existent */}
+            {/*
             <div className="flex space-x-4">
               {[
-                { name: 'Facebook', href: '#', path: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' },
-                { name: 'Twitter', href: '#', path: 'M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z' },
-                { name: 'Instagram', href: '#', path: 'M16 8a6 6 0 0 1 6 6v7a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6v-7a6 6 0 0 1 6-6h8zM12 11a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z' },
-                { name: 'LinkedIn', href: '#', path: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z' }
+                { name: 'Facebook', href: 'https://facebook.com/propairapp', path: '...' },
               ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  aria-label={social.name}
-                  className="w-10 h-10 bg-surface hover:bg-teal rounded-lg flex items-center justify-center text-muted hover:text-white transition-all border border-border"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <path d={social.path} />
-                  </svg>
-                </a>
+                <a key={i} href={social.href} ... />
               ))}
             </div>
+            */}
           </div>
 
           {/* Product Links */}
@@ -79,19 +70,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-body hover:text-teal transition-colors">
-                  Carrières
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-body hover:text-teal transition-colors">
+                <a href="mailto:support@propairapp.com" className="text-body hover:text-teal transition-colors">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#" className="text-body hover:text-teal transition-colors">
-                  Presse
-                </a>
+                <Link to="/login" className="text-body hover:text-teal transition-colors">
+                  Connexion
+                </Link>
               </li>
             </ul>
           </div>
