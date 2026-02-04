@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Crown,
   Zap,
@@ -15,9 +15,11 @@ import {
   Shield
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
+import { useToast } from '../../context/ToastContext';
 
 export default function DashboardHome() {
   const { user } = useOutletContext();
+  const toast = useToast();
   const isEntrepreneur = user.role === 'entrepreneur';
   const [copied, setCopied] = useState(false);
 
@@ -46,8 +48,8 @@ export default function DashboardHome() {
 
   const handleStripeAction = () => {
     // TODO: Integrate with Stripe
-    alert(user.isPro
-      ? 'Redirection vers Stripe Customer Portal...'
+    toast.info(user.isPro
+      ? 'Redirection vers le portail Stripe...'
       : 'Redirection vers Stripe Checkout...'
     );
   };

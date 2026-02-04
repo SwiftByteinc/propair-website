@@ -1,11 +1,13 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CookieConsent from './components/ui/CookieConsent';
+import StructuredData from './components/seo/StructuredData';
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -78,10 +80,12 @@ function AuthLayout({ children }) {
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Routes>
+      <ToastProvider>
+        <AuthProvider>
+          <Router>
+            <StructuredData />
+            <ScrollToTop />
+            <Routes>
             {/* Public pages with Navbar and Footer */}
             <Route path="/" element={<MainLayout><Home /></MainLayout>} />
             <Route path="/pricing" element={<MainLayout><Pricing /></MainLayout>} />
@@ -115,10 +119,11 @@ function App() {
             <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
           </Routes>
 
-          {/* Cookie Consent Banner (RGPD/Loi 25) */}
-          <CookieConsent />
-        </Router>
-      </AuthProvider>
+            {/* Cookie Consent Banner (RGPD/Loi 25) */}
+            <CookieConsent />
+          </Router>
+        </AuthProvider>
+      </ToastProvider>
     </ErrorBoundary>
   );
 }

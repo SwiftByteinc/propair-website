@@ -12,10 +12,12 @@ import {
   Loader2
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import { useToast } from '../../context/ToastContext';
 
 
 export default function Security() {
-  const { user, profile } = useOutletContext();
+  const { user } = useOutletContext();
+  const toast = useToast();
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -89,7 +91,7 @@ export default function Security() {
 
     } catch (error) {
       console.error('Erreur suppression:', error);
-      alert('Erreur lors de la suppression. Veuillez contacter support@propairapp.com');
+      toast.error('Erreur lors de la suppression. Veuillez contacter support@propairapp.com');
     } finally {
       setIsDeleting(false);
       setShowDeleteModal(false);

@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   CreditCard,
   Download,
   Crown,
-  Zap,
   Check,
   Shield,
   Lock,
   ChevronRight,
   ExternalLink
 } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
 
 export default function Billing() {
-  const { user, subscription, isPro } = useOutletContext();
+  const { subscription, isPro } = useOutletContext();
+  const toast = useToast();
 
   // Format subscription end date
   const formatDate = (dateString) => {
@@ -35,16 +35,16 @@ export default function Billing() {
 
   const handleStripeCheckout = () => {
     // TODO: Connect to Stripe Edge Function
-    alert('Redirection vers Stripe Checkout...\n\nÀ connecter avec les Edge Functions Supabase.');
+    toast.info('Redirection vers Stripe Checkout...');
   };
 
   const handleStripePortal = () => {
     // TODO: Connect to Stripe Edge Function
-    alert('Redirection vers Stripe Customer Portal...\n\nÀ connecter avec les Edge Functions Supabase.');
+    toast.info('Redirection vers le portail Stripe...');
   };
 
   const handleDownloadInvoice = (invoiceId) => {
-    alert(`Téléchargement de ${invoiceId}...`);
+    toast.success(`Téléchargement de ${invoiceId} en cours...`);
   };
 
   return (
