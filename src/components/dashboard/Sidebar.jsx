@@ -5,7 +5,6 @@ import {
   Gift,
   Shield,
   LogOut,
-  MapPin,
   ChevronLeft,
   Crown,
   Zap
@@ -24,7 +23,7 @@ export default function Sidebar({ user, onSignOut }) {
 
   const clientLinks = [
     { to: '/portal', icon: Home, label: 'Accueil', end: true },
-    { to: '/portal/info', icon: MapPin, label: 'Mes Infos' },
+    { to: '/portal/billing', icon: CreditCard, label: 'Abonnement' },
     { to: '/portal/referral', icon: Gift, label: 'Parrainage' },
     { to: '/portal/security', icon: Shield, label: 'Sécurité' },
   ];

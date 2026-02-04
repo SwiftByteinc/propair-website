@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield,
   Lock,
-  Smartphone,
   Mail,
   Eye,
   EyeOff,
@@ -35,10 +34,6 @@ export default function Security() {
     email: {
       verified: user?.email ? true : false, // If email exists, consider verified (from SSO or confirmed signup)
       value: user?.email || 'Non renseigné'
-    },
-    phone: {
-      verified: profile?.phone_verified || false,
-      value: profile?.phone || ''
     }
   };
 
@@ -77,12 +72,6 @@ export default function Security() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleVerifyPhone = () => {
-    // Phone verification would typically involve sending an SMS code
-    // This requires additional setup with Supabase or a third-party service
-    alert('Fonctionnalité à venir: Vérification par SMS');
   };
 
   const handleDeleteAccount = async () => {
@@ -137,49 +126,21 @@ export default function Security() {
             <h2 className="font-bold text-gray-900">Vérifications</h2>
           </div>
 
-          <div className="divide-y divide-gray-50">
-            {/* Email */}
-            <div className="px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-gray-400" />
-                <div>
-                  <p className="text-sm font-medium text-gray-900">Email</p>
-                  <p className="text-xs text-gray-400">{verification.email.value}</p>
-                </div>
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Mail size={18} className="text-gray-400" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Email</p>
+                <p className="text-xs text-gray-400">{verification.email.value}</p>
               </div>
-              <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                verification.email.verified
-                  ? 'bg-teal/10 text-teal'
-                  : 'bg-amber/10 text-amber'
-              }`}>
-                {verification.email.verified ? 'Vérifié' : 'Non vérifié'}
-              </span>
             </div>
-
-            {/* Phone */}
-            <div className="px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Smartphone size={18} className="text-gray-400" />
-                <div>
-                  <p className="text-sm font-medium text-gray-900">Téléphone</p>
-                  <p className="text-xs text-gray-400">
-                    {verification.phone.verified ? verification.phone.value : 'Non renseigné'}
-                  </p>
-                </div>
-              </div>
-              {verification.phone.verified ? (
-                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-teal/10 text-teal">
-                  Vérifié
-                </span>
-              ) : (
-                <button
-                  onClick={handleVerifyPhone}
-                  className="text-xs font-semibold text-teal hover:text-teal-dark transition-colors"
-                >
-                  Vérifier
-                </button>
-              )}
-            </div>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+              verification.email.verified
+                ? 'bg-teal/10 text-teal'
+                : 'bg-amber/10 text-amber'
+            }`}>
+              {verification.email.verified ? 'Vérifié' : 'Non vérifié'}
+            </span>
           </div>
         </motion.section>
 

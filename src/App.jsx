@@ -21,7 +21,6 @@ import DashboardHome from './pages/dashboard/DashboardHome';
 import Billing from './pages/dashboard/Billing';
 import Referral from './pages/dashboard/Referral';
 import Security from './pages/dashboard/Security';
-import ClientInfo from './pages/dashboard/ClientInfo';
 
 // ScrollToTop component to handle scroll position on route change
 function ScrollToTop() {
@@ -84,7 +83,6 @@ function App() {
               <Route path="billing" element={<Billing />} />
               <Route path="referral" element={<Referral />} />
               <Route path="security" element={<Security />} />
-              <Route path="info" element={<ClientInfo />} />
             </Route>
 
             {/* 404 - Page Not Found */}

@@ -1,5 +1,6 @@
 // supabase/functions/delete-user-account/index.ts
 // Edge Function pour suppression de compte conforme RGPD/Loi 25
+// Soft delete: données anonymisées immédiatement, conservées 30 jours puis purgées
 // À déployer avec: supabase functions deploy delete-user-account
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
@@ -43,38 +44,46 @@ serve(async (req) => {
       )
     }
 
-    console.log(`Deleting user: ${user.id} (${user.email})`)
+    console.log(`Soft-deleting user: ${user.id} (${user.email})`)
 
-    // 3. Supprimer les données liées dans les tables (si pas de CASCADE)
-    // Note: Si tes foreign keys ont ON DELETE CASCADE, cette étape est optionnelle
-
-    // Supprimer les événements de parrainage où l'utilisateur est le parrain
-    await supabaseAdmin
-      .from('referral_events')
-      .delete()
-      .eq('referrer_id', user.id)
-
-    // Supprimer le profil
-    await supabaseAdmin
+    // 3. RGPD/Loi 25 - Soft delete avec rétention 30 jours
+    // Marquer le compte comme supprimé (les données seront purgées après 30 jours)
+    const { error: updateError } = await supabaseAdmin
       .from('profiles')
-      .delete()
+      .update({
+        account_deleted: true,
+        account_deleted_at: new Date().toISOString(),
+        // Anonymiser les données sensibles immédiatement
+        full_name: 'Compte supprimé',
+        phone: null
+      })
       .eq('id', user.id)
 
-    // 4. Supprimer l'utilisateur de auth.users
-    const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(user.id)
-
-    if (deleteError) {
-      console.error('Delete error:', deleteError)
+    if (updateError) {
+      console.error('Update error:', updateError)
       return new Response(
-        JSON.stringify({ error: deleteError.message }),
+        JSON.stringify({ error: updateError.message }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 
-    console.log(`User ${user.id} deleted successfully`)
+    // 4. Désactiver l'utilisateur dans auth (ban = ne peut plus se connecter)
+    const { error: banError } = await supabaseAdmin.auth.admin.updateUserById(user.id, {
+      ban_duration: '876000h' // ~100 ans = compte désactivé définitivement
+    })
+
+    if (banError) {
+      console.error('Ban error:', banError)
+      return new Response(
+        JSON.stringify({ error: banError.message }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    console.log(`User ${user.id} soft-deleted successfully (data retained 30 days)`)
 
     return new Response(
-      JSON.stringify({ message: 'Compte supprimé avec succès' }),
+      JSON.stringify({ message: 'Compte supprimé avec succès. Données conservées 30 jours.' }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
 
