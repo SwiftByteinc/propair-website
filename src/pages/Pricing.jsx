@@ -1,38 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, AlertCircle, TrendingUp } from 'lucide-react';
-import Card from '../components/ui/Card';
-import Button from '../components/ui/Button';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Check, Zap, Shield, Bell, Users, ChevronDown, ChevronUp, Sparkles, Download, ArrowRight } from 'lucide-react';
 
 export default function Pricing() {
-  const [showPopup, setShowPopup] = useState(false);
-  const [hasSeenPopup, setHasSeenPopup] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
 
-  // Trigger popup after 5 seconds if not seen
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!hasSeenPopup) {
-        setShowPopup(true);
-        setHasSeenPopup(true);
-      }
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [hasSeenPopup]);
+  const clientFeatures = [
+    "Trouver un professionnel qualifié",
+    "Chat direct avec les artisans",
+    "Devis gratuits et sans engagement",
+    "Aucune commission sur vos travaux"
+  ];
 
-  const handleMonthlyClick = () => {
-    if (!hasSeenPopup) {
-      setShowPopup(true);
-      setHasSeenPopup(true);
+  const proFeatures = [
+    { icon: Zap, text: "Accès illimité aux demandes de votre zone" },
+    { icon: Shield, text: "Profil vérifié avec badge de confiance" },
+    { icon: Bell, text: "Notifications instantanées" },
+    { icon: Users, text: "0% de commission sur vos revenus" }
+  ];
+
+  const faqs = [
+    {
+      question: "Puis-je annuler à tout moment ?",
+      answer: "Oui, vous pouvez annuler votre abonnement à tout moment depuis votre espace personnel. Votre accès reste actif jusqu'à la fin de la période payée."
+    },
+    {
+      question: "Comment fonctionnent les 3 connexions offertes ?",
+      answer: "En vous inscrivant, vous recevez 3 connexions gratuites. Chaque connexion vous permet de répondre à une demande client. C'est l'équivalent d'un essai gratuit sans limite de temps."
+    },
+    {
+      question: "Quels moyens de paiement acceptez-vous ?",
+      answer: "Nous acceptons toutes les cartes bancaires (Visa, Mastercard, American Express) ainsi que les paiements par virement. Tous les paiements sont sécurisés par Stripe."
+    },
+    {
+      question: "Y a-t-il vraiment 0% de commission ?",
+      answer: "Absolument. Contrairement aux plateformes qui prennent 15-25% de vos revenus, ProPair fonctionne sur un abonnement fixe. Vous gardez 100% de ce que vous facturez à vos clients."
+    },
+    {
+      question: "Comment fonctionne le parrainage ?",
+      answer: "Chaque entrepreneur que vous parrainez vous offre 1 mois gratuit d'abonnement. Il n'y a pas de limite : parrainez 12 pros et votre année est entièrement gratuite !"
     }
-  };
+  ];
 
   return (
-    <div className="pt-32 pb-24 bg-slate-50 min-h-screen relative overflow-hidden">
-
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-slate-900 skew-y-3 transform -translate-y-24 z-0" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="pt-32 pb-24 bg-surface min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -41,180 +54,221 @@ export default function Pricing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Ne laissez pas filer votre marge</h1>
-            <p className="text-xl text-slate-300 mb-8">
-              ProPair est la seule plateforme qui vous laisse choisir votre modèle de commission.
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Choisissez votre{' '}
+              <span className="text-gradient-teal">formule</span>
+            </h1>
+            <p className="text-xl text-body">
+              Une offre simple et transparente pour tous.
             </p>
           </motion.div>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
 
-          {/* Monthly Plan (High Fees) */}
+          {/* Client Card - White, subtle */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-3xl p-8 border border-border shadow-soft"
           >
-            <Card className="border border-slate-200 h-full bg-white/95 backdrop-blur">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-900">Mensuel</h3>
-                <p className="text-slate-500 mt-1">Flexibilité maximale, frais standards.</p>
-
-                <div className="my-8 py-6 border-y border-slate-100">
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-5xl font-bold text-slate-900">$23</span>
-                    <span className="text-slate-500 ml-2">/mois</span>
-                  </div>
-                  <div className="mt-4 flex items-center justify-center text-red-500 bg-red-50 py-2 px-4 rounded-full mx-auto w-fit">
-                    <AlertCircle size={18} className="mr-2" />
-                    <span className="font-bold">10.47% de commission</span>
-                  </div>
-                  <p className="text-center text-xs text-slate-400 mt-2">sur chaque transaction</p>
-                </div>
-
-                <Button variant="outline" className="w-full mb-8 py-4" onClick={handleMonthlyClick}>
-                  Choisir le Mensuel
-                </Button>
-
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <Check size={18} className="text-slate-400 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">Accès complet à la plateforme</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Check size={18} className="text-slate-400 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-600">Liberté d'arrêter quand vous voulez</span>
-                  </li>
-                </ul>
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface text-body rounded-full text-sm font-medium mb-4">
+                <Users size={14} />
+                Pour les clients
               </div>
-            </Card>
+              <h3 className="text-2xl font-bold text-primary mb-2">Gratuit</h3>
+              <p className="text-muted">Pour toujours</p>
+            </div>
+
+            <div className="mb-8">
+              <div className="text-5xl font-bold text-primary mb-2">
+                0$
+              </div>
+              <p className="text-muted">Aucun frais, jamais</p>
+            </div>
+
+            <ul className="space-y-4 mb-8">
+              {clientFeatures.map((feature, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <Check size={20} className="text-teal flex-shrink-0 mt-0.5" />
+                  <span className="text-body">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/login"
+              className="block w-full py-4 px-6 text-center font-semibold text-body border-2 border-border-dark rounded-xl hover:bg-surface transition-colors"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <Download size={18} />
+                Télécharger l'app
+              </span>
+            </Link>
           </motion.div>
 
-          {/* Annual Plan (Low Fees - Winner) */}
+          {/* Pro Card - White with teal border, prominent */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white rounded-3xl p-8 border-2 border-teal shadow-soft-lg relative overflow-hidden"
           >
-             <div className="absolute -top-5 inset-x-0 flex justify-center z-20">
-               <span className="bg-gradient-to-r from-teal-500 to-teal-600 text-white text-sm font-bold px-6 py-2 rounded-full uppercase tracking-wider shadow-lg transform hover:scale-105 transition-transform cursor-default">
-                 Choix Intelligent
-               </span>
-             </div>
-            <Card className="border-2 border-teal-500 shadow-2xl shadow-teal-900/20 h-full relative z-10 bg-white overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-bl-full -mr-16 -mt-16 z-0" />
+            {/* Subtle glow effect */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber/5 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="p-8 relative z-10">
-                <h3 className="text-2xl font-bold text-slate-900">Annuel</h3>
-                <p className="text-teal-600 font-medium mt-1">Maximisez vos profits dès le jour 1.</p>
-
-                <div className="my-8 py-6 border-y border-dashed border-slate-200">
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-6xl font-extrabold text-slate-900">$150</span>
-                    <span className="text-slate-500 ml-2">/an</span>
+            <div className="relative">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal/10 text-teal rounded-full text-sm font-medium mb-4">
+                    <Sparkles size={14} />
+                    Pour les entrepreneurs
                   </div>
-                   <p className="text-center text-sm text-slate-400 mt-1">(soit $12.50/mois)</p>
-
-                  <div className="mt-4 flex items-center justify-center text-teal-700 bg-teal-50 py-3 px-6 rounded-full mx-auto w-fit shadow-sm border border-teal-100">
-                    <TrendingUp size={20} className="mr-2" />
-                    <span className="font-bold text-lg">Seulement 2.8%</span>
-                  </div>
-                  <p className="text-center text-xs text-slate-400 mt-2">de commission transactionnelle</p>
+                  <h3 className="text-2xl font-bold text-primary mb-2">Abonnement Pro</h3>
+                  <p className="text-muted">Accès complet à la plateforme</p>
                 </div>
-
-                <Button variant="primary" className="w-full mb-8 py-4 text-lg shadow-lg shadow-teal-500/30">
-                  Passer à l'Annuel
-                </Button>
-
-                <ul className="space-y-4">
-                  {[
-                    "Economisez 126$ sur l'abonnement",
-                    "Gagnez ~8% de plus sur chaque projet",
-                    "Badge 'Pro Partenaire' exclusif",
-                    "Support Prioritaire"
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <div className="bg-teal-100 rounded-full p-1 mr-3 mt-0.5">
-                        <Check size={14} className="text-teal-700 flex-shrink-0" />
-                      </div>
-                      <span className="text-slate-800 font-medium">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-            </Card>
+
+              {/* Badge 3 connexions */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber/10 text-amber-dark rounded-full text-sm font-semibold mb-6 border border-amber/20">
+                <Zap size={16} />
+                3 connexions offertes à l'inscription
+              </div>
+
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-bold text-primary">29$</span>
+                  <span className="text-muted">/mois</span>
+                </div>
+                <p className="text-muted mt-1">Facturation mensuelle</p>
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                {proFeatures.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-teal/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <feature.icon size={16} className="text-teal" />
+                    </div>
+                    <span className="text-body pt-1">{feature.text}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                to="/login?redirect=billing"
+                className="block w-full py-4 px-6 text-center font-semibold text-white bg-amber hover:bg-amber-dark rounded-xl transition-colors shadow-lg shadow-amber/25"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  Choisir ce plan
+                  <ArrowRight size={18} />
+                </span>
+              </Link>
+
+              <p className="text-center text-muted text-sm mt-4">
+                Annulation possible à tout moment
+              </p>
+            </div>
           </motion.div>
-
         </div>
 
-        {/* Trust Badge */}
-        <div className="mt-16 text-center">
-            <p className="text-slate-400 text-sm">Paiements sécurisés par Stripe • Annulation facile • Satisfait ou remboursé</p>
-        </div>
+        {/* Trust Badges */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-wrap justify-center gap-8 mb-20 py-8 border-y border-border"
+        >
+          <div className="flex items-center gap-2 text-body">
+            <Shield size={20} className="text-teal" />
+            <span className="font-medium">Paiements sécurisés par Stripe</span>
+          </div>
+          <div className="flex items-center gap-2 text-body">
+            <Check size={20} className="text-teal" />
+            <span className="font-medium">Satisfait ou remboursé</span>
+          </div>
+          <div className="flex items-center gap-2 text-body">
+            <Users size={20} className="text-teal" />
+            <span className="font-medium">+2,500 pros actifs</span>
+          </div>
+        </motion.div>
+
+        {/* FAQ Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+            Questions fréquentes
+          </h2>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl border border-border overflow-hidden shadow-soft"
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface transition-colors"
+                >
+                  <span className="font-semibold text-primary pr-4">{faq.question}</span>
+                  {openFaq === index ? (
+                    <ChevronUp size={20} className="text-muted flex-shrink-0" />
+                  ) : (
+                    <ChevronDown size={20} className="text-muted flex-shrink-0" />
+                  )}
+                </button>
+                {openFaq === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="px-6 pb-5"
+                  >
+                    <p className="text-body leading-relaxed">{faq.answer}</p>
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Final CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <div className="bg-white rounded-3xl p-12 border-2 border-teal shadow-soft-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber/5 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+                Prêt à développer votre activité ?
+              </h2>
+              <p className="text-body text-lg mb-8 max-w-xl mx-auto">
+                Rejoignez ProPair et commencez à recevoir des demandes de clients qualifiés dans votre région.
+              </p>
+              <Link
+                to="/login?redirect=billing"
+                className="inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-white font-semibold py-4 px-8 rounded-full transition-colors shadow-lg shadow-amber/25 btn-press"
+              >
+                Commencer maintenant
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
 
       </div>
-
-      {/* Smart Popup */}
-      <AnimatePresence>
-        {showPopup && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-40"
-              onClick={() => setShowPopup(false)}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg"
-            >
-              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div className="bg-slate-900 p-6 text-center relative">
-                    <button onClick={() => setShowPopup(false)} className="absolute top-4 right-4 text-slate-400 hover:text-white">
-                        <X size={24} />
-                    </button>
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-teal-500/20 rounded-full mb-4 border border-teal-500/50">
-                        <TrendingUp className="text-teal-400" size={32} />
-                    </div>
-                    <h2 className="text-2xl font-bold text-white">Cet argent est à vous.</h2>
-                </div>
-
-                <div className="p-8">
-                    <p className="text-slate-600 text-lg mb-6 text-center">
-                        En passant au plan Annuel, vous économisez en moyenne <span className="font-bold text-slate-900">+800$ de frais</span> par an sur vos projets.
-                    </p>
-
-                    <div className="bg-orange-50 border-l-4 border-orange-500 p-4 mb-8">
-                        <p className="text-orange-800 text-sm font-medium">
-                            <span className="font-bold">Le saviez-vous ?</span> Sur un projet à 1000$, vous payez 104$ de frais en Mensuel, contre seulement 28$ en Annuel.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                         <button
-                            onClick={() => setShowPopup(false)}
-                            className="px-4 py-3 rounded-xl border border-slate-200 text-slate-500 font-medium hover:bg-slate-50 transition-colors"
-                        >
-                            Je préfère payer plus
-                        </button>
-                        <Button variant="primary" className="py-3 text-base shadow-xl">
-                            Passer à l'Annuel
-                        </Button>
-                    </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
