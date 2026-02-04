@@ -7,9 +7,7 @@ import {
   Users,
   Briefcase,
   Check,
-  Star,
-  MessageCircle,
-  TrendingUp
+  Star
 } from 'lucide-react';
 
 export default function Home() {
@@ -27,197 +25,81 @@ export default function Home() {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-tr from-amber/15 to-amber/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-teal/5 to-transparent rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {/* Main headline */}
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-[1.1] mb-6 tracking-tight">
-                Connectez.
-                <br />
-                <span className="bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent">Collaborez.</span>
-              </h1>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10">
+          {/* Centered Hero Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-center"
+          >
+            {/* Main headline */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-[1.1] mb-8 tracking-tight">
+              Connectez.{' '}
+              <span className="bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent">Collaborez.</span>
+            </h1>
 
-              <p className="text-xl sm:text-2xl text-body mb-10 max-w-xl leading-relaxed">
-                La mise en relation directe entre clients et entrepreneurs.{' '}
-                <span className="text-teal font-semibold">0% de commission</span> sur vos travaux.
-              </p>
+            <p className="text-xl sm:text-2xl text-body mb-12 max-w-2xl mx-auto leading-relaxed">
+              La mise en relation directe entre clients et entrepreneurs.{' '}
+              <span className="text-teal font-semibold">0% de commission</span> sur vos travaux.
+            </p>
 
-              {/* CTA Button - Teal gradient */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#telecharger"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-teal to-teal-dark hover:from-teal-dark hover:to-teal text-white font-bold rounded-2xl transition-all shadow-lg shadow-teal/30 hover:shadow-xl hover:shadow-teal/40 hover:-translate-y-0.5"
-                >
-                  <Smartphone size={20} />
-                  Télécharger l'application
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+            {/* CTA Buttons - Centered */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <a
+                href="#telecharger"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-teal to-teal-dark hover:from-teal-dark hover:to-teal text-white font-bold rounded-2xl transition-all shadow-lg shadow-teal/30 hover:shadow-xl hover:shadow-teal/40 hover:-translate-y-0.5"
+              >
+                <Smartphone size={20} />
+                Télécharger l'application
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="/pricing"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-white/80 backdrop-blur-sm hover:bg-white text-primary font-bold rounded-2xl border border-teal/20 hover:border-teal/40 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <Briefcase size={20} />
+                Espace Entrepreneur
+              </a>
+            </div>
+
+            {/* Trust badges - Centered row */}
+            <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border border-teal/10 shadow-sm">
+                <Check size={18} className="text-teal" />
+                <span className="text-sm font-medium text-body">100% gratuit pour les clients</span>
               </div>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border border-teal/10 shadow-sm">
+                <Shield size={18} className="text-teal" />
+                <span className="text-sm font-medium text-body">Artisans vérifiés</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border border-amber/10 shadow-sm">
+                <Star size={18} className="text-amber fill-amber" />
+                <span className="text-sm font-medium text-body">4.9/5 sur l'App Store</span>
+              </div>
+            </div>
 
-              {/* Trust badges */}
-              <div className="mt-12 flex flex-wrap gap-6 text-sm text-muted">
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-teal/10">
-                  <Check size={18} className="text-teal" />
-                  <span>100% gratuit pour les clients</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-teal/10">
-                  <Shield size={18} className="text-teal" />
-                  <span>Artisans vérifiés</span>
-                </div>
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+            >
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent">2,500+</div>
+                <div className="text-sm text-muted mt-1">Pros actifs</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-amber to-amber-dark bg-clip-text text-transparent">0%</div>
+                <div className="text-sm text-muted mt-1">Commission</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-teal to-teal-dark bg-clip-text text-transparent">100%</div>
+                <div className="text-sm text-muted mt-1">Québécois</div>
               </div>
             </motion.div>
-
-            {/* Right: Phone mockup */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative flex justify-center lg:justify-end"
-            >
-              <div className="relative">
-                {/* Phone frame with gradient border */}
-                <div className="relative w-72 h-[580px] bg-white rounded-[50px] border-2 border-teal/20 shadow-2xl shadow-teal/10 overflow-hidden">
-                  {/* Notch - Teal gradient instead of black */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-gradient-to-r from-teal to-teal-dark rounded-b-2xl z-10" />
-
-                  {/* Screen content */}
-                  <div className="w-full h-full bg-gradient-to-b from-surface to-white p-5 pt-12">
-                    {/* App header */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center gap-3">
-                        <div className="w-11 h-11 bg-gradient-to-br from-teal to-teal-dark rounded-xl flex items-center justify-center shadow-lg shadow-teal/30">
-                          <span className="text-white text-lg font-bold">P</span>
-                        </div>
-                        <div>
-                          <div className="text-primary font-bold">ProPair</div>
-                          <div className="text-muted text-xs">3 demandes à traiter</div>
-                        </div>
-                      </div>
-                      <div className="w-9 h-9 bg-gradient-to-br from-amber/20 to-amber/10 rounded-full border border-amber/20 flex items-center justify-center">
-                        <div className="w-6 h-6 bg-gradient-to-br from-teal to-teal-dark rounded-full" />
-                      </div>
-                    </div>
-
-                    {/* Mock project cards */}
-                    <div className="space-y-3">
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                        className="bg-white rounded-2xl p-4 shadow-lg shadow-teal/5 border border-teal/10"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-teal/20 to-teal/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Users size={18} className="text-teal" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-primary font-semibold text-sm">Rénovation cuisine</div>
-                            <div className="text-muted text-xs mt-0.5">Sherbrooke • Budget: 15k-20k$</div>
-                            <div className="flex items-center gap-2 mt-2">
-                              <span className="px-2 py-0.5 bg-gradient-to-r from-teal/20 to-teal/10 text-teal text-xs font-medium rounded-full">Nouveau</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7 }}
-                        className="bg-white rounded-2xl p-4 shadow-lg shadow-amber/5 border border-amber/10"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-amber/20 to-amber/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <MessageCircle size={18} className="text-amber" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-primary font-semibold text-sm">Toiture à refaire</div>
-                            <div className="text-muted text-xs mt-0.5">Magog • Budget: 8k-12k$</div>
-                            <div className="flex items-center gap-2 mt-2">
-                              <span className="px-2 py-0.5 bg-gradient-to-r from-amber/20 to-amber/10 text-amber text-xs font-medium rounded-full">En attente</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 }}
-                        className="bg-white rounded-2xl p-4 shadow-lg shadow-green-500/5 border border-green-500/10"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-green-500/20 to-green-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Check size={18} className="text-green-500" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-primary font-semibold text-sm">Peinture intérieure</div>
-                            <div className="text-muted text-xs mt-0.5">Granby • Budget: 3k-5k$</div>
-                            <div className="flex items-center gap-2 mt-2">
-                              <span className="px-2 py-0.5 bg-gradient-to-r from-green-500/20 to-green-500/10 text-green-500 text-xs font-medium rounded-full">Connecté</span>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Bottom nav */}
-                    <div className="absolute bottom-6 left-5 right-5">
-                      <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-3 shadow-lg border border-teal/10 flex items-center justify-around">
-                        <div className="w-8 h-8 bg-gradient-to-br from-teal/20 to-teal/10 rounded-lg flex items-center justify-center">
-                          <TrendingUp size={16} className="text-teal" />
-                        </div>
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                          <MessageCircle size={16} className="text-muted" />
-                        </div>
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                          <Users size={16} className="text-muted" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating stats card */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30, y: 20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 0.9, type: "spring", stiffness: 100 }}
-                  className="absolute -left-16 top-1/4 bg-white/90 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-teal/10 hidden lg:block"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-teal to-teal-dark rounded-xl flex items-center justify-center shadow-lg shadow-teal/30">
-                      <TrendingUp size={20} className="text-white" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-teal">2,500+</div>
-                      <div className="text-xs text-muted">Pros actifs</div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Floating review card */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30, y: -20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ delay: 1.1, type: "spring", stiffness: 100 }}
-                  className="absolute -right-8 bottom-1/3 bg-white/90 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-amber/10 hidden lg:block"
-                >
-                  <div className="flex items-center gap-1 mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} className="text-amber fill-amber" />
-                    ))}
-                  </div>
-                  <div className="text-xs text-muted">4.9/5 sur l'App Store</div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
