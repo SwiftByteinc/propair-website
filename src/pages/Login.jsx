@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import SEO from '../components/SEO';
 
@@ -10,7 +10,6 @@ export default function Login() {
   const navigate = useNavigate();
   const { user, signIn, signUp, signInWithOAuth } = useAuth();
 
-  const redirectTo = searchParams.get('redirect');
   const refCode = searchParams.get('ref');
 
   const [isLogin, setIsLogin] = useState(true);
@@ -24,10 +23,10 @@ export default function Login() {
     confirmPassword: ''
   });
 
-  // Store referral code in localStorage if present
+  // Safe referral storage using sessionStorage
   useEffect(() => {
     if (refCode) {
-      localStorage.setItem('referral_code', refCode);
+      sessionStorage.setItem('referral_code', refCode);
     }
   }, [refCode]);
 
@@ -38,9 +37,42 @@ export default function Login() {
     }
   }, [user, navigate]);
 
+  // --- VALIDATION LOGIC ---
+  const validateForm = () => {
+    // 1. Email Regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      return "Veuillez entrer une adresse email valide.";
+    }
+
+    // 2. Password Strength (Signup Only)
+    if (!isLogin) {
+      if (formData.password.length < 8) {
+        return "Le mot de passe doit contenir au moins 8 caractères.";
+      }
+
+      if (formData.password !== formData.confirmPassword) {
+        return "Les mots de passe ne correspondent pas.";
+      }
+
+      if (!formData.name.trim()) {
+        return "Veuillez entrer votre nom complet.";
+      }
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Validation pre-submit
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -48,17 +80,10 @@ export default function Login() {
         // Sign in
         const { error } = await signIn(formData.email, formData.password);
         if (error) throw error;
-        navigate('/portal');
+        // Navigation handled by useEffect
       } else {
         // Sign up
-        if (formData.password !== formData.confirmPassword) {
-          throw new Error('Les mots de passe ne correspondent pas');
-        }
-        if (formData.password.length < 6) {
-          throw new Error('Le mot de passe doit contenir au moins 6 caractères');
-        }
-
-        const storedRefCode = localStorage.getItem('referral_code');
+        const storedRefCode = sessionStorage.getItem('referral_code');
         const { error } = await signUp(
           formData.email,
           formData.password,
@@ -67,12 +92,17 @@ export default function Login() {
         );
         if (error) throw error;
 
-        // Clear referral code after use
-        localStorage.removeItem('referral_code');
-        navigate('/portal');
+        // Clean up
+        sessionStorage.removeItem('referral_code');
+        // Navigation handled by useEffect
       }
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      // Friendly error messages
+      let msg = err.message;
+      if (msg.includes('Invalid login credentials')) msg = "Email ou mot de passe incorrect.";
+      if (msg.includes('already registered')) msg = "Cet email est déjà utilisé.";
+      if (msg.includes('Email not confirmed')) msg = "Veuillez confirmer votre email.";
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -81,25 +111,24 @@ export default function Login() {
   const handleSocialLogin = async (provider) => {
     setError('');
     setLoading(true);
-
     try {
       const { error } = await signInWithOAuth(provider, '/portal');
       if (error) throw error;
-      // OAuth redirects automatically
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setError(err.message || 'Erreur de connexion sociale.');
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12 font-sans">
       <SEO
         title={isLogin ? "Connexion" : "Inscription"}
         canonical="/login"
         description="Connectez-vous ou créez votre compte ProPair. Accédez à votre espace entrepreneur ou client."
         noIndex={true}
       />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -116,9 +145,10 @@ export default function Login() {
 
         {/* Referral Badge */}
         {refCode && (
-          <div className="mb-6 p-3 bg-teal/10 rounded-xl text-center">
+          <div className="mb-6 p-4 bg-teal/10 border border-teal/20 rounded-xl flex items-start gap-3">
+            <CheckCircle size={20} className="text-teal mt-0.5 shrink-0" />
             <p className="text-sm text-teal font-medium">
-              Vous avez été parrainé ! Inscrivez-vous pour en bénéficier.
+              Code de parrainage appliqué ! Créez votre compte pour en profiter.
             </p>
           </div>
         )}
@@ -126,42 +156,34 @@ export default function Login() {
         {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-primary mb-2">
-            {isLogin ? 'Connexion' : 'Créer un compte'}
+            {isLogin ? 'Bon retour parmi nous' : 'Créer un compte'}
           </h1>
           <p className="text-muted text-sm">
             {isLogin
-              ? 'Accédez à votre espace ProPair'
-              : 'Rejoignez la communauté ProPair'}
+              ? 'Gérez vos chantiers et vos demandes.'
+              : 'Rejoignez les entrepreneurs de Magog.'}
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm">
-            <AlertCircle size={18} />
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm"
+          >
+            <AlertCircle size={18} className="shrink-0" />
             {error}
-          </div>
+          </motion.div>
         )}
 
         {/* SSO Buttons */}
-        <div className="space-y-3 mb-6">
-          <button
-            type="button"
-            onClick={() => handleSocialLogin('apple')}
-            disabled={loading}
-            className="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors flex items-center justify-center gap-3 font-medium disabled:opacity-50"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            Continuer avec Apple
-          </button>
-
+        <div className="grid grid-cols-2 gap-3 mb-6">
           <button
             type="button"
             onClick={() => handleSocialLogin('google')}
             disabled={loading}
-            className="w-full py-3 px-4 bg-white hover:bg-surface border border-border-dark rounded-xl transition-colors flex items-center justify-center gap-3 font-medium text-primary disabled:opacity-50"
+            className="py-2.5 px-4 bg-white hover:bg-surface border border-border rounded-xl transition-colors flex items-center justify-center gap-2 text-sm font-medium text-primary disabled:opacity-50"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -169,15 +191,29 @@ export default function Login() {
               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
-            Continuer avec Google
+            Google
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSocialLogin('apple')}
+            disabled={loading}
+            className="py-2.5 px-4 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors flex items-center justify-center gap-2 text-sm font-medium disabled:opacity-50"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Apple
           </button>
         </div>
 
         {/* Divider */}
-        <div className="flex items-center gap-4 my-6">
-          <div className="flex-1 h-px bg-border" />
-          <span className="text-muted text-sm">ou</span>
-          <div className="flex-1 h-px bg-border" />
+        <div className="relative mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-muted">ou avec email</span>
+          </div>
         </div>
 
         {/* Form */}
@@ -191,7 +227,7 @@ export default function Login() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Votre nom"
+                  placeholder="Votre nom complet"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-primary placeholder-muted focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
                   required
                   disabled={loading}
@@ -237,6 +273,9 @@ export default function Login() {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
+            {!isLogin && (
+              <p className="text-xs text-muted mt-1.5 ml-1">Minimum 8 caractères</p>
+            )}
           </div>
 
           {/* Confirm Password (signup only) */}
@@ -270,7 +309,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm shadow-teal/20"
           >
             {loading ? (
               <Loader2 size={18} className="animate-spin" />
@@ -284,13 +323,14 @@ export default function Login() {
         </form>
 
         {/* Toggle Login/Signup */}
-        <p className="text-center mt-6 text-muted text-sm">
+        <p className="text-center mt-8 text-muted text-sm">
           {isLogin ? "Pas encore de compte ?" : "Déjà un compte ?"}
           <button
             type="button"
             onClick={() => {
               setIsLogin(!isLogin);
               setError('');
+              setFormData({ email: '', password: '', name: '', confirmPassword: '' });
             }}
             className="ml-1 text-teal font-semibold hover:text-teal-dark"
             disabled={loading}
@@ -300,8 +340,8 @@ export default function Login() {
         </p>
 
         {/* Back to home */}
-        <div className="text-center mt-8">
-          <Link to="/" className="text-sm text-muted hover:text-body">
+        <div className="text-center mt-8 pt-6 border-t border-border">
+          <Link to="/" className="text-sm text-muted hover:text-body transition-colors">
             ← Retour à l'accueil
           </Link>
         </div>

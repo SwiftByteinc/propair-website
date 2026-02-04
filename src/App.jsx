@@ -4,6 +4,8 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import CookieConsent from './components/ui/CookieConsent';
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -95,11 +97,13 @@ function App() {
             <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
             <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
 
-            {/* Portal - Dashboard with nested routes */}
+            {/* Portal - Dashboard with nested routes (PROTECTED) */}
             <Route path="/portal" element={
-              <Suspense fallback={<PageLoader />}>
-                <DashboardLayout />
-              </Suspense>
+              <ProtectedRoute>
+                <Suspense fallback={<PageLoader />}>
+                  <DashboardLayout />
+                </Suspense>
+              </ProtectedRoute>
             }>
               <Route index element={<DashboardHome />} />
               <Route path="billing" element={<Billing />} />
@@ -110,6 +114,9 @@ function App() {
             {/* 404 - Page Not Found */}
             <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
           </Routes>
+
+          {/* Cookie Consent Banner (RGPD/Loi 25) */}
+          <CookieConsent />
         </Router>
       </AuthProvider>
     </ErrorBoundary>

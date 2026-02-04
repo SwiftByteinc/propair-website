@@ -13,8 +13,10 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log error to console in development
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Log uniquement en développement
+    if (import.meta.env.DEV) {
+      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    }
   }
 
   handleReload = () => {
@@ -24,10 +26,10 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-surface flex items-center justify-center px-4">
+        <div className="min-h-screen bg-surface flex items-center justify-center px-4 font-sans">
           <div className="max-w-md w-full text-center">
             {/* Icon */}
-            <div className="w-20 h-20 bg-amber/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-amber/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber/20">
               <AlertTriangle size={40} className="text-amber" />
             </div>
 
@@ -45,7 +47,7 @@ export default class ErrorBoundary extends Component {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={this.handleReload}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-teal hover:bg-teal-dark text-white font-semibold rounded-xl transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-teal hover:bg-teal-dark text-white font-semibold rounded-xl transition-colors shadow-sm"
               >
                 <RefreshCw size={18} />
                 Rafraîchir la page
@@ -60,12 +62,12 @@ export default class ErrorBoundary extends Component {
             </div>
 
             {/* Error details (development only) */}
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className="mt-8 text-left">
-                <summary className="text-sm text-muted cursor-pointer hover:text-primary">
-                  Détails de l'erreur (dev)
+                <summary className="text-sm text-muted cursor-pointer hover:text-primary transition-colors">
+                  Détails de l'erreur (Dev Mode)
                 </summary>
-                <pre className="mt-2 p-4 bg-white rounded-xl border border-border text-xs text-red-600 overflow-auto">
+                <pre className="mt-2 p-4 bg-white rounded-xl border border-border text-xs text-red-600 overflow-auto shadow-inner">
                   {this.state.error.toString()}
                 </pre>
               </details>
