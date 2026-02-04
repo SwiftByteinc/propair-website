@@ -8,6 +8,7 @@ import {
   Users,
   ChevronRight
 } from 'lucide-react';
+import { useReferralStats } from '../../hooks/useReferralStats';
 
 export default function Referral() {
   const { user } = useOutletContext();
@@ -19,11 +20,14 @@ export default function Referral() {
   const referralCode = user.referral_code || 'PROPAIR';
   const referralLink = `https://propairapp.com/login?ref=${referralCode}`;
 
-  // Placeholder data - will be connected to Supabase when referral_events table is ready
-  const referrals = [];
+  // Fetch real referral stats from Supabase
+  const { stats: referralStats, loading: statsLoading } = useReferralStats(user?.id);
+
+  // Combine fetched stats with user profile data
+  const referrals = []; // Will be populated when we add referral list fetching
   const stats = {
-    totalReferrals: 0,
-    subscribedReferrals: 0,
+    totalReferrals: statsLoading ? '-' : referralStats.totalReferrals,
+    subscribedReferrals: statsLoading ? '-' : referralStats.subscribedReferrals,
     monthsEarned: user.pro_months_balance || 0,
     entriesEarned: 0
   };
