@@ -9,7 +9,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import CookieConsent from './components/ui/CookieConsent';
 import StructuredData from './components/seo/StructuredData';
 
-// Lazy load pages for code splitting
+// --- LAZY LOADING (Code Splitting P1) ---
 const Home = lazy(() => import('./pages/Home'));
 const Pricing = lazy(() => import('./pages/Pricing'));
 const About = lazy(() => import('./pages/About'));
@@ -21,42 +21,40 @@ const Terms = lazy(() => import('./pages/Terms'));
 const Refund = lazy(() => import('./pages/Refund'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Dashboard components (lazy loaded)
+// Dashboard components
 const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout'));
 const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
 const Billing = lazy(() => import('./pages/dashboard/Billing'));
 const Referral = lazy(() => import('./pages/dashboard/Referral'));
 const Security = lazy(() => import('./pages/dashboard/Security'));
 
-// Page loader component
+// Loader optimisé
 function PageLoader() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 border-3 border-teal/20 border-t-teal rounded-full animate-spin" />
-        <span className="text-sm text-muted">Chargement...</span>
+        <div className="w-10 h-10 border-4 border-teal-100 border-t-teal-600 rounded-full animate-spin" />
+        <span className="text-sm text-gray-500 font-medium animate-pulse">Chargement...</span>
       </div>
     </div>
   );
 }
 
-// ScrollToTop component to handle scroll position on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 }
 
-// Layout wrapper for pages with Navbar and Footer
+// Layout wrapper
 function MainLayout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen bg-white font-sans text-body">
+    <div className="flex flex-col min-h-screen bg-white font-sans text-gray-600">
       <Navbar />
       <main className="flex-grow">
+        {/* Suspense wrap pour le lazy loading */}
         <Suspense fallback={<PageLoader />}>
           {children}
         </Suspense>
@@ -66,10 +64,9 @@ function MainLayout({ children }) {
   );
 }
 
-// Standalone layout for auth pages (no navbar/footer)
 function AuthLayout({ children }) {
   return (
-    <div className="min-h-screen bg-white font-sans text-body">
+    <div className="min-h-screen bg-white font-sans text-gray-600">
       <Suspense fallback={<PageLoader />}>
         {children}
       </Suspense>
@@ -86,40 +83,39 @@ function App() {
             <StructuredData />
             <ScrollToTop />
             <Routes>
-            {/* Public pages with Navbar and Footer */}
-            <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-            <Route path="/pricing" element={<MainLayout><Pricing /></MainLayout>} />
-            <Route path="/about" element={<MainLayout><About /></MainLayout>} />
+              {/* Public Pages */}
+              <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+              <Route path="/pricing" element={<MainLayout><Pricing /></MainLayout>} />
+              <Route path="/about" element={<MainLayout><About /></MainLayout>} />
 
-            {/* Legal pages */}
-            <Route path="/privacy" element={<MainLayout><Privacy /></MainLayout>} />
-            <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
-            <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
+              {/* Legal Pages */}
+              <Route path="/privacy" element={<MainLayout><Privacy /></MainLayout>} />
+              <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
+              <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
 
-            {/* Auth pages (standalone, no navbar/footer) */}
-            <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
-            <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
-            <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
+              {/* Auth Pages */}
+              <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+              <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
+              <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
 
-            {/* Portal - Dashboard with nested routes (PROTECTED) */}
-            <Route path="/portal" element={
-              <ProtectedRoute>
-                <Suspense fallback={<PageLoader />}>
-                  <DashboardLayout />
-                </Suspense>
-              </ProtectedRoute>
-            }>
-              <Route index element={<DashboardHome />} />
-              <Route path="billing" element={<Billing />} />
-              <Route path="referral" element={<Referral />} />
-              <Route path="security" element={<Security />} />
-            </Route>
+              {/* Portal (Protected) */}
+              <Route path="/portal" element={
+                <ProtectedRoute>
+                  <Suspense fallback={<PageLoader />}>
+                    <DashboardLayout />
+                  </Suspense>
+                </ProtectedRoute>
+              }>
+                <Route index element={<DashboardHome />} />
+                <Route path="billing" element={<Billing />} />
+                <Route path="referral" element={<Referral />} />
+                <Route path="security" element={<Security />} />
+              </Route>
 
-            {/* 404 - Page Not Found */}
-            <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
-          </Routes>
+              {/* 404 */}
+              <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
+            </Routes>
 
-            {/* Cookie Consent Banner (RGPD/Loi 25) */}
             <CookieConsent />
           </Router>
         </AuthProvider>
