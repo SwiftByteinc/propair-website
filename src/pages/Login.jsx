@@ -3,6 +3,7 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import SEO from '../components/SEO';
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -93,6 +94,12 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12">
+      <SEO
+        title={isLogin ? "Connexion" : "Inscription"}
+        canonical="/login"
+        description="Connectez-vous ou créez votre compte ProPair. Accédez à votre espace entrepreneur ou client."
+        noIndex={true}
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

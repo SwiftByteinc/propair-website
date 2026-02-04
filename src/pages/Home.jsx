@@ -12,10 +12,15 @@ import {
   Search,
   Users
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Home() {
   return (
     <div className="w-full overflow-hidden bg-white font-sans selection:bg-teal-50 selection:text-teal-700">
+      <SEO
+        canonical="/"
+        description="ProPair connecte clients et entrepreneurs de la construction au Québec. 0% commission, plateforme locale. Trouvez le bon pro pour vos rénovations."
+      />
       
       {/* ============================================ */}
       {/* HERO SECTION */}

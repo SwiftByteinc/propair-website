@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Zap, Shield, Bell, Users, Star, ArrowRight, Info, Server, Heart } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Pricing() {
   // État pour déclencher l'effet "Insider"
@@ -41,6 +42,11 @@ export default function Pricing() {
 
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
+      <SEO
+        title="Tarifs"
+        canonical="/pricing"
+        description="Abonnement ProPair à 29$/mois ou 150$/an. 0% commission, connexions illimitées. Investissez dans votre croissance, pas dans des commissions."
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* HEADER */}

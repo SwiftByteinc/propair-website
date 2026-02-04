@@ -28,7 +28,7 @@ export default function Billing() {
 
   const renewalDate = subscription?.current_period_end
     ? formatDate(subscription.current_period_end)
-    : '15 fév 2026';
+    : 'N/A';
 
   // Placeholder invoices - will be connected to Stripe when Edge Functions are ready
   const invoices = [];

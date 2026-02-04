@@ -1,0 +1,14 @@
+# ProPair Robots.txt
+# https://propairapp.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas
+Disallow: /portal/
+Disallow: /login
+Disallow: /forgot-password
+Disallow: /update-password
+
+# Sitemap
+Sitemap: https://propairapp.com/sitemap.xml

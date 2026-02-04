@@ -19,7 +19,7 @@ export default function Referral() {
 
   // Build referral link from user's code
   const referralCode = user.referral_code || 'PROPAIR';
-  const referralLink = `https://propairapp.com/login?ref=${referralCode}`;
+  const referralLink = `${window.location.origin}/login?ref=${referralCode}`;
 
   // Fetch real referral stats from Supabase (table referral_events)
   const { stats, referralList, loading } = useReferralStats(user?.id);

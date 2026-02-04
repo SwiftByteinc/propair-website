@@ -28,7 +28,7 @@ export default function DashboardHome() {
   const proMonthsEarned = user.pro_months_balance || 0;
   const connectionsTotal = 3; // Limite essai gratuit
   const referralCode = user.referral_code || 'PROPAIR2024';
-  const referralLink = `https://propairapp.com/login?ref=${referralCode}`;
+  const referralLink = `${window.location.origin}/login?ref=${referralCode}`;
   const referralGoal = 3;
 
   // Calculate connections used (for trial users)
@@ -304,12 +304,12 @@ export default function DashboardHome() {
             </Link>
 
             <Link
-              to="/portal/info"
+              to="/about"
               className="p-4 bg-white rounded-xl border border-gray-100 hover:border-teal/30 hover:shadow-sm transition-all group"
             >
               <Briefcase size={20} className="text-gray-400 group-hover:text-teal mb-2" />
-              <p className="font-semibold text-sm text-gray-900">Mes infos</p>
-              <p className="text-xs text-gray-400">Adresses de chantier</p>
+              <p className="font-semibold text-sm text-gray-900">À propos</p>
+              <p className="text-xs text-gray-400">Découvrir ProPair</p>
             </Link>
           </motion.section>
         </>

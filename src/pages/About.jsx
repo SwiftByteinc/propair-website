@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Clock, ShieldCheck, Hammer, Mountain, ArrowRight, Quote, Lightbulb, PenTool, Heart } from 'lucide-react';
+import SEO from '../components/SEO';
 
-// Composant Compteur (Identique à avant)
+// Composant Compteur avec protection NaN
 const Counter = ({ value, label }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -11,23 +12,34 @@ const Counter = ({ value, label }) => {
 
   useEffect(() => {
     if (!isInView) return;
+
+    // Protection contre les valeurs non-numériques (ex: "Magog")
+    const numericString = value.toString().replace(/[^0-9]/g, '');
+    const end = parseInt(numericString, 10);
+
+    // Si pas de nombre valide, afficher la valeur telle quelle
+    if (isNaN(end) || end === 0) return;
+
     let start = 0;
-    const end = parseInt(value.replace(/,/g, '').replace('k', '000').replace('%', '').replace('$', '').replace('+', ''));
-    if (start === end) return;
     const duration = 2000;
     const stepTime = Math.abs(Math.floor(duration / end));
     let timer = setInterval(() => {
       start += 1;
       setCount(start);
-      if (start === end) clearInterval(timer);
+      if (start >= end) clearInterval(timer);
     }, stepTime > 0 ? stepTime : 10);
     return () => clearInterval(timer);
   }, [value, isInView]);
 
+  // Si valeur non-numérique ou contient %, afficher directement
+  const numericCheck = value.toString().replace(/[^0-9]/g, '');
+  const isNumeric = numericCheck.length > 0 && !isNaN(parseInt(numericCheck, 10));
+  const showRawValue = value.includes('%') || value.includes('+') || !isNumeric;
+
   return (
     <div ref={ref} className="text-center p-6 group hover:bg-slate-50 rounded-xl transition-colors">
       <div className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">
-        {value.includes('%') || value.includes('+') ? value : count.toLocaleString()}
+        {showRawValue ? value : count.toLocaleString()}
       </div>
       <div className="text-slate-500 font-medium uppercase tracking-wider text-xs">{label}</div>
     </div>
@@ -82,6 +94,11 @@ export default function About() {
 
   return (
     <div className="w-full overflow-hidden bg-white selection:bg-teal-50 selection:text-teal-700 font-sans">
+      <SEO
+        title="À propos"
+        canonical="/about"
+        description="Découvrez l'histoire de ProPair, créé par Nicolas Lepage à Magog. Une plateforme locale pour connecter entrepreneurs et clients au Québec."
+      />
 
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">

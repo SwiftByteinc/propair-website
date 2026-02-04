@@ -1,26 +1,40 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
-import Home from './pages/Home';
-import Pricing from './pages/Pricing';
-import About from './pages/About';
-import Login from './pages/Login';
-import UpdatePassword from './pages/UpdatePassword';
-import ForgotPassword from './pages/ForgotPassword';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import Refund from './pages/Refund';
-import NotFound from './pages/NotFound';
 
-// Dashboard components
-import DashboardLayout from './components/dashboard/DashboardLayout';
-import DashboardHome from './pages/dashboard/DashboardHome';
-import Billing from './pages/dashboard/Billing';
-import Referral from './pages/dashboard/Referral';
-import Security from './pages/dashboard/Security';
+// Lazy load pages for code splitting
+const Home = lazy(() => import('./pages/Home'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const About = lazy(() => import('./pages/About'));
+const Login = lazy(() => import('./pages/Login'));
+const UpdatePassword = lazy(() => import('./pages/UpdatePassword'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Refund = lazy(() => import('./pages/Refund'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Dashboard components (lazy loaded)
+const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout'));
+const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
+const Billing = lazy(() => import('./pages/dashboard/Billing'));
+const Referral = lazy(() => import('./pages/dashboard/Referral'));
+const Security = lazy(() => import('./pages/dashboard/Security'));
+
+// Page loader component
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-10 h-10 border-3 border-teal/20 border-t-teal rounded-full animate-spin" />
+        <span className="text-sm text-muted">Chargement...</span>
+      </div>
+    </div>
+  );
+}
 
 // ScrollToTop component to handle scroll position on route change
 function ScrollToTop() {
@@ -39,7 +53,9 @@ function MainLayout({ children }) {
     <div className="flex flex-col min-h-screen bg-white font-sans text-body">
       <Navbar />
       <main className="flex-grow">
-        {children}
+        <Suspense fallback={<PageLoader />}>
+          {children}
+        </Suspense>
       </main>
       <Footer />
     </div>
@@ -50,7 +66,9 @@ function MainLayout({ children }) {
 function AuthLayout({ children }) {
   return (
     <div className="min-h-screen bg-white font-sans text-body">
-      {children}
+      <Suspense fallback={<PageLoader />}>
+        {children}
+      </Suspense>
     </div>
   );
 }
@@ -78,7 +96,11 @@ function App() {
             <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
 
             {/* Portal - Dashboard with nested routes */}
-            <Route path="/portal" element={<DashboardLayout />}>
+            <Route path="/portal" element={
+              <Suspense fallback={<PageLoader />}>
+                <DashboardLayout />
+              </Suspense>
+            }>
               <Route index element={<DashboardHome />} />
               <Route path="billing" element={<Billing />} />
               <Route path="referral" element={<Referral />} />
