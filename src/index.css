@@ -270,3 +270,48 @@ input[type="checkbox"]:checked {
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* Accessibilité - Réduire les animations pour les utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse-soft,
+  .animate-slide-up,
+  .animate-fade-in {
+    animation: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* Focus visible pour navigation clavier */
+:focus-visible {
+  outline: 2px solid #0D9488;
+  outline-offset: 2px;
+}
+
+/* Skip link pour lecteurs d'écran */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #0D9488;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}

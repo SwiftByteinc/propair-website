@@ -107,9 +107,13 @@ export default function ForgotPassword() {
                 <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="votre@courriel.com"
+                  aria-label="Adresse email"
+                  autoComplete="email"
                   className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-primary placeholder-muted focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
                   required
                   disabled={loading}

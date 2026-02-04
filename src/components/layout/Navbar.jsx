@@ -109,6 +109,9 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-surface text-body hover:bg-border transition-colors"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -129,6 +132,10 @@ export default function Navbar() {
               className="fixed inset-0 bg-primary/30 backdrop-blur-sm z-40 md:hidden"
             />
             <motion.div
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu de navigation"
               initial={{ opacity: 0, x: '100%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
@@ -147,6 +154,7 @@ export default function Navbar() {
                   </Link>
                   <button
                     onClick={() => setIsOpen(false)}
+                    aria-label="Fermer le menu"
                     className="w-10 h-10 flex items-center justify-center rounded-xl bg-surface text-body"
                   >
                     <X size={20} />

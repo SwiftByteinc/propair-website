@@ -47,8 +47,8 @@ export default function UpdatePassword() {
       return;
     }
 
-    if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères');
+    if (password.length < 8) {
+      setError('Le mot de passe doit contenir au moins 8 caractères');
       return;
     }
 
@@ -202,17 +202,22 @@ export default function UpdatePassword() {
                   <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
                   <input
                     type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Nouveau mot de passe"
+                    aria-label="Nouveau mot de passe"
+                    autoComplete="new-password"
                     className="w-full pl-11 pr-11 py-3 rounded-xl border border-border bg-white text-primary placeholder-muted focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
                     required
-                    minLength={6}
+                    minLength={8}
                     disabled={loading}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-body"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -225,9 +230,13 @@ export default function UpdatePassword() {
                   <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
                   <input
                     type={showPassword ? 'text' : 'password'}
+                    id="confirmPassword"
+                    name="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirmer le mot de passe"
+                    aria-label="Confirmer le mot de passe"
+                    autoComplete="new-password"
                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-white text-primary placeholder-muted focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
                     required
                     disabled={loading}
