@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Clock, ShieldCheck, Hammer, Mountain, ArrowRight, Quote } from 'lucide-react';
+import { Clock, ShieldCheck, Hammer, Mountain, ArrowRight, Quote, Lightbulb, PenTool, Heart } from 'lucide-react';
 
-// Composant Compteur (Simplifié et optimisé)
+// Composant Compteur (Identique à avant)
 const Counter = ({ value, label }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -14,17 +14,13 @@ const Counter = ({ value, label }) => {
     let start = 0;
     const end = parseInt(value.replace(/,/g, '').replace('k', '000').replace('%', '').replace('$', '').replace('+', ''));
     if (start === end) return;
-
-    // Durée fixe pour une animation fluide peu importe le chiffre
     const duration = 2000;
     const stepTime = Math.abs(Math.floor(duration / end));
-
     let timer = setInterval(() => {
       start += 1;
       setCount(start);
       if (start === end) clearInterval(timer);
-    }, stepTime > 0 ? stepTime : 10); // Protection contre stepTime = 0
-
+    }, stepTime > 0 ? stepTime : 10);
     return () => clearInterval(timer);
   }, [value, isInView]);
 
@@ -39,21 +35,25 @@ const Counter = ({ value, label }) => {
 };
 
 export default function About() {
+  // L'HISTOIRE VRAIE (Intégrée ici)
   const timeline = [
     {
-      year: "Le Constat",
-      title: "Trop de temps perdu",
-      description: "Comme entrepreneur à Magog, je passais trop de temps à gérer des appels manqués ou à payer des leads inutiles. Je me suis dit : 'Qu'est-ce que je voudrais utiliser moi-même ?'"
+      year: "Le Déclic",
+      title: "Une simple publication Facebook",
+      description: "Tout est parti d'une dame cherchant une massothérapeute sur les réseaux sociaux. Venant du milieu des services (réparation de bateaux), j'ai réalisé qu'il manquait un lien direct et simple entre les besoins locaux et nos talents.",
+      icon: Lightbulb
     },
     {
-      year: "La Solution",
-      title: "Créer l'outil manquant",
-      description: "J'ai décidé de bâtir la plateforme que je ne trouvais pas ailleurs. Pas pour prendre une commission, mais pour nous faire sauver du temps."
+      year: "Le Sacrifice",
+      title: "Apprendre et bâtir",
+      description: "J'ai appris à coder de zéro. J'ai mis de côté mes hobbies et réduit mon travail régulier pour consacrer des milliers d'heures à développer cette plateforme.",
+      icon: PenTool
     },
     {
-      year: "Aujourd'hui",
-      title: "ProPair pour tous",
-      description: "Ce qui a commencé comme une solution à ma propre frustration est devenu un outil pour tous les entrepreneurs d'ici."
+      year: "La Mission",
+      title: "Pour ma communauté",
+      description: "Aujourd'hui, je lance ProPair avec la même passion qu'au premier jour : offrir aux gens d'ici un outil simple, efficace et juste, bâti par un entrepreneur d'ici.",
+      icon: Heart
     }
   ];
 
@@ -85,7 +85,6 @@ export default function About() {
 
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Fond abstrait propre (remplace l'image lourde pour la perf) */}
         <div className="absolute inset-0 bg-slate-50">
           <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
         </div>
@@ -103,19 +102,18 @@ export default function About() {
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
               En tant qu'entrepreneur, je me suis posé la question :{' '}
-              <span className="text-teal-600 block mt-2 relative inline-block">
+              <span className="text-teal-600 block mt-2">
                 "Qu'est-ce que je voudrais utiliser ?"
-                {/* Soulignement SVG */}
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-amber-400 opacity-60" viewBox="0 0 300 12" fill="none"><path d="M2 9.5C55.5 3.5 168.5 -1.5 298 9.5" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/></svg>
               </span>
+              {/* Soulignement retiré ici comme demandé */}
             </h1>
 
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
               <p>
-                Je m'appelle <span className="font-bold text-slate-900">Nicolas Lepage</span>. Je ne suis pas une multinationale. Je suis un gars d'ici qui en avait assez de payer des commissions inutiles.
+                Je m'appelle <span className="font-bold text-slate-900">Nicolas Lepage</span>. Je suis né et j'ai grandi ici, à Magog. L'entrepreneuriat a toujours fait partie de ma vie.
               </p>
               <p>
-                J'ai créé ProPair pour offrir une expérience digne de ce nom. Des bons outils pour les clients, et surtout, pour nous, les entrepreneurs.
+                J'ai créé ProPair pour une raison simple : régler de vrais problèmes pour les gens de ma région.
               </p>
             </div>
           </motion.div>
@@ -134,7 +132,7 @@ export default function About() {
             <blockquote className="text-2xl md:text-3xl font-medium text-slate-900 leading-relaxed italic mb-8">
               "Arrêter de compliquer la vie des artisans avec de la paperasse. <span className="text-teal-600 font-bold">ProPair, c'est l'outil que j'aurais aimé avoir quand j'ai commencé.</span>"
             </blockquote>
-
+            
             <div className="flex flex-col items-center">
               <div className="w-12 h-1 bg-amber-500 rounded-full mb-4"></div>
               <div className="font-bold text-slate-900">Nicolas Lepage</div>
@@ -144,11 +142,12 @@ export default function About() {
         </div>
       </section>
 
-      {/* PARCOURS (Timeline) */}
+      {/* PARCOURS (Timeline Storytelling) */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Du chantier au code</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">L'histoire d'une obsession</h2>
+            <p className="text-slate-600">Comment une frustration est devenue une mission.</p>
           </div>
 
           <div className="relative space-y-12">
@@ -164,18 +163,20 @@ export default function About() {
                 transition={{ delay: index * 0.1 }}
                 className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start md:items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Point */}
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-4 border-teal-600 rounded-full z-10 mt-1.5 md:mt-0"></div>
+                {/* Point Icone */}
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-10 h-10 bg-white border-2 border-teal-100 text-teal-600 flex items-center justify-center rounded-full z-10 mt-0 md:mt-0 shadow-sm">
+                  <item.icon size={18} />
+                </div>
 
                 {/* Contenu */}
-                <div className={`pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">
+                <div className={`pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
+                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-amber-600 mb-2 uppercase tracking-wide">
                     {item.year}
                   </span>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-slate-600">{item.description}</p>
+                  <p className="text-slate-600 leading-relaxed text-sm">{item.description}</p>
                 </div>
-
+                
                 {/* Espace vide pour l'autre moitié */}
                 <div className="hidden md:block md:w-1/2"></div>
               </motion.div>
