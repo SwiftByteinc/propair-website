@@ -52,7 +52,6 @@ export function AuthProvider({ children }) {
       ])
 
       if (profileError) {
-        console.log('Profile fetch error (using fallback):', profileError.message)
         setProfile(createFallbackProfile(userData))
       } else {
         setProfile(profileData)
@@ -78,12 +77,10 @@ export function AuthProvider({ children }) {
           setSubscription(null)
         }
       } catch {
-        console.log('Subscription fetch skipped (timeout or error)')
         setSubscription(null)
       }
 
-    } catch (error) {
-      console.log('Profile fetch failed (using fallback):', error.message)
+    } catch {
       setProfile(createFallbackProfile(userData))
       setSubscription(null)
     } finally {
@@ -178,9 +175,13 @@ export function AuthProvider({ children }) {
       }
     })
 
-    // Note: Referral handling will be implemented later
+    // Store referral code for later processing
     if (data?.user && referralCode) {
-      console.log('Referral code stored for future implementation:', referralCode)
+      localStorage.setItem('pending_referral', JSON.stringify({
+        code: referralCode,
+        userId: data.user.id,
+        timestamp: Date.now()
+      }))
     }
 
     return { data, error }

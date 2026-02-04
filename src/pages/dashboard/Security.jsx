@@ -6,8 +6,6 @@ import {
   Lock,
   Smartphone,
   Mail,
-  CheckCircle2,
-  AlertCircle,
   Eye,
   EyeOff,
   Trash2,
