@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, LogIn, Briefcase, User, LogOut } from 'lucide-react';
+import { Menu, X, LogIn, Briefcase } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Navbar() {
-  const { user, profile, signOut } = useAuth();
-  const navigate = useNavigate();
+  const { user, profile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -31,11 +30,6 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
-  };
-
   return (
     <>
       <motion.header
@@ -55,7 +49,7 @@ export default function Navbar() {
               <img
                 src="/images/logo_ProPair.jpg"
                 alt="ProPair"
-                className="h-12 w-auto transition-all group-hover:scale-105"
+                className="h-16 w-auto transition-all group-hover:scale-105"
               />
             </Link>
 
@@ -79,23 +73,18 @@ export default function Navbar() {
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
               {user ? (
-                // Connected State
-                <div className="flex items-center gap-4 pl-6 border-l border-border">
-                  <Link
-                    to="/portal"
-                    className="flex items-center gap-2 text-sm font-semibold text-teal hover:text-teal-dark transition-colors"
-                  >
-                    <User size={18} />
-                    {profile?.full_name?.split(' ')[0] || 'Mon Portail'}
-                  </Link>
-                  <button
-                    onClick={handleSignOut}
-                    className="p-2 text-muted hover:text-red-500 transition-colors rounded-lg hover:bg-surface"
-                    title="Déconnexion"
-                  >
-                    <LogOut size={18} />
-                  </button>
-                </div>
+                // Connected State - User Account Button (Amber style)
+                <Link
+                  to="/portal"
+                  className="flex items-center gap-3 px-4 py-2.5 bg-gradient-to-r from-amber to-amber-dark hover:from-amber-dark hover:to-amber text-white rounded-full transition-all shadow-soft hover:shadow-lg"
+                >
+                  <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm">
+                    {profile?.full_name?.charAt(0)?.toUpperCase() || 'U'}
+                  </div>
+                  <span className="text-sm font-semibold">
+                    {profile?.full_name?.split(' ')[0] || 'Mon Compte'}
+                  </span>
+                </Link>
               ) : (
                 // Not Connected State
                 <>
@@ -209,13 +198,15 @@ export default function Navbar() {
                 {/* Mobile Actions */}
                 <div className="p-6 border-t border-border space-y-3">
                   {user ? (
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-semibold text-red-500 border-2 border-red-200 rounded-xl hover:bg-red-50 transition-colors"
+                    <Link
+                      to="/portal"
+                      className="flex items-center justify-center gap-3 w-full px-5 py-3 text-sm font-semibold bg-gradient-to-r from-amber to-amber-dark text-white rounded-xl hover:from-amber-dark hover:to-amber transition-all shadow-soft"
                     >
-                      <LogOut size={18} />
-                      Déconnexion
-                    </button>
+                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs font-bold">
+                        {profile?.full_name?.charAt(0)?.toUpperCase() || 'U'}
+                      </div>
+                      Mon Compte
+                    </Link>
                   ) : (
                     <>
                       <Link

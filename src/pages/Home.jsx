@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Smartphone,
   Shield,
-  Zap,
   Users,
   Briefcase,
   Check,
@@ -35,24 +34,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/5 border border-teal/10 mb-8"
-              >
-                <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
-                <span className="text-teal text-sm font-medium">La plateforme québécoise sans commission</span>
-              </motion.div>
-
               {/* Main headline */}
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-[1.1] mb-6 tracking-tight">
-                Bâtissez.
-                <br />
                 Connectez.
                 <br />
-                <span className="text-gradient-teal">Prospérez.</span>
+                <span className="text-gradient-teal">Collaborez.</span>
               </h1>
 
               <p className="text-xl sm:text-2xl text-body mb-10 max-w-xl leading-relaxed">
@@ -62,21 +48,14 @@ export default function Home() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/login?redirect=billing"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-amber hover:bg-amber-dark text-white font-bold rounded-2xl transition-all btn-press shadow-lg shadow-amber/25"
+                <a
+                  href="#telecharger"
+                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-2xl transition-all btn-press shadow-lg shadow-teal/25"
                 >
-                  Obtenir mes 3 connexions gratuites
+                  <Smartphone size={20} />
+                  Télécharger l'application
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-                <Link
-                  to="/pricing"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-white hover:bg-surface text-primary font-semibold rounded-2xl border border-border-dark transition-all btn-press"
-                >
-                  <Briefcase size={20} />
-                  Voir les tarifs
-                </Link>
+                </a>
               </div>
 
               {/* Trust badges */}
@@ -88,10 +67,6 @@ export default function Home() {
                 <div className="flex items-center gap-2">
                   <Shield size={18} className="text-muted" />
                   <span>Artisans vérifiés</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap size={18} className="text-amber" />
-                  <span>Réponse en 24h</span>
                 </div>
               </div>
             </motion.div>
@@ -250,8 +225,8 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Client card - White with subtle border */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Client card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -262,17 +237,44 @@ export default function Home() {
               <div className="w-14 h-14 bg-teal rounded-2xl flex items-center justify-center mb-6 shadow-soft group-hover:scale-105 transition-transform">
                 <Users size={28} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-primary mb-3">Pour les Clients</h3>
+              <h3 className="text-2xl font-bold text-primary mb-2">Pour les Clients</h3>
+              <p className="text-lg font-semibold text-teal mb-4">La rénovation sans intermédiaire</p>
               <p className="text-body mb-6 leading-relaxed">
-                Trouvez des artisans qualifiés pour vos projets. Décrivez votre besoin et recevez des propositions.
+                ProPair vous met en contact direct avec des entrepreneurs qualifiés, sans intermédiaire ni frais cachés.
               </p>
-              <div className="flex items-center gap-2 text-teal font-semibold">
-                <Check size={20} />
-                <span>100% gratuit</span>
-              </div>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-teal flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Publication simplifiée</span>
+                    <p className="text-sm text-muted">Décrivez votre projet en quelques clics et recevez des réponses personnalisées.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-teal flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Confiance vérifiée</span>
+                    <p className="text-sm text-muted">Chaque entrepreneur est validé avec ses licences RBQ et assurances.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-teal flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Communication directe</span>
+                    <p className="text-sm text-muted">Discutez directement avec les professionnels sans passer par un tiers.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-teal flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">100% gratuit pour vous</span>
+                    <p className="text-sm text-muted">L'utilisation de ProPair est entièrement gratuite pour les clients.</p>
+                  </div>
+                </li>
+              </ul>
             </motion.div>
 
-            {/* Pro card - White with teal accent */}
+            {/* Pro card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -283,17 +285,116 @@ export default function Home() {
               <div className="w-14 h-14 bg-amber rounded-2xl flex items-center justify-center mb-6 shadow-soft group-hover:scale-105 transition-transform">
                 <Briefcase size={28} className="text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-primary mb-3">Pour les Entrepreneurs</h3>
+              <h3 className="text-2xl font-bold text-primary mb-2">Pour les Entrepreneurs</h3>
+              <p className="text-lg font-semibold text-amber mb-4">Votre outil de travail, pas votre patron</p>
               <p className="text-body mb-6 leading-relaxed">
-                Accédez à des demandes qualifiées dans votre région. Un abonnement fixe, zéro commission.
+                ProPair, c'est l'outil intelligent conçu pour vous aider à trouver des chantiers, pas pour vous dicter comment travailler.
               </p>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center gap-2 text-teal font-semibold hover:text-teal-dark transition-colors"
-              >
-                Voir les tarifs
-                <ArrowRight size={18} />
-              </Link>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-amber flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Recevez des demandes ciblées</span>
+                    <p className="text-sm text-muted">Seulement les projets qui correspondent à vos métiers et votre zone.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-amber flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Abonnement fixe, 0% commission</span>
+                    <p className="text-sm text-muted">Vous gardez 100% de vos profits. Pas de surprise à la fin du mois.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-amber flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Restez maître de votre business</span>
+                    <p className="text-sm text-muted">Pas de contrat. Pas de restriction. Vous gérez votre carnet de commandes comme vous voulez.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={18} className="text-amber flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-primary">Visibilité sans effort</span>
+                    <p className="text-sm text-muted">Créez votre profil une fois, et laissez les clients venir à vous.</p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* HOW IT WORKS SECTION */}
+      {/* ============================================ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-primary mb-6">
+              Comment ça marche ?
+            </h2>
+            <p className="text-xl text-body max-w-2xl mx-auto">
+              En 3 étapes simples, trouvez le bon professionnel ou le bon projet.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-teal/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-teal">1</span>
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-3">Créez votre profil</h3>
+              <p className="text-body">
+                Inscrivez-vous gratuitement et complétez votre profil en quelques minutes.
+              </p>
+            </motion.div>
+
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-amber/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-amber">2</span>
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-3">Publiez ou recherchez</h3>
+              <p className="text-body">
+                Clients : décrivez votre projet. Entrepreneurs : parcourez les demandes dans votre zone.
+              </p>
+            </motion.div>
+
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-teal/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl font-bold text-teal">3</span>
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-3">Connectez-vous directement</h3>
+              <p className="text-body">
+                Échangez via le chat intégré et collaborez sans intermédiaire ni commission.
+              </p>
             </motion.div>
           </div>
         </div>
@@ -302,107 +403,74 @@ export default function Home() {
       {/* ============================================ */}
       {/* APP DOWNLOAD SECTION */}
       {/* ============================================ */}
-      <section className="py-32 bg-white">
+      <section id="telecharger" className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Text */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl sm:text-5xl font-bold text-primary mb-6 leading-tight">
-                Emportez ProPair
-                <br />
-                <span className="text-gradient-teal">partout avec vous.</span>
-              </h2>
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-soft border border-border">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left: App Icon + Info */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-col sm:flex-row items-center gap-8"
+              >
+                <img
+                  src="/apple-touch-icon.png"
+                  alt="ProPair App"
+                  className="w-32 h-32 rounded-[28px] shadow-soft-lg border border-border flex-shrink-0"
+                />
+                <div className="text-center sm:text-left">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-3">
+                    Téléchargez ProPair
+                  </h2>
+                  <p className="text-body mb-2">
+                    Disponible gratuitement sur iOS et Android.
+                  </p>
+                  <p className="text-sm text-muted">
+                    Notifications en temps réel • Chat intégré • 0% commission
+                  </p>
+                </div>
+              </motion.div>
 
-              <p className="text-xl text-body mb-10 leading-relaxed">
-                Gérez vos projets ou trouvez des chantiers directement depuis votre téléphone.
-                Notifications en temps réel et chat intégré.
-              </p>
-
-              {/* App Store buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* Right: App Store buttons */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end"
+              >
                 <a
-                  href="#"
+                  href="https://apps.apple.com/app/propair"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 px-6 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors btn-press shadow-soft"
                 >
-                  <Smartphone size={24} />
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
                   <div className="text-left">
                     <div className="text-[10px] uppercase text-white/60">Télécharger sur</div>
                     <div className="text-lg font-bold -mt-0.5">App Store</div>
                   </div>
                 </a>
                 <a
-                  href="#"
+                  href="https://play.google.com/store/apps/details?id=com.propair"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 px-6 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors btn-press shadow-soft"
                 >
-                  <Smartphone size={24} />
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
                   <div className="text-left">
                     <div className="text-[10px] uppercase text-white/60">Disponible sur</div>
                     <div className="text-lg font-bold -mt-0.5">Google Play</div>
                   </div>
                 </a>
-              </div>
-
-              {/* Stats */}
-              <div className="mt-12 flex gap-12">
-                <div>
-                  <div className="text-3xl font-bold text-primary">4.9</div>
-                  <div className="text-sm text-muted flex items-center gap-1">
-                    <Star size={14} className="text-amber fill-amber" />
-                    Note App Store
-                  </div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary">10K+</div>
-                  <div className="text-sm text-muted">Téléchargements</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-teal">0%</div>
-                  <div className="text-sm text-muted">Commission</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right: Phone visual */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative flex justify-center lg:justify-end"
-            >
-              <div className="relative">
-                {/* Phone with shadow-float */}
-                <div className="relative w-64 h-[520px] bg-white rounded-[45px] border border-border shadow-float overflow-hidden">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-primary rounded-b-xl z-10" />
-                  <div className="w-full h-full bg-surface p-4 pt-10">
-                    {/* Mock UI */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-10 h-10 bg-teal rounded-xl flex items-center justify-center text-white font-bold shadow-soft">P</div>
-                      <div className="w-8 h-8 bg-white rounded-full border border-border" />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="bg-white rounded-2xl p-4 shadow-soft border border-border">
-                        <div className="h-3 w-3/4 bg-border-dark rounded-full mb-2" />
-                        <div className="h-2 w-1/2 bg-border rounded-full" />
-                      </div>
-                      <div className="bg-white rounded-2xl p-4 shadow-soft border-2 border-teal/30">
-                        <div className="h-3 w-2/3 bg-teal/20 rounded-full mb-2" />
-                        <div className="h-2 w-1/3 bg-teal/10 rounded-full" />
-                      </div>
-                      <div className="bg-white rounded-2xl p-4 shadow-soft border border-border">
-                        <div className="h-3 w-1/2 bg-border-dark rounded-full mb-2" />
-                        <div className="h-2 w-3/4 bg-border rounded-full" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -432,13 +500,14 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/login?redirect=billing"
-                className="group flex items-center justify-center gap-3 px-10 py-5 bg-amber hover:bg-amber-dark text-white text-lg font-bold rounded-2xl transition-all btn-press shadow-lg shadow-amber/25"
+              <a
+                href="#telecharger"
+                className="group flex items-center justify-center gap-3 px-10 py-5 bg-teal hover:bg-teal-dark text-white text-lg font-bold rounded-2xl transition-all btn-press shadow-lg shadow-teal/25"
               >
-                Obtenir mes 3 connexions gratuites
+                <Smartphone size={22} />
+                Télécharger l'application
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
               <Link
                 to="/about"
                 className="flex items-center justify-center gap-3 px-10 py-5 bg-white hover:bg-white/80 text-primary text-lg font-semibold rounded-2xl border border-border-dark transition-all btn-press shadow-soft"
