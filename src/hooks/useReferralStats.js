@@ -3,10 +3,12 @@ import { supabase } from '../lib/supabase';
 
 export function useReferralStats(userId) {
   const [stats, setStats] = useState({
-    totalReferrals: 0,
-    subscribedReferrals: 0,
-    potentialEarnings: 0
+    totalReferrals: 0,      // Total des invitations
+    validatedReferrals: 0,  // Ceux qui ont payé/sont validés
+    pendingReferrals: 0,    // En attente
+    earnedMonths: 0         // Mois gratuits gagnés
   });
+  const [referralList, setReferralList] = useState([]); // Pour afficher la liste
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -16,45 +18,46 @@ export function useReferralStats(userId) {
       return;
     }
 
-    async function fetchReferrals() {
+    async function fetchReferralData() {
       try {
         setLoading(true);
 
-        // 1. Compter le nombre total de filleuls (ceux qui ont utilisé ton code)
-        const { count: total, error: totalError } = await supabase
-          .from('referrals')
-          .select('*', { count: 'exact', head: true })
-          .eq('referrer_id', userId);
-
-        if (totalError) throw totalError;
-
-        // 2. Compter ceux qui se sont abonnés (conversion)
-        // On suppose que ta table referrals a une colonne 'status'
-        const { count: subscribed, error: subError } = await supabase
-          .from('referrals')
-          .select('*', { count: 'exact', head: true })
+        // Récupère TOUS les événements de parrainage pour cet utilisateur
+        const { data, error } = await supabase
+          .from('referral_events')
+          .select('*')
           .eq('referrer_id', userId)
-          .eq('status', 'subscribed');
+          .order('created_at', { ascending: false }); // Les plus récents en premier
 
-        if (subError) throw subError;
+        if (error) throw error;
+
+        // Calcul des statistiques en JS
+        const total = data?.length || 0;
+        const validated = data?.filter(item => item.status === 'validated').length || 0;
+        const pending = data?.filter(item => item.status === 'pending').length || 0;
+
+        // 1 parrainage validé = 1 mois offert
+        const earned = validated;
 
         setStats({
-          totalReferrals: total || 0,
-          subscribedReferrals: subscribed || 0,
-          // 1 mois gratuit (valeur 29$) par filleul abonné
-          potentialEarnings: (subscribed || 0) * 29
+          totalReferrals: total,
+          validatedReferrals: validated,
+          pendingReferrals: pending,
+          earnedMonths: earned
         });
 
+        setReferralList(data || []);
+
       } catch (err) {
-        console.error('Erreur stats parrainage:', err);
+        console.error('Erreur lors du chargement des parrainages:', err);
         setError(err);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchReferrals();
+    fetchReferralData();
   }, [userId]);
 
-  return { stats, loading, error };
+  return { stats, referralList, loading, error };
 }
