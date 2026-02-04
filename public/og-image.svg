@@ -1,0 +1,48 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#F0FDFA"/>
+    </linearGradient>
+    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#14B8A6"/>
+      <stop offset="100%" style="stop-color:#0D9488"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Decorative elements -->
+  <circle cx="1100" cy="100" r="200" fill="#0D9488" opacity="0.05"/>
+  <circle cx="100" cy="530" r="150" fill="#0D9488" opacity="0.05"/>
+
+  <!-- Main content area -->
+  <g transform="translate(600, 315)">
+    <!-- Logo text -->
+    <text x="0" y="-80" font-family="Inter, -apple-system, sans-serif" font-size="72" font-weight="800" fill="#09090B" text-anchor="middle">
+      ProPair
+    </text>
+    <text x="85" y="-80" font-family="Inter, -apple-system, sans-serif" font-size="72" font-weight="800" fill="#0D9488" text-anchor="middle">
+      .
+    </text>
+
+    <!-- Tagline -->
+    <text x="0" y="0" font-family="Inter, -apple-system, sans-serif" font-size="32" font-weight="500" fill="#4B5563" text-anchor="middle">
+      Connectez. Construisez. Prosperez.
+    </text>
+
+    <!-- Description -->
+    <text x="0" y="60" font-family="Inter, -apple-system, sans-serif" font-size="22" fill="#6B7280" text-anchor="middle">
+      La plateforme quebecoise pour entrepreneurs certifies RBQ
+    </text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="600" width="1200" height="30" fill="url(#tealGradient)"/>
+
+  <!-- Domain -->
+  <text x="600" y="580" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0D9488" text-anchor="middle">
+    propair.ca
+  </text>
+</svg>
