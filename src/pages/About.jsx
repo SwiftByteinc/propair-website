@@ -37,8 +37,8 @@ const Counter = ({ value, label }) => {
   const showRawValue = value.includes('%') || value.includes('+') || !isNumeric;
 
   return (
-    <div ref={ref} className="text-center p-6 group hover:bg-slate-50 rounded-xl transition-colors">
-      <div className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">
+    <div ref={ref} className="text-center p-6">
+      <div className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
         {showRawValue ? value : count.toLocaleString()}
       </div>
       <div className="text-slate-500 font-medium uppercase tracking-wider text-xs">{label}</div>
@@ -102,9 +102,7 @@ export default function About() {
 
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-slate-50">
-          <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-40"></div>
-        </div>
+        <div className="absolute inset-0 bg-slate-50" />
 
         <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center">
           <motion.div
@@ -138,14 +136,14 @@ export default function About() {
       </section>
 
       {/* CITATION */}
-      <section className="py-20 bg-white relative">
+      <section className="py-20 bg-gradient-to-b from-white via-slate-50/50 to-white relative">
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <Quote className="w-12 h-12 text-teal-100 mx-auto mb-6" />
+            <Quote className="w-12 h-12 text-slate-200 mx-auto mb-6" />
             <blockquote className="text-2xl md:text-3xl font-medium text-slate-900 leading-relaxed italic mb-8">
               "Arrêter de compliquer la vie des artisans avec de la paperasse. <span className="text-teal-600 font-bold">ProPair, c'est l'outil que j'aurais aimé avoir quand j'ai commencé.</span>"
             </blockquote>
@@ -169,7 +167,7 @@ export default function About() {
 
           <div className="relative space-y-12">
             {/* Ligne verticale */}
-            <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-px bg-slate-200 transform md:-translate-x-1/2" />
+            <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-teal-200 via-slate-200 to-teal-200 transform md:-translate-x-1/2" />
 
             {timeline.map((item, index) => (
               <motion.div
@@ -181,12 +179,12 @@ export default function About() {
                 className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start md:items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 {/* Point Icone */}
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-10 h-10 bg-white border-2 border-teal-100 text-teal-600 flex items-center justify-center rounded-full z-10 mt-0 md:mt-0 shadow-sm">
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-2 border-teal-200 text-teal-600 flex items-center justify-center rounded-full z-10 shadow-md shadow-teal-100">
                   <item.icon size={18} />
                 </div>
 
                 {/* Contenu */}
-                <div className={`pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
+                <div className={`pl-20 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
                   <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-amber-600 mb-2 uppercase tracking-wide">
                     {item.year}
                   </span>
@@ -212,8 +210,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <div key={index} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-teal-100 transition-all group">
-                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-600 transition-colors">
-                  <value.icon size={24} className="text-slate-600 group-hover:text-white transition-colors" />
+                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-50 transition-colors">
+                  <value.icon size={24} className="text-slate-600 group-hover:text-teal-600 transition-colors" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-3">{value.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
@@ -224,9 +222,9 @@ export default function About() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 bg-slate-50 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x divide-slate-200">
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
             <Counter value="100%" label="Pour l'entrepreneur" />
             <Counter value="0$" label="Frais cachés" />
             <Counter value="Magog" label="Point de départ" />
@@ -247,14 +245,14 @@ export default function About() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/login?mode=signup"
-              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg shadow-slate-200"
+              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
               Créer mon compte
               <ArrowRight size={18} />
             </Link>
             <Link
               to="/pricing"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-full hover:bg-slate-50 transition-all"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-2xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
             >
               Voir comment ça marche
             </Link>

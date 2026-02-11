@@ -51,6 +51,10 @@ export default function Pricing() {
 
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6 md:mb-8">
+            <Shield size={14} className="text-teal-600" />
+            <span>0% de commission, toujours</span>
+          </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
             Investissez dans votre croissance,<br/>
             <span className="text-teal-600">pas dans des commissions.</span>
@@ -89,7 +93,7 @@ export default function Pricing() {
 
                   <Link
                     to="/login?plan=monthly"
-                    className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8"
+                    className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98]"
                   >
                     Choisir le mensuel
                   </Link>
@@ -159,8 +163,8 @@ export default function Pricing() {
           {/* CARTE DROITE : ANNUEL (La Star) */}
           {/* ============================================== */}
           <motion.div
-            animate={{ 
-              scale: showInsider ? 1.05 : 1,
+            animate={{
+              scale: showInsider ? 1.02 : 1,
               borderColor: showInsider ? '#0d9488' : '#e2e8f0', // teal-600 vs slate-200
               boxShadow: showInsider ? '0 25px 50px -12px rgba(13, 148, 136, 0.15)' : '0 0 0 0 rgba(0,0,0,0)'
             }}
@@ -204,7 +208,7 @@ export default function Pricing() {
 
             <Link
               to="/login?plan=annual"
-              className="block w-full py-4 px-6 text-center font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="block w-full py-4 px-6 text-center font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98]"
             >
               Choisir l'annuel
             </Link>
@@ -219,7 +223,7 @@ export default function Pricing() {
         {/* TRUST / GARANTIE */}
         <div className="text-center border-t border-slate-100 pt-16 mb-24">
           <div className="inline-flex flex-col items-center">
-            <Heart size={32} className="text-amber-400 fill-amber-400 mb-4 animate-pulse" />
+            <Heart size={32} className="text-amber-400 fill-amber-400 mb-4" />
             <h3 className="text-lg font-bold text-slate-900">Soutenez l'économie locale</h3>
             <p className="text-slate-500 max-w-lg mx-auto mt-2">
               En choisissant ProPair, vous encouragez une entreprise de Magog qui se bat pour que les artisans gardent leurs profits.
@@ -239,11 +243,11 @@ export default function Pricing() {
                 key={index}
                 className="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden hover:border-teal-100 transition-colors"
               >
-                <div className="w-full px-6 py-5 flex items-start justify-between text-left">
-                  <span className="font-semibold text-slate-900 pr-4">{faq.question}</span>
+                <div className="px-6 pt-5 pb-3">
+                  <span className="font-semibold text-slate-900">{faq.question}</span>
                 </div>
-                <div className="px-6 pb-5 pt-0">
-                  <p className="text-slate-600 leading-relaxed text-sm">{faq.answer}</p>
+                <div className="px-6 pb-5">
+                  <p className="text-slate-500 leading-relaxed text-sm">{faq.answer}</p>
                 </div>
               </div>
             ))}
