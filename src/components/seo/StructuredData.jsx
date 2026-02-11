@@ -23,7 +23,7 @@ export default function StructuredData() {
         },
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "support@propair.ca",
+          "email": "support@propairapp.com",
           "contactType": "customer service",
           "availableLanguage": ["French", "English"]
         }
@@ -39,12 +39,6 @@ export default function StructuredData() {
           "price": "0",
           "priceCurrency": "CAD",
           "description": "Essai gratuit disponible"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "150",
-          "bestRating": "5"
         }
       },
       {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Zap, Shield, Bell, Users, Star, ArrowRight, Info, Server, Heart } from 'lucide-react';
@@ -36,7 +36,7 @@ export default function Pricing() {
     },
     {
       question: "L'offre de lancement est valable combien de temps ?",
-      answer: "L'offre annuelle à 150$ est réservée aux premiers membres fondateurs de Magog. Une fois le tarif bloqué, vous le gardez à vie tant que vous restez abonné."
+      answer: "L'offre annuelle à 149$ est réservée aux premiers membres fondateurs de Magog. Une fois le tarif bloqué, vous le gardez à vie tant que vous restez abonné."
     }
   ];
 
@@ -45,7 +45,7 @@ export default function Pricing() {
       <SEO
         title="Tarifs"
         canonical="/pricing"
-        description="Abonnement ProPair à 29$/mois ou 150$/an. 0% commission, connexions illimitées. Investissez dans votre croissance, pas dans des commissions."
+        description="Abonnement ProPair à 24$/mois ou 149$/an. 0% commission, connexions illimitées. Investissez dans votre croissance, pas dans des commissions."
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -83,7 +83,7 @@ export default function Pricing() {
                   <p className="text-slate-500 mb-6">Liberté totale, sans engagement.</p>
                   
                   <div className="mb-8 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-slate-900">23$</span>
+                    <span className="text-4xl font-bold text-slate-900">24$</span>
                     <span className="text-sm text-slate-500">/mois + tx</span>
                   </div>
 
@@ -169,7 +169,7 @@ export default function Pricing() {
           >
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
-              <span className="bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm uppercase tracking-wide flex items-center gap-1">
+              <span className="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm uppercase tracking-wide flex items-center gap-1">
                 <Star size={12} className="fill-white" /> Offre Lancement
               </span>
             </div>
@@ -180,12 +180,12 @@ export default function Pricing() {
 
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-bold text-slate-900">150$</span>
+                  <span className="text-5xl md:text-6xl font-bold text-slate-900">149$</span>
                   <span className="text-sm text-slate-500">/an + tx</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2 text-sm">
-                  <span className="text-slate-400 line-through decoration-red-400">276$</span>
-                  <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">-45% de rabais</span>
+                  <span className="text-slate-400 line-through decoration-red-400">288$</span>
+                  <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">-48% de rabais</span>
                 </div>
               </div>
 
@@ -228,7 +228,7 @@ export default function Pricing() {
         </div>
 
         {/* FAQ Section */}
-        <div className="max-w-2xl mx-auto">
+        <div id="faq" className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
             Questions fréquentes
           </h2>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Send, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,6 +16,7 @@ export default function Footer() {
                 src="/images/logo_ProPair.jpg"
                 alt="ProPair"
                 className="h-12 w-auto"
+                loading="lazy"
               />
             </Link>
             <p className="text-body leading-relaxed">
@@ -48,7 +49,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-body hover:text-teal transition-colors">
+                <Link to="/about" className="text-body hover:text-teal transition-colors">
                   Fonctionnalités
                 </Link>
               </li>
@@ -70,9 +71,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@propairapp.com" className="text-body hover:text-teal transition-colors">
+                <Link to="/contact" className="text-body hover:text-teal transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/login" className="text-body hover:text-teal transition-colors">
@@ -82,24 +83,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Télécharger */}
           <div>
-            <h3 className="font-bold text-primary mb-6">Newsletter</h3>
-            <p className="text-body mb-4">Recevez nos derniers conseils et mises à jour.</p>
-            <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Votre email"
-                className="w-full px-4 py-3 rounded-xl border border-border bg-white text-primary placeholder-muted focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
-              />
-              <button
-                type="submit"
+            <h3 className="font-bold text-primary mb-6">Télécharger l'app</h3>
+            <p className="text-body mb-4">Disponible gratuitement sur iOS et Android.</p>
+            <div className="space-y-3">
+              <a
+                href="https://apps.apple.com/app/propair"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-teal hover:bg-teal-dark text-white font-semibold rounded-xl transition-colors shadow-soft"
               >
-                S'inscrire
-                <Send size={16} />
-              </button>
-            </form>
+                App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.propair"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-colors shadow-soft"
+              >
+                Google Play
+              </a>
+            </div>
           </div>
         </div>
 

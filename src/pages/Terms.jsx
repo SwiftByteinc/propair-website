@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion';
 import { FileText, Users, Building2, CreditCard, MessageSquare, Scale, Gavel } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Terms() {
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen">
+      <SEO
+        title="Conditions d'utilisation"
+        canonical="/terms"
+        description="Conditions générales d'utilisation de la plateforme ProPair. Règles, droits et obligations des utilisateurs."
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

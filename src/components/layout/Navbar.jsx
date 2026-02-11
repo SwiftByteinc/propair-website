@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, LogIn, Briefcase, User } from 'lucide-react';
+import { Menu, X, LogIn, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Navbar() {
@@ -38,12 +38,58 @@ export default function Navbar() {
     { name: 'Accueil', path: '/' },
     { name: 'Notre Histoire', path: '/about' },
     { name: 'Abonnements Pro', path: '/pricing' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const isActive = (path) => location.pathname === path;
 
+  // Indicateur animé (sliding underline)
+  const navRef = useRef(null);
+  const linkRefs = useRef({});
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+  const [hovered, setHovered] = useState(null);
+
+  useEffect(() => {
+    const target = hovered || location.pathname;
+    const el = linkRefs.current[target];
+    const nav = navRef.current;
+    if (el && nav) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = el.getBoundingClientRect();
+      setIndicator({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+        opacity: 1,
+      });
+    } else {
+      setIndicator((prev) => ({ ...prev, opacity: 0 }));
+    }
+  }, [location.pathname, hovered]);
+
+  // Recalculer au resize
+  useEffect(() => {
+    const onResize = () => {
+      const el = linkRefs.current[location.pathname];
+      const nav = navRef.current;
+      if (el && nav) {
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = el.getBoundingClientRect();
+        setIndicator({ left: linkRect.left - navRect.left, width: linkRect.width, opacity: 1 });
+      }
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [location.pathname]);
+
   return (
     <>
+      {/* Skip to content - accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-teal-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
+      >
+        Aller au contenu principal
+      </a>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -67,7 +113,7 @@ export default function Navbar() {
                 <img
                   src="/images/logo_ProPair.jpg"
                   alt=""
-                  className="h-12 w-auto transition-all group-hover:scale-105"
+                  className="h-14 w-auto transition-all group-hover:scale-105"
                   aria-hidden="true"
                 />
                 <span className="sr-only">ProPair</span>
@@ -75,21 +121,33 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8" aria-label="Navigation principale">
+            <nav ref={navRef} className="hidden md:flex items-center space-x-6 relative" aria-label="Navigation principale">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-md px-2 py-1 ${
+                  ref={(el) => { linkRefs.current[link.path] = el; }}
+                  onMouseEnter={() => setHovered(link.path)}
+                  onMouseLeave={() => setHovered(null)}
+                  className={`relative text-sm font-semibold pb-1 transition-colors outline-none px-1 ${
                     isActive(link.path)
-                      ? 'text-teal-600'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'text-teal-700'
+                      : 'text-slate-500 hover:text-slate-900'
                   }`}
                   aria-current={isActive(link.path) ? 'page' : undefined}
                 >
                   {link.name}
                 </Link>
               ))}
+              <motion.span
+                className="absolute bottom-0 h-0.5 bg-teal-600 rounded-full pointer-events-none"
+                animate={{
+                  left: indicator.left,
+                  width: indicator.width,
+                  opacity: indicator.opacity,
+                }}
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
             </nav>
 
             {/* Desktop Actions */}
@@ -110,22 +168,13 @@ export default function Navbar() {
                 </Link>
               ) : (
                 // Not Connected State
-                <>
-                  <Link
-                    to="/login"
-                    className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-full"
-                  >
-                    <LogIn size={16} aria-hidden="true" />
-                    Connexion
-                  </Link>
-                  <Link
-                    to="/pricing"
-                    className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-teal-700 border-2 border-teal-600/20 rounded-full hover:bg-teal-50 transition-all focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  >
-                    <Briefcase size={16} aria-hidden="true" />
-                    Espace Pro
-                  </Link>
-                </>
+                <Link
+                  to="/login"
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors outline-none"
+                >
+                  <LogIn size={16} aria-hidden="true" />
+                  Se connecter
+                </Link>
               )}
             </div>
 
@@ -238,22 +287,14 @@ export default function Navbar() {
                     Accéder à mon espace
                   </Link>
                 ) : (
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link
-                      to="/login"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    >
-                      Connexion
-                    </Link>
-                    <Link
-                      to="/pricing"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-white bg-teal-600 rounded-xl hover:bg-teal-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-                    >
-                      S'inscrire
-                    </Link>
-                  </div>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-bold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                  >
+                    <LogIn size={16} aria-hidden="true" />
+                    Se connecter
+                  </Link>
                 )}
               </div>
             </motion.div>

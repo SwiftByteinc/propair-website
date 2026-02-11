@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from './Sidebar';
 
@@ -7,21 +8,21 @@ import Sidebar from './Sidebar';
 function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
-      {/* Sidebar skeleton */}
-      <aside className="w-64 h-screen bg-white border-r border-gray-100 fixed left-0 top-0">
+      {/* Sidebar skeleton - hidden on mobile */}
+      <aside className="hidden md:block w-64 h-screen bg-white border-r border-slate-100 fixed left-0 top-0">
         <div className="p-6 space-y-4 animate-pulse">
-          <div className="h-8 bg-gray-100 rounded-lg w-32" />
-          <div className="h-12 bg-gray-100 rounded-full w-12" />
-          <div className="h-4 bg-gray-100 rounded w-full" />
-          <div className="h-4 bg-gray-100 rounded w-2/3" />
+          <div className="h-8 bg-slate-100 rounded-lg w-32" />
+          <div className="h-12 bg-slate-100 rounded-full w-12" />
+          <div className="h-4 bg-slate-100 rounded w-full" />
+          <div className="h-4 bg-slate-100 rounded w-2/3" />
         </div>
       </aside>
       {/* Main skeleton */}
-      <main className="ml-64 flex-1 p-8">
+      <main className="md:ml-64 flex-1 p-8">
         <div className="animate-pulse space-y-6">
-          <div className="h-8 bg-gray-100 rounded-lg w-64" />
-          <div className="h-32 bg-gray-100 rounded-2xl" />
-          <div className="h-48 bg-gray-100 rounded-2xl" />
+          <div className="h-8 bg-slate-100 rounded-lg w-64" />
+          <div className="h-32 bg-slate-100 rounded-2xl" />
+          <div className="h-48 bg-slate-100 rounded-2xl" />
         </div>
       </main>
     </div>
@@ -39,6 +40,8 @@ export default function DashboardLayout() {
     isPro,
     signOut
   } = useAuth();
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -77,16 +80,35 @@ export default function DashboardLayout() {
     trial_connections_count: profile?.trial_connections_count || 0,
     // Subscription info
     subscription_status: subscription?.status,
-    subscription_end: subscription?.current_period_end
+    subscription_end: subscription?.current_period_end,
+    // Auth metadata for Security page
+    email_confirmed_at: user.email_confirmed_at
   };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
+      {/* Mobile header with hamburger */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
+          aria-label="Ouvrir le menu"
+        >
+          <Menu size={20} />
+        </button>
+        <img src="/images/logo_ProPair.jpg" alt="ProPair" className="h-7 ml-3" />
+      </div>
+
       {/* Sidebar */}
-      <Sidebar user={userData} onSignOut={handleSignOut} />
+      <Sidebar
+        user={userData}
+        onSignOut={handleSignOut}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       {/* Main Content Area */}
-      <main className="ml-64 min-h-screen">
+      <main className="md:ml-64 min-h-screen pt-14 md:pt-0">
         <Outlet context={{ user: userData, profile, subscription, isPro }} />
       </main>
     </div>

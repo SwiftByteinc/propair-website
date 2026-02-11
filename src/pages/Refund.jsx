@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReceiptText, Ban, Calendar, AlertCircle, Users, Mail } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Refund() {
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen">
+      <SEO
+        title="Politique de remboursement"
+        canonical="/refund"
+        description="Politique de remboursement ProPair. Informations sur les annulations et remboursements d'abonnement."
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

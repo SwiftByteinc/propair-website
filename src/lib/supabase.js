@@ -5,7 +5,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 // Validate configuration
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Supabase config missing - check .env.local')
+  if (import.meta.env.DEV) console.error('Supabase config missing - check .env.local')
 }
 
 // Singleton pattern to prevent multiple instances

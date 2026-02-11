@@ -49,7 +49,7 @@ export function useReferralStats(userId) {
         setReferralList(data || []);
 
       } catch (err) {
-        console.error('Erreur lors du chargement des parrainages:', err);
+        if (import.meta.env.DEV) console.error('Erreur lors du chargement des parrainages:', err);
         setError(err);
       } finally {
         setLoading(false);

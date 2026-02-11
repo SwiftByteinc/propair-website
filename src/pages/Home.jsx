@@ -60,7 +60,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-12 md:mb-16 px-4 sm:px-0">
               <a
                 href="#telecharger"
-                className="group flex items-center justify-center gap-3 px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-teal-200 hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto active:scale-95 duration-200"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl transition-all hover:-translate-y-0.5 w-full sm:w-auto active:scale-[0.98] duration-200"
               >
                 <Smartphone size={20} />
                 Télécharger l'app
@@ -263,6 +263,7 @@ export default function Home() {
                     src="/apple-touch-icon.png"
                     alt="ProPair App"
                     className="w-24 h-24 md:w-32 md:h-32 rounded-[22px] md:rounded-[28px] shadow-2xl border-4 border-white flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 rounded-[28px] bg-slate-200 blur-xl -z-10 opacity-50" />
                 </div>

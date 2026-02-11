@@ -19,6 +19,7 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Refund = lazy(() => import('./pages/Refund'));
+const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Dashboard components
@@ -34,7 +35,7 @@ function PageLoader() {
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
         <div className="w-10 h-10 border-4 border-teal-100 border-t-teal-600 rounded-full animate-spin" />
-        <span className="text-sm text-gray-500 font-medium animate-pulse">Chargement...</span>
+        <span className="text-sm text-slate-500 font-medium animate-pulse">Chargement...</span>
       </div>
     </div>
   );
@@ -51,9 +52,9 @@ function ScrollToTop() {
 // Layout wrapper
 function MainLayout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen bg-white font-sans text-gray-600">
+    <div className="flex flex-col min-h-screen bg-white font-sans text-slate-600">
       <Navbar />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {/* Suspense wrap pour le lazy loading */}
         <Suspense fallback={<PageLoader />}>
           {children}
@@ -66,7 +67,7 @@ function MainLayout({ children }) {
 
 function AuthLayout({ children }) {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-600">
+    <div className="min-h-screen bg-white font-sans text-slate-600">
       <Suspense fallback={<PageLoader />}>
         {children}
       </Suspense>
@@ -92,6 +93,7 @@ function App() {
               <Route path="/privacy" element={<MainLayout><Privacy /></MainLayout>} />
               <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
               <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
+              <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
 
               {/* Auth Pages */}
               <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />

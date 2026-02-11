@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion';
 import { Shield, Mail, MapPin, Lock, Database, UserCheck, AlertTriangle } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Privacy() {
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen">
+      <SEO
+        title="Politique de confidentialité"
+        canonical="/privacy"
+        description="Politique de confidentialité de ProPair. Découvrez comment nous protégeons vos données personnelles."
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
