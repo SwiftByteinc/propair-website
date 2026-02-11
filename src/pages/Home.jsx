@@ -25,7 +25,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* HERO SECTION */}
       {/* ============================================ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden">
         {/* Fond très léger */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-50/50 via-white to-white" />
 
@@ -76,14 +76,14 @@ export default function Home() {
             </div>
 
             {/* Badges : Grid sur mobile pour alignement propre */}
-            <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 sm:gap-6 justify-center text-sm font-medium text-slate-500 px-8 sm:px-0">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6 justify-center text-sm font-medium text-slate-500 px-4 sm:px-0">
               <div className="flex items-center justify-center gap-2">
                 <Check size={18} className="text-teal-600" /> 0% de commission
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Check size={18} className="text-teal-600" /> Outils de gestion inclus
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 col-span-2 sm:col-span-1">
                 <Check size={18} className="text-teal-600" /> Chat intégré
               </div>
             </div>

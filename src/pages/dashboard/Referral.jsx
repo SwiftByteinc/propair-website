@@ -70,22 +70,22 @@ export default function Referral() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-amber/10 to-amber/5 rounded-2xl border border-amber/20 p-6"
+            className="bg-gradient-to-br from-amber-50 to-amber-50/50 rounded-2xl border border-amber-100 p-6"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-amber/20 flex items-center justify-center">
-                  <Gift size={24} className="text-amber" />
+                <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
+                  <Gift size={24} className="text-amber-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-amber uppercase tracking-wider">Récompenses</p>
+                  <p className="text-xs font-bold text-amber-500 uppercase tracking-wider">Récompenses</p>
                   <p className="text-xl font-bold text-slate-900">
                     {`${loading ? '-' : stats.earnedMonths} mois Pro gagnés`}
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-3xl font-bold text-amber">
+                <p className="text-3xl font-bold text-amber-500">
                   {loading ? '-' : stats.earnedMonths}
                 </p>
               </div>
@@ -117,7 +117,7 @@ export default function Referral() {
                 whileTap={{ scale: 0.95 }}
                 className={`px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all whitespace-nowrap ${
                   copied
-                    ? 'bg-teal text-white'
+                    ? 'bg-teal-600 text-white'
                     : 'bg-slate-900 text-white hover:bg-slate-800'
                 }`}
               >
@@ -175,20 +175,20 @@ export default function Referral() {
 
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
-              <CheckCircle size={18} className="text-teal" />
+              <CheckCircle size={18} className="text-teal-600" />
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Validés</span>
             </div>
-            <p className="text-2xl font-bold text-teal">
+            <p className="text-2xl font-bold text-teal-600">
               {loading ? '-' : stats.validatedReferrals}
             </p>
           </div>
 
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
-              <Clock size={18} className="text-amber" />
+              <Clock size={18} className="text-amber-500" />
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">En attente</span>
             </div>
-            <p className="text-2xl font-bold text-amber">
+            <p className="text-2xl font-bold text-amber-500">
               {loading ? '-' : stats.pendingReferrals}
             </p>
           </div>
@@ -232,7 +232,7 @@ export default function Referral() {
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
-                          ref.status === 'validated' ? 'bg-teal/10 text-teal' :
+                          ref.status === 'validated' ? 'bg-teal-50 text-teal-600' :
                           ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                           'bg-slate-100 text-slate-500'
                         }`}>

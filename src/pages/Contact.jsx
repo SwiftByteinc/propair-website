@@ -144,9 +144,13 @@ export default function Contact() {
                   <Mail size={24} className="text-teal-600" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Votre client courriel s'est ouvert</h3>
-                <p className="text-slate-600 mb-4">
+                <p className="text-slate-600 mb-2">
                   Envoyez le message depuis votre application de courriel.
                   Nous vous répondrons sous 24h ouvrables.
+                </p>
+                <p className="text-slate-400 text-sm mb-4">
+                  Si rien ne s'est ouvert, écrivez directement à{' '}
+                  <a href="mailto:support@propairapp.com" className="text-teal-600 hover:underline">support@propairapp.com</a>
                 </p>
                 <button
                   onClick={() => { setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}

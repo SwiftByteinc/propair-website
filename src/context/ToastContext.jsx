@@ -58,13 +58,13 @@ export function ToastProvider({ children }) {
               role="alert"
               className={`
                 pointer-events-auto min-w-[300px] max-w-[400px] p-4 rounded-xl shadow-lg border flex items-start gap-3
-                ${t.type === 'success' ? 'bg-white border-teal/20 text-teal-dark' : ''}
+                ${t.type === 'success' ? 'bg-white border-teal-100 text-teal-800' : ''}
                 ${t.type === 'error' ? 'bg-white border-red-200 text-red-700' : ''}
                 ${t.type === 'info' ? 'bg-slate-900 border-slate-700 text-white' : ''}
               `}
             >
               <div className="mt-0.5 shrink-0">
-                {t.type === 'success' && <CheckCircle size={18} className="text-teal" />}
+                {t.type === 'success' && <CheckCircle size={18} className="text-teal-600" />}
                 {t.type === 'error' && <AlertCircle size={18} className="text-red-500" />}
                 {t.type === 'info' && <Info size={18} className="text-blue-400" />}
               </div>

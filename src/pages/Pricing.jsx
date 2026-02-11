@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Zap, Shield, Bell, Users, Star, ArrowRight, Info, Server, Heart } from 'lucide-react';
+import { Check, Zap, Shield, Bell, Users, Star, Info, Heart } from 'lucide-react';
 import SEO from '../components/SEO';
 
 export default function Pricing() {
@@ -68,92 +68,56 @@ export default function Pricing() {
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto items-center mb-24">
 
           {/* ============================================== */}
-          {/* CARTE GAUCHE : MENSUEL (Celle qui change) */}
+          {/* CARTE GAUCHE : MENSUEL + Bandeau transparence */}
           {/* ============================================== */}
-          <div className="relative h-full min-h-[500px]">
-            <AnimatePresence mode="wait">
-              
-              {/* ÉTAT 1 : La carte Mensuelle Normale */}
-              {!showInsider ? (
-                <motion.div
-                  key="monthly-card"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, filter: "blur(10px)" }}
-                  transition={{ duration: 0.8 }}
-                  className="bg-white rounded-[2rem] p-8 border border-slate-200 h-full relative z-10"
-                >
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Mensuel</h3>
-                  <p className="text-slate-500 mb-6">Liberté totale, sans engagement.</p>
-                  
-                  <div className="mb-8 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-slate-900">24$</span>
-                    <span className="text-sm text-slate-500">/mois + tx</span>
-                  </div>
+          <div className="relative h-full flex flex-col">
+            <div className="bg-white rounded-[2rem] p-8 border border-slate-200 flex-1 relative z-10">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">Mensuel</h3>
+              <p className="text-slate-500 mb-6">Liberté totale, sans engagement.</p>
 
-                  <Link
-                    to="/login?plan=monthly"
-                    className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98]"
-                  >
-                    Choisir le mensuel
-                  </Link>
+              <div className="mb-8 flex items-baseline gap-1">
+                <span className="text-4xl font-bold text-slate-900">24$</span>
+                <span className="text-sm text-slate-500">/mois + tx</span>
+              </div>
 
-                  <div className="space-y-3 opacity-70">
-                    <p className="text-xs font-bold text-slate-400 uppercase">Inclus :</p>
-                    {proFeatures.slice(0, 3).map((f, i) => (
-                      <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                        <Check size={14} className="text-slate-400" /> {f.text}
-                      </div>
-                    ))}
+              <Link
+                to="/login?plan=monthly"
+                className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98]"
+              >
+                Choisir le mensuel
+              </Link>
+
+              <div className="space-y-3 opacity-70">
+                <p className="text-xs font-bold text-slate-400 uppercase">Inclus :</p>
+                {proFeatures.slice(0, 3).map((f, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
+                    <Check size={14} className="text-slate-400" /> {f.text}
                   </div>
-                </motion.div>
-              ) : (
-                
-                /* ÉTAT 2 : Le Message "Insider / Transparence" */
+                ))}
+              </div>
+            </div>
+
+            {/* Bandeau transparence - apparaît après 5s */}
+            <AnimatePresence>
+              {showInsider && (
                 <motion.div
-                  key="insider-msg"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="h-full flex flex-col justify-center p-8 rounded-[2rem] border border-dashed border-slate-200 bg-slate-50/50 backdrop-blur-sm"
+                  initial={{ opacity: 0, y: -10, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="overflow-hidden"
                 >
-                  <div className="flex items-center gap-2 text-amber-600 mb-4 font-bold text-sm uppercase tracking-wide">
-                    <Info size={16} />
-                    Transparence ProPair
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                    Pourquoi on préfère l'annuel ?
-                  </h3>
-                  
-                  <div className="space-y-6 text-slate-600 text-sm leading-relaxed">
-                    <p>
-                      En tant qu'entreprise locale, chaque dollar compte pour améliorer l'application.
-                    </p>
-                    
-                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-semibold text-slate-900">Frais bancaires (Stripe)</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs">
-                        <span className="text-red-500 font-bold">10.47%</span> sur le mensuel
-                        <ArrowRight size={12} className="text-slate-400"/>
-                        <span className="text-green-600 font-bold">2.8%</span> sur l'annuel
+                  <div className="mt-4 p-5 rounded-2xl border border-dashed border-amber-200 bg-amber-50/50">
+                    <div className="flex items-start gap-3">
+                      <Info size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                      <div className="text-sm">
+                        <p className="font-bold text-slate-900 mb-1">Le saviez-vous ?</p>
+                        <p className="text-slate-600 leading-relaxed">
+                          Les frais Stripe coûtent <span className="text-red-500 font-bold">10.47%</span> au mensuel vs <span className="text-green-600 font-bold">2.8%</span> à l'annuel. L'annuel nous permet de réinvestir dans l'app au lieu de payer les banques.
+                        </p>
                       </div>
                     </div>
-
-                    <div className="flex gap-3 items-start">
-                      <Server size={18} className="text-teal-600 mt-1 flex-shrink-0" />
-                      <p>L'argent économisé est réinvesti directement dans le développement et les serveurs, pas dans les banques.</p>
-                    </div>
                   </div>
-
-                  <button 
-                    onClick={() => setShowInsider(false)}
-                    className="mt-8 text-xs text-slate-400 underline hover:text-slate-600 text-left"
-                  >
-                    Je préfère quand même payer mensuellement
-                  </button>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -124,7 +124,7 @@ export default function DashboardHome() {
             className={`px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all ${
               user?.isPro
                 ? 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
-                : 'bg-teal-600 text-white hover:bg-teal-700 hover:shadow-lg hover:shadow-teal-200'
+                : 'bg-slate-900 text-white hover:bg-black shadow-lg shadow-slate-900/10'
             }`}
           >
             <CreditCard size={18} />

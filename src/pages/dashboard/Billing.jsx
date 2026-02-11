@@ -111,7 +111,7 @@ export default function Billing() {
             <p className="text-slate-500 mb-6">Passez Pro pour débloquer toutes les fonctionnalités.</p>
             <button
               onClick={() => window.location.href = '/pricing'}
-              className="px-6 py-3 bg-teal-600 text-white rounded-xl font-bold hover:bg-teal-700 transition-colors"
+              className="px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-colors shadow-lg shadow-slate-900/10"
             >
               Voir les offres
             </button>

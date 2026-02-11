@@ -156,8 +156,8 @@ export default function Security() {
             </div>
             <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
               verification.email.verified
-                ? 'bg-teal/10 text-teal'
-                : 'bg-amber/10 text-amber'
+                ? 'bg-teal-50 text-teal-600'
+                : 'bg-amber-50 text-amber-500'
             }`}>
               {verification.email.verified ? 'Vérifié' : 'Non vérifié'}
             </span>
@@ -210,7 +210,7 @@ export default function Security() {
                     </div>
                   )}
                   {success && (
-                    <div className="p-3 bg-teal/10 border border-teal/20 rounded-lg text-sm text-teal">
+                    <div className="p-3 bg-teal-50 border border-teal-100 rounded-lg text-sm text-teal-600">
                       {success}
                     </div>
                   )}
@@ -223,7 +223,7 @@ export default function Security() {
                       type="password"
                       value={passwords.current}
                       onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-teal focus:ring-1 focus:ring-teal/20 text-sm transition-all"
+                      className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all"
                       placeholder="••••••••"
                       autoComplete="current-password"
                     />
@@ -239,7 +239,7 @@ export default function Security() {
                           type={showPassword ? 'text' : 'password'}
                           value={passwords.new}
                           onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-teal focus:ring-1 focus:ring-teal/20 text-sm transition-all pr-10"
+                          className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all pr-10"
                           placeholder="Min. 8 caractères"
                         />
                         <button
@@ -259,7 +259,7 @@ export default function Security() {
                         type={showPassword ? 'text' : 'password'}
                         value={passwords.confirm}
                         onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-teal focus:ring-1 focus:ring-teal/20 text-sm transition-all"
+                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all"
                         placeholder="••••••••"
                       />
                     </div>

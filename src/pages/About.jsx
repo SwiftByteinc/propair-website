@@ -17,8 +17,8 @@ const Counter = ({ value, label }) => {
     const numericString = value.toString().replace(/[^0-9]/g, '');
     const end = parseInt(numericString, 10);
 
-    // Si pas de nombre valide, afficher la valeur telle quelle
-    if (isNaN(end) || end === 0) return;
+    // Si pas de nombre valide ou trop petit pour animer, afficher la valeur telle quelle
+    if (isNaN(end) || end <= 1) return;
 
     let start = 0;
     const duration = 2000;
@@ -34,7 +34,8 @@ const Counter = ({ value, label }) => {
   // Si valeur non-numérique ou contient %, afficher directement
   const numericCheck = value.toString().replace(/[^0-9]/g, '');
   const isNumeric = numericCheck.length > 0 && !isNaN(parseInt(numericCheck, 10));
-  const showRawValue = value.includes('%') || value.includes('+') || !isNumeric;
+  const numericEnd = parseInt(numericCheck, 10);
+  const showRawValue = value.includes('%') || value.includes('+') || value.includes('$') || !isNumeric || numericEnd <= 1;
 
   return (
     <div ref={ref} className="text-center p-6">

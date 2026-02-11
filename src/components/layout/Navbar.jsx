@@ -170,7 +170,7 @@ export default function Navbar() {
                 // Not Connected State
                 <Link
                   to="/login"
-                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors outline-none"
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all outline-none"
                 >
                   <LogIn size={16} aria-hidden="true" />
                   Se connecter
