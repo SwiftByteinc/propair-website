@@ -60,7 +60,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-12 md:mb-16 px-4 sm:px-0">
               <a
                 href="#telecharger"
-                className="group flex items-center justify-center gap-3 px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl transition-all hover:-translate-y-0.5 w-full sm:w-auto active:scale-[0.98] duration-200"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 hover:bg-black text-white font-bold rounded-2xl transition-all hover:-translate-y-0.5 w-full sm:w-auto active:scale-[0.98] duration-200 shadow-lg shadow-slate-900/10"
               >
                 <Smartphone size={20} />
                 Télécharger l'app
@@ -68,7 +68,7 @@ export default function Home() {
               </a>
               <Link
                 to="/pricing"
-                className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-2xl transition-all shadow-sm hover:shadow-md hover:border-teal-200 hover:text-teal-700 w-full sm:w-auto active:scale-95 duration-200"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-2xl transition-all hover:border-slate-300 hover:text-slate-900 w-full sm:w-auto active:scale-[0.98] duration-200"
               >
                 <Briefcase size={20} />
                 Espace Pro
@@ -199,7 +199,7 @@ export default function Home() {
             
             {/* Étape 1 */}
             <div className="text-center relative">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 rotate-3 border border-teal-100">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 border border-teal-100">
                 <Search size={28} className="text-teal-600 md:w-8 md:h-8" />
               </div>
               <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 md:mb-3">1. Contactez ou Publiez</h3>
@@ -210,10 +210,7 @@ export default function Home() {
 
             {/* Étape 2 */}
             <div className="text-center relative">
-               {/* Arrow desktop only */}
-               <div className="hidden md:block absolute top-10 -left-1/2 w-full h-px border-t-2 border-dashed border-slate-100 -z-10" />
-               
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-amber-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 -rotate-3 border border-amber-100">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-amber-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 border border-amber-100">
                 <MessageSquare size={28} className="text-amber-600 md:w-8 md:h-8" />
               </div>
               <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 md:mb-3">2. Discussion & Entente</h3>
@@ -224,10 +221,7 @@ export default function Home() {
 
             {/* Étape 3 */}
             <div className="text-center relative">
-               {/* Arrow desktop only */}
-               <div className="hidden md:block absolute top-10 -left-1/2 w-full h-px border-t-2 border-dashed border-slate-100 -z-10" />
-
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 rotate-3 border border-slate-100">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-4 md:mb-6 border border-slate-100">
                 <Layout size={28} className="text-slate-700 md:w-8 md:h-8" />
               </div>
               <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 md:mb-3">3. Gestion Simplifiée</h3>
@@ -251,10 +245,6 @@ export default function Home() {
             viewport={{ once: true }}
             className="relative bg-white rounded-[24px] md:rounded-[32px] p-8 md:p-12 border border-slate-200 shadow-xl overflow-hidden"
           >
-            {/* Dégradés décoratifs */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full blur-3xl opacity-50" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl opacity-50" />
-
             <div className="relative z-10 grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
               {/* Gauche: Icone & Info */}
               <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-8">
@@ -262,10 +252,9 @@ export default function Home() {
                   <img
                     src="/apple-touch-icon.png"
                     alt="ProPair App"
-                    className="w-24 h-24 md:w-32 md:h-32 rounded-[22px] md:rounded-[28px] shadow-2xl border-4 border-white flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
+                    className="w-24 h-24 md:w-32 md:h-32 rounded-[22px] md:rounded-[28px] shadow-lg border-4 border-white flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 rounded-[28px] bg-slate-200 blur-xl -z-10 opacity-50" />
                 </div>
                 <div className="text-center sm:text-left">
                   <h2 className="text-2xl md:text-4xl font-bold text-slate-900 mb-2 md:mb-3">

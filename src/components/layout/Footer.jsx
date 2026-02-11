@@ -92,7 +92,7 @@ export default function Footer() {
                 href="https://apps.apple.com/app/propair"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-teal hover:bg-teal-dark text-white font-semibold rounded-xl transition-colors shadow-soft"
+                className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-xl transition-colors shadow-soft"
               >
                 App Store
               </a>
