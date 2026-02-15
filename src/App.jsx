@@ -1,132 +1,41 @@
-import { useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { ToastProvider } from './context/ToastContext';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import ErrorBoundary from './components/ErrorBoundary';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import CookieConsent from './components/ui/CookieConsent';
-import StructuredData from './components/seo/StructuredData';
-import { useReferralCapture } from './hooks/useReferralCapture';
+import Home from './pages/Home';
+import Guides from './pages/Guides';
+import Pricing from './pages/Pricing';
+import About from './pages/About';
 
-// --- LAZY LOADING (Code Splitting P1) ---
-const Home = lazy(() => import('./pages/Home'));
-const Pricing = lazy(() => import('./pages/Pricing'));
-const About = lazy(() => import('./pages/About'));
-const Login = lazy(() => import('./pages/Login'));
-const UpdatePassword = lazy(() => import('./pages/UpdatePassword'));
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
-const Privacy = lazy(() => import('./pages/Privacy'));
-const Terms = lazy(() => import('./pages/Terms'));
-const Refund = lazy(() => import('./pages/Refund'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Parrainage = lazy(() => import('./pages/Parrainage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-
-// Dashboard components
-const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout'));
-const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
-const Billing = lazy(() => import('./pages/dashboard/Billing'));
-const Referral = lazy(() => import('./pages/dashboard/Referral'));
-const Security = lazy(() => import('./pages/dashboard/Security'));
-
-// Loader optimisé
-function PageLoader() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 border-4 border-teal-100 border-t-teal-600 rounded-full animate-spin" />
-        <span className="text-sm text-slate-500 font-medium animate-pulse">Chargement...</span>
-      </div>
-    </div>
-  );
-}
+// ScrollToTop Component
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useReferralCapture(); // Capture ?ref__= ou ?ref= depuis n'importe quelle page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
 }
 
-// Layout wrapper
-function MainLayout({ children }) {
-  return (
-    <div className="flex flex-col min-h-screen bg-white font-sans text-slate-600">
-      <Navbar />
-      <main id="main-content" className="flex-grow">
-        {/* Suspense wrap pour le lazy loading */}
-        <Suspense fallback={<PageLoader />}>
-          {children}
-        </Suspense>
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
-function AuthLayout({ children }) {
-  return (
-    <div className="min-h-screen bg-white font-sans text-slate-600">
-      <Suspense fallback={<PageLoader />}>
-        {children}
-      </Suspense>
-    </div>
-  );
-}
-
 function App() {
   return (
-    <ErrorBoundary>
-      <ToastProvider>
-        <AuthProvider>
-          <Router>
-            <StructuredData />
-            <ScrollToTop />
-            <Routes>
-              {/* Public Pages */}
-              <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-              <Route path="/pricing" element={<MainLayout><Pricing /></MainLayout>} />
-              <Route path="/about" element={<MainLayout><About /></MainLayout>} />
-
-              {/* Legal Pages */}
-              <Route path="/privacy" element={<MainLayout><Privacy /></MainLayout>} />
-              <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
-              <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
-              <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
-              <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} />
-
-              {/* Auth Pages */}
-              <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
-              <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
-              <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
-
-              {/* Portal (Protected) */}
-              <Route path="/portal" element={
-                <ProtectedRoute>
-                  <Suspense fallback={<PageLoader />}>
-                    <DashboardLayout />
-                  </Suspense>
-                </ProtectedRoute>
-              }>
-                <Route index element={<DashboardHome />} />
-                <Route path="billing" element={<Billing />} />
-                <Route path="referral" element={<Referral />} />
-                <Route path="security" element={<Security />} />
-              </Route>
-
-              {/* 404 */}
-              <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
-            </Routes>
-
-            <CookieConsent />
-          </Router>
-        </AuthProvider>
-      </ToastProvider>
-    </ErrorBoundary>
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
