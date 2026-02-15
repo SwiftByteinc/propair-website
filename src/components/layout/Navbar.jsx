@@ -114,6 +114,8 @@ export default function Navbar() {
                 <img
                   src="/images/logo_ProPair.jpg"
                   alt=""
+                  width="120"
+                  height="56"
                   className="h-14 w-auto transition-all group-hover:scale-105"
                   aria-hidden="true"
                 />

@@ -15,6 +15,8 @@ export default function Footer() {
               <img
                 src="/images/logo_ProPair.jpg"
                 alt="ProPair"
+                width="103"
+                height="48"
                 className="h-12 w-auto"
                 loading="lazy"
               />

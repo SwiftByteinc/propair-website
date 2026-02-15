@@ -129,6 +129,8 @@ export default function Login() {
         <img
           src="/images/logo_ProPair.jpg"
           alt="ProPair"
+          width="120"
+          height="56"
           className="h-12 sm:h-14 w-auto"
         />
       </Link>
@@ -221,6 +223,7 @@ export default function Login() {
           {/* Name field (signup only) */}
           {!isLogin && (
             <div className="relative">
+              <label htmlFor="name" className="sr-only">Nom complet</label>
               <User size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
@@ -229,7 +232,6 @@ export default function Login() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Votre nom complet"
-                aria-label="Nom complet"
                 autoComplete="name"
                 className={inputClass}
                 required
@@ -240,6 +242,7 @@ export default function Login() {
 
           {/* Email */}
           <div className="relative">
+            <label htmlFor="email" className="sr-only">Adresse email</label>
             <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="email"
@@ -248,7 +251,6 @@ export default function Login() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="Adresse email"
-              aria-label="Adresse email"
               autoComplete="email"
               className={inputClass}
               required
@@ -259,6 +261,7 @@ export default function Login() {
           {/* Password */}
           <div>
             <div className="relative">
+              <label htmlFor="password" className="sr-only">Mot de passe</label>
               <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -267,7 +270,6 @@ export default function Login() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="Mot de passe"
-                aria-label="Mot de passe"
                 autoComplete={isLogin ? "current-password" : "new-password"}
                 className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm"
                 required
@@ -290,6 +292,7 @@ export default function Login() {
           {/* Confirm Password (signup only) */}
           {!isLogin && (
             <div className="relative">
+              <label htmlFor="confirmPassword" className="sr-only">Confirmer le mot de passe</label>
               <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -298,7 +301,6 @@ export default function Login() {
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 placeholder="Confirmer le mot de passe"
-                aria-label="Confirmer le mot de passe"
                 autoComplete="new-password"
                 className={inputClass}
                 required

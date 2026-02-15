@@ -93,7 +93,7 @@ export default function DashboardLayout() {
         >
           <Menu size={20} />
         </button>
-        <img src="/images/logo_ProPair.jpg" alt="ProPair" className="h-7 ml-3" />
+        <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7 ml-3" />
       </div>
 
       {/* Sidebar */}

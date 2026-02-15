@@ -68,7 +68,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
             className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
           >
             <ChevronLeft size={18} />
-            <img src="/images/logo_ProPair.jpg" alt="ProPair" className="h-7" />
+            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7" />
           </button>
           <button
             onClick={onClose}

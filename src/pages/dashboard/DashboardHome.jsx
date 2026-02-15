@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
+import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Crown,
@@ -31,7 +31,7 @@ export default function DashboardHome() {
 
   // Sécurisation XSS : Encode le code de parrainage
   const referralCode = encodeURIComponent(user?.referral_code || 'PROPAIR2024');
-  const referralLink = `${window.location.origin}/login?ref=${referralCode}`;
+  const referralLink = `${window.location.origin}/login?ref__=${referralCode}`;
   const referralGoal = 3;
 
   const connectionsUsed = user?.user_metadata?.trial_connections_count || 0;
@@ -46,10 +46,10 @@ export default function DashboardHome() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const navigate = useNavigate();
+
   const handleStripeAction = () => {
-    // Redirection propre vers la page Billing qui gère Stripe
-    // Au lieu d'une alerte, on redirige vers l'endroit approprié
-    window.location.href = '/portal/billing';
+    navigate('/portal/billing');
   };
 
   return (
