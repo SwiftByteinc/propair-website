@@ -21,6 +21,13 @@ describe('StructuredData schema content', () => {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://propairapp.com/#website",
+        "name": "ProPair",
+        "alternateName": "ProPair App",
+        "url": "https://propairapp.com"
+      },
+      {
         "@type": "Organization",
         "@id": "https://propairapp.com/#organization",
         "name": "ProPair",
@@ -83,6 +90,13 @@ describe('StructuredData schema content', () => {
     const app = structuredData['@graph'].find(item => item['@type'] === 'SoftwareApplication');
     expect(app).toBeDefined();
     expect(app.applicationCategory).toBe('BusinessApplication');
+  });
+
+  it('includes WebSite schema with site name', () => {
+    const website = structuredData['@graph'].find(item => item['@type'] === 'WebSite');
+    expect(website).toBeDefined();
+    expect(website.name).toBe('ProPair');
+    expect(website.url).toBe('https://propairapp.com');
   });
 
   it('includes LocalBusiness with Magog address', () => {

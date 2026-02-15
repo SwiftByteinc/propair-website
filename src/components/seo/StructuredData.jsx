@@ -5,11 +5,18 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
-        "@id": "https://propair.ca/#organization",
+        "@type": "WebSite",
+        "@id": "https://propairapp.com/#website",
         "name": "ProPair",
-        "url": "https://propair.ca",
-        "logo": "https://propair.ca/images/logo_ProPair.jpg",
+        "alternateName": "ProPair App",
+        "url": "https://propairapp.com"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://propairapp.com/#organization",
+        "name": "ProPair",
+        "url": "https://propairapp.com",
+        "logo": "https://propairapp.com/images/logo_ProPair.jpg",
         "description": "Plateforme de mise en relation entre entrepreneurs certifiés RBQ et clients au Québec",
         "sameAs": [
           "https://facebook.com/propair",
@@ -44,7 +51,7 @@ export default function StructuredData() {
       {
         "@type": "LocalBusiness",
         "name": "ProPair",
-        "image": "https://propair.ca/images/logo_ProPair.jpg",
+        "image": "https://propairapp.com/images/logo_ProPair.jpg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Magog",
