@@ -38,6 +38,7 @@ export default function Navbar() {
     { name: 'Accueil', path: '/' },
     { name: 'Notre Histoire', path: '/about' },
     { name: 'Abonnements Pro', path: '/pricing' },
+    { name: 'Parrainage', path: '/parrainage' },
     { name: 'Contact', path: '/contact' },
   ];
 

@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase';
+import { clearStoredReferralCode } from '../hooks/useReferralCapture';
 
 const AuthContext = createContext({});
 
@@ -89,6 +90,86 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  // Track if referral was already processed to avoid duplicates
+  const referralProcessed = useRef(false);
+
+  // Process pending referral after signup
+  const processReferral = useCallback(async (currentUser) => {
+    if (!supabase || !currentUser || referralProcessed.current) return;
+
+    try {
+      const pendingRaw = sessionStorage.getItem('pending_referral');
+      if (!pendingRaw) return;
+
+      const pending = JSON.parse(pendingRaw);
+      if (!pending?.code) return;
+
+      // Guard: only process within 1 hour of creation
+      if (Date.now() - pending.timestamp > 3600000) {
+        clearStoredReferralCode();
+        return;
+      }
+
+      referralProcessed.current = true;
+
+      // 1. Look up the referrer by referral_code
+      const { data: referrer, error: lookupErr } = await supabase
+        .from('profiles')
+        .select('id, email')
+        .eq('referral_code', pending.code)
+        .single();
+
+      if (lookupErr || !referrer) {
+        clearStoredReferralCode();
+        return;
+      }
+
+      // 2. Guard: can't refer yourself
+      if (referrer.id === currentUser.id) {
+        clearStoredReferralCode();
+        return;
+      }
+
+      // 3. Guard: check if already referred (unique constraint)
+      const { data: existing } = await supabase
+        .from('referral_events')
+        .select('id')
+        .eq('referred_id', currentUser.id)
+        .limit(1);
+
+      if (existing && existing.length > 0) {
+        clearStoredReferralCode();
+        return;
+      }
+
+      // 4. Determine referee_type from profile (default to 'client')
+      const { data: newProfile } = await supabase
+        .from('profiles')
+        .select('user_role')
+        .eq('id', currentUser.id)
+        .single();
+
+      const refereeType = newProfile?.user_role === 'entrepreneur' ? 'entrepreneur' : 'client';
+
+      // 5. Create the referral_event
+      await supabase.from('referral_events').insert({
+        referrer_id: referrer.id,
+        referrer_email: referrer.email,
+        referred_id: currentUser.id,
+        referee_type: refereeType,
+        status: refereeType === 'client' ? 'VALIDATED' : 'PENDING',
+        created_at: new Date().toISOString()
+      });
+
+      // 6. Cleanup
+      clearStoredReferralCode();
+
+    } catch {
+      // Silent fail — don't block auth flow
+      clearStoredReferralCode();
+    }
+  }, []);
+
   // Main Auth Effect
   useEffect(() => {
     let isMounted = true;
@@ -143,6 +224,10 @@ export function AuthProvider({ children }) {
           if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
             await fetchProfile(currentUser);
           }
+          // Process pending referral on first sign-in
+          if (event === 'SIGNED_IN') {
+            processReferral(currentUser);
+          }
         } else {
           setProfile(null);
           setSubscription(null);
@@ -157,7 +242,7 @@ export function AuthProvider({ children }) {
       isMounted = false;
       if (authListener) authListener.unsubscribe();
     };
-  }, [fetchProfile]);
+  }, [fetchProfile, processReferral]);
 
   // --- Auth Actions ---
 

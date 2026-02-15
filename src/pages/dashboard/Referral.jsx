@@ -1,51 +1,115 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Gift,
-  Copy,
-  Check,
-  Users,
-  CheckCircle,
-  Clock
+  Gift, Copy, Check, Users, CheckCircle, Clock,
+  Share2, Briefcase, ArrowRight, Award, Sparkles
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
+
+// Progress Bar component
+function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon }) {
+  const progress = Math.min(current / max, 1);
+
+  const colorMap = {
+    teal: { bg: 'bg-teal-100', fill: 'bg-teal-600', text: 'text-teal-600', iconBg: 'bg-teal-50' },
+    amber: { bg: 'bg-amber-100', fill: 'bg-amber-500', text: 'text-amber-600', iconBg: 'bg-amber-50' },
+    pink: { bg: 'bg-pink-100', fill: 'bg-pink-500', text: 'text-pink-600', iconBg: 'bg-pink-50' },
+  };
+  const c = colorMap[color] || colorMap.teal;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2.5">
+          <div className={`w-8 h-8 rounded-lg ${c.iconBg} flex items-center justify-center`}>
+            <Icon size={16} className={c.text} />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-900">{label}</p>
+            <p className="text-[11px] text-slate-400">{sublabel}</p>
+          </div>
+        </div>
+        <div className="flex items-baseline gap-1">
+          <span className={`text-lg font-bold ${c.text}`}>{current}</span>
+          <span className="text-xs text-slate-400">/ {max}</span>
+        </div>
+      </div>
+      <div className={`h-2.5 ${c.bg} rounded-full overflow-hidden`}>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${progress * 100}%` }}
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
+          className={`h-full ${c.fill} rounded-full`}
+        />
+      </div>
+      {progress >= 1 && (
+        <p className="text-[11px] font-semibold text-green-600 mt-1.5 flex items-center gap-1">
+          <CheckCircle size={12} /> Objectif atteint
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function Referral() {
   const { user } = useOutletContext();
   const isEntrepreneur = user?.role === 'entrepreneur';
-
   const [copied, setCopied] = useState(false);
 
-  // Build referral link from user's code
+  // Build referral link
   const referralCode = user?.referral_code || 'PROPAIR';
-  const referralLink = `${window.location.origin}/login?ref=${encodeURIComponent(referralCode)}`;
+  const referralLink = `${window.location.origin}/login?ref__=${encodeURIComponent(referralCode)}`;
 
-  // Fetch real referral stats from Supabase (table referral_events)
+  // Fetch real referral stats from Supabase
   const { stats, referralList, loading } = useReferralStats(user?.id);
 
-  const copyLink = async () => {
+  // Compute detailed stats from referralList
+  const entreReferrals = referralList.filter(r => r.referee_type === 'entrepreneur');
+  const clientReferrals = referralList.filter(r => r.referee_type === 'client');
+  const entreValidated = entreReferrals.filter(r => r.status === 'validated').length;
+  const clientCount = clientReferrals.length;
+  const entreMonths = entreValidated * 2;
+  const clientMonths = Math.floor(clientCount / 6) * 2;
+  const totalMonths = entreMonths + clientMonths;
+
+  const copyLink = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(referralLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for browsers/contexts where clipboard API is unavailable
-      const textArea = document.createElement('textarea');
-      textArea.value = referralLink;
-      textArea.style.position = 'fixed';
-      textArea.style.opacity = '0';
-      document.body.appendChild(textArea);
-      textArea.select();
+      const ta = document.createElement('textarea');
+      ta.value = referralLink;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
       document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      document.body.removeChild(ta);
     }
-  };
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [referralLink]);
+
+  const handleShare = useCallback(async () => {
+    const shareData = {
+      title: 'ProPair — Parrainage',
+      text: `Rejoins ProPair avec mon code ${referralCode} et on gagne tous les deux des mois Pro gratuits !\n${referralLink}`,
+      url: referralLink,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // User cancelled
+      }
+    } else {
+      copyLink();
+    }
+  }, [referralCode, referralLink, copyLink]);
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-6 md:p-8 max-w-4xl">
       {/* Header */}
       <header className="mb-8">
         <motion.h1
@@ -56,66 +120,123 @@ export default function Referral() {
           Parrainage
         </motion.h1>
         <p className="text-slate-500 mt-1">
-          {isEntrepreneur
-            ? 'Invitez des collègues et gagnez des mois gratuits.'
-            : 'Aidez vos amis entrepreneurs à découvrir ProPair.'
-          }
+          Partagez votre lien, suivez vos récompenses.
         </p>
       </header>
 
       <div className="space-y-6">
 
-        {/* Rewards Card - Only for Entrepreneurs */}
-        {isEntrepreneur && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-amber-50 to-amber-50/50 rounded-2xl border border-amber-100 p-6"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
-                  <Gift size={24} className="text-amber-500" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-amber-500 uppercase tracking-wider">Récompenses</p>
-                  <p className="text-xl font-bold text-slate-900">
-                    {`${loading ? '-' : stats.earnedMonths} mois Pro gagnés`}
-                  </p>
-                </div>
+        {/* REWARD BANNER */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-br from-pink-50 to-amber-50/50 rounded-2xl border border-pink-100 p-6"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-pink-100 flex items-center justify-center shadow-sm">
+                <Gift size={28} className="text-pink-500" />
               </div>
-              <div className="text-right">
-                <p className="text-3xl font-bold text-amber-500">
-                  {loading ? '-' : stats.earnedMonths}
+              <div>
+                <p className="text-xs font-bold text-pink-500 uppercase tracking-wider mb-0.5">Mois Pro gagnés</p>
+                <p className="text-sm text-slate-500">
+                  {entreMonths > 0 && `${entreMonths} via entrepreneurs`}
+                  {entreMonths > 0 && clientMonths > 0 && ' + '}
+                  {clientMonths > 0 && `${clientMonths} via clients`}
+                  {totalMonths === 0 && 'Partagez pour commencer'}
                 </p>
               </div>
             </div>
-          </motion.section>
-        )}
+            <div className="text-right">
+              <p className="text-4xl font-bold text-slate-900">
+                {loading ? '-' : totalMonths}
+              </p>
+              <p className="text-[11px] text-slate-400 font-medium">mois</p>
+            </div>
+          </div>
+        </motion.section>
 
-        {/* Referral Link Section */}
+        {/* PROGRESS BARS */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
+          className="bg-white rounded-2xl border border-slate-100 p-6 space-y-5"
+        >
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+              <Award size={16} className="text-slate-400" />
+            </div>
+            <h2 className="font-bold text-slate-900">Progression</h2>
+          </div>
+
+          {/* Entrepreneur progress */}
+          <ProgressBar
+            current={loading ? 0 : entreValidated}
+            max={1}
+            label="Parrainage entrepreneur"
+            sublabel="1 filleul validé (3 mois actif) = 2 mois Pro"
+            color="amber"
+            icon={Briefcase}
+          />
+
+          {/* Client progress */}
+          <ProgressBar
+            current={loading ? 0 : clientCount}
+            max={6}
+            label="Réseau client"
+            sublabel="6 clients inscrits = 2 mois Pro"
+            color="pink"
+            icon={Users}
+          />
+
+          {/* Info */}
+          <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
+            <Sparkles size={14} className="text-amber-500 mt-0.5 shrink-0" />
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              Les barres se réinitialisent après chaque palier atteint. Les mois gagnés sont cumulables.
+            </p>
+          </div>
+        </motion.section>
+
+        {/* REFERRAL LINK + ACTIONS */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
           className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Copy size={16} className="text-slate-400" />
             </div>
-            <h2 className="font-bold text-slate-900">Lien de parrainage</h2>
+            <h2 className="font-bold text-slate-900">Votre lien de parrainage</h2>
           </div>
 
           <div className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="flex-1 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-mono text-slate-600 truncate">
+            {/* Code display */}
+            <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-4">
+              <span className="flex-1 text-lg font-bold text-slate-900 tracking-widest font-mono">
+                {referralCode}
+              </span>
+              <span className="text-[10px] font-semibold text-slate-400 bg-slate-200/60 px-2 py-0.5 rounded-full uppercase">
+                Votre code
+              </span>
+            </div>
+
+            {/* Link display */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex-1 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-mono text-slate-500 truncate">
                 {referralLink}
               </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="grid grid-cols-2 gap-3">
               <motion.button
                 onClick={copyLink}
                 whileTap={{ scale: 0.95 }}
-                className={`px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all whitespace-nowrap ${
+                className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                   copied
                     ? 'bg-teal-600 text-white'
                     : 'bg-slate-900 text-white hover:bg-slate-800'
@@ -123,40 +244,37 @@ export default function Referral() {
               >
                 <AnimatePresence mode="wait">
                   {copied ? (
-                    <motion.span
-                      key="check"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="flex items-center gap-2"
-                    >
+                    <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
                       <Check size={16} /> Copié
                     </motion.span>
                   ) : (
-                    <motion.span
-                      key="copy"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="flex items-center gap-2"
-                    >
-                      <Copy size={16} /> Copier
+                    <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
+                      <Copy size={16} /> Copier le lien
                     </motion.span>
                   )}
                 </AnimatePresence>
+              </motion.button>
+
+              <motion.button
+                onClick={handleShare}
+                whileTap={{ scale: 0.95 }}
+                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-pink-600 text-white hover:bg-pink-700 transition-all"
+              >
+                <Share2 size={16} />
+                Partager
               </motion.button>
             </div>
 
             <p className="text-xs text-slate-400 mt-4">
               {isEntrepreneur
-                ? 'Quand votre filleul s\'abonne, vous recevez tous les deux 1 mois gratuit.'
+                ? 'Quand votre filleul s\'abonne et reste actif 3 mois, vous gagnez 2 mois Pro chacun.'
                 : 'Aidez vos amis entrepreneurs à découvrir une solution locale et juste.'
               }
             </p>
           </div>
         </motion.section>
 
-        {/* Stats Row - Connected to Supabase */}
+        {/* STATS ROW */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -194,7 +312,49 @@ export default function Referral() {
           </div>
         </motion.div>
 
-        {/* Referral List - Real Data from Supabase */}
+        {/* HOW IT WORKS (inline) */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="bg-white rounded-2xl border border-slate-100 p-6"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+              <Award size={16} className="text-slate-400" />
+            </div>
+            <h2 className="font-bold text-slate-900">Comment ça marche</h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100/50">
+              <div className="flex items-center gap-2.5 mb-2">
+                <Briefcase size={16} className="text-amber-600" />
+                <h3 className="font-semibold text-slate-900 text-sm">Entrepreneur</h3>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-slate-600">
+                <span>Inscription</span>
+                <ArrowRight size={12} className="text-slate-400" />
+                <span>3 mois actif</span>
+                <ArrowRight size={12} className="text-slate-400" />
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
+              </div>
+            </div>
+            <div className="bg-pink-50/50 rounded-xl p-4 border border-pink-100/50">
+              <div className="flex items-center gap-2.5 mb-2">
+                <Users size={16} className="text-pink-600" />
+                <h3 className="font-semibold text-slate-900 text-sm">Client</h3>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-slate-600">
+                <span>6 inscrits</span>
+                <ArrowRight size={12} className="text-slate-400" />
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* REFERRAL LIST */}
         {!loading && referralList.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -209,7 +369,7 @@ export default function Referral() {
                 </div>
                 <h2 className="font-bold text-slate-900">Historique</h2>
               </div>
-              <span className="text-xs text-slate-400">{referralList.length}</span>
+              <span className="text-xs text-slate-400 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
             </div>
 
             <div className="overflow-x-auto">
@@ -217,7 +377,8 @@ export default function Referral() {
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-100">
                   <tr>
                     <th className="px-6 py-3 font-medium">Date</th>
-                    <th className="px-6 py-3 font-medium">Email Filleul</th>
+                    <th className="px-6 py-3 font-medium">Email</th>
+                    <th className="px-6 py-3 font-medium">Type</th>
                     <th className="px-6 py-3 font-medium">Statut</th>
                   </tr>
                 </thead>
@@ -229,6 +390,15 @@ export default function Referral() {
                       </td>
                       <td className="px-6 py-4 text-slate-900 font-medium">
                         {ref.referee_email || 'Email masqué'}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                          ref.referee_type === 'entrepreneur'
+                            ? 'bg-amber-50 text-amber-600'
+                            : 'bg-pink-50 text-pink-600'
+                        }`}>
+                          {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
+                        </span>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
@@ -248,7 +418,7 @@ export default function Referral() {
           </motion.section>
         )}
 
-        {/* Empty State */}
+        {/* EMPTY STATE */}
         {!loading && referralList.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -257,12 +427,12 @@ export default function Referral() {
             className="bg-white rounded-2xl border border-slate-100 p-12 text-center"
           >
             <Users size={40} className="mx-auto text-slate-200 mb-4" />
-            <p className="text-slate-500 font-medium">Aucun parrainage</p>
-            <p className="text-sm text-slate-400">Partagez votre lien pour commencer</p>
+            <p className="text-slate-500 font-medium mb-1">Aucun parrainage pour le moment</p>
+            <p className="text-sm text-slate-400">Partagez votre lien ci-dessus pour commencer</p>
           </motion.div>
         )}
 
-        {/* Loading State */}
+        {/* LOADING STATE */}
         {loading && (
           <motion.div
             initial={{ opacity: 0 }}

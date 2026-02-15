@@ -155,24 +155,24 @@ export default function Home() {
                 <span className="px-3 py-1 bg-amber-100 text-amber-800 text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wide">Premium</span>
               </div>
               
-              <p className="text-base md:text-lg font-medium text-amber-600 mb-4 md:mb-6">Moins de téléphone, meilleur service</p>
-              
+              <p className="text-base md:text-lg font-medium text-amber-600 mb-4 md:mb-6">Votre vitrine pro, toujours dans votre poche</p>
+
               <p className="text-slate-600 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
-                Diminuez votre temps au téléphone tout en améliorant votre service client. Recevez uniquement les demandes qui vous correspondent vraiment.
+                Fini les appels manqués et les soumissions perdues. ProPair centralise vos demandes, vos conversations et vos projets en un seul endroit. Vous recevez uniquement les mandats qui correspondent à votre métier et votre zone — et vous gardez 100% de vos revenus.
               </p>
 
               <ul className="space-y-3 md:space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="p-1 bg-amber-100 rounded-full mt-0.5"><Clock size={14} className="text-amber-700" /></div>
-                  <span className="text-slate-700 text-sm md:text-base">Gain de temps massif sur la gestion</span>
+                  <span className="text-slate-700 text-sm md:text-base">Notifications ciblées, zéro bruit</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 bg-amber-100 rounded-full mt-0.5"><Check size={14} className="text-amber-700" /></div>
-                  <span className="text-slate-700 text-sm md:text-base">Leads qualifiés dans votre dashboard</span>
+                  <span className="text-slate-700 text-sm md:text-base">0% commission — abonnement fixe</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 bg-amber-100 rounded-full mt-0.5"><Layout size={14} className="text-amber-700" /></div>
-                  <span className="text-slate-700 text-sm md:text-base">Outils de gestion partagés</span>
+                  <span className="text-slate-700 text-sm md:text-base">Chat, suivi et gestion intégrés</span>
                 </li>
               </ul>
             </motion.div>

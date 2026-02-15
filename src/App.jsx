@@ -8,6 +8,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CookieConsent from './components/ui/CookieConsent';
 import StructuredData from './components/seo/StructuredData';
+import { useReferralCapture } from './hooks/useReferralCapture';
 
 // --- LAZY LOADING (Code Splitting P1) ---
 const Home = lazy(() => import('./pages/Home'));
@@ -20,6 +21,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Refund = lazy(() => import('./pages/Refund'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Parrainage = lazy(() => import('./pages/Parrainage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Dashboard components
@@ -43,6 +45,7 @@ function PageLoader() {
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+  useReferralCapture(); // Capture ?ref__= ou ?ref= depuis n'importe quelle page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -94,6 +97,7 @@ function App() {
               <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
               <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
               <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
+              <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} />
 
               {/* Auth Pages */}
               <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />

@@ -3,6 +3,7 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { getStoredReferralCode } from '../hooks/useReferralCapture';
 import SEO from '../components/SEO';
 
 export default function Login() {
@@ -10,7 +11,8 @@ export default function Login() {
   const navigate = useNavigate();
   const { user, signIn, signUp, signInWithOAuth } = useAuth();
 
-  const refCode = searchParams.get('ref');
+  // Support both ?ref__= and ?ref= (rétrocompatibilité)
+  const refCode = searchParams.get('ref__') || searchParams.get('ref');
 
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +25,8 @@ export default function Login() {
     confirmPassword: ''
   });
 
-  // Safe referral storage using sessionStorage
+  // Le capture global (useReferralCapture dans App.jsx) gère le stockage localStorage.
+  // Ici on stocke aussi en sessionStorage pour rétrocompatibilité.
   useEffect(() => {
     if (refCode) {
       sessionStorage.setItem('referral_code', refCode);
@@ -77,7 +80,7 @@ export default function Login() {
         const { error } = await signIn(formData.email, formData.password);
         if (error) throw error;
       } else {
-        const storedRefCode = sessionStorage.getItem('referral_code');
+        const storedRefCode = sessionStorage.getItem('referral_code') || getStoredReferralCode();
         const { error } = await signUp(
           formData.email,
           formData.password,
@@ -138,7 +141,7 @@ export default function Login() {
         className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
       >
         {/* Referral Badge */}
-        {refCode && (
+        {(refCode || getStoredReferralCode()) && (
           <div className="mb-6 p-3.5 bg-teal-50 border border-teal-100 rounded-xl flex items-start gap-3">
             <CheckCircle size={18} className="text-teal-600 mt-0.5 shrink-0" />
             <p className="text-sm text-teal-700 font-medium">

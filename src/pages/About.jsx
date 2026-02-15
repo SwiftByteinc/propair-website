@@ -129,7 +129,7 @@ export default function About() {
                 Je m'appelle <span className="font-bold text-slate-900">Nicolas Lepage</span>. Je suis né et j'ai grandi ici, à Magog. L'entrepreneuriat a toujours fait partie de ma vie.
               </p>
               <p>
-                J'ai créé ProPair pour une raison simple : régler de vrais problèmes pour les gens de ma région.
+                ProPair, c'est ma réponse concrète à un problème que je voyais chaque jour : des gens qui cherchent de l'aide, et des entrepreneurs qui méritent mieux que des plateformes qui les traitent comme des numéros.
               </p>
             </div>
           </motion.div>
