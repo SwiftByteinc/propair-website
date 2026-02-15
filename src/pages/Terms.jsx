@@ -56,7 +56,7 @@ export default function Terms() {
                 <li>• Avoir au moins <strong>18 ans</strong></li>
                 <li>• Avoir la capacité juridique de contracter au Québec</li>
               </ul>
-              <p className="text-sm text-slate-400 italic mt-4">
+              <p className="text-sm text-slate-500 italic mt-4">
                 ProPair™ est une marque de commerce de SwiftByte inc.
               </p>
             </div>

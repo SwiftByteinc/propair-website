@@ -51,7 +51,7 @@ export default function ForgotPassword() {
           {/* Back to login */}
           <Link
             to="/login"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 mb-6 text-sm transition-colors"
+            className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-6 text-sm transition-colors"
           >
             <ArrowLeft size={16} />
             Retour à la connexion
@@ -66,12 +66,14 @@ export default function ForgotPassword() {
           </p>
 
           {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm">
-              <AlertCircle size={18} />
-              {error}
-            </div>
-          )}
+          <div aria-live="polite" aria-atomic="true">
+            {error && (
+              <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm" role="alert">
+                <AlertCircle size={18} />
+                {error}
+              </div>
+            )}
+          </div>
 
           {sent ? (
             /* Success State */
@@ -107,7 +109,7 @@ export default function ForgotPassword() {
             <form onSubmit={handleReset} className="space-y-4">
               <div>
                 <div className="relative">
-                  <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                   <input
                     type="email"
                     id="email"
@@ -144,7 +146,7 @@ export default function ForgotPassword() {
 
         {/* Back to home */}
         <div className="text-center mt-8">
-          <Link to="/" className="text-sm text-slate-400 hover:text-slate-600 transition-colors">
+          <Link to="/" className="text-sm text-slate-500 hover:text-slate-600 transition-colors">
             ← Retour à l'accueil
           </Link>
         </div>

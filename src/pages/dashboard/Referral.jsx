@@ -28,12 +28,12 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
           </div>
           <div>
             <p className="text-sm font-semibold text-slate-900">{label}</p>
-            <p className="text-[11px] text-slate-400">{sublabel}</p>
+            <p className="text-[11px] text-slate-500">{sublabel}</p>
           </div>
         </div>
         <div className="flex items-baseline gap-1">
           <span className={`text-lg font-bold ${c.text}`}>{current}</span>
-          <span className="text-xs text-slate-400">/ {max}</span>
+          <span className="text-xs text-slate-500">/ {max}</span>
         </div>
       </div>
       <div className={`h-2.5 ${c.bg} rounded-full overflow-hidden`}>
@@ -152,7 +152,7 @@ export default function Referral() {
               <p className="text-4xl font-bold text-slate-900">
                 {loading ? '-' : totalMonths}
               </p>
-              <p className="text-[11px] text-slate-400 font-medium">mois</p>
+              <p className="text-[11px] text-slate-500 font-medium">mois</p>
             </div>
           </div>
         </motion.section>
@@ -166,7 +166,7 @@ export default function Referral() {
         >
           <div className="flex items-center gap-3 mb-1">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-              <Award size={16} className="text-slate-400" />
+              <Award size={16} className="text-slate-500" />
             </div>
             <h2 className="font-bold text-slate-900">Progression</h2>
           </div>
@@ -193,7 +193,7 @@ export default function Referral() {
 
           {/* Info */}
           <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
-            <Sparkles size={14} className="text-amber-500 mt-0.5 shrink-0" />
+            <Sparkles size={14} className="text-amber-600 mt-0.5 shrink-0" />
             <p className="text-[11px] text-slate-500 leading-relaxed">
               Les barres se réinitialisent après chaque palier atteint. Les mois gagnés sont cumulables.
             </p>
@@ -209,7 +209,7 @@ export default function Referral() {
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-              <Copy size={16} className="text-slate-400" />
+              <Copy size={16} className="text-slate-500" />
             </div>
             <h2 className="font-bold text-slate-900">Votre lien de parrainage</h2>
           </div>
@@ -220,7 +220,7 @@ export default function Referral() {
               <span className="flex-1 text-lg font-bold text-slate-900 tracking-widest font-mono">
                 {referralCode}
               </span>
-              <span className="text-[10px] font-semibold text-slate-400 bg-slate-200/60 px-2 py-0.5 rounded-full uppercase">
+              <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full uppercase">
                 Votre code
               </span>
             </div>
@@ -266,7 +266,7 @@ export default function Referral() {
               </motion.button>
             </div>
 
-            <p className="text-xs text-slate-400 mt-4">
+            <p className="text-xs text-slate-500 mt-4">
               {isEntrepreneur
                 ? 'Quand votre filleul s\'abonne et reste actif 3 mois, vous gagnez 2 mois Pro chacun.'
                 : 'Aidez vos amis entrepreneurs à découvrir une solution locale et juste.'
@@ -284,8 +284,8 @@ export default function Referral() {
         >
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
-              <Users size={18} className="text-slate-400" />
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Inscrits</span>
+              <Users size={18} className="text-slate-500" />
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Inscrits</span>
             </div>
             <p className="text-2xl font-bold text-slate-900">
               {loading ? '-' : stats.totalReferrals}
@@ -295,7 +295,7 @@ export default function Referral() {
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
               <CheckCircle size={18} className="text-teal-600" />
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Validés</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Validés</span>
             </div>
             <p className="text-2xl font-bold text-teal-600">
               {loading ? '-' : stats.validatedReferrals}
@@ -304,10 +304,10 @@ export default function Referral() {
 
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
-              <Clock size={18} className="text-amber-500" />
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">En attente</span>
+              <Clock size={18} className="text-amber-600" />
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">En attente</span>
             </div>
-            <p className="text-2xl font-bold text-amber-500">
+            <p className="text-2xl font-bold text-amber-600">
               {loading ? '-' : stats.pendingReferrals}
             </p>
           </div>
@@ -322,7 +322,7 @@ export default function Referral() {
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-              <Award size={16} className="text-slate-400" />
+              <Award size={16} className="text-slate-500" />
             </div>
             <h2 className="font-bold text-slate-900">Comment ça marche</h2>
           </div>
@@ -335,9 +335,9 @@ export default function Referral() {
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
                 <span>Inscription</span>
-                <ArrowRight size={12} className="text-slate-400" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span>3 mois actif</span>
-                <ArrowRight size={12} className="text-slate-400" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>
@@ -348,7 +348,7 @@ export default function Referral() {
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
                 <span>6 inscrits</span>
-                <ArrowRight size={12} className="text-slate-400" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>
@@ -366,11 +366,11 @@ export default function Referral() {
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-                  <Users size={16} className="text-slate-400" />
+                  <Users size={16} className="text-slate-500" />
                 </div>
                 <h2 className="font-bold text-slate-900">Historique</h2>
               </div>
-              <span className="text-xs text-slate-400 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
+              <span className="text-xs text-slate-500 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
             </div>
 
             <div className="overflow-x-auto">
@@ -431,7 +431,7 @@ export default function Referral() {
           >
             <Users size={40} className="mx-auto text-slate-200 mb-4" />
             <p className="text-slate-500 font-medium mb-1">Aucun parrainage pour le moment</p>
-            <p className="text-sm text-slate-400">Partagez votre lien ci-dessus pour commencer</p>
+            <p className="text-sm text-slate-500">Partagez votre lien ci-dessus pour commencer</p>
           </motion.div>
         )}
 

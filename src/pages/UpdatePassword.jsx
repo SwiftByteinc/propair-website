@@ -105,7 +105,7 @@ export default function UpdatePassword() {
 
           <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8 text-center">
             <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
-              <AlertCircle size={32} className="text-amber-500" />
+              <AlertCircle size={32} className="text-amber-600" />
             </div>
 
             <h1 className="text-2xl font-bold text-slate-900 mb-2">
@@ -124,7 +124,7 @@ export default function UpdatePassword() {
             </Link>
 
             <div className="mt-6">
-              <Link to="/login" className="text-sm text-slate-400 hover:text-slate-900 transition-colors">
+              <Link to="/login" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
                 ← Retour à la connexion
               </Link>
             </div>
@@ -154,12 +154,14 @@ export default function UpdatePassword() {
           className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
         >
           {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm">
-              <AlertCircle size={18} />
-              {error}
-            </div>
-          )}
+          <div aria-live="polite" aria-atomic="true">
+            {error && (
+              <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm" role="alert">
+                <AlertCircle size={18} />
+                {error}
+              </div>
+            )}
+          </div>
 
           {success ? (
             /* Success State */
@@ -206,7 +208,7 @@ export default function UpdatePassword() {
               <form onSubmit={handleUpdatePassword} className="space-y-4">
                 <div>
                   <div className="relative">
-                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       id="password"
@@ -225,7 +227,7 @@ export default function UpdatePassword() {
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
@@ -234,7 +236,7 @@ export default function UpdatePassword() {
 
                 <div>
                   <div className="relative">
-                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       id="confirmPassword"
@@ -273,7 +275,7 @@ export default function UpdatePassword() {
         {/* Back to home */}
         {!success && (
           <div className="text-center mt-8">
-            <Link to="/" className="text-sm text-slate-400 hover:text-slate-600 transition-colors">
+            <Link to="/" className="text-sm text-slate-500 hover:text-slate-600 transition-colors">
               ← Retour à l'accueil
             </Link>
           </div>

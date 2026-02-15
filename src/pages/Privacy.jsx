@@ -44,7 +44,7 @@ export default function Privacy() {
               <p className="text-slate-600 leading-relaxed mb-4">
                 ProPair™, exploitée par <strong>SwiftByte inc.</strong> (« nous », « notre »), propose une plateforme de mise en relation B2B. La présente Politique détaille nos pratiques de gestion des renseignements personnels conformément à la <strong>Loi 25 (Québec)</strong>, à la <strong>LPRPDE (Canada)</strong> et au <strong>RGPD</strong>, le cas échéant.
               </p>
-              <p className="text-sm text-slate-400 italic">
+              <p className="text-sm text-slate-500 italic">
                 ProPair™ est une marque de commerce de SwiftByte inc.
               </p>
             </div>
@@ -185,7 +185,7 @@ export default function Privacy() {
               </div>
               <div className="bg-amber-50 rounded-2xl p-6 border border-amber-100">
                 <div className="flex items-start gap-3">
-                  <AlertTriangle size={20} className="text-amber-500 mt-1" />
+                  <AlertTriangle size={20} className="text-amber-600 mt-1" />
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Incident de confidentialité</h3>
                     <p className="text-slate-600">

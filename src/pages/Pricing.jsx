@@ -226,13 +226,13 @@ export default function Pricing() {
                   <span className="text-sm text-slate-500">/an + tx</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2 text-sm">
-                  <span className="text-slate-400 line-through decoration-red-400">200$</span>
+                  <span className="text-slate-500 line-through decoration-red-400">200$</span>
                   <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">-25% de rabais</span>
                 </div>
               </div>
 
               <div className="space-y-4 mb-8 pt-8 border-t border-slate-100">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Tout inclus :</p>
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Tout inclus :</p>
                 {proFeatures.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-6 h-6 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -251,7 +251,7 @@ export default function Pricing() {
               Choisir l'annuel
             </Link>
 
-            <p className="text-center text-xs text-slate-400 mt-4">
+            <p className="text-center text-xs text-slate-500 mt-4">
               3 connexions gratuites offertes pour tester avant de payer.
             </p>
           </motion.div>
@@ -275,10 +275,10 @@ export default function Pricing() {
               </Link>
 
               <div className="space-y-3 opacity-70">
-                <p className="text-xs font-bold text-slate-400 uppercase">Inclus :</p>
+                <p className="text-xs font-bold text-slate-500 uppercase">Inclus :</p>
                 {proFeatures.slice(0, 3).map((f, i) => (
                   <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                    <Check size={14} className="text-slate-400" /> {f.text}
+                    <Check size={14} className="text-slate-500" /> {f.text}
                   </div>
                 ))}
               </div>

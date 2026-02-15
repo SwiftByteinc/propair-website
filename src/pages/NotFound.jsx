@@ -12,7 +12,7 @@ export default function NotFound() {
       >
         {/* Icon */}
         <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <AlertCircle size={40} className="text-amber-500" />
+          <AlertCircle size={40} className="text-amber-600" />
         </div>
 
         {/* 404 Number */}

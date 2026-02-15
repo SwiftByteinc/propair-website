@@ -170,7 +170,7 @@ export default function DashboardHome() {
 
             <div className="p-6 space-y-5">
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
                   Votre lien unique
                 </label>
                 <div className="flex items-center gap-2">
@@ -194,7 +194,7 @@ export default function DashboardHome() {
 
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                     Objectif mois gratuit
                   </span>
                   <span className="text-sm font-bold text-slate-900">
@@ -208,7 +208,7 @@ export default function DashboardHome() {
                     className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
                   />
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-slate-500 mt-2">
                   {referralGoal - referralCount > 0
                     ? `Encore ${referralGoal - referralCount} parrainage(s) validé(s) pour 1 mois gratuit`
                     : 'Mois gratuit débloqué ! Continuez !'
@@ -229,18 +229,18 @@ export default function DashboardHome() {
               to="/portal/billing"
               className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-200 hover:shadow-sm transition-all group"
             >
-              <CreditCard size={20} className="text-slate-400 group-hover:text-teal-600 mb-2" />
+              <CreditCard size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
               <p className="font-semibold text-sm text-slate-900">Abonnement</p>
-              <p className="text-xs text-slate-400">Factures et paiement</p>
+              <p className="text-xs text-slate-500">Factures et paiement</p>
             </Link>
 
             <a
               href="mailto:support@propairapp.com"
               className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-200 hover:shadow-sm transition-all group"
             >
-              <HelpCircle size={20} className="text-slate-400 group-hover:text-teal-600 mb-2" />
+              <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
               <p className="font-semibold text-sm text-slate-900">Support</p>
-              <p className="text-xs text-slate-400">Aide technique</p>
+              <p className="text-xs text-slate-500">Aide technique</p>
             </a>
           </motion.section>
         </>
@@ -268,11 +268,11 @@ export default function DashboardHome() {
 
           <div className="grid grid-cols-2 gap-4">
              <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-100 hover:shadow-sm transition-all">
-                <Briefcase size={20} className="text-slate-400 mb-2" />
+                <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">À propos</p>
              </Link>
              <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-100 hover:shadow-sm transition-all">
-                <Gift size={20} className="text-slate-400 mb-2" />
+                <Gift size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">Parrainage</p>
              </Link>
           </div>

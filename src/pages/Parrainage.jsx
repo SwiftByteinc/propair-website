@@ -115,7 +115,7 @@ export default function Parrainage() {
                   <p className="text-sm text-slate-600">Il reste actif pendant 3 mois</p>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Sparkles size={16} className="text-amber-500 mt-0.5 shrink-0" />
+                  <Sparkles size={16} className="text-amber-600 mt-0.5 shrink-0" />
                   <p className="text-sm text-slate-900 font-semibold">Vous gagnez tous les deux 2 mois Pro</p>
                 </div>
               </div>
@@ -123,9 +123,9 @@ export default function Parrainage() {
               {/* Flow visuel */}
               <div className="flex items-center justify-center gap-2 bg-amber-50 rounded-xl p-3 text-xs font-semibold text-slate-600">
                 <span>Inscription</span>
-                <ArrowRight size={14} className="text-slate-400" />
+                <ArrowRight size={14} className="text-slate-500" />
                 <span>3 mois actif</span>
-                <ArrowRight size={14} className="text-slate-400" />
+                <ArrowRight size={14} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function Parrainage() {
                   <p className="text-sm text-slate-600">6 clients s'inscrivent via votre code</p>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Sparkles size={16} className="text-amber-500 mt-0.5 shrink-0" />
+                  <Sparkles size={16} className="text-amber-600 mt-0.5 shrink-0" />
                   <p className="text-sm text-slate-900 font-semibold">Vous gagnez 2 mois Pro</p>
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function Parrainage() {
               {/* Flow visuel */}
               <div className="flex items-center justify-center gap-2 bg-pink-50 rounded-xl p-3 text-xs font-semibold text-slate-600">
                 <span>6 clients inscrits</span>
-                <ArrowRight size={14} className="text-slate-400" />
+                <ArrowRight size={14} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>

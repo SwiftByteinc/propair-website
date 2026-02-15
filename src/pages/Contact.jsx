@@ -117,7 +117,7 @@ export default function Contact() {
                   <p className="text-teal-600 font-semibold group-hover:underline break-all">
                     {channel.value}
                   </p>
-                  <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-400">
+                  <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
                     <Clock size={12} />
                     <span>{channel.detail}</span>
                   </div>
@@ -139,7 +139,7 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Envoyez-nous un message</h2>
 
             {sent ? (
-              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite">
+              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
                 <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-600" />
                 </div>
@@ -148,7 +148,7 @@ export default function Contact() {
                   Envoyez le message depuis votre application de courriel.
                   Nous vous répondrons sous 24h ouvrables.
                 </p>
-                <p className="text-slate-400 text-sm mb-4">
+                <p className="text-slate-500 text-sm mb-4">
                   Si rien ne s'est ouvert, écrivez directement à{' '}
                   <a href="mailto:support@propairapp.com" className="text-teal-600 hover:underline">support@propairapp.com</a>
                 </p>
@@ -279,9 +279,9 @@ export default function Contact() {
                 </div>
                 <div className="flex justify-between">
                   <span>Samedi — Dimanche</span>
-                  <span className="text-slate-400">Fermé</span>
+                  <span className="text-slate-500">Fermé</span>
                 </div>
-                <p className="text-xs text-slate-400 pt-2">Heure de l'Est (HE) — Fuseau Montréal</p>
+                <p className="text-xs text-slate-500 pt-2">Heure de l'Est (HE) — Fuseau Montréal</p>
               </div>
             </div>
 

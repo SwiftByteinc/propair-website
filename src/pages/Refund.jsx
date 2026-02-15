@@ -47,7 +47,7 @@ export default function Refund() {
               </p>
               <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
                 <div className="flex items-start gap-3">
-                  <Ban size={20} className="text-amber-500 mt-0.5" />
+                  <Ban size={20} className="text-amber-600 mt-0.5" />
                   <p className="text-slate-600">
                     En raison de la <strong>nature numérique et immédiate</strong> du service, tous les achats sont <strong>définitifs et non remboursables</strong>.
                   </p>

@@ -35,6 +35,15 @@ export default function Login() {
     }
   }, [refCode]);
 
+  // Auto-switch to signup if mode=signup or a plan is specified from Pricing page
+  useEffect(() => {
+    const mode = searchParams.get('mode');
+    const plan = searchParams.get('plan');
+    if (mode === 'signup' || plan) {
+      setIsLogin(false);
+    }
+  }, [searchParams]);
+
   // Redirect if already logged in
   useEffect(() => {
     if (user) {
@@ -227,7 +236,7 @@ export default function Login() {
             <div className="w-full border-t border-slate-200"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-white text-slate-400 uppercase tracking-wider font-medium">ou par courriel</span>
+            <span className="px-3 bg-white text-slate-500 uppercase tracking-wider font-medium">ou par courriel</span>
           </div>
         </div>
 
@@ -237,7 +246,7 @@ export default function Login() {
           {!isLogin && (
             <div className="relative">
               <label htmlFor="name" className="sr-only">Nom complet</label>
-              <User size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <User size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type="text"
                 id="name"
@@ -256,7 +265,7 @@ export default function Login() {
           {/* Email */}
           <div className="relative">
             <label htmlFor="email" className="sr-only">Adresse courriel</label>
-            <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="email"
               id="email"
@@ -275,7 +284,7 @@ export default function Login() {
           <div>
             <div className="relative">
               <label htmlFor="password" className="sr-only">Mot de passe</label>
-              <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
@@ -292,13 +301,13 @@ export default function Login() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
               >
                 {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
               </button>
             </div>
             {!isLogin && (
-              <p className="text-xs text-slate-400 mt-1.5 ml-1">Minimum 8 caractères</p>
+              <p className="text-xs text-slate-500 mt-1.5 ml-1">Minimum 8 caractères</p>
             )}
           </div>
 
@@ -306,7 +315,7 @@ export default function Login() {
           {!isLogin && (
             <div className="relative">
               <label htmlFor="confirmPassword" className="sr-only">Confirmer le mot de passe</label>
-              <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="confirmPassword"
@@ -367,7 +376,7 @@ export default function Login() {
       </motion.div>
 
       {/* Back to home */}
-      <Link to="/" className="mt-6 sm:mt-8 text-sm text-slate-400 hover:text-slate-600 transition-colors">
+      <Link to="/" className="mt-6 sm:mt-8 text-sm text-slate-500 hover:text-slate-600 transition-colors">
         ← Retour à l'accueil
       </Link>
     </div>

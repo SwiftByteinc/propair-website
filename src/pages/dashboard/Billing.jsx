@@ -90,7 +90,7 @@ export default function Billing() {
             >
               <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-                  <CreditCard size={16} className="text-slate-400" />
+                  <CreditCard size={16} className="text-slate-500" />
                 </div>
                 <h2 className="font-bold text-slate-900">Factures</h2>
               </div>
@@ -106,7 +106,7 @@ export default function Billing() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12 bg-white rounded-2xl border border-slate-100"
           >
-            <Crown size={48} className="mx-auto text-amber-500 mb-4" />
+            <Crown size={48} className="mx-auto text-amber-600 mb-4" />
             <h2 className="text-xl font-bold text-slate-900 mb-2">Aucun abonnement actif</h2>
             <p className="text-slate-500 mb-6">Passez Pro pour débloquer toutes les fonctionnalités.</p>
             <button

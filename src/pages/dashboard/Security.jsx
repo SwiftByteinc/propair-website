@@ -141,23 +141,23 @@ export default function Security() {
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-              <Shield size={16} className="text-slate-400" />
+              <Shield size={16} className="text-slate-500" />
             </div>
             <h2 className="font-bold text-slate-900">Vérifications</h2>
           </div>
 
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Mail size={18} className="text-slate-400" />
+              <Mail size={18} className="text-slate-500" />
               <div>
                 <p className="text-sm font-medium text-slate-900">Email</p>
-                <p className="text-xs text-slate-400">{verification.email.value}</p>
+                <p className="text-xs text-slate-500">{verification.email.value}</p>
               </div>
             </div>
             <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
               verification.email.verified
                 ? 'bg-teal-50 text-teal-600'
-                : 'bg-amber-50 text-amber-500'
+                : 'bg-amber-50 text-amber-600'
             }`}>
               {verification.email.verified ? 'Vérifié' : 'Non vérifié'}
             </span>
@@ -177,18 +177,18 @@ export default function Security() {
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-                <Lock size={16} className="text-slate-400" />
+                <Lock size={16} className="text-slate-500" />
               </div>
               <div className="text-left">
                 <p className="font-bold text-slate-900">Mot de passe</p>
-                <p className="text-xs text-slate-400">Changer votre mot de passe</p>
+                <p className="text-xs text-slate-500">Changer votre mot de passe</p>
               </div>
             </div>
             <motion.div
               animate={{ rotate: showPasswordForm ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={18} className="text-slate-400" />
+              <ChevronDown size={18} className="text-slate-500" />
             </motion.div>
           </button>
 
@@ -204,16 +204,18 @@ export default function Security() {
               >
                 <div className="px-6 pb-6 pt-2 space-y-4 border-t border-slate-50">
                   {/* Error/Success Messages */}
-                  {error && (
-                    <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600">
-                      {error}
-                    </div>
-                  )}
-                  {success && (
-                    <div className="p-3 bg-teal-50 border border-teal-100 rounded-lg text-sm text-teal-600">
-                      {success}
-                    </div>
-                  )}
+                  <div aria-live="polite" aria-atomic="true">
+                    {error && (
+                      <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600" role="alert">
+                        {error}
+                      </div>
+                    )}
+                    {success && (
+                      <div className="p-3 bg-teal-50 border border-teal-100 rounded-lg text-sm text-teal-600" role="status">
+                        {success}
+                      </div>
+                    )}
+                  </div>
 
                   <div>
                     <label className="block text-xs font-medium text-slate-500 mb-1.5">
@@ -245,7 +247,7 @@ export default function Security() {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600"
                         >
                           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                         </button>
@@ -299,7 +301,7 @@ export default function Security() {
               </div>
               <div>
                 <p className="font-bold text-slate-900">Supprimer le compte</p>
-                <p className="text-xs text-slate-400">Action irréversible</p>
+                <p className="text-xs text-slate-500">Action irréversible</p>
               </div>
             </div>
             <button
@@ -312,7 +314,7 @@ export default function Security() {
         </motion.section>
 
         {/* RGPD Notice - Minimal */}
-        <p className="text-xs text-slate-400 text-center pt-4">
+        <p className="text-xs text-slate-500 text-center pt-4">
           Loi 25 / RGPD : Suppression traitée sous 30 jours.
         </p>
       </div>

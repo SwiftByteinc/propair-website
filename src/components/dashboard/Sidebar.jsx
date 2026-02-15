@@ -65,14 +65,14 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         <div className="h-16 px-6 flex items-center justify-between border-b border-slate-50">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors"
           >
             <ChevronLeft size={18} />
             <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7" />
           </button>
           <button
             onClick={onClose}
-            className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-600"
             aria-label="Fermer le menu"
           >
             <X size={18} />
@@ -89,7 +89,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
               <p className="font-semibold text-sm text-slate-900 truncate">
                 {user?.full_name || 'Utilisateur'}
               </p>
-              <p className="text-xs text-slate-400 truncate">
+              <p className="text-xs text-slate-500 truncate">
                 {user?.email || ''}
               </p>
             </div>

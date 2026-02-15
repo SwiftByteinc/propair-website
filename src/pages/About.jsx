@@ -112,7 +112,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 bg-white text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-teal-100 shadow-sm">
-              <Mountain size={16} className="text-amber-500" />
+              <Mountain size={16} className="text-amber-600" />
               <span>Initiative locale de Magog</span>
             </div>
 

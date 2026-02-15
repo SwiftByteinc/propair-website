@@ -25,7 +25,7 @@ export default function Footer() {
               La plateforme québécoise qui connecte clients et professionnels.
               Zéro commission. 100% confiance.
             </p>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
+            <div className="flex items-center gap-2 text-sm text-slate-500">
               <MapPin size={16} className="text-teal-600" />
               <span>Magog, Québec</span>
             </div>
@@ -103,10 +103,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-500 text-sm">
             © {currentYear} ProPair™ — Une marque de SwiftByte inc.
           </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
             <Link to="/privacy" className="hover:text-teal-600 transition-colors">
               Confidentialité
             </Link>
