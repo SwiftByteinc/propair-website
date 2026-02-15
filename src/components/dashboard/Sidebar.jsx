@@ -36,7 +36,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
   // Close sidebar on route change (mobile)
   useEffect(() => {
     onClose?.();
-  }, [location.pathname]);
+  }, [location.pathname, onClose]);
 
   const handleSignOut = () => {
     if (onSignOut) onSignOut();

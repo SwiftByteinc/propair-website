@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, LogIn, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
+const navLinks = [
+  { name: 'Accueil', path: '/' },
+  { name: 'Notre Histoire', path: '/about' },
+  { name: 'Abonnements Pro', path: '/pricing' },
+  { name: 'Parrainage', path: '/parrainage' },
+  { name: 'Contact', path: '/contact' },
+];
+
 export default function Navbar() {
   const { user, profile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -33,14 +41,6 @@ export default function Navbar() {
     }
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
-
-  const navLinks = [
-    { name: 'Accueil', path: '/' },
-    { name: 'Notre Histoire', path: '/about' },
-    { name: 'Abonnements Pro', path: '/pricing' },
-    { name: 'Parrainage', path: '/parrainage' },
-    { name: 'Contact', path: '/contact' },
-  ];
 
   const isActive = (path) => location.pathname === path;
 

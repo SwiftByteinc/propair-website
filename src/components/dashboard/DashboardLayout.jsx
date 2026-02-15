@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -66,24 +66,21 @@ export default function DashboardLayout() {
     return null;
   }
 
-  // Build user object for components
-  const userData = {
+  // Build user object for components — memoized to avoid re-renders
+  const userData = useMemo(() => ({
     id: user.id,
     email: user.email || profile?.email,
     full_name: profile?.full_name || user.user_metadata?.full_name || 'Utilisateur',
-    role: profile?.user_role || 'entrepreneur', // Default to entrepreneur
+    role: profile?.user_role || 'entrepreneur',
     isPro: isPro,
     referral_code: profile?.referral_code,
     pro_months_balance: profile?.pro_months_balance || 0,
     is_verified: profile?.is_verified || false,
-    // Trial connections (for non-Pro users)
     trial_connections_count: profile?.trial_connections_count || 0,
-    // Subscription info
     subscription_status: subscription?.status,
     subscription_end: subscription?.current_period_end,
-    // Auth metadata for Security page
     email_confirmed_at: user.email_confirmed_at
-  };
+  }), [user, profile, subscription, isPro]);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">

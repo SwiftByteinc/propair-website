@@ -13,7 +13,7 @@ export function useReferralCapture() {
 
   useEffect(() => {
     const code = searchParams.get('ref__') || searchParams.get('ref');
-    if (code && code.length >= 5) {
+    if (code && code.length >= 5 && code.length <= 50 && /^[a-zA-Z0-9_-]+$/.test(code)) {
       localStorage.setItem(REFERRAL_KEY, code);
     }
   }, [searchParams]);

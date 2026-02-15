@@ -18,25 +18,24 @@ export function useReferralStats(userId) {
       return;
     }
 
+    let isMounted = true;
+
     async function fetchReferralData() {
       try {
         setLoading(true);
 
-        // Récupère TOUS les événements de parrainage pour cet utilisateur
         const { data, error } = await supabase
           .from('referral_events')
           .select('*')
           .eq('referrer_id', userId)
-          .order('created_at', { ascending: false }); // Les plus récents en premier
+          .order('created_at', { ascending: false });
 
+        if (!isMounted) return;
         if (error) throw error;
 
-        // Calcul des statistiques en JS
         const total = data?.length || 0;
         const validated = data?.filter(item => item.status === 'validated').length || 0;
         const pending = data?.filter(item => item.status === 'pending').length || 0;
-
-        // 1 parrainage validé = 1 mois offert
         const earned = validated;
 
         setStats({
@@ -49,14 +48,17 @@ export function useReferralStats(userId) {
         setReferralList(data || []);
 
       } catch (err) {
+        if (!isMounted) return;
         if (import.meta.env.DEV) console.error('Erreur lors du chargement des parrainages:', err);
         setError(err);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     }
 
     fetchReferralData();
+
+    return () => { isMounted = false; };
   }, [userId]);
 
   return { stats, referralList, loading, error };

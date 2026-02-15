@@ -12,11 +12,13 @@ export const useToast = () => {
   return context;
 };
 
+let toastCounter = 0;
+
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
   const addToast = useCallback((message, type = 'info') => {
-    const id = Date.now();
+    const id = ++toastCounter;
     setToasts((prev) => [...prev, { id, message, type }]);
 
     // Auto-remove after 4 seconds
