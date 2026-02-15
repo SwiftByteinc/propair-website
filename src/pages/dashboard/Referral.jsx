@@ -8,6 +8,7 @@ import {
 import { useReferralStats } from '../../hooks/useReferralStats';
 
 // Progress Bar component
+// eslint-disable-next-line no-unused-vars -- Icon is used in JSX below
 function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon }) {
   const progress = Math.min(current / max, 1);
 

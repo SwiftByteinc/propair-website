@@ -87,7 +87,7 @@ export default function Security() {
           setSuccess('');
         }, 2000);
       }
-    } catch (err) {
+    } catch {
       setError('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setLoading(false);

@@ -34,6 +34,13 @@ function TestConsumer() {
   return <div>No user</div>;
 }
 
+// Grabber component that exposes auth hook via callback ref
+function Grabber({ onAuth }) {
+  const auth = useAuth();
+  onAuth(auth);
+  return null;
+}
+
 describe('AuthContext', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -91,20 +98,16 @@ describe('AuthContext', () => {
   it('exposes signIn function that calls supabase', async () => {
     mockSignIn.mockResolvedValue({ data: {}, error: null });
 
-    let authHook;
-    function Grabber() {
-      authHook = useAuth();
-      return null;
-    }
+    const authRef = { current: null };
 
     render(
-      <AuthProvider><Grabber /></AuthProvider>
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
     );
 
-    await waitFor(() => expect(authHook.loading).toBe(false));
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
 
     await act(async () => {
-      await authHook.signIn('test@test.com', 'password123');
+      await authRef.current.signIn('test@test.com', 'password123');
     });
 
     expect(mockSignIn).toHaveBeenCalledWith({
@@ -116,20 +119,16 @@ describe('AuthContext', () => {
   it('exposes signOut function that clears state', async () => {
     mockSignOut.mockResolvedValue({ error: null });
 
-    let authHook;
-    function Grabber() {
-      authHook = useAuth();
-      return null;
-    }
+    const authRef = { current: null };
 
     render(
-      <AuthProvider><Grabber /></AuthProvider>
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
     );
 
-    await waitFor(() => expect(authHook.loading).toBe(false));
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
 
     await act(async () => {
-      await authHook.signOut();
+      await authRef.current.signOut();
     });
 
     expect(mockSignOut).toHaveBeenCalled();

@@ -28,9 +28,8 @@ export default function Navbar() {
   }, []);
 
   // Fermer le menu mobile lors d'un changement de page
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: reset menu state on route change
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   // Désactiver le scroll du body quand le menu mobile est ouvert + Escape pour fermer
   useEffect(() => {

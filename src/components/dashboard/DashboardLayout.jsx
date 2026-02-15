@@ -57,6 +57,26 @@ export default function DashboardLayout() {
     navigate('/login');
   };
 
+  // Build user object for components — memoized to avoid re-renders
+  // Must be called before early returns to satisfy rules-of-hooks
+  const userData = useMemo(() => {
+    if (!user) return null;
+    return {
+      id: user.id,
+      email: user.email || profile?.email,
+      full_name: profile?.full_name || user.user_metadata?.full_name || 'Utilisateur',
+      role: profile?.user_role || 'client',
+      isPro: isPro,
+      referral_code: profile?.referral_code,
+      pro_months_balance: profile?.pro_months_balance || 0,
+      is_verified: profile?.is_verified || false,
+      trial_connections_count: profile?.trial_connections_count || 0,
+      subscription_status: subscription?.status,
+      subscription_end: subscription?.current_period_end,
+      email_confirmed_at: user.email_confirmed_at
+    };
+  }, [user, profile, subscription, isPro]);
+
   // Show skeleton while loading
   if (loading || profileLoading) {
     return <DashboardSkeleton />;
@@ -66,22 +86,6 @@ export default function DashboardLayout() {
   if (!user) {
     return null;
   }
-
-  // Build user object for components — memoized to avoid re-renders
-  const userData = useMemo(() => ({
-    id: user.id,
-    email: user.email || profile?.email,
-    full_name: profile?.full_name || user.user_metadata?.full_name || 'Utilisateur',
-    role: profile?.user_role || 'client',
-    isPro: isPro,
-    referral_code: profile?.referral_code,
-    pro_months_balance: profile?.pro_months_balance || 0,
-    is_verified: profile?.is_verified || false,
-    trial_connections_count: profile?.trial_connections_count || 0,
-    subscription_status: subscription?.status,
-    subscription_end: subscription?.current_period_end,
-    email_confirmed_at: user.email_confirmed_at
-  }), [user, profile, subscription, isPro]);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
