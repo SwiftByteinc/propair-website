@@ -46,7 +46,7 @@ describe('Login Page', () => {
     expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
 
     // Check email and password fields exist
-    expect(screen.getByPlaceholderText('Adresse email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Adresse courriel')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Mot de passe')).toBeInTheDocument();
 
     // Check submit button
@@ -105,7 +105,7 @@ describe('Login Page', () => {
   it('allows typing in form fields', () => {
     renderWithRouter(<Login />);
 
-    const emailInput = screen.getByPlaceholderText('Adresse email');
+    const emailInput = screen.getByPlaceholderText('Adresse courriel');
     const passwordInput = screen.getByPlaceholderText('Mot de passe');
 
     // Type in email

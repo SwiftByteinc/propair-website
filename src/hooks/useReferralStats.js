@@ -33,10 +33,14 @@ export function useReferralStats(userId) {
         if (!isMounted) return;
         if (error) throw error;
 
+        setError(null);
+
         const total = data?.length || 0;
         const validated = data?.filter(item => item.status === 'validated').length || 0;
         const pending = data?.filter(item => item.status === 'pending').length || 0;
-        const earned = validated;
+        const entreValidated = data?.filter(item => item.status === 'validated' && item.referee_type === 'entrepreneur').length || 0;
+        const clientCount = data?.filter(item => item.referee_type === 'client').length || 0;
+        const earned = (entreValidated * 2) + (Math.floor(clientCount / 6) * 2);
 
         setStats({
           totalReferrals: total,

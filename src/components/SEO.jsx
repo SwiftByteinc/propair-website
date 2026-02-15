@@ -2,9 +2,9 @@ import { Helmet } from 'react-helmet-async';
 
 const defaultMeta = {
   siteName: 'ProPair',
-  defaultTitle: 'ProPair - Bâtissez. Connectez. Prospérez.',
+  defaultTitle: 'ProPair - Connectez. Construisez. Prospérez.',
   defaultDescription: 'La plateforme québécoise qui connecte clients et entrepreneurs de la construction. 0% commission, 100% local.',
-  siteUrl: 'https://propairapp.com',
+  siteUrl: 'https://propair.ca',
   ogImage: '/og-image.png',
   twitterHandle: '@propairapp',
   locale: 'fr_CA',

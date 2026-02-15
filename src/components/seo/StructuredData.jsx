@@ -6,10 +6,10 @@ export default function StructuredData() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://propairapp.com/#organization",
+        "@id": "https://propair.ca/#organization",
         "name": "ProPair",
-        "url": "https://propairapp.com",
-        "logo": "https://propairapp.com/images/logo_ProPair.jpg",
+        "url": "https://propair.ca",
+        "logo": "https://propair.ca/images/logo_ProPair.jpg",
         "description": "Plateforme de mise en relation entre entrepreneurs certifiés RBQ et clients au Québec",
         "sameAs": [
           "https://facebook.com/propair",
@@ -44,7 +44,7 @@ export default function StructuredData() {
       {
         "@type": "LocalBusiness",
         "name": "ProPair",
-        "image": "https://propairapp.com/images/logo_ProPair.jpg",
+        "image": "https://propair.ca/images/logo_ProPair.jpg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Magog",

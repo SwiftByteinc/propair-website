@@ -20,7 +20,7 @@ import { useToast } from '../../context/ToastContext';
 export default function DashboardHome() {
   const { user } = useOutletContext();
   const toast = useToast();
-  const isEntrepreneur = user?.user_metadata?.role === 'entrepreneur' || user?.role === 'entrepreneur'; // Fallback role check
+  const isEntrepreneur = user?.role === 'entrepreneur';
   const [copied, setCopied] = useState(false);
 
   // Stats réelles
@@ -34,13 +34,25 @@ export default function DashboardHome() {
   const referralLink = `${window.location.origin}/login?ref__=${referralCode}`;
   const referralGoal = 3;
 
-  const connectionsUsed = user?.user_metadata?.trial_connections_count || 0;
+  const connectionsUsed = user?.trial_connections_count || 0;
   const connectionsRemaining = user?.isPro ? 999 : Math.max(0, connectionsTotal - connectionsUsed);
 
   const referralCount = loadingStats ? 0 : (referralStats?.validatedReferrals || 0);
 
-  const copyReferralLink = () => {
-    navigator.clipboard.writeText(referralLink);
+  const copyReferralLink = async () => {
+    try {
+      await navigator.clipboard.writeText(referralLink);
+    } catch {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = referralLink;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
     setCopied(true);
     toast.success("Lien copié dans le presse-papier !");
     setTimeout(() => setCopied(false), 2000);
@@ -62,7 +74,7 @@ export default function DashboardHome() {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-slate-900"
         >
-          Bonjour, {user?.user_metadata?.full_name?.split(' ')[0] || 'Partenaire'}
+          Bonjour, {user?.full_name?.split(' ')[0] || 'Partenaire'}
         </motion.h1>
         <p className="text-slate-500 mt-1">
           Votre tour de contrôle ProPair.

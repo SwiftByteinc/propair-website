@@ -97,6 +97,8 @@ export default function UpdatePassword() {
             <img
               src="/images/logo_ProPair.jpg"
               alt="ProPair"
+              width="120"
+              height="56"
               className="h-12 w-auto"
             />
           </Link>
@@ -115,7 +117,7 @@ export default function UpdatePassword() {
 
             <Link
               to="/forgot-password"
-              className="inline-flex items-center justify-center gap-2 w-full bg-black hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
               Demander un nouveau lien
               <ArrowRight size={18} />
@@ -140,6 +142,8 @@ export default function UpdatePassword() {
           <img
             src="/images/logo_ProPair.jpg"
             alt="ProPair"
+            width="120"
+            height="56"
             className="h-12 w-auto"
           />
         </Link>
@@ -177,7 +181,7 @@ export default function UpdatePassword() {
 
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center gap-2 w-full bg-black hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
                 Se connecter
                 <ArrowRight size={18} />
@@ -250,7 +254,7 @@ export default function UpdatePassword() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-black hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+                  className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
                 >
                   {loading ? (
                     <Loader2 size={18} className="animate-spin" />

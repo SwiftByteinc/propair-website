@@ -55,7 +55,7 @@ export default function Contact() {
     // Ouvre le client email avec les infos pré-remplies
     const subject = encodeURIComponent(formData.subject || 'Question depuis le site web');
     const body = encodeURIComponent(
-      `Nom : ${formData.name}\nEmail : ${formData.email}\n\n${formData.message}`
+      `Nom : ${formData.name}\nCourriel : ${formData.email}\n\n${formData.message}`
     );
     window.location.href = `mailto:support@propairapp.com?subject=${subject}&body=${body}`;
 
@@ -139,7 +139,7 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Envoyez-nous un message</h2>
 
             {sent ? (
-              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center">
+              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite">
                 <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-600" />
                 </div>
@@ -186,7 +186,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="votre@courriel.com"
+                      placeholder="nom@exemple.com"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     />
                   </div>

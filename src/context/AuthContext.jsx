@@ -64,7 +64,8 @@ export function AuthProvider({ children }) {
           .from('subscriptions')
           .select('*')
           .eq('user_id', userData.id)
-          .limit(5); // Safety limit
+          .order('created_at', { ascending: false })
+          .limit(5);
 
         const { data: subData } = await Promise.race([
           subPromise,
@@ -157,7 +158,7 @@ export function AuthProvider({ children }) {
         referrer_email: referrer.email,
         referred_id: currentUser.id,
         referee_type: refereeType,
-        status: refereeType === 'client' ? 'VALIDATED' : 'PENDING',
+        status: refereeType === 'client' ? 'validated' : 'pending',
         created_at: new Date().toISOString()
       });
 
@@ -221,7 +222,7 @@ export function AuthProvider({ children }) {
 
         if (currentUser) {
           // Only refetch if user changed or just signed in
-          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
             await fetchProfile(currentUser);
           }
           // Process pending referral on first sign-in
@@ -276,10 +277,12 @@ export function AuthProvider({ children }) {
 
   const signInWithOAuth = useCallback(async (provider, redirectTo = '/portal') => {
     if (!supabase) return { error: { message: 'Service unavailable' } };
+    const allowedPaths = ['/portal', '/portal/billing', '/portal/referral', '/portal/settings'];
+    const safePath = allowedPaths.includes(redirectTo) ? redirectTo : '/portal';
     return await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}${redirectTo}`
+        redirectTo: `${window.location.origin}${safePath}`
       }
     });
   }, []);
@@ -296,6 +299,7 @@ export function AuthProvider({ children }) {
       setUser(null);
       setProfile(null);
       setSubscription(null);
+      referralProcessed.current = false;
     }
     return { error };
   }, []);

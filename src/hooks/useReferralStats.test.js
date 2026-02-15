@@ -26,9 +26,9 @@ describe('useReferralStats', () => {
 
   it('fetches and calculates stats correctly', async () => {
     const mockData = [
-      { id: 1, status: 'validated', referrer_id: 'u1', created_at: '2026-01-01' },
-      { id: 2, status: 'validated', referrer_id: 'u1', created_at: '2026-01-02' },
-      { id: 3, status: 'pending', referrer_id: 'u1', created_at: '2026-01-03' },
+      { id: 1, status: 'validated', referee_type: 'entrepreneur', referrer_id: 'u1', created_at: '2026-01-01' },
+      { id: 2, status: 'validated', referee_type: 'entrepreneur', referrer_id: 'u1', created_at: '2026-01-02' },
+      { id: 3, status: 'pending', referee_type: 'entrepreneur', referrer_id: 'u1', created_at: '2026-01-03' },
     ];
 
     supabase.from.mockReturnValue({
@@ -48,7 +48,8 @@ describe('useReferralStats', () => {
     expect(result.current.stats.totalReferrals).toBe(3);
     expect(result.current.stats.validatedReferrals).toBe(2);
     expect(result.current.stats.pendingReferrals).toBe(1);
-    expect(result.current.stats.earnedMonths).toBe(2);
+    // 2 validated entrepreneurs * 2 = 4 months, 0 clients = 0 → total 4
+    expect(result.current.stats.earnedMonths).toBe(4);
     expect(result.current.referralList).toHaveLength(3);
   });
 

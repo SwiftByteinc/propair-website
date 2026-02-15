@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from './Sidebar';
@@ -71,7 +72,7 @@ export default function DashboardLayout() {
     id: user.id,
     email: user.email || profile?.email,
     full_name: profile?.full_name || user.user_metadata?.full_name || 'Utilisateur',
-    role: profile?.user_role || 'entrepreneur',
+    role: profile?.user_role || 'client',
     isPro: isPro,
     referral_code: profile?.referral_code,
     pro_months_balance: profile?.pro_months_balance || 0,
@@ -84,6 +85,9 @@ export default function DashboardLayout() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       {/* Mobile header with hamburger */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
         <button

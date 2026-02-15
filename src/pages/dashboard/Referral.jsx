@@ -377,7 +377,7 @@ export default function Referral() {
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-100">
                   <tr>
                     <th className="px-6 py-3 font-medium">Date</th>
-                    <th className="px-6 py-3 font-medium">Email</th>
+                    <th className="px-6 py-3 font-medium">Courriel</th>
                     <th className="px-6 py-3 font-medium">Type</th>
                     <th className="px-6 py-3 font-medium">Statut</th>
                   </tr>
@@ -389,7 +389,9 @@ export default function Referral() {
                         {new Date(ref.created_at).toLocaleDateString('fr-CA')}
                       </td>
                       <td className="px-6 py-4 text-slate-900 font-medium">
-                        {ref.referee_email || 'Email masqué'}
+                        {ref.referee_email
+                          ? `${ref.referee_email.substring(0, 2)}***@${ref.referee_email.split('@')[1] || '***'}`
+                          : 'Courriel masqué'}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${

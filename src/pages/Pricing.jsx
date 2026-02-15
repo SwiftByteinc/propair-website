@@ -290,6 +290,8 @@ export default function Pricing() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6 }}
+                    role="dialog"
+                    aria-label="Information sur les frais"
                     className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-[2rem] flex items-center justify-center p-8"
                   >
                     <div className="text-center max-w-xs">
@@ -298,7 +300,7 @@ export default function Pricing() {
                       </div>
                       <p className="font-bold text-slate-900 text-lg mb-2">Le saviez-vous ?</p>
                       <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                        Les frais Stripe coûtent <span className="text-red-500 font-bold">10.47%</span> au mensuel vs <span className="text-green-600 font-bold">2.8%</span> à l'annuel.
+                        Les frais Stripe coûtent <span className="text-red-500 font-bold">10.47%</span> au mensuel contre <span className="text-green-600 font-bold">2.8%</span> à l'annuel.
                       </p>
                       <p className="text-slate-500 text-xs mb-5">
                         L'annuel nous permet de réinvestir dans l'app au lieu de payer les banques.

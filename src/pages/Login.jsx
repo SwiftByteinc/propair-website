@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
@@ -24,6 +24,8 @@ export default function Login() {
     name: '',
     confirmPassword: ''
   });
+  const failedAttempts = useRef(0);
+  const lockoutUntil = useRef(0);
 
   // Le capture global (useReferralCapture dans App.jsx) gère le stockage localStorage.
   // Ici on stocke aussi en sessionStorage pour rétrocompatibilité.
@@ -67,6 +69,12 @@ export default function Login() {
     e.preventDefault();
     setError('');
 
+    if (Date.now() < lockoutUntil.current) {
+      const secs = Math.ceil((lockoutUntil.current - Date.now()) / 1000);
+      setError(`Trop de tentatives. Réessayez dans ${secs} secondes.`);
+      return;
+    }
+
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
@@ -92,9 +100,14 @@ export default function Login() {
       }
     } catch (err) {
       let msg = err.message;
-      if (msg.includes('Invalid login credentials')) msg = "Email ou mot de passe incorrect.";
-      if (msg.includes('already registered')) msg = "Cet email est déjà utilisé.";
-      if (msg.includes('Email not confirmed')) msg = "Veuillez confirmer votre email.";
+      if (msg.includes('Invalid login credentials')) msg = "Identifiants invalides. Vérifiez votre courriel et mot de passe.";
+      if (msg.includes('already registered')) msg = "Impossible de créer le compte. Essayez de vous connecter.";
+      if (msg.includes('Email not confirmed')) msg = "Veuillez confirmer votre courriel avant de vous connecter.";
+      failedAttempts.current += 1;
+      if (failedAttempts.current >= 5) {
+        lockoutUntil.current = Date.now() + 30000;
+        failedAttempts.current = 0;
+      }
       setError(msg);
     } finally {
       setLoading(false);
@@ -214,7 +227,7 @@ export default function Login() {
             <div className="w-full border-t border-slate-200"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-white text-slate-400 uppercase tracking-wider font-medium">ou par email</span>
+            <span className="px-3 bg-white text-slate-400 uppercase tracking-wider font-medium">ou par courriel</span>
           </div>
         </div>
 
@@ -242,7 +255,7 @@ export default function Login() {
 
           {/* Email */}
           <div className="relative">
-            <label htmlFor="email" className="sr-only">Adresse email</label>
+            <label htmlFor="email" className="sr-only">Adresse courriel</label>
             <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="email"
@@ -250,7 +263,7 @@ export default function Login() {
               name="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="Adresse email"
+              placeholder="Adresse courriel"
               autoComplete="email"
               className={inputClass}
               required
@@ -322,7 +335,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black hover:bg-slate-800 text-white font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98] mt-2"
+            className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98] mt-2"
           >
             {loading ? (
               <Loader2 size={18} className="animate-spin" />

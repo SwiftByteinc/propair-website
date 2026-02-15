@@ -10,6 +10,12 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }) => children,
 }));
 
+// Mock react-helmet-async
+vi.mock('react-helmet-async', () => ({
+  Helmet: ({ children }) => <>{children}</>,
+  HelmetProvider: ({ children }) => <>{children}</>,
+}));
+
 // Mock AuthContext
 const mockUseAuth = vi.fn();
 vi.mock('../../context/AuthContext', () => ({

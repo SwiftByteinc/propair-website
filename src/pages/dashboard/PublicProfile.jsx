@@ -11,11 +11,11 @@ export default function PublicProfile() {
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-bold text-gray-900"
+          className="text-2xl font-bold text-slate-900"
         >
           Mon Profil Public
         </motion.h1>
-        <p className="text-gray-500 mt-1">
+        <p className="text-slate-500 mt-1">
           Gérez votre profil visible par les clients.
         </p>
       </header>
@@ -23,15 +23,15 @@ export default function PublicProfile() {
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-2xl border border-gray-100 p-12 text-center"
+        className="bg-white rounded-2xl border border-slate-100 p-12 text-center"
       >
         <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
           <Smartphone size={32} className="text-teal-600" />
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-3">
+        <h2 className="text-xl font-bold text-slate-900 mb-3">
           Gérez votre profil depuis l'application
         </h2>
-        <p className="text-gray-500 max-w-md mx-auto mb-8">
+        <p className="text-slate-500 max-w-md mx-auto mb-8">
           Pour modifier votre profil public, vos photos de réalisations, vos certifications et votre zone de service, utilisez l'application mobile ProPair.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -39,7 +39,7 @@ export default function PublicProfile() {
             href="https://apps.apple.com/app/propair"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-slate-800 transition-colors"
           >
             App Store
             <ExternalLink size={14} />
@@ -48,7 +48,7 @@ export default function PublicProfile() {
             href="https://play.google.com/store/apps/details?id=com.propair"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-slate-800 transition-colors"
           >
             Google Play
             <ExternalLink size={14} />

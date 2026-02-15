@@ -32,10 +32,18 @@ export default function Navbar() {
     setIsOpen(false);
   }, [location]);
 
-  // Désactiver le scroll du body quand le menu mobile est ouvert
+  // Désactiver le scroll du body quand le menu mobile est ouvert + Escape pour fermer
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') setIsOpen(false);
+      };
+      document.addEventListener('keydown', handleEscape);
+      return () => {
+        document.body.style.overflow = 'unset';
+        document.removeEventListener('keydown', handleEscape);
+      };
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -227,6 +235,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setIsOpen(false)}
                   aria-label="Fermer le menu"
+                  autoFocus
                   className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <X size={20} aria-hidden="true" />

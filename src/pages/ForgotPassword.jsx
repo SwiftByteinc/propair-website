@@ -37,6 +37,8 @@ export default function ForgotPassword() {
           <img
             src="/images/logo_ProPair.jpg"
             alt="ProPair"
+            width="120"
+            height="56"
             className="h-12 w-auto"
           />
         </Link>
@@ -87,7 +89,7 @@ export default function ForgotPassword() {
                 <span className="font-semibold text-slate-900">{email}</span>
               </p>
               <p className="text-sm text-slate-500">
-                Cliquez sur le lien dans l'email pour créer un nouveau mot de passe.
+                Cliquez sur le lien dans le courriel pour créer un nouveau mot de passe.
               </p>
 
               <button
@@ -112,8 +114,8 @@ export default function ForgotPassword() {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="votre@courriel.com"
-                    aria-label="Adresse email"
+                    placeholder="nom@exemple.com"
+                    aria-label="Adresse courriel"
                     autoComplete="email"
                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     required
@@ -125,7 +127,7 @@ export default function ForgotPassword() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-black hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+                className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
                 {loading ? (
                   <>
