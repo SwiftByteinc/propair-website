@@ -65,7 +65,7 @@ export default function DashboardHome() {
   };
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
 
       {/* Header */}
       <header className="mb-8">

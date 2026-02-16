@@ -6,7 +6,7 @@ export default function PublicProfile() {
   useOutletContext();
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
       <header className="mb-8">
         <motion.h1
           initial={{ opacity: 0, y: -10 }}

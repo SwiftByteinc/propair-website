@@ -19,12 +19,12 @@ export default function Parrainage() {
     {
       icon: Users,
       title: "Votre filleul s'inscrit",
-      description: "Quand quelqu'un s'inscrit via votre lien, le parrainage est automatiquement enregistré dans votre compte."
+      description: "Quand quelqu'un s'inscrit via votre lien, le parrainage est enregistré dans votre compte."
     },
     {
       icon: Award,
       title: "Gagnez des mois Pro",
-      description: "Dès que les conditions sont remplies, vos mois gratuits sont crédités automatiquement sur votre abonnement."
+      description: "Dès que les conditions sont remplies, vos mois gratuits sont disponibles dans votre tableau de bord pour les appliquer à votre abonnement."
     }
   ];
 
@@ -42,7 +42,7 @@ export default function Parrainage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-pink-50 to-pink-100/50 rounded-2xl p-8 md:p-10 flex items-center gap-6 mb-10 border border-pink-100"
+          className="bg-gradient-to-br from-pink-50 to-pink-100/50 rounded-2xl p-5 sm:p-8 md:p-10 flex items-center gap-4 sm:gap-6 mb-10 border border-pink-100"
         >
           <div className="flex-1">
             <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -121,11 +121,11 @@ export default function Parrainage() {
               </div>
 
               {/* Flow visuel */}
-              <div className="flex items-center justify-center gap-2 bg-amber-50 rounded-xl p-3 text-xs font-semibold text-slate-600">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-amber-50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
                 <span>Inscription</span>
-                <ArrowRight size={14} className="text-slate-500" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span>3 mois actif</span>
-                <ArrowRight size={14} className="text-slate-500" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>
@@ -155,9 +155,9 @@ export default function Parrainage() {
               </div>
 
               {/* Flow visuel */}
-              <div className="flex items-center justify-center gap-2 bg-pink-50 rounded-xl p-3 text-xs font-semibold text-slate-600">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-pink-50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
                 <span>6 clients inscrits</span>
-                <ArrowRight size={14} className="text-slate-500" />
+                <ArrowRight size={12} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">+2 mois</span>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function Parrainage() {
           className="bg-slate-50 rounded-2xl p-5 border border-slate-100 mb-10"
         >
           <p className="text-xs text-slate-500 leading-relaxed">
-            Les mois Pro gagnés sont cumulables et s'appliquent automatiquement à votre prochain renouvellement. Le parrainage entrepreneur est validé une fois que le filleul a complété 3 mois d'activité sur la plateforme. Le parrainage client est validé automatiquement à l'inscription.
+            Les mois Pro gagnés sont cumulables et disponibles dans votre tableau de bord. Vous pouvez les appliquer à votre abonnement quand vous le souhaitez. Le parrainage entrepreneur est validé une fois que le filleul a complété 3 mois d'activité sur la plateforme. Le parrainage client est validé à l'inscription.
           </p>
         </motion.div>
 

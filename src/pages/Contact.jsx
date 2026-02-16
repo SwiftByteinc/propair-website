@@ -85,7 +85,7 @@ export default function Contact() {
             <Mail size={14} className="text-teal-600" />
             <span>Réponse sous 24h ouvrables</span>
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
             Nous sommes là pour vous
           </h1>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
@@ -128,7 +128,7 @@ export default function Contact() {
         </motion.div>
 
         {/* Contact Form + Info */}
-        <div className="grid lg:grid-cols-5 gap-12">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

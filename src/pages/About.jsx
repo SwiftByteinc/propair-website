@@ -38,8 +38,8 @@ const Counter = ({ value, label }) => {
   const showRawValue = value.includes('%') || value.includes('+') || value.includes('$') || !isNumeric || numericEnd <= 1;
 
   return (
-    <div ref={ref} className="text-center p-6">
-      <div className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
+    <div ref={ref} className="text-center p-4 sm:p-6">
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
         {showRawValue ? value : count.toLocaleString()}
       </div>
       <div className="text-slate-500 font-medium uppercase tracking-wider text-xs">{label}</div>
@@ -105,7 +105,7 @@ export default function About() {
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-slate-50" />
 
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ export default function About() {
               <span>Initiative locale de Magog</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
               En tant qu'entrepreneur, je me suis posé la question :{' '}
               <span className="text-teal-600 block mt-2">
                 "Qu'est-ce que je voudrais utiliser ?"
@@ -224,7 +224,7 @@ export default function About() {
 
       {/* STATS */}
       <section className="py-16 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
             <Counter value="100%" label="Pour l'entrepreneur" />
             <Counter value="0$" label="Frais cachés" />
@@ -235,9 +235,9 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+      <section className="py-16 sm:py-24 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">
             Utilisez l'outil que j'ai créé pour nous.
           </h2>
           <p className="text-slate-600 text-lg mb-10 max-w-xl mx-auto">

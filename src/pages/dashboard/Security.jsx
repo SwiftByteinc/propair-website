@@ -117,7 +117,7 @@ export default function Security() {
   };
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
       {/* Header */}
       <header className="mb-8">
         <motion.h1
@@ -231,7 +231,7 @@ export default function Security() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-medium text-slate-500 mb-1.5">
                         Nouveau mot de passe

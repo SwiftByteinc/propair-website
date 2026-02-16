@@ -280,7 +280,7 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="grid grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">

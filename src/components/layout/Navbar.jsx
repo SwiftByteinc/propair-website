@@ -109,7 +109,7 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16 sm:h-20">
 
             {/* Logo */}
             <Link
@@ -123,7 +123,7 @@ export default function Navbar() {
                   alt=""
                   width="120"
                   height="56"
-                  className="h-14 w-auto transition-all group-hover:scale-105"
+                  className="h-11 sm:h-14 w-auto transition-all group-hover:scale-105"
                   aria-hidden="true"
                 />
                 <span className="sr-only">ProPair</span>

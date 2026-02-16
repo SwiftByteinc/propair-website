@@ -104,7 +104,7 @@ export default function Pricing() {
             <Shield size={14} className="text-teal-600" />
             <span>0% de commission, toujours</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
             Investissez dans votre croissance,<br/>
             <span className="text-teal-600">pas dans des commissions.</span>
           </h1>
@@ -207,7 +207,7 @@ export default function Pricing() {
               boxShadow: showInsider ? '0 25px 50px -12px rgba(13, 148, 136, 0.15)' : '0 0 0 0 rgba(0,0,0,0)'
             }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-[2rem] p-8 md:p-10 border-2 relative overflow-hidden h-full flex flex-col justify-between"
+            className="bg-white rounded-[2rem] p-5 sm:p-8 md:p-10 border-2 relative overflow-hidden h-full flex flex-col justify-between"
           >
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
@@ -222,7 +222,7 @@ export default function Pricing() {
 
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-bold text-slate-900">149$</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900">149$</span>
                   <span className="text-sm text-slate-500">/an + tx</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2 text-sm">
@@ -258,12 +258,12 @@ export default function Pricing() {
 
           {/* CARTE DROITE : MENSUEL + Overlay Insider */}
           <div className="relative h-full flex flex-col">
-            <div className="bg-white rounded-[2rem] p-8 border border-slate-200 flex-1 relative z-10 overflow-hidden">
+            <div className="bg-white rounded-[2rem] p-5 sm:p-8 border border-slate-200 flex-1 relative z-10 overflow-hidden">
               <h3 className="text-2xl font-bold text-slate-900 mb-2">Mensuel</h3>
               <p className="text-slate-500 mb-6">Liberté totale, sans engagement.</p>
 
               <div className="mb-8 flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-slate-900">24$</span>
+                <span className="text-3xl sm:text-4xl font-bold text-slate-900">24$</span>
                 <span className="text-sm text-slate-500">/mois + tx</span>
               </div>
 
@@ -292,7 +292,7 @@ export default function Pricing() {
                     transition={{ duration: 0.6 }}
                     role="dialog"
                     aria-label="Information sur les frais"
-                    className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-[2rem] flex items-center justify-center p-8"
+                    className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-[2rem] flex items-center justify-center p-4 sm:p-8"
                   >
                     <div className="text-center max-w-xs">
                       <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
