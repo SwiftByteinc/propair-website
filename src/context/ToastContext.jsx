@@ -45,7 +45,7 @@ export function ToastProvider({ children }) {
 
       {/* Toast Container - Fixed bottom right */}
       <div
-        className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"
+        className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50 flex flex-col gap-2 pointer-events-none"
         role="region"
         aria-label="Notifications"
         aria-live="polite"
@@ -60,7 +60,7 @@ export function ToastProvider({ children }) {
               layout
               role="alert"
               className={`
-                pointer-events-auto min-w-[300px] max-w-[400px] p-4 rounded-xl shadow-lg border flex items-start gap-3
+                pointer-events-auto w-full sm:min-w-[300px] sm:max-w-[400px] p-4 rounded-xl shadow-lg border flex items-start gap-3
                 ${t.type === 'success' ? 'bg-white border-teal-100 text-teal-800' : ''}
                 ${t.type === 'error' ? 'bg-white border-red-200 text-red-700' : ''}
                 ${t.type === 'info' ? 'bg-slate-900 border-slate-700 text-white' : ''}

@@ -87,24 +87,6 @@ body {
   background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%); /* Ajusté */
 }
 
-/* Soft shadows - Style Apple/Stripe */
-.shadow-soft {
-  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 4px 16px -4px rgba(0, 0, 0, 0.08);
-}
-
-.shadow-soft-lg {
-  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.06), 0 8px 24px -8px rgba(0, 0, 0, 0.1);
-}
-
-.shadow-soft-xl {
-  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.08), 0 16px 48px -16px rgba(0, 0, 0, 0.12);
-}
-
-/* Card float effect */
-.shadow-float {
-  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.15), 0 40px 80px -40px rgba(0, 0, 0, 0.1);
-}
-
 /* Glass effect - Subtle for white mode */
 .glass {
   background: rgba(255, 255, 255, 0.8);

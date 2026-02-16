@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Referral from './Referral';
 
 // Mock framer-motion
@@ -37,9 +38,11 @@ Object.assign(navigator, {
 
 function renderReferral() {
   return render(
-    <MemoryRouter>
-      <Referral />
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter>
+        <Referral />
+      </MemoryRouter>
+    </HelmetProvider>
   );
 }
 

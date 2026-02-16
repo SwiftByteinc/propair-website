@@ -1,4 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Smartphone, ExternalLink } from 'lucide-react';
 
@@ -7,6 +8,7 @@ export default function PublicProfile() {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
+      <Helmet><title>Profil Public — Mon Espace ProPair</title></Helmet>
       <header className="mb-8">
         <motion.h1
           initial={{ opacity: 0, y: -10 }}

@@ -1,4 +1,5 @@
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
   CreditCard,
@@ -36,6 +37,7 @@ export default function Billing() {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
+      <Helmet><title>Abonnement — Mon Espace ProPair</title></Helmet>
       <header className="mb-8">
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
@@ -109,12 +111,12 @@ export default function Billing() {
             <Crown size={48} className="mx-auto text-amber-600 mb-4" />
             <h2 className="text-xl font-bold text-slate-900 mb-2">Aucun abonnement actif</h2>
             <p className="text-slate-500 mb-6">Passez Pro pour débloquer toutes les fonctionnalités.</p>
-            <button
-              onClick={() => window.location.href = '/pricing'}
-              className="px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-colors shadow-lg shadow-slate-900/10"
+            <Link
+              to="/pricing"
+              className="inline-block px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-colors shadow-lg shadow-slate-900/10"
             >
               Voir les offres
-            </button>
+            </Link>
           </motion.section>
         )}
       </div>

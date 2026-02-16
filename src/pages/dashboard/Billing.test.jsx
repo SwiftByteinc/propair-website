@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Billing from './Billing';
 
 // Mock framer-motion
@@ -28,9 +29,11 @@ vi.mock('react-router-dom', async () => {
 
 function renderBilling() {
   return render(
-    <MemoryRouter>
-      <Billing />
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter>
+        <Billing />
+      </MemoryRouter>
+    </HelmetProvider>
   );
 }
 

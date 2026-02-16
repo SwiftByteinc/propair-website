@@ -72,7 +72,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
           </button>
           <button
             onClick={onClose}
-            className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-600"
+            className="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-600"
             aria-label="Fermer le menu"
           >
             <X size={18} />

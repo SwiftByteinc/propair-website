@@ -4,13 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check, Zap, Shield, Bell, Users, Star, Info, Heart,
   MessageSquare, Briefcase, CreditCard,
-  Smartphone, ArrowRight
+  Smartphone, ArrowRight, ChevronDown, X
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 export default function Pricing() {
-  // État pour déclencher l'effet "Insider"
   const [showInsider, setShowInsider] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
 
   // Déclencheur après 5 secondes
   useEffect(() => {
@@ -274,11 +274,11 @@ export default function Pricing() {
                 Choisir le mensuel
               </Link>
 
-              <div className="space-y-3 opacity-70">
+              <div className="space-y-3">
                 <p className="text-xs font-bold text-slate-500 uppercase">Inclus :</p>
-                {proFeatures.slice(0, 3).map((f, i) => (
+                {proFeatures.map((f, i) => (
                   <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                    <Check size={14} className="text-slate-500" /> {f.text}
+                    <Check size={14} className="text-teal-600" /> {f.text}
                   </div>
                 ))}
               </div>
@@ -294,7 +294,14 @@ export default function Pricing() {
                     aria-label="Information sur les frais"
                     className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-[2rem] flex items-center justify-center p-4 sm:p-8"
                   >
-                    <div className="text-center max-w-xs">
+                    <div className="text-center max-w-xs relative">
+                      <button
+                        onClick={() => setShowInsider(false)}
+                        className="absolute -top-2 -right-2 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-500 transition-colors"
+                        aria-label="Fermer"
+                      >
+                        <X size={16} />
+                      </button>
                       <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Info size={22} className="text-amber-600" />
                       </div>
@@ -368,18 +375,40 @@ export default function Pricing() {
             Questions fréquentes
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 className="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden hover:border-teal-100 transition-colors"
               >
-                <div className="px-6 pt-5 pb-3">
-                  <span className="font-semibold text-slate-900">{faq.question}</span>
-                </div>
-                <div className="px-6 pb-5">
-                  <p className="text-slate-500 leading-relaxed text-sm">{faq.answer}</p>
-                </div>
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left"
+                >
+                  <span className="font-semibold text-slate-900 pr-4">{faq.question}</span>
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="shrink-0"
+                  >
+                    <ChevronDown size={18} className="text-slate-400" />
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-5">
+                        <p className="text-slate-500 leading-relaxed text-sm">{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>

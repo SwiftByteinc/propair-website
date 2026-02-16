@@ -96,7 +96,7 @@ export default function DashboardLayout() {
       <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
+          className="w-11 h-11 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
           aria-label="Ouvrir le menu"
         >
           <Menu size={20} />

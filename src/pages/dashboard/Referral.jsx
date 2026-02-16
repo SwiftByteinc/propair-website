@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Gift, Copy, Check, Users, CheckCircle, Clock,
@@ -110,7 +111,8 @@ export default function Referral() {
   }, [referralCode, referralLink, copyLink]);
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl">
+    <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
+      <Helmet><title>Parrainage — Mon Espace ProPair</title></Helmet>
       {/* Header */}
       <header className="mb-8">
         <motion.h1
