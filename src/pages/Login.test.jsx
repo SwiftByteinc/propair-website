@@ -108,12 +108,71 @@ describe('Login Page', () => {
     const emailInput = screen.getByPlaceholderText('Adresse courriel');
     const passwordInput = screen.getByPlaceholderText('Mot de passe');
 
-    // Type in email
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     expect(emailInput).toHaveValue('test@example.com');
 
-    // Type in password
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
     expect(passwordInput).toHaveValue('password123');
+  });
+
+  it('email input has type email', () => {
+    renderWithRouter(<Login />);
+    const email = screen.getByPlaceholderText('Adresse courriel');
+    expect(email).toHaveAttribute('type', 'email');
+  });
+
+  it('password input has type password by default', () => {
+    renderWithRouter(<Login />);
+    const pw = screen.getByPlaceholderText('Mot de passe');
+    expect(pw).toHaveAttribute('type', 'password');
+  });
+
+  it('password becomes visible after toggle', () => {
+    renderWithRouter(<Login />);
+    const toggle = screen.getByRole('button', { name: /afficher le mot de passe/i });
+    fireEvent.click(toggle);
+    const pw = screen.getByPlaceholderText('Mot de passe');
+    expect(pw).toHaveAttribute('type', 'text');
+  });
+
+  it('forgot password link points to /forgot-password', () => {
+    renderWithRouter(<Login />);
+    const link = screen.getByText('Mot de passe oublié ?').closest('a');
+    expect(link).toHaveAttribute('href', '/forgot-password');
+  });
+
+  it('signup mode shows name field', () => {
+    renderWithRouter(<Login />);
+    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
+    expect(screen.getByPlaceholderText('Votre nom complet')).toBeInTheDocument();
+  });
+
+  it('signup mode shows confirm password field', () => {
+    renderWithRouter(<Login />);
+    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
+    expect(screen.getByPlaceholderText('Confirmer le mot de passe')).toBeInTheDocument();
+  });
+
+  it('login mode does not show name field', () => {
+    renderWithRouter(<Login />);
+    expect(screen.queryByPlaceholderText('Votre nom complet')).not.toBeInTheDocument();
+  });
+
+  it('login mode does not show confirm password', () => {
+    renderWithRouter(<Login />);
+    expect(screen.queryByPlaceholderText('Confirmer le mot de passe')).not.toBeInTheDocument();
+  });
+
+  it('renders ou divider between form and social buttons', () => {
+    renderWithRouter(<Login />);
+    expect(screen.getByText('ou par courriel')).toBeInTheDocument();
+  });
+
+  it('switching to signup then back restores login mode', () => {
+    renderWithRouter(<Login />);
+    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
+    expect(screen.getByText('Créer un compte')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
+    expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
   });
 });

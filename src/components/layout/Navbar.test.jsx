@@ -103,4 +103,55 @@ describe('Navbar', () => {
     const logoLink = screen.getByRole('link', { name: /retour à l'accueil/i });
     expect(logoLink).toBeInTheDocument();
   });
+
+  it('login link points to /login', () => {
+    renderNavbar();
+    const loginLink = screen.getByText('Se connecter').closest('a');
+    expect(loginLink).toHaveAttribute('href', '/login');
+  });
+
+  it('closes mobile menu on second click', () => {
+    renderNavbar();
+    const menuButton = screen.getByRole('button', { name: /ouvrir le menu/i });
+    fireEvent.click(menuButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(menuButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('displays Portail link when user is authenticated', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com' },
+      profile: { full_name: 'Nicolas Dupont' },
+    });
+    renderNavbar();
+    const portalLink = screen.getByText('Nicolas').closest('a');
+    expect(portalLink).toHaveAttribute('href', '/portal');
+  });
+
+  it('does not show user avatar when not authenticated', () => {
+    renderNavbar();
+    expect(screen.queryByText('N')).not.toBeInTheDocument();
+    expect(screen.queryByText('M')).not.toBeInTheDocument();
+  });
+
+  it('renders nav element', () => {
+    renderNavbar();
+    const nav = screen.getByRole('navigation');
+    expect(nav).toBeInTheDocument();
+  });
+
+  it('Accueil link points to /', () => {
+    renderNavbar();
+    const accueilLinks = screen.getAllByText('Accueil');
+    const link = accueilLinks[0].closest('a');
+    expect(link).toHaveAttribute('href', '/');
+  });
+
+  it('Contact link points to /contact', () => {
+    renderNavbar();
+    const contactLinks = screen.getAllByText('Contact');
+    const link = contactLinks[0].closest('a');
+    expect(link).toHaveAttribute('href', '/contact');
+  });
 });

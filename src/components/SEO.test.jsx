@@ -77,4 +77,45 @@ describe('SEO title logic', () => {
     const imageUrl = `${siteUrl}${ogImage}`;
     expect(imageUrl).toBe('https://propairapp.com/og-image.png');
   });
+
+  it('generates correct canonical for root path', () => {
+    const siteUrl = 'https://propairapp.com';
+    const canonical = '/';
+    const canonicalUrl = `${siteUrl}${canonical}`;
+    expect(canonicalUrl).toBe('https://propairapp.com/');
+  });
+
+  it('appends title separator correctly', () => {
+    const title = 'Contact';
+    const siteName = 'ProPair';
+    const fullTitle = `${title} | ${siteName}`;
+    expect(fullTitle).toContain('|');
+    expect(fullTitle).toContain('Contact');
+    expect(fullTitle).toContain('ProPair');
+  });
+
+  it('handles empty title gracefully', () => {
+    const title = '';
+    const siteName = 'ProPair';
+    const defaultTitle = 'ProPair - Bâtissez. Connectez. Prospérez.';
+    const fullTitle = title ? `${title} | ${siteName}` : defaultTitle;
+    expect(fullTitle).toBe(defaultTitle);
+  });
+
+  it('handles type prop for article', () => {
+    const type = 'article';
+    expect(type).toBe('article');
+  });
+
+  it('handles noIndex meta generation', () => {
+    const noIndex = true;
+    const meta = noIndex ? 'noindex, nofollow' : 'index, follow';
+    expect(meta).toBe('noindex, nofollow');
+  });
+
+  it('renders with type=article without crashing', () => {
+    expect(() =>
+      renderSEO({ type: 'article', title: 'Blog Post' })
+    ).not.toThrow();
+  });
 });

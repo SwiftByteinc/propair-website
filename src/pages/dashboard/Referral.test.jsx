@@ -232,4 +232,60 @@ describe('Referral Page', () => {
 
     expect(screen.getByText(/entrepreneurs à découvrir/i)).toBeInTheDocument();
   });
+
+  it('displays client referral code in link', () => {
+    mockOutletContext.mockReturnValue({
+      user: { id: 'user-2', role: 'client', referral_code: 'CLIENT456' },
+    });
+    renderReferral();
+    expect(screen.getAllByText(/ref__=CLIENT456/).length).toBeGreaterThan(0);
+  });
+
+  it('client user copies correct link', () => {
+    mockOutletContext.mockReturnValue({
+      user: { id: 'user-2', role: 'client', referral_code: 'CLIENT456' },
+    });
+    renderReferral();
+    fireEvent.click(screen.getByText('Copier le lien'));
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      expect.stringContaining('ref__=CLIENT456')
+    );
+  });
+
+  it('shows referral code in badge', () => {
+    renderReferral();
+    expect(screen.getByText('NICOLAS123')).toBeInTheDocument();
+  });
+
+  it('shows empty history when no referrals', () => {
+    mockUseReferralStats.mockReturnValue({
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      referralList: [],
+      loading: false,
+    });
+    renderReferral();
+    expect(screen.getByText(/aucun parrainage/i)).toBeInTheDocument();
+  });
+
+  it('loading state hides stats values', () => {
+    mockUseReferralStats.mockReturnValue({
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      referralList: [],
+      loading: true,
+    });
+    renderReferral();
+    const dashes = screen.getAllByText('-');
+    expect(dashes.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('shows progress section with correct labels', () => {
+    renderReferral();
+    expect(screen.getByText('Parrainage entrepreneur')).toBeInTheDocument();
+    expect(screen.getByText('Réseau client')).toBeInTheDocument();
+  });
+
+  it('shows "Comment ça marche" section', () => {
+    renderReferral();
+    expect(screen.getByText('Comment ça marche')).toBeInTheDocument();
+  });
 });

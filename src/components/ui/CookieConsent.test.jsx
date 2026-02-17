@@ -96,4 +96,34 @@ describe('CookieConsent', () => {
     expect(screen.getByText(/cookies essentiels/i)).toBeInTheDocument();
     expect(screen.getByText(/aucune donnée n'est vendue/i)).toBeInTheDocument();
   });
+
+  it('renders dialog with correct aria-label', () => {
+    render(<CookieConsent />);
+    act(() => { vi.advanceTimersByTime(2000); });
+    expect(screen.getByRole('dialog')).toHaveAttribute('aria-label', 'Consentement aux cookies');
+  });
+
+  it('renders heading text', () => {
+    render(<CookieConsent />);
+    act(() => { vi.advanceTimersByTime(2000); });
+    expect(screen.getByText('Nous respectons votre vie privée')).toBeInTheDocument();
+  });
+
+  it('does not show before 2 seconds', () => {
+    render(<CookieConsent />);
+    act(() => { vi.advanceTimersByTime(1500); });
+    expect(screen.queryByText(/vie privée/i)).not.toBeInTheDocument();
+  });
+
+  it('accept button is rendered as button element', () => {
+    render(<CookieConsent />);
+    act(() => { vi.advanceTimersByTime(2000); });
+    expect(screen.getByText('Accepter').tagName).toBe('BUTTON');
+  });
+
+  it('decline button is rendered as button element', () => {
+    render(<CookieConsent />);
+    act(() => { vi.advanceTimersByTime(2000); });
+    expect(screen.getByText('Refuser').tagName).toBe('BUTTON');
+  });
 });

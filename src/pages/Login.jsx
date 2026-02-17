@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getStoredReferralCode } from '../hooks/useReferralCapture';
 import SEO from '../components/SEO';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Login() {
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, signIn, signUp, signInWithOAuth } = useAuth();
 
   // Support both ?ref__= and ?ref= (rétrocompatibilité)
@@ -44,31 +47,32 @@ export default function Login() {
     }
   }, [searchParams]);
 
-  // Redirect if already logged in
+  // Redirect if already logged in (or after successful login)
   useEffect(() => {
     if (user) {
-      navigate('/portal');
+      const from = location.state?.from?.pathname || '/portal';
+      navigate(from, { replace: true });
     }
-  }, [user, navigate]);
+  }, [user, navigate, location.state]);
 
   // --- VALIDATION LOGIC ---
   const validateForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      return "Veuillez entrer une adresse email valide.";
+      return t('login.invalidEmail');
     }
 
     if (!isLogin) {
       if (formData.password.length < 8) {
-        return "Le mot de passe doit contenir au moins 8 caractères.";
+        return t('login.passwordTooShort');
       }
 
       if (formData.password !== formData.confirmPassword) {
-        return "Les mots de passe ne correspondent pas.";
+        return t('login.passwordMismatch');
       }
 
       if (!formData.name.trim()) {
-        return "Veuillez entrer votre nom complet.";
+        return t('login.nameRequired');
       }
     }
     return null;
@@ -80,7 +84,7 @@ export default function Login() {
 
     if (Date.now() < lockoutUntil.current) {
       const secs = Math.ceil((lockoutUntil.current - Date.now()) / 1000);
-      setError(`Trop de tentatives. Réessayez dans ${secs} secondes.`);
+      setError(t('login.tooManyAttempts', { secs }));
       return;
     }
 
@@ -109,9 +113,9 @@ export default function Login() {
       }
     } catch (err) {
       let msg = err.message;
-      if (msg.includes('Invalid login credentials')) msg = "Identifiants invalides. Vérifiez votre courriel et mot de passe.";
-      if (msg.includes('already registered')) msg = "Impossible de créer le compte. Essayez de vous connecter.";
-      if (msg.includes('Email not confirmed')) msg = "Veuillez confirmer votre courriel avant de vous connecter.";
+      if (msg.includes('Invalid login credentials')) msg = t('login.invalidCredentials');
+      if (msg.includes('already registered')) msg = t('login.alreadyRegistered');
+      if (msg.includes('Email not confirmed')) msg = t('login.emailNotConfirmed');
       failedAttempts.current += 1;
       if (failedAttempts.current >= 5) {
         lockoutUntil.current = Date.now() + 30000;
@@ -130,7 +134,7 @@ export default function Login() {
       const { error } = await signInWithOAuth(provider, '/portal');
       if (error) throw error;
     } catch (err) {
-      setError(err.message || 'Erreur de connexion sociale.');
+      setError(err.message || t('login.socialError'));
       setLoading(false);
     }
   };
@@ -140,9 +144,9 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-8 sm:py-12 font-sans">
       <SEO
-        title={isLogin ? "Connexion" : "Inscription"}
+        title={isLogin ? t('login.loginTitle') : t('login.signupTitle')}
         canonical="/login"
-        description="Connectez-vous ou créez votre compte ProPair. Accédez à votre espace entrepreneur ou client."
+        description={t('login.seoDesc')}
         noIndex={true}
       />
 
@@ -169,7 +173,7 @@ export default function Login() {
           <div className="mb-6 p-3.5 bg-teal-50 border border-teal-100 rounded-xl flex items-start gap-3">
             <CheckCircle size={18} className="text-teal-600 mt-0.5 shrink-0" />
             <p className="text-sm text-teal-700 font-medium">
-              Code de parrainage appliqué ! Créez votre compte pour en profiter.
+              {t('login.referralBadge')}
             </p>
           </div>
         )}
@@ -177,12 +181,10 @@ export default function Login() {
         {/* Title */}
         <div className="text-center mb-7">
           <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1.5">
-            {isLogin ? 'Bon retour parmi nous' : 'Créer un compte'}
+            {isLogin ? t('login.welcomeBack') : t('login.createAccount')}
           </h1>
           <p className="text-slate-500 text-sm">
-            {isLogin
-              ? 'Gérez vos chantiers et vos demandes.'
-              : 'Rejoignez les entrepreneurs de Magog.'}
+            {isLogin ? t('login.welcomeSubtitle') : t('login.signupSubtitle')}
           </p>
         </div>
 
@@ -236,7 +238,7 @@ export default function Login() {
             <div className="w-full border-t border-slate-200"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-white text-slate-500 uppercase tracking-wider font-medium">ou par courriel</span>
+            <span className="px-3 bg-white text-slate-500 uppercase tracking-wider font-medium">{t('login.orByEmail')}</span>
           </div>
         </div>
 
@@ -245,7 +247,7 @@ export default function Login() {
           {/* Name field (signup only) */}
           {!isLogin && (
             <div className="relative">
-              <label htmlFor="name" className="sr-only">Nom complet</label>
+              <label htmlFor="name" className="sr-only">{t('login.nameLabel')}</label>
               <User size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type="text"
@@ -253,7 +255,7 @@ export default function Login() {
                 name="name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Votre nom complet"
+                placeholder={t('login.namePlaceholder')}
                 autoComplete="name"
                 className={inputClass}
                 required
@@ -264,7 +266,7 @@ export default function Login() {
 
           {/* Email */}
           <div className="relative">
-            <label htmlFor="email" className="sr-only">Adresse courriel</label>
+            <label htmlFor="email" className="sr-only">{t('login.emailLabel')}</label>
             <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="email"
@@ -272,7 +274,7 @@ export default function Login() {
               name="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="Adresse courriel"
+              placeholder={t('login.emailPlaceholder')}
               autoComplete="email"
               className={inputClass}
               required
@@ -283,7 +285,7 @@ export default function Login() {
           {/* Password */}
           <div>
             <div className="relative">
-              <label htmlFor="password" className="sr-only">Mot de passe</label>
+              <label htmlFor="password" className="sr-only">{t('login.passwordLabel')}</label>
               <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -291,7 +293,7 @@ export default function Login() {
                 name="password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                placeholder="Mot de passe"
+                placeholder={t('login.passwordPlaceholder')}
                 autoComplete={isLogin ? "current-password" : "new-password"}
                 className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm"
                 required
@@ -300,21 +302,21 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                aria-label={showPassword ? t('login.hidePassword') : t('login.showPassword')}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
               >
                 {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
               </button>
             </div>
             {!isLogin && (
-              <p className="text-xs text-slate-500 mt-1.5 ml-1">Minimum 8 caractères</p>
+              <p className="text-xs text-slate-500 mt-1.5 ml-1">{t('login.minChars')}</p>
             )}
           </div>
 
           {/* Confirm Password (signup only) */}
           {!isLogin && (
             <div className="relative">
-              <label htmlFor="confirmPassword" className="sr-only">Confirmer le mot de passe</label>
+              <label htmlFor="confirmPassword" className="sr-only">{t('login.confirmPasswordLabel')}</label>
               <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -322,7 +324,7 @@ export default function Login() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                placeholder="Confirmer le mot de passe"
+                placeholder={t('login.confirmPasswordPlaceholder')}
                 autoComplete="new-password"
                 className={inputClass}
                 required
@@ -335,7 +337,7 @@ export default function Login() {
           {isLogin && (
             <div className="text-right">
               <Link to="/forgot-password" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
-                Mot de passe oublié ?
+                {t('login.forgotPassword')}
               </Link>
             </div>
           )}
@@ -350,7 +352,7 @@ export default function Login() {
               <Loader2 size={18} className="animate-spin" />
             ) : (
               <>
-                {isLogin ? 'Se connecter' : 'Créer mon compte'}
+                {isLogin ? t('login.loginBtn') : t('login.signupBtn')}
                 <ArrowRight size={17} />
               </>
             )}
@@ -359,7 +361,7 @@ export default function Login() {
 
         {/* Toggle Login/Signup */}
         <p className="text-center mt-6 text-slate-500 text-sm">
-          {isLogin ? "Pas encore de compte ?" : "Déjà un compte ?"}
+          {isLogin ? t('login.noAccount') : t('login.hasAccount')}
           <button
             type="button"
             onClick={() => {
@@ -370,14 +372,14 @@ export default function Login() {
             className="ml-1 text-slate-900 font-semibold hover:underline"
             disabled={loading}
           >
-            {isLogin ? "S'inscrire" : "Se connecter"}
+            {isLogin ? t('login.switchToSignup') : t('login.switchToLogin')}
           </button>
         </p>
       </motion.div>
 
       {/* Back to home */}
       <Link to="/" className="mt-6 sm:mt-8 text-sm text-slate-500 hover:text-slate-600 transition-colors">
-        ← Retour à l'accueil
+        {t('common.backToHomeArrow')}
       </Link>
     </div>
   );

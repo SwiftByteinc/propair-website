@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Home,
   CreditCard,
@@ -11,31 +11,37 @@ import {
   Zap,
   X
 } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const isEntrepreneur = user?.role === 'entrepreneur';
 
   const entrepreneurLinks = [
-    { to: '/portal', icon: Home, label: 'Accueil', end: true },
-    { to: '/portal/billing', icon: CreditCard, label: 'Abonnement & Factures' },
-    { to: '/portal/referral', icon: Gift, label: 'Parrainage' },
-    { to: '/portal/security', icon: Shield, label: 'Sécurité' },
+    { to: '/portal', icon: Home, label: t('dashboard.sideHome'), end: true },
+    { to: '/portal/billing', icon: CreditCard, label: t('dashboard.sideBillingEntrep') },
+    { to: '/portal/referral', icon: Gift, label: t('dashboard.sideReferral') },
+    { to: '/portal/security', icon: Shield, label: t('dashboard.sideSecurity') },
   ];
 
   const clientLinks = [
-    { to: '/portal', icon: Home, label: 'Accueil', end: true },
-    { to: '/portal/billing', icon: CreditCard, label: 'Abonnement' },
-    { to: '/portal/referral', icon: Gift, label: 'Parrainage' },
-    { to: '/portal/security', icon: Shield, label: 'Sécurité' },
+    { to: '/portal', icon: Home, label: t('dashboard.sideHome'), end: true },
+    { to: '/portal/billing', icon: CreditCard, label: t('dashboard.sideBillingClient') },
+    { to: '/portal/referral', icon: Gift, label: t('dashboard.sideReferral') },
+    { to: '/portal/security', icon: Shield, label: t('dashboard.sideSecurity') },
   ];
 
   const links = isEntrepreneur ? entrepreneurLinks : clientLinks;
 
   // Close sidebar on route change (mobile)
+  const prevPathname = useRef(location.pathname);
   useEffect(() => {
-    onClose?.();
+    if (prevPathname.current !== location.pathname) {
+      prevPathname.current = location.pathname;
+      onClose?.();
+    }
   }, [location.pathname, onClose]);
 
   const handleSignOut = () => {
@@ -73,7 +79,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
           <button
             onClick={onClose}
             className="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-600"
-            aria-label="Fermer le menu"
+            aria-label={t('dashboard.closeMenu')}
           >
             <X size={18} />
           </button>
@@ -87,7 +93,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm text-slate-900 truncate">
-                {user?.full_name || 'Utilisateur'}
+                {user?.full_name || t('dashboard.userFallback')}
               </p>
               <p className="text-xs text-slate-500 truncate">
                 {user?.email || ''}
@@ -102,7 +108,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
               : 'bg-amber-50 text-amber-600'
           }`}>
             {user?.isPro ? <Crown size={12} /> : <Zap size={12} />}
-            {user?.isPro ? 'Pro' : 'Essai'}
+            {user?.isPro ? t('dashboard.statusPro') : t('dashboard.statusTrial')}
           </div>
         </div>
 
@@ -134,7 +140,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all"
           >
             <LogOut size={18} />
-            Déconnexion
+            {t('dashboard.signOut')}
           </button>
         </div>
       </aside>

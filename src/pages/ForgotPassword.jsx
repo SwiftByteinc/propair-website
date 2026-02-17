@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, ArrowLeft, Send, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ForgotPassword() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
@@ -16,6 +18,7 @@ export default function ForgotPassword() {
     setLoading(true);
 
     try {
+      if (!supabase) throw new Error(t('forgotPassword.serviceUnavailable'));
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/update-password`,
       });
@@ -23,7 +26,7 @@ export default function ForgotPassword() {
       if (error) throw error;
       setSent(true);
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setError(err.message || t('forgotPassword.genericError'));
     } finally {
       setLoading(false);
     }
@@ -54,15 +57,15 @@ export default function ForgotPassword() {
             className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-6 text-sm transition-colors"
           >
             <ArrowLeft size={16} />
-            Retour à la connexion
+            {t('common.backToLogin')}
           </Link>
 
           {/* Title */}
           <h1 className="text-2xl font-bold text-slate-900 mb-2">
-            Mot de passe oublié ?
+            {t('forgotPassword.title')}
           </h1>
           <p className="text-slate-500 mb-8">
-            Entrez votre courriel et nous vous enverrons un lien pour réinitialiser votre accès.
+            {t('forgotPassword.desc')}
           </p>
 
           {/* Error Message */}
@@ -85,13 +88,13 @@ export default function ForgotPassword() {
               <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send size={28} className="text-teal-600" />
               </div>
-              <h2 className="text-lg font-bold text-slate-900 mb-2">Lien envoyé !</h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
               <p className="text-slate-500 mb-4">
-                Vérifiez votre boîte de réception à<br />
+                {t('forgotPassword.sentDesc1')}<br />
                 <span className="font-semibold text-slate-900">{email}</span>
               </p>
               <p className="text-sm text-slate-500">
-                Cliquez sur le lien dans le courriel pour créer un nouveau mot de passe.
+                {t('forgotPassword.sentDesc2')}
               </p>
 
               <button
@@ -101,7 +104,7 @@ export default function ForgotPassword() {
                 }}
                 className="mt-6 text-teal-600 hover:text-teal-700 font-medium transition-colors text-sm"
               >
-                Utiliser une autre adresse
+                {t('forgotPassword.useAnother')}
               </button>
             </motion.div>
           ) : (
@@ -117,7 +120,7 @@ export default function ForgotPassword() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="nom@exemple.com"
-                    aria-label="Adresse courriel"
+                    aria-label={t('forgotPassword.emailAria')}
                     autoComplete="email"
                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     required
@@ -134,10 +137,10 @@ export default function ForgotPassword() {
                 {loading ? (
                   <>
                     <Loader2 size={18} className="animate-spin" />
-                    Envoi en cours...
+                    {t('forgotPassword.sending')}
                   </>
                 ) : (
-                  'Envoyer le lien'
+                  t('forgotPassword.sendLink')
                 )}
               </button>
             </form>
@@ -147,7 +150,7 @@ export default function ForgotPassword() {
         {/* Back to home */}
         <div className="text-center mt-8">
           <Link to="/" className="text-sm text-slate-500 hover:text-slate-600 transition-colors">
-            ← Retour à l'accueil
+            {t('common.backToHomeArrow')}
           </Link>
         </div>
       </div>

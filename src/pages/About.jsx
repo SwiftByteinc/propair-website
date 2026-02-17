@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Clock, ShieldCheck, Hammer, Mountain, ArrowRight, Quote, Lightbulb, PenTool, Heart } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../context/LanguageContext';
 
 // Composant Compteur avec protection NaN
 const Counter = ({ value, label }) => {
@@ -48,24 +49,25 @@ const Counter = ({ value, label }) => {
 };
 
 export default function About() {
-  // L'HISTOIRE VRAIE (Intégrée ici)
+  const { t } = useLanguage();
+
   const timeline = [
     {
-      year: "Le Déclic",
-      title: "Une simple publication Facebook",
-      description: "Tout est parti d'une dame cherchant une massothérapeute sur les réseaux sociaux. Venant du milieu des services (réparation de bateaux), j'ai réalisé qu'il manquait un lien direct et simple entre les besoins locaux et nos talents.",
+      year: t('about.timeline1Year'),
+      title: t('about.timeline1Title'),
+      description: t('about.timeline1Desc'),
       icon: Lightbulb
     },
     {
-      year: "Le Sacrifice",
-      title: "Apprendre et bâtir",
-      description: "J'ai appris à coder de zéro. J'ai mis de côté mes hobbies et réduit mon travail régulier pour consacrer des milliers d'heures à développer cette plateforme.",
+      year: t('about.timeline2Year'),
+      title: t('about.timeline2Title'),
+      description: t('about.timeline2Desc'),
       icon: PenTool
     },
     {
-      year: "La Mission",
-      title: "Pour ma communauté",
-      description: "Aujourd'hui, je lance ProPair avec la même passion qu'au premier jour : offrir aux gens d'ici un outil simple, efficace et juste, bâti par un entrepreneur d'ici.",
+      year: t('about.timeline3Year'),
+      title: t('about.timeline3Title'),
+      description: t('about.timeline3Desc'),
       icon: Heart
     }
   ];
@@ -73,32 +75,32 @@ export default function About() {
   const values = [
     {
       icon: Clock,
-      title: "Sauver du temps",
-      description: "On n'est pas là pour placoter. Nos outils connectent le besoin à la compétence, rapidement."
+      title: t('about.value1Title'),
+      description: t('about.value1Desc')
     },
     {
       icon: Hammer,
-      title: "Faits pour le terrain",
-      description: "Je suis entrepreneur. Je sais de quels outils on a besoin pour offrir une expérience digne de ce nom."
+      title: t('about.value2Title'),
+      description: t('about.value2Desc')
     },
     {
       icon: Mountain,
-      title: "Ancré à Magog",
-      description: "Je comprends la réalité des entrepreneurs locaux parce que c'est la mienne."
+      title: t('about.value3Title'),
+      description: t('about.value3Desc')
     },
     {
       icon: ShieldCheck,
-      title: "Zéro commission",
-      description: "Mon but n'est pas de taxer votre travail. Le modèle est simple et fixe. Vous gardez vos profits."
+      title: t('about.value4Title'),
+      description: t('about.value4Desc')
     }
   ];
 
   return (
     <div className="w-full overflow-hidden bg-white selection:bg-teal-50 selection:text-teal-700 font-sans">
       <SEO
-        title="À propos"
+        title={t('seo.aboutTitle')}
         canonical="/about"
-        description="Découvrez l'histoire de ProPair, créé par Nicolas Lepage à Magog. Une plateforme locale pour connecter entrepreneurs et clients au Québec."
+        description={t('seo.aboutDesc')}
       />
 
       {/* HERO SECTION */}
@@ -113,24 +115,19 @@ export default function About() {
           >
             <div className="inline-flex items-center gap-2 bg-white text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-teal-100 shadow-sm">
               <Mountain size={16} className="text-amber-600" />
-              <span>Initiative locale de Magog</span>
+              <span>{t('about.badge')}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
-              En tant qu'entrepreneur, je me suis posé la question :{' '}
+              {t('about.heroTitle1')}{' '}
               <span className="text-teal-600 block mt-2">
-                "Qu'est-ce que je voudrais utiliser ?"
+                {t('about.heroTitle2')}
               </span>
-              {/* Soulignement retiré ici comme demandé */}
             </h1>
 
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              <p>
-                Je m'appelle <span className="font-bold text-slate-900">Nicolas Lepage</span>. Je suis né et j'ai grandi ici, à Magog. L'entrepreneuriat a toujours fait partie de ma vie.
-              </p>
-              <p>
-                ProPair, c'est ma réponse concrète à un problème que je voyais chaque jour : des gens qui cherchent de l'aide, et des entrepreneurs qui méritent mieux que des plateformes qui les traitent comme des numéros.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: t('about.heroParagraph1') }} />
+              <p>{t('about.heroParagraph2')}</p>
             </div>
           </motion.div>
         </div>
@@ -145,14 +142,15 @@ export default function About() {
             viewport={{ once: true }}
           >
             <Quote className="w-12 h-12 text-slate-200 mx-auto mb-6" />
-            <blockquote className="text-2xl md:text-3xl font-medium text-slate-900 leading-relaxed italic mb-8">
-              "Arrêter de compliquer la vie des artisans avec de la paperasse. <span className="text-teal-600 font-bold">ProPair, c'est l'outil que j'aurais aimé avoir quand j'ai commencé.</span>"
-            </blockquote>
-            
+            <blockquote
+              className="text-2xl md:text-3xl font-medium text-slate-900 leading-relaxed italic mb-8"
+              dangerouslySetInnerHTML={{ __html: t('about.quote') }}
+            />
+
             <div className="flex flex-col items-center">
               <div className="w-12 h-1 bg-amber-500 rounded-full mb-4"></div>
-              <div className="font-bold text-slate-900">Nicolas Lepage</div>
-              <div className="text-sm text-slate-500">Fondateur de ProPair</div>
+              <div className="font-bold text-slate-900">{t('about.quoteAuthor')}</div>
+              <div className="text-sm text-slate-500">{t('about.quoteRole')}</div>
             </div>
           </motion.div>
         </div>
@@ -162,8 +160,8 @@ export default function About() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">L'histoire d'une obsession</h2>
-            <p className="text-slate-600">Comment une frustration est devenue une mission.</p>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('about.timelineTitle')}</h2>
+            <p className="text-slate-600">{t('about.timelineSubtitle')}</p>
           </div>
 
           <div className="relative space-y-12">
@@ -192,7 +190,7 @@ export default function About() {
                   <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
                   <p className="text-slate-600 leading-relaxed text-sm">{item.description}</p>
                 </div>
-                
+
                 {/* Espace vide pour l'autre moitié */}
                 <div className="hidden md:block md:w-1/2"></div>
               </motion.div>
@@ -205,7 +203,7 @@ export default function About() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">L'ADN de ProPair</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('about.valuesTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -226,10 +224,10 @@ export default function About() {
       <section className="py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
-            <Counter value="100%" label="Pour l'entrepreneur" />
-            <Counter value="0$" label="Frais cachés" />
-            <Counter value="Magog" label="Point de départ" />
-            <Counter value="1" label="Vision commune" />
+            <Counter value={t('about.stat1Value')} label={t('about.stat1Label')} />
+            <Counter value={t('about.stat2Value')} label={t('about.stat2Label')} />
+            <Counter value={t('about.stat3Value')} label={t('about.stat3Label')} />
+            <Counter value={t('about.stat4Value')} label={t('about.stat4Label')} />
           </div>
         </div>
       </section>
@@ -238,24 +236,24 @@ export default function About() {
       <section className="py-16 sm:py-24 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-            Utilisez l'outil que j'ai créé pour nous.
+            {t('about.ctaTitle')}
           </h2>
           <p className="text-slate-600 text-lg mb-10 max-w-xl mx-auto">
-            Si vous êtes tanné des plateformes qui ne comprennent pas votre réalité, venez essayer ProPair.
+            {t('about.ctaDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/login?mode=signup"
               className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
-              Créer mon compte
+              {t('about.ctaSignup')}
               <ArrowRight size={18} />
             </Link>
             <Link
               to="/pricing"
               className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-2xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
             >
-              Voir comment ça marche
+              {t('about.ctaLearnMore')}
             </Link>
           </div>
         </div>

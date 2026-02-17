@@ -157,4 +157,75 @@ describe('DashboardLayout', () => {
 
     expect(screen.getByText('Sidebar for Jean Pro')).toBeInTheDocument();
   });
+
+  it('renders mobile hamburger menu when authenticated', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
+      profile: { full_name: 'Test', user_role: 'entrepreneur', referral_code: 'T1' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByRole('button', { name: /ouvrir le menu/i })).toBeInTheDocument();
+  });
+
+  it('renders ProPair logo in mobile header', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
+      profile: { full_name: 'Test', user_role: 'entrepreneur', referral_code: 'T1' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    const logos = screen.getAllByAltText('ProPair');
+    expect(logos.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('does not show skeleton when fully loaded', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
+      profile: { full_name: 'Test', user_role: 'client', referral_code: 'T1' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+    expect(screen.getByTestId('outlet')).toBeInTheDocument();
+  });
+
+  it('uses fallback name "Utilisateur" when no profile name', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: {}, email_confirmed_at: '2026-01-01' },
+      profile: { user_role: 'client', referral_code: 'T1' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByText('Sidebar for Utilisateur')).toBeInTheDocument();
+  });
+
+  it('defaults role to "client" when no profile role', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
+      profile: { full_name: 'Test' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+  });
+
+  it('handles null subscription gracefully', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
+      profile: { full_name: 'Test', user_role: 'entrepreneur', referral_code: 'T1' },
+      subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByTestId('outlet')).toBeInTheDocument();
+  });
+
+  it('handles null profile gracefully', () => {
+    mockUseAuth.mockReturnValue({
+      user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'From Meta' }, email_confirmed_at: '2026-01-01' },
+      profile: null, subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
+    });
+    renderDashboard();
+    expect(screen.getByText('Sidebar for From Meta')).toBeInTheDocument();
+  });
 });

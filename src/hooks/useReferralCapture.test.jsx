@@ -109,4 +109,54 @@ describe('clearStoredReferralCode', () => {
     expect(sessionStorage.getItem('referral_code')).toBeNull();
     expect(sessionStorage.getItem('pending_referral')).toBeNull();
   });
+
+  it('does not throw when storage is already empty', () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    expect(() => clearStoredReferralCode()).not.toThrow();
+  });
+});
+
+describe('useReferralCapture edge cases', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+
+  it('accepts exactly 5 character code', () => {
+    renderHook(() => useReferralCapture(), {
+      wrapper: createWrapper(['/?ref__=ABCDE']),
+    });
+    expect(localStorage.getItem('propair_referral_code')).toBe('ABCDE');
+  });
+
+  it('accepts exactly 50 character code', () => {
+    const code = 'A'.repeat(50);
+    renderHook(() => useReferralCapture(), {
+      wrapper: createWrapper([`/?ref__=${code}`]),
+    });
+    expect(localStorage.getItem('propair_referral_code')).toBe(code);
+  });
+
+  it('does not store code from unrelated param', () => {
+    renderHook(() => useReferralCapture(), {
+      wrapper: createWrapper(['/?referral=ABCDE12345']),
+    });
+    expect(localStorage.getItem('propair_referral_code')).toBeNull();
+  });
+
+  it('does not overwrite existing code with empty ref__', () => {
+    localStorage.setItem('propair_referral_code', 'EXISTING');
+    renderHook(() => useReferralCapture(), {
+      wrapper: createWrapper(['/?ref__=']),
+    });
+    expect(localStorage.getItem('propair_referral_code')).toBe('EXISTING');
+  });
+
+  it('handles URL with hash fragment', () => {
+    renderHook(() => useReferralCapture(), {
+      wrapper: createWrapper(['/?ref__=VALID12345#section']),
+    });
+    expect(localStorage.getItem('propair_referral_code')).toBe('VALID12345');
+  });
 });

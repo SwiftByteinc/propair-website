@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 
 export default class ErrorBoundary extends Component {
@@ -52,13 +51,13 @@ export default class ErrorBoundary extends Component {
                 <RefreshCw size={18} />
                 Rafraîchir la page
               </button>
-              <Link
-                to="/"
+              <a
+                href="/"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-900 font-semibold rounded-xl transition-colors border border-slate-200"
               >
                 <Home size={18} />
                 Retour à l'accueil
-              </Link>
+              </a>
             </div>
 
             {/* Error details (development only) */}

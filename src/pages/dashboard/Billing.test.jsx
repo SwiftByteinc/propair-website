@@ -161,4 +161,61 @@ describe('Billing', () => {
       expect(screen.getByText(/Aucun abonnement actif/)).toBeInTheDocument();
     });
   });
+
+  describe('additional coverage', () => {
+    it('renders page heading "Abonnement"', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      expect(screen.getByText('Abonnement')).toBeInTheDocument();
+    });
+
+    it('pro user does not show "Voir les offres"', () => {
+      mockOutletContext.mockReturnValue({
+        subscription: { status: 'active', current_period_end: 1740000000 },
+        isPro: true,
+      });
+      renderBilling();
+      expect(screen.queryByText('Voir les offres')).not.toBeInTheDocument();
+    });
+
+    it('non-pro user does not show "Gérer via l\'app"', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      expect(screen.queryByText("Gérer via l'app")).not.toBeInTheDocument();
+    });
+
+    it('non-pro user does not show "ProPair Élite"', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      expect(screen.queryByText('ProPair Élite')).not.toBeInTheDocument();
+    });
+
+    it('non-pro user does not show "Plan actif"', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      expect(screen.queryByText('Plan actif')).not.toBeInTheDocument();
+    });
+
+    it('non-pro user does not show renewal date', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      expect(screen.queryByText(/Renouvellement le/)).not.toBeInTheDocument();
+    });
+
+    it('pro user shows "Factures" section', () => {
+      mockOutletContext.mockReturnValue({
+        subscription: { status: 'active', current_period_end: 1740000000 },
+        isPro: true,
+      });
+      renderBilling();
+      expect(screen.getByText('Factures')).toBeInTheDocument();
+    });
+
+    it('Voir les offres links to pricing', () => {
+      mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
+      renderBilling();
+      const link = screen.getByText('Voir les offres').closest('a');
+      expect(link).toHaveAttribute('href', '/pricing');
+    });
+  });
 });

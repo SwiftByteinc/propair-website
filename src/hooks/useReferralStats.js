@@ -13,7 +13,7 @@ export function useReferralStats(userId) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!userId) {
+    if (!userId || !supabase) {
       setLoading(false);
       return;
     }

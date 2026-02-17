@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 import Sidebar from './Sidebar';
 
 // Skeleton loader for initial auth loading
@@ -42,6 +43,7 @@ export default function DashboardLayout() {
     signOut
   } = useAuth();
 
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Redirect to login if not authenticated
@@ -64,7 +66,7 @@ export default function DashboardLayout() {
     return {
       id: user.id,
       email: user.email || profile?.email,
-      full_name: profile?.full_name || user.user_metadata?.full_name || 'Utilisateur',
+      full_name: profile?.full_name || user.user_metadata?.full_name || t('dashboard.userFallback'),
       role: profile?.user_role || 'client',
       isPro: isPro,
       referral_code: profile?.referral_code,
@@ -75,7 +77,7 @@ export default function DashboardLayout() {
       subscription_end: subscription?.current_period_end,
       email_confirmed_at: user.email_confirmed_at
     };
-  }, [user, profile, subscription, isPro]);
+  }, [user, profile, subscription, isPro, t]);
 
   // Show skeleton while loading
   if (loading || profileLoading) {
@@ -97,7 +99,7 @@ export default function DashboardLayout() {
         <button
           onClick={() => setSidebarOpen(true)}
           className="w-11 h-11 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
-          aria-label="Ouvrir le menu"
+          aria-label={t('dashboard.openMenu')}
         >
           <Menu size={20} />
         </button>

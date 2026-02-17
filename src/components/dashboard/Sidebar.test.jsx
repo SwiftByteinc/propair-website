@@ -133,4 +133,85 @@ describe('Sidebar', () => {
     const logo = screen.getByAltText('ProPair');
     expect(logo).toHaveAttribute('src', '/images/logo_ProPair.jpg');
   });
+
+  it('Accueil link points to /portal', () => {
+    renderSidebar();
+    const link = screen.getByText('Accueil').closest('a');
+    expect(link).toHaveAttribute('href', '/portal');
+  });
+
+  it('Sécurité link points to /portal/security', () => {
+    renderSidebar();
+    const link = screen.getByText('Sécurité').closest('a');
+    expect(link).toHaveAttribute('href', '/portal/security');
+  });
+
+  it('Parrainage link points to /portal/referral', () => {
+    renderSidebar();
+    const link = screen.getByText('Parrainage').closest('a');
+    expect(link).toHaveAttribute('href', '/portal/referral');
+  });
+
+  it('client does not show "Abonnement & Factures"', () => {
+    renderSidebar(clientUser);
+    expect(screen.queryByText('Abonnement & Factures')).not.toBeInTheDocument();
+  });
+
+  it('shows fallback initial "U" when no name', () => {
+    renderSidebar({ ...entrepreneurUser, full_name: '' });
+    expect(screen.getByText('U')).toBeInTheDocument();
+  });
+
+  it('shows "Utilisateur" when full_name is null', () => {
+    renderSidebar({ ...entrepreneurUser, full_name: null });
+    expect(screen.getByText('Utilisateur')).toBeInTheDocument();
+  });
+
+  it('does not show backdrop when closed', () => {
+    renderSidebar(entrepreneurUser, { isOpen: false });
+    const backdrop = document.querySelector('[aria-hidden="true"]');
+    expect(backdrop).not.toBeInTheDocument();
+  });
+
+  it('clicking backdrop calls onClose', () => {
+    const onClose = vi.fn();
+    renderSidebar(entrepreneurUser, { isOpen: true, onClose });
+    const backdrop = document.querySelector('[aria-hidden="true"]');
+    fireEvent.click(backdrop);
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('renders nav element', () => {
+    renderSidebar();
+    const nav = document.querySelector('nav');
+    expect(nav).toBeInTheDocument();
+  });
+
+  it('renders aside element', () => {
+    renderSidebar();
+    const aside = document.querySelector('aside');
+    expect(aside).toBeInTheDocument();
+  });
+
+  it('entrepreneur billing link points to /portal/billing', () => {
+    renderSidebar(entrepreneurUser);
+    const link = screen.getByText('Abonnement & Factures').closest('a');
+    expect(link).toHaveAttribute('href', '/portal/billing');
+  });
+
+  it('client billing link points to /portal/billing', () => {
+    renderSidebar(clientUser);
+    const link = screen.getByText('Abonnement').closest('a');
+    expect(link).toHaveAttribute('href', '/portal/billing');
+  });
+
+  it('shows M initial for Marie', () => {
+    renderSidebar(clientUser);
+    expect(screen.getByText('M')).toBeInTheDocument();
+  });
+
+  it('displays client email', () => {
+    renderSidebar(clientUser);
+    expect(screen.getByText('marie@test.com')).toBeInTheDocument();
+  });
 });

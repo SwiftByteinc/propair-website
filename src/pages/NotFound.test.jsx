@@ -56,4 +56,33 @@ describe('NotFound (404)', () => {
     expect(screen.getByText("Retour à l'accueil")).toBeInTheDocument();
     expect(screen.getByText('Page précédente')).toBeInTheDocument();
   });
+
+  it('renders 404 as large heading', () => {
+    renderNotFound();
+    const heading = screen.getByText('404');
+    expect(heading.tagName).toBe('H1');
+  });
+
+  it('renders Page introuvable as h2', () => {
+    renderNotFound();
+    const sub = screen.getByText('Page introuvable');
+    expect(sub.tagName).toBe('H2');
+  });
+
+  it('renders description text', () => {
+    renderNotFound();
+    expect(screen.getByText(/a été déplacée/)).toBeInTheDocument();
+  });
+
+  it('home link uses Link component with correct destination', () => {
+    renderNotFound();
+    const link = screen.getByText("Retour à l'accueil").closest('a');
+    expect(link).toHaveAttribute('href', '/');
+  });
+
+  it('back button is a button element', () => {
+    renderNotFound();
+    const btn = screen.getByText('Page précédente');
+    expect(btn.tagName).toBe('BUTTON');
+  });
 });

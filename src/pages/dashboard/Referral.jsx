@@ -7,10 +7,11 @@ import {
   Share2, Briefcase, ArrowRight, Award, Sparkles
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
+import { useLanguage } from '../../context/LanguageContext';
 
 // Progress Bar component
 // eslint-disable-next-line no-unused-vars -- Icon is used in JSX below
-function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon }) {
+function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon, goalReachedText }) {
   const progress = Math.min(current / max, 1);
 
   const colorMap = {
@@ -47,7 +48,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
       </div>
       {progress >= 1 && (
         <p className="text-[11px] font-semibold text-green-600 mt-1.5 flex items-center gap-1">
-          <CheckCircle size={12} /> Objectif atteint
+          <CheckCircle size={12} /> {goalReachedText}
         </p>
       )}
     </div>
@@ -55,6 +56,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
 }
 
 export default function Referral() {
+  const { t, lang } = useLanguage();
   const { user } = useOutletContext();
   const isEntrepreneur = user?.role === 'entrepreneur';
   const [copied, setCopied] = useState(false);
@@ -94,8 +96,8 @@ export default function Referral() {
 
   const handleShare = useCallback(async () => {
     const shareData = {
-      title: 'ProPair — Parrainage',
-      text: `Rejoins ProPair avec mon code ${referralCode} et on gagne tous les deux des mois Pro gratuits !\n${referralLink}`,
+      title: t('dashboard.shareTitle'),
+      text: t('dashboard.shareText', { code: referralCode }) + `\n${referralLink}`,
       url: referralLink,
     };
 
@@ -108,11 +110,11 @@ export default function Referral() {
     } else {
       copyLink();
     }
-  }, [referralCode, referralLink, copyLink]);
+  }, [referralCode, referralLink, copyLink, t]);
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
-      <Helmet><title>Parrainage — Mon Espace ProPair</title></Helmet>
+      <Helmet><title>{t('dashboard.referralTitle')}</title></Helmet>
       {/* Header */}
       <header className="mb-8">
         <motion.h1
@@ -120,10 +122,10 @@ export default function Referral() {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-slate-900"
         >
-          Parrainage
+          {t('dashboard.referralHeading')}
         </motion.h1>
         <p className="text-slate-500 mt-1">
-          Partagez votre lien, suivez vos récompenses.
+          {t('dashboard.referralSubtitle')}
         </p>
       </header>
 
@@ -141,12 +143,12 @@ export default function Referral() {
                 <Gift size={28} className="text-pink-500" />
               </div>
               <div>
-                <p className="text-xs font-bold text-pink-500 uppercase tracking-wider mb-0.5">Mois Pro gagnés</p>
+                <p className="text-xs font-bold text-pink-500 uppercase tracking-wider mb-0.5">{t('dashboard.proMonthsEarned')}</p>
                 <p className="text-sm text-slate-500">
-                  {entreMonths > 0 && `${entreMonths} via entrepreneurs`}
+                  {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
                   {entreMonths > 0 && clientMonths > 0 && ' + '}
-                  {clientMonths > 0 && `${clientMonths} via clients`}
-                  {totalMonths === 0 && 'Partagez pour commencer'}
+                  {clientMonths > 0 && t('dashboard.viaClients', { count: clientMonths })}
+                  {totalMonths === 0 && t('dashboard.shareToStart')}
                 </p>
               </div>
             </div>
@@ -154,7 +156,7 @@ export default function Referral() {
               <p className="text-4xl font-bold text-slate-900">
                 {loading ? '-' : totalMonths}
               </p>
-              <p className="text-[11px] text-slate-500 font-medium">mois</p>
+              <p className="text-[11px] text-slate-500 font-medium">{t('dashboard.months')}</p>
             </div>
           </div>
         </motion.section>
@@ -170,34 +172,36 @@ export default function Referral() {
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Award size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">Progression</h2>
+            <h2 className="font-bold text-slate-900">{t('dashboard.progression')}</h2>
           </div>
 
           {/* Entrepreneur progress */}
           <ProgressBar
             current={loading ? 0 : entreValidated}
             max={1}
-            label="Parrainage entrepreneur"
-            sublabel="1 filleul validé (3 mois actif) = 2 mois Pro"
+            label={t('dashboard.entrepReferral')}
+            sublabel={t('dashboard.entrepReferralDesc')}
             color="amber"
             icon={Briefcase}
+            goalReachedText={t('dashboard.goalReached')}
           />
 
           {/* Client progress */}
           <ProgressBar
             current={loading ? 0 : clientCount}
             max={6}
-            label="Réseau client"
-            sublabel="6 clients inscrits = 2 mois Pro"
+            label={t('dashboard.clientNetwork')}
+            sublabel={t('dashboard.clientNetworkDesc')}
             color="pink"
             icon={Users}
+            goalReachedText={t('dashboard.goalReached')}
           />
 
           {/* Info */}
           <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
             <Sparkles size={14} className="text-amber-600 mt-0.5 shrink-0" />
             <p className="text-[11px] text-slate-500 leading-relaxed">
-              Les barres se réinitialisent après chaque palier atteint. Les mois gagnés sont cumulables.
+              {t('dashboard.progressResetInfo')}
             </p>
           </div>
         </motion.section>
@@ -213,7 +217,7 @@ export default function Referral() {
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Copy size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">Votre lien de parrainage</h2>
+            <h2 className="font-bold text-slate-900">{t('dashboard.yourReferralLink')}</h2>
           </div>
 
           <div className="p-6">
@@ -223,7 +227,7 @@ export default function Referral() {
                 {referralCode}
               </span>
               <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full uppercase">
-                Votre code
+                {t('dashboard.yourCode')}
               </span>
             </div>
 
@@ -248,11 +252,11 @@ export default function Referral() {
                 <AnimatePresence mode="wait">
                   {copied ? (
                     <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
-                      <Check size={16} /> Copié
+                      <Check size={16} /> {t('dashboard.copiedLabel')}
                     </motion.span>
                   ) : (
                     <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
-                      <Copy size={16} /> Copier le lien
+                      <Copy size={16} /> {t('dashboard.copyLink')}
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -264,14 +268,14 @@ export default function Referral() {
                 className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-pink-600 text-white hover:bg-pink-700 transition-all"
               >
                 <Share2 size={16} />
-                Partager
+                {t('dashboard.share')}
               </motion.button>
             </div>
 
             <p className="text-xs text-slate-500 mt-4">
               {isEntrepreneur
-                ? 'Quand votre filleul s\'abonne et reste actif 3 mois, vous gagnez 2 mois Pro chacun.'
-                : 'Aidez vos amis entrepreneurs à découvrir une solution locale et juste.'
+                ? t('dashboard.entrepReferralTip')
+                : t('dashboard.clientReferralTip')
               }
             </p>
           </div>
@@ -287,7 +291,7 @@ export default function Referral() {
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
               <Users size={18} className="text-slate-500" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Inscrits</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsSignedUp')}</span>
             </div>
             <p className="text-2xl font-bold text-slate-900">
               {loading ? '-' : stats.totalReferrals}
@@ -297,7 +301,7 @@ export default function Referral() {
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
               <CheckCircle size={18} className="text-teal-600" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Validés</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsValidated')}</span>
             </div>
             <p className="text-2xl font-bold text-teal-600">
               {loading ? '-' : stats.validatedReferrals}
@@ -307,7 +311,7 @@ export default function Referral() {
           <div className="bg-white rounded-xl border border-slate-100 p-5">
             <div className="flex items-center gap-3 mb-3">
               <Clock size={18} className="text-amber-600" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">En attente</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsPending')}</span>
             </div>
             <p className="text-2xl font-bold text-amber-600">
               {loading ? '-' : stats.pendingReferrals}
@@ -326,32 +330,32 @@ export default function Referral() {
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Award size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">Comment ça marche</h2>
+            <h2 className="font-bold text-slate-900">{t('dashboard.howItWorks')}</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100/50">
               <div className="flex items-center gap-2.5 mb-2">
                 <Briefcase size={16} className="text-amber-600" />
-                <h3 className="font-semibold text-slate-900 text-sm">Entrepreneur</h3>
+                <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.entrepreneur')}</h3>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                <span>Inscription</span>
+                <span>{t('dashboard.signUp')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span>3 mois actif</span>
+                <span>{t('dashboard.threeMonthsActive')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">{t('dashboard.plusTwoMonths')}</span>
               </div>
             </div>
             <div className="bg-pink-50/50 rounded-xl p-4 border border-pink-100/50">
               <div className="flex items-center gap-2.5 mb-2">
                 <Users size={16} className="text-pink-600" />
-                <h3 className="font-semibold text-slate-900 text-sm">Client</h3>
+                <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.client')}</h3>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                <span>6 inscrits</span>
+                <span>{t('dashboard.sixSignedUp')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">+2 mois</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">{t('dashboard.plusTwoMonths')}</span>
               </div>
             </div>
           </div>
@@ -370,7 +374,7 @@ export default function Referral() {
                 <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
                   <Users size={16} className="text-slate-500" />
                 </div>
-                <h2 className="font-bold text-slate-900">Historique</h2>
+                <h2 className="font-bold text-slate-900">{t('dashboard.history')}</h2>
               </div>
               <span className="text-xs text-slate-500 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
             </div>
@@ -379,22 +383,22 @@ export default function Referral() {
               <table className="w-full text-left text-sm">
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-100">
                   <tr>
-                    <th className="px-6 py-3 font-medium">Date</th>
-                    <th className="px-6 py-3 font-medium">Courriel</th>
-                    <th className="px-6 py-3 font-medium">Type</th>
-                    <th className="px-6 py-3 font-medium">Statut</th>
+                    <th className="px-6 py-3 font-medium">{t('dashboard.dateColumn')}</th>
+                    <th className="px-6 py-3 font-medium">{t('dashboard.emailColumn')}</th>
+                    <th className="px-6 py-3 font-medium">{t('dashboard.typeColumn')}</th>
+                    <th className="px-6 py-3 font-medium">{t('dashboard.statusColumn')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50">
                   {referralList.map((ref) => (
                     <tr key={ref.id} className="hover:bg-slate-50/50">
                       <td className="px-6 py-4 text-slate-600">
-                        {new Date(ref.created_at).toLocaleDateString('fr-CA')}
+                        {new Date(ref.created_at).toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA')}
                       </td>
                       <td className="px-6 py-4 text-slate-900 font-medium">
                         {ref.referee_email
                           ? `${ref.referee_email.substring(0, 2)}***@${ref.referee_email.split('@')[1] || '***'}`
-                          : 'Courriel masqué'}
+                          : t('dashboard.emailHidden')}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
@@ -411,8 +415,8 @@ export default function Referral() {
                           ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                           'bg-slate-100 text-slate-500'
                         }`}>
-                          {ref.status === 'validated' ? 'Validé' :
-                           ref.status === 'rejected' ? 'Rejeté' : 'En attente'}
+                          {ref.status === 'validated' ? t('dashboard.statusValidated') :
+                           ref.status === 'rejected' ? t('dashboard.statusRejected') : t('dashboard.statusPending')}
                         </span>
                       </td>
                     </tr>
@@ -432,8 +436,8 @@ export default function Referral() {
             className="bg-white rounded-2xl border border-slate-100 p-12 text-center"
           >
             <Users size={40} className="mx-auto text-slate-200 mb-4" />
-            <p className="text-slate-500 font-medium mb-1">Aucun parrainage pour le moment</p>
-            <p className="text-sm text-slate-500">Partagez votre lien ci-dessus pour commencer</p>
+            <p className="text-slate-500 font-medium mb-1">{t('dashboard.noReferralsYet')}</p>
+            <p className="text-sm text-slate-500">{t('dashboard.shareYourLink')}</p>
           </motion.div>
         )}
 

@@ -1,0 +1,182 @@
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import Pricing from './Pricing';
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
+    section: ({ children, ...props }) => <section {...props}>{children}</section>,
+  },
+  AnimatePresence: ({ children }) => children,
+}));
+
+function renderPricing() {
+  return render(
+    <HelmetProvider>
+      <MemoryRouter>
+        <Pricing />
+      </MemoryRouter>
+    </HelmetProvider>
+  );
+}
+
+describe('Pricing', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('renders page heading', () => {
+    renderPricing();
+    expect(screen.getByText(/Investissez dans votre croissance/)).toBeInTheDocument();
+  });
+
+  it('renders 0% commission badge', () => {
+    renderPricing();
+    expect(screen.getByText('0% de commission, toujours')).toBeInTheDocument();
+  });
+
+  it('renders 6 reason cards', () => {
+    renderPricing();
+    expect(screen.getByText('Connexions illimitées')).toBeInTheDocument();
+    expect(screen.getByText('Demandes en temps réel')).toBeInTheDocument();
+    expect(screen.getByText('Profil vérifié')).toBeInTheDocument();
+    expect(screen.getByText('Chat intégré')).toBeInTheDocument();
+    expect(screen.getByText('Tarif simple et fixe')).toBeInTheDocument();
+  });
+
+  it('renders annual price', () => {
+    renderPricing();
+    expect(screen.getByText('149$')).toBeInTheDocument();
+    expect(screen.getByText('/an + tx')).toBeInTheDocument();
+  });
+
+  it('renders monthly price', () => {
+    renderPricing();
+    expect(screen.getByText('24$')).toBeInTheDocument();
+    expect(screen.getByText('/mois + tx')).toBeInTheDocument();
+  });
+
+  it('renders Choisir l\'annuel link to signup', () => {
+    renderPricing();
+    const link = screen.getByText("Choisir l'annuel");
+    expect(link.closest('a')).toHaveAttribute('href', '/login?plan=annual');
+  });
+
+  it('renders Choisir le mensuel link to signup', () => {
+    renderPricing();
+    const link = screen.getByText('Choisir le mensuel');
+    expect(link.closest('a')).toHaveAttribute('href', '/login?plan=monthly');
+  });
+
+  it('renders Offre Lancement badge', () => {
+    renderPricing();
+    expect(screen.getByText('Offre Lancement')).toBeInTheDocument();
+  });
+
+  it('renders discount badge', () => {
+    renderPricing();
+    expect(screen.getByText('-25% de rabais')).toBeInTheDocument();
+  });
+
+  it('renders all 5 pro features', () => {
+    renderPricing();
+    // Features appear on both cards, so getAllByText
+    expect(screen.getAllByText('Accès illimité aux demandes').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText('Profil vérifié & Badge').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText('Notifications instantanées').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText('0% de commission (garanti)').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText('Outils de gestion inclus').length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('shows insider overlay after 5 seconds', () => {
+    renderPricing();
+    expect(screen.queryByText('Le saviez-vous ?')).not.toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+
+    expect(screen.getByText('Le saviez-vous ?')).toBeInTheDocument();
+  });
+
+  it('dismiss button closes overlay', () => {
+    renderPricing();
+
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+
+    expect(screen.getByText('Le saviez-vous ?')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText('Fermer'));
+
+    expect(screen.queryByText('Le saviez-vous ?')).not.toBeInTheDocument();
+  });
+
+  it('renders all FAQ questions', () => {
+    renderPricing();
+    expect(screen.getByText('Puis-je annuler à tout moment ?')).toBeInTheDocument();
+    expect(screen.getByText('Y a-t-il vraiment 0% de commission ?')).toBeInTheDocument();
+    expect(screen.getByText('Est-ce que je peux essayer gratuitement ?')).toBeInTheDocument();
+    expect(screen.getByText('Quels types d\'entrepreneurs utilisent ProPair ?')).toBeInTheDocument();
+    expect(screen.getByText('Comment les clients me trouvent ?')).toBeInTheDocument();
+    expect(screen.getByText('L\'offre de lancement est valable combien de temps ?')).toBeInTheDocument();
+  });
+
+  it('clicking FAQ question toggles answer', () => {
+    renderPricing();
+
+    const question = screen.getByText('Puis-je annuler à tout moment ?');
+    fireEvent.click(question);
+
+    expect(screen.getByText(/Vous pouvez annuler votre abonnement en un clic/)).toBeInTheDocument();
+  });
+
+  it('renders CTA section', () => {
+    renderPricing();
+    expect(screen.getByText('Prêt à développer votre clientèle ?')).toBeInTheDocument();
+  });
+
+  it('renders trust section', () => {
+    renderPricing();
+    expect(screen.getByText("Soutenez l'économie locale")).toBeInTheDocument();
+  });
+
+  it('renders FAQ heading', () => {
+    renderPricing();
+    expect(screen.getByText('Questions fréquentes')).toBeInTheDocument();
+  });
+
+  it('overlay does not show before 5 seconds', () => {
+    renderPricing();
+    act(() => { vi.advanceTimersByTime(4000); });
+    expect(screen.queryByText('Le saviez-vous ?')).not.toBeInTheDocument();
+  });
+
+  it('clicking second FAQ question shows its answer', () => {
+    renderPricing();
+    fireEvent.click(screen.getByText('Y a-t-il vraiment 0% de commission ?'));
+    expect(screen.getAllByText(/tout ce que vous facturez/i).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('renders Offre Lancement badge on annual card', () => {
+    renderPricing();
+    expect(screen.getByText('Offre Lancement')).toBeInTheDocument();
+  });
+
+  it('renders annual card discount text', () => {
+    renderPricing();
+    expect(screen.getByText('-25% de rabais')).toBeInTheDocument();
+  });
+
+  it('CTA section has annual signup link', () => {
+    renderPricing();
+    const link = screen.getByText('Choisir l\'annuel').closest('a');
+    expect(link).toHaveAttribute('href', '/login?plan=annual');
+  });
+});

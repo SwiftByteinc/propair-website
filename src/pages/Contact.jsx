@@ -3,50 +3,52 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, CreditCard, Shield, ArrowRight, Send, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
-
-const channels = [
-  {
-    icon: Phone,
-    title: 'Téléphone',
-    description: 'Parlez directement à notre équipe',
-    value: '873-200-9806',
-    href: 'tel:+18732009806',
-    detail: 'Lun-Ven, 9h à 17h (HE)',
-    color: 'bg-teal-600',
-  },
-  {
-    icon: Mail,
-    title: 'Support général',
-    description: 'Questions sur l\'app ou votre compte',
-    value: 'support@propairapp.com',
-    href: 'mailto:support@propairapp.com',
-    detail: 'Réponse sous 24h ouvrables',
-    color: 'bg-slate-800',
-  },
-  {
-    icon: CreditCard,
-    title: 'Facturation',
-    description: 'Abonnement, paiements, remboursements',
-    value: 'billing@propairapp.com',
-    href: 'mailto:billing@propairapp.com',
-    detail: 'Réponse sous 24h ouvrables',
-    color: 'bg-amber-600',
-  },
-  {
-    icon: Shield,
-    title: 'Confidentialité',
-    description: 'Données personnelles, droit d\'accès (Loi 25)',
-    value: 'privacy@propairapp.com',
-    href: 'mailto:privacy@propairapp.com',
-    detail: 'Réponse sous 30 jours (obligation légale)',
-    color: 'bg-slate-700',
-  },
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+
+  const channels = [
+    {
+      icon: Phone,
+      title: t('contact.phoneTitle'),
+      description: t('contact.phoneDesc'),
+      value: t('contact.phoneValue'),
+      href: 'tel:+18732009806',
+      detail: t('contact.phoneDetail'),
+      color: 'bg-teal-600',
+    },
+    {
+      icon: Mail,
+      title: t('contact.supportTitle'),
+      description: t('contact.supportDesc'),
+      value: t('contact.supportValue'),
+      href: 'mailto:support@propairapp.com',
+      detail: t('contact.supportDetail'),
+      color: 'bg-slate-800',
+    },
+    {
+      icon: CreditCard,
+      title: t('contact.billingTitle'),
+      description: t('contact.billingDesc'),
+      value: t('contact.billingValue'),
+      href: 'mailto:billing@propairapp.com',
+      detail: t('contact.billingDetail'),
+      color: 'bg-amber-600',
+    },
+    {
+      icon: Shield,
+      title: t('contact.privacyTitle'),
+      description: t('contact.privacyDesc'),
+      value: t('contact.privacyValue'),
+      href: 'mailto:privacy@propairapp.com',
+      detail: t('contact.privacyDetail'),
+      color: 'bg-slate-700',
+    },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,9 +71,9 @@ export default function Contact() {
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
       <SEO
-        title="Contact"
+        title={t('seo.contactTitle')}
         canonical="/contact"
-        description="Contactez l'équipe ProPair par téléphone ou courriel. Support technique, facturation et confidentialité."
+        description={t('seo.contactDesc')}
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,14 +85,13 @@ export default function Contact() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
             <Mail size={14} className="text-teal-600" />
-            <span>Réponse sous 24h ouvrables</span>
+            <span>{t('contact.badge')}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            Nous sommes là pour vous
+            {t('contact.title')}
           </h1>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-            Une question, un problème technique ou une demande spéciale ?
-            Contactez-nous par le canal qui vous convient.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -136,27 +137,26 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-3 bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100"
           >
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Envoyez-nous un message</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
 
             {sent ? (
               <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
                 <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Votre client courriel s'est ouvert</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>
                 <p className="text-slate-600 mb-2">
-                  Envoyez le message depuis votre application de courriel.
-                  Nous vous répondrons sous 24h ouvrables.
+                  {t('contact.sentDesc')}
                 </p>
                 <p className="text-slate-500 text-sm mb-4">
-                  Si rien ne s'est ouvert, écrivez directement à{' '}
+                  {t('contact.sentFallback')}{' '}
                   <a href="mailto:support@propairapp.com" className="text-teal-600 hover:underline">support@propairapp.com</a>
                 </p>
                 <button
                   onClick={() => { setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}
                   className="text-teal-600 font-semibold hover:underline"
                 >
-                  Envoyer un autre message
+                  {t('contact.sentAnother')}
                 </button>
               </div>
             ) : (
@@ -164,7 +164,7 @@ export default function Contact() {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-900 mb-2">
-                      Nom complet
+                      {t('contact.formName')}
                     </label>
                     <input
                       type="text"
@@ -172,13 +172,13 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Votre nom"
+                      placeholder={t('contact.formNamePlaceholder')}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     />
                   </div>
                   <div>
                     <label htmlFor="contact-email" className="block text-sm font-semibold text-slate-900 mb-2">
-                      Courriel
+                      {t('contact.formEmail')}
                     </label>
                     <input
                       type="email"
@@ -186,7 +186,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="nom@exemple.com"
+                      placeholder={t('contact.formEmailPlaceholder')}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     />
                   </div>
@@ -194,7 +194,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="contact-subject" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Sujet
+                    {t('contact.formSubject')}
                   </label>
                   <select
                     id="contact-subject"
@@ -203,19 +203,19 @@ export default function Contact() {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                   >
-                    <option value="">Choisir un sujet...</option>
-                    <option value="Question générale">Question générale</option>
-                    <option value="Problème technique">Problème technique</option>
-                    <option value="Abonnement & facturation">Abonnement & facturation</option>
-                    <option value="Partenariat / Presse">Partenariat / Presse</option>
-                    <option value="Signaler un problème">Signaler un problème</option>
-                    <option value="Autre">Autre</option>
+                    <option value="">{t('contact.formSubjectDefault')}</option>
+                    <option value="Question générale">{t('contact.formSubjectGeneral')}</option>
+                    <option value="Problème technique">{t('contact.formSubjectTech')}</option>
+                    <option value="Abonnement & facturation">{t('contact.formSubjectBilling')}</option>
+                    <option value="Partenariat / Presse">{t('contact.formSubjectPartner')}</option>
+                    <option value="Signaler un problème">{t('contact.formSubjectReport')}</option>
+                    <option value="Autre">{t('contact.formSubjectOther')}</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="contact-message" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Message
+                    {t('contact.formMessage')}
                   </label>
                   <textarea
                     id="contact-message"
@@ -223,7 +223,7 @@ export default function Contact() {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Décrivez votre question ou problème..."
+                    placeholder={t('contact.formMessagePlaceholder')}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all resize-none"
                   />
                 </div>
@@ -238,7 +238,7 @@ export default function Contact() {
                   ) : (
                     <>
                       <Send size={18} />
-                      Envoyer le message
+                      {t('contact.formSubmit')}
                     </>
                   )}
                 </button>
@@ -257,12 +257,12 @@ export default function Contact() {
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <MapPin size={18} className="text-teal-600" />
-                Siège social
+                {t('contact.addressTitle')}
               </h3>
               <address className="text-slate-600 not-italic leading-relaxed">
-                <strong>SwiftByte inc.</strong><br />
-                Magog, Québec<br />
-                Canada
+                <strong>{t('contact.addressCompany')}</strong><br />
+                {t('contact.addressCity')}<br />
+                {t('contact.addressCountry')}
               </address>
             </div>
 
@@ -270,44 +270,44 @@ export default function Contact() {
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <Clock size={18} className="text-teal-600" />
-                Heures de service
+                {t('contact.hoursTitle')}
               </h3>
               <div className="space-y-2 text-slate-600 text-sm">
                 <div className="flex justify-between">
-                  <span>Lundi — Vendredi</span>
-                  <span className="font-semibold text-slate-900">9h — 17h</span>
+                  <span>{t('contact.hoursWeekday')}</span>
+                  <span className="font-semibold text-slate-900">{t('contact.hoursWeekdayValue')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Samedi — Dimanche</span>
-                  <span className="text-slate-500">Fermé</span>
+                  <span>{t('contact.hoursWeekend')}</span>
+                  <span className="text-slate-500">{t('contact.hoursWeekendValue')}</span>
                 </div>
-                <p className="text-xs text-slate-500 pt-2">Heure de l'Est (HE) — Fuseau Montréal</p>
+                <p className="text-xs text-slate-500 pt-2">{t('contact.hoursTimezone')}</p>
               </div>
             </div>
 
             {/* Quick Links */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4">Besoin d'aide rapide ?</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('contact.quickTitle')}</h3>
               <div className="space-y-3">
                 <Link
                   to="/pricing#faq"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
-                  <span>Questions fréquentes</span>
+                  <span>{t('contact.quickFaq')}</span>
                   <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/refund"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
-                  <span>Politique de remboursement</span>
+                  <span>{t('contact.quickRefund')}</span>
                   <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/privacy"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
-                  <span>Confidentialité & données</span>
+                  <span>{t('contact.quickPrivacy')}</span>
                   <ArrowRight size={14} />
                 </Link>
               </div>

@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Eye, EyeOff, ArrowRight, Check, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function UpdatePassword() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +17,14 @@ export default function UpdatePassword() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isValidLink, setIsValidLink] = useState(false);
   const [checkingLink, setCheckingLink] = useState(true);
+  const redirectTimer = useRef(null);
+
+  // Cleanup redirect timer on unmount
+  useEffect(() => {
+    return () => {
+      if (redirectTimer.current) clearTimeout(redirectTimer.current);
+    };
+  }, []);
 
   // Check if user arrived via password reset link (has access_token in URL)
   useEffect(() => {
@@ -25,7 +35,7 @@ export default function UpdatePassword() {
 
       if (accessToken && type === 'recovery') {
         setIsValidLink(true);
-      } else {
+      } else if (supabase) {
         // Check if there's an active session (user might have already clicked the link)
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
@@ -43,18 +53,19 @@ export default function UpdatePassword() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
+      setError(t('updatePassword.passwordMismatch'));
       return;
     }
 
     if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères');
+      setError(t('updatePassword.passwordTooShort'));
       return;
     }
 
     setLoading(true);
 
     try {
+      if (!supabase) throw new Error(t('updatePassword.serviceUnavailable'));
       const { error } = await supabase.auth.updateUser({ password });
 
       if (error) throw error;
@@ -62,11 +73,11 @@ export default function UpdatePassword() {
       setSuccess(true);
 
       // Redirect to login after 3 seconds
-      setTimeout(() => {
+      redirectTimer.current = setTimeout(() => {
         navigate('/login');
       }, 3000);
     } catch (err) {
-      setError(err.message || 'Une erreur est survenue');
+      setError(err.message || t('updatePassword.genericError'));
     } finally {
       setLoading(false);
     }
@@ -78,7 +89,7 @@ export default function UpdatePassword() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
         <div className="text-center">
           <Loader2 size={32} className="animate-spin text-teal-600 mx-auto mb-4" />
-          <p className="text-slate-500">Vérification du lien...</p>
+          <p className="text-slate-500">{t('updatePassword.checkingLink')}</p>
         </div>
       </div>
     );
@@ -109,23 +120,23 @@ export default function UpdatePassword() {
             </div>
 
             <h1 className="text-2xl font-bold text-slate-900 mb-2">
-              Lien invalide ou expiré
+              {t('updatePassword.invalidLinkTitle')}
             </h1>
             <p className="text-slate-500 mb-8">
-              Ce lien de réinitialisation n'est plus valide. Veuillez demander un nouveau lien.
+              {t('updatePassword.invalidLinkDesc')}
             </p>
 
             <Link
               to="/forgot-password"
               className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
-              Demander un nouveau lien
+              {t('updatePassword.requestNewLink')}
               <ArrowRight size={18} />
             </Link>
 
             <div className="mt-6">
               <Link to="/login" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
-                ← Retour à la connexion
+                {t('common.backToLoginArrow')}
               </Link>
             </div>
           </div>
@@ -174,18 +185,18 @@ export default function UpdatePassword() {
                 <Check size={40} className="text-teal-600" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">
-                Mot de passe mis à jour !
+                {t('updatePassword.successTitle')}
               </h1>
               <p className="text-slate-500 mb-8">
-                Votre mot de passe a été réinitialisé avec succès.<br />
-                Redirection vers la connexion...
+                {t('updatePassword.successDesc')}<br />
+                {t('updatePassword.redirecting')}
               </p>
 
               <Link
                 to="/login"
                 className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
-                Se connecter
+                {t('updatePassword.loginBtn')}
                 <ArrowRight size={18} />
               </Link>
             </motion.div>
@@ -199,10 +210,10 @@ export default function UpdatePassword() {
                 <Lock size={32} className="text-teal-600" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 text-center mb-2">
-                Nouveau mot de passe
+                {t('updatePassword.newPasswordTitle')}
               </h1>
               <p className="text-slate-500 text-center mb-8">
-                Créez un nouveau mot de passe sécurisé pour votre compte.
+                {t('updatePassword.newPasswordDesc')}
               </p>
 
               <form onSubmit={handleUpdatePassword} className="space-y-4">
@@ -215,8 +226,8 @@ export default function UpdatePassword() {
                       name="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Nouveau mot de passe"
-                      aria-label="Nouveau mot de passe"
+                      placeholder={t('updatePassword.newPasswordPlaceholder')}
+                      aria-label={t('updatePassword.newPasswordAria')}
                       autoComplete="new-password"
                       className="w-full pl-11 pr-11 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                       required
@@ -226,7 +237,7 @@ export default function UpdatePassword() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                      aria-label={showPassword ? t('updatePassword.hidePassword') : t('updatePassword.showPassword')}
                       className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -243,8 +254,8 @@ export default function UpdatePassword() {
                       name="confirmPassword"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Confirmer le mot de passe"
-                      aria-label="Confirmer le mot de passe"
+                      placeholder={t('updatePassword.confirmPasswordPlaceholder')}
+                      aria-label={t('updatePassword.confirmPasswordAria')}
                       autoComplete="new-password"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                       required
@@ -262,7 +273,7 @@ export default function UpdatePassword() {
                     <Loader2 size={18} className="animate-spin" />
                   ) : (
                     <>
-                      Réinitialiser le mot de passe
+                      {t('updatePassword.resetBtn')}
                       <ArrowRight size={18} />
                     </>
                   )}
@@ -276,7 +287,7 @@ export default function UpdatePassword() {
         {!success && (
           <div className="text-center mt-8">
             <Link to="/" className="text-sm text-slate-500 hover:text-slate-600 transition-colors">
-              ← Retour à l'accueil
+              {t('common.backToHomeArrow')}
             </Link>
           </div>
         )}

@@ -17,8 +17,10 @@ import {
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
 import { useToast } from '../../context/ToastContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function DashboardHome() {
+  const { t } = useLanguage();
   const { user } = useOutletContext();
   const toast = useToast();
   const isEntrepreneur = user?.role === 'entrepreneur';
@@ -55,7 +57,7 @@ export default function DashboardHome() {
       document.body.removeChild(ta);
     }
     setCopied(true);
-    toast.success("Lien copié dans le presse-papier !");
+    toast.success(t('dashboard.linkCopied'));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -65,9 +67,11 @@ export default function DashboardHome() {
     navigate('/portal/billing');
   };
 
+  const firstName = user?.full_name?.split(' ')[0] || t('dashboard.helloFallback');
+
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-4xl">
-      <Helmet><title>Accueil — Mon Espace ProPair</title></Helmet>
+      <Helmet><title>{t('dashboard.homeTitle')}</title></Helmet>
 
       {/* Header */}
       <header className="mb-8">
@@ -76,10 +80,10 @@ export default function DashboardHome() {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-slate-900"
         >
-          Bonjour, {user?.full_name?.split(' ')[0] || 'Partenaire'}
+          {t('dashboard.hello', { name: firstName })}
         </motion.h1>
         <p className="text-slate-500 mt-1">
-          Votre tour de contrôle ProPair.
+          {t('dashboard.controlTower')}
         </p>
       </header>
 
@@ -108,16 +112,16 @@ export default function DashboardHome() {
                 {user?.isPro ? (
                   <>
                     <Shield size={10} />
-                    Membre Élite
+                    {t('dashboard.memberElite')}
                   </>
                 ) : (
                   <>
-                    Mode Essai ({connectionsUsed}/{connectionsTotal})
+                    {t('dashboard.trialMode', { used: connectionsUsed, total: connectionsTotal })}
                   </>
                 )}
               </div>
               <p className="text-lg font-bold text-slate-900">
-                {user?.isPro ? 'Connexions illimitées' : `${connectionsRemaining} connexion(s) restante(s)`}
+                {user?.isPro ? t('dashboard.unlimitedConnections') : t('dashboard.connectionsRemaining', { count: connectionsRemaining })}
               </p>
               {!user?.isPro && (
                 <div className="mt-2 w-48">
@@ -142,7 +146,7 @@ export default function DashboardHome() {
             }`}
           >
             <CreditCard size={18} />
-            {user?.isPro ? 'Gérer l\'abonnement' : 'Passer à Pro'}
+            {user?.isPro ? t('dashboard.manageSubscription') : t('dashboard.upgradeToPro')}
             <ChevronRight size={16} />
           </button>
         </div>
@@ -163,17 +167,17 @@ export default function DashboardHome() {
                 <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
                   <Gift size={16} className="text-amber-600" />
                 </div>
-                <h2 className="font-bold text-slate-900">Parrainage</h2>
+                <h2 className="font-bold text-slate-900">{t('dashboard.referralSection')}</h2>
               </div>
               <Link to="/portal/referral" className="text-xs font-semibold text-teal-600 hover:text-teal-700">
-                Voir tout
+                {t('dashboard.seeAll')}
               </Link>
             </div>
 
             <div className="p-6 space-y-5">
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
-                  Votre lien unique
+                  {t('dashboard.yourUniqueLink')}
                 </label>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-lg border border-slate-100 text-sm font-mono text-slate-600 truncate">
@@ -189,7 +193,7 @@ export default function DashboardHome() {
                     }`}
                   >
                     {copied ? <Check size={16} /> : <Copy size={16} />}
-                    {copied ? 'Copié' : 'Copier'}
+                    {copied ? t('dashboard.copied') : t('dashboard.copy')}
                   </motion.button>
                 </div>
               </div>
@@ -197,7 +201,7 @@ export default function DashboardHome() {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    Objectif mois gratuit
+                    {t('dashboard.freeMonthGoal')}
                   </span>
                   <span className="text-sm font-bold text-slate-900">
                     {referralCount}/{referralGoal}
@@ -212,15 +216,15 @@ export default function DashboardHome() {
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
                   {referralGoal - referralCount > 0
-                    ? `Encore ${referralGoal - referralCount} parrainage(s) validé(s) pour 1 mois gratuit`
-                    : 'Mois gratuit débloqué ! Continuez !'
+                    ? t('dashboard.moreReferralsNeeded', { count: referralGoal - referralCount })
+                    : t('dashboard.freeMonthUnlocked')
                   }
                 </p>
               </div>
             </div>
           </motion.section>
 
-          {/* QUICK LINKS - Correction lien mort */}
+          {/* QUICK LINKS */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -232,8 +236,8 @@ export default function DashboardHome() {
               className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-200 hover:shadow-sm transition-all group"
             >
               <CreditCard size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
-              <p className="font-semibold text-sm text-slate-900">Abonnement</p>
-              <p className="text-xs text-slate-500">Factures et paiement</p>
+              <p className="font-semibold text-sm text-slate-900">{t('dashboard.subscriptionLink')}</p>
+              <p className="text-xs text-slate-500">{t('dashboard.invoicesAndPayment')}</p>
             </Link>
 
             <a
@@ -241,8 +245,8 @@ export default function DashboardHome() {
               className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-200 hover:shadow-sm transition-all group"
             >
               <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
-              <p className="font-semibold text-sm text-slate-900">Support</p>
-              <p className="text-xs text-slate-500">Aide technique</p>
+              <p className="font-semibold text-sm text-slate-900">{t('dashboard.supportLink')}</p>
+              <p className="text-xs text-slate-500">{t('dashboard.technicalHelp')}</p>
             </a>
           </motion.section>
         </>
@@ -259,23 +263,23 @@ export default function DashboardHome() {
                 <Users size={24} className="text-teal-600" />
               </div>
               <div>
-                <p className="font-bold text-slate-900">Espace Client</p>
-                <p className="text-sm text-slate-500">Trouvez les meilleurs entrepreneurs</p>
+                <p className="font-bold text-slate-900">{t('dashboard.clientSpace')}</p>
+                <p className="text-sm text-slate-500">{t('dashboard.clientSpaceDesc')}</p>
               </div>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Pour publier un projet ou suivre vos demandes, veuillez utiliser l'application mobile ProPair.
+              {t('dashboard.clientSpaceInfo')}
             </p>
           </motion.section>
 
           <div className="grid grid-cols-2 gap-4">
              <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-100 hover:shadow-sm transition-all">
                 <Briefcase size={20} className="text-slate-500 mb-2" />
-                <p className="font-semibold text-sm">À propos</p>
+                <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>
              </Link>
              <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100 hover:border-teal-100 hover:shadow-sm transition-all">
                 <Gift size={20} className="text-slate-500 mb-2" />
-                <p className="font-semibold text-sm">Parrainage</p>
+                <p className="font-semibold text-sm">{t('dashboard.referralLink')}</p>
              </Link>
           </div>
         </>

@@ -3,22 +3,23 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, LogIn, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-
-const navLinks = [
-  { name: 'Accueil', path: '/' },
-  { name: 'Notre Histoire', path: '/about' },
-  { name: 'Abonnements Pro', path: '/pricing' },
-  { name: 'Parrainage', path: '/parrainage' },
-  { name: 'Contact', path: '/contact' },
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Navbar() {
   const { user, profile } = useAuth();
+  const { t, lang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Gestion du scroll pour l'effet de fond
+  const navLinks = [
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.pricing'), path: '/pricing' },
+    { name: t('nav.referral'), path: '/parrainage' },
+    { name: t('nav.contact'), path: '/contact' },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -27,11 +28,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fermer le menu mobile lors d'un changement de page
   // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: reset menu state on route change
   useEffect(() => { setIsOpen(false); }, [location]);
 
-  // Désactiver le scroll du body quand le menu mobile est ouvert + Escape pour fermer
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -51,7 +50,6 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path;
 
-  // Indicateur animé (sliding underline)
   const navRef = useRef(null);
   const linkRefs = useRef({});
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
@@ -74,7 +72,6 @@ export default function Navbar() {
     }
   }, [location.pathname, hovered]);
 
-  // Recalculer au resize
   useEffect(() => {
     const onResize = () => {
       const el = linkRefs.current[location.pathname];
@@ -91,12 +88,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Skip to content - accessibility */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-teal-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
       >
-        Aller au contenu principal
+        {t('nav.skipToContent')}
       </a>
       <motion.header
         initial={{ y: -100 }}
@@ -111,11 +107,10 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-20">
 
-            {/* Logo */}
             <Link
               to="/"
               className="group focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-lg p-1"
-              aria-label="Retour à l'accueil ProPair"
+              aria-label={t('nav.backToHomeAria')}
             >
               <div className="flex items-center gap-2">
                 <img
@@ -130,7 +125,6 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
             <nav ref={navRef} className="hidden md:flex items-center space-x-6 relative" aria-label="Navigation principale">
               {navLinks.map((link) => (
                 <Link
@@ -160,40 +154,45 @@ export default function Navbar() {
               />
             </nav>
 
-            {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
+              {/* Language Toggle */}
+              <button
+                onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+                className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors px-2 py-1 rounded-lg hover:bg-slate-100"
+                aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+              >
+                {lang === 'fr' ? 'EN' : 'FR'}
+              </button>
+
               {user ? (
-                // Connected State
                 <Link
                   to="/portal"
                   className="flex items-center gap-3 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-white rounded-full transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-                  aria-label="Accéder à mon portail"
+                  aria-label={t('nav.accessPortalAria')}
                 >
                   <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm" aria-hidden="true">
                     {profile?.full_name?.charAt(0)?.toUpperCase() || <User size={14}/>}
                   </div>
                   <span className="text-sm font-semibold">
-                    {profile?.full_name?.split(' ')[0] || 'Mon Compte'}
+                    {profile?.full_name?.split(' ')[0] || t('nav.myAccount')}
                   </span>
                 </Link>
               ) : (
-                // Not Connected State
                 <Link
                   to="/login"
                   className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all outline-none"
                 >
                   <LogIn size={16} aria-hidden="true" />
-                  Se connecter
+                  {t('nav.login')}
                 </Link>
               )}
             </div>
 
-            {/* Mobile Menu Button - A11y Enhanced */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
-              aria-label={isOpen ? "Fermer le menu de navigation" : "Ouvrir le menu de navigation"}
+              aria-label={isOpen ? t('nav.closeMenu') : t('nav.openMenu')}
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
@@ -202,11 +201,9 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -216,24 +213,22 @@ export default function Navbar() {
               aria-hidden="true"
             />
 
-            {/* Drawer */}
             <motion.div
               id="mobile-menu"
               role="dialog"
               aria-modal="true"
-              aria-label="Menu principal"
+              aria-label={t('nav.menu')}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-50 md:hidden shadow-2xl border-l border-slate-100 flex flex-col"
             >
-              {/* Mobile Header */}
               <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                <span className="font-bold text-lg text-slate-900">Menu</span>
+                <span className="font-bold text-lg text-slate-900">{t('nav.menu')}</span>
                 <button
                   onClick={() => setIsOpen(false)}
-                  aria-label="Fermer le menu"
+                  aria-label={t('nav.closeMenu')}
                   autoFocus
                   className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
@@ -241,7 +236,6 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Mobile User Info */}
               {user && (
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50">
                   <div className="flex items-center gap-4">
@@ -249,14 +243,13 @@ export default function Navbar() {
                       {profile?.full_name?.charAt(0) || <User size={20}/>}
                     </div>
                     <div className="overflow-hidden">
-                      <p className="font-bold text-slate-900 truncate">{profile?.full_name || 'Utilisateur'}</p>
+                      <p className="font-bold text-slate-900 truncate">{profile?.full_name || t('nav.user')}</p>
                       <p className="text-sm text-slate-500 truncate">{user.email}</p>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Mobile Links */}
               <nav className="flex-1 p-6 space-y-2 overflow-y-auto" aria-label="Navigation mobile">
                 {navLinks.map((link) => (
                   <Link
@@ -282,12 +275,19 @@ export default function Navbar() {
                       isActive('/portal') ? 'bg-teal-50 text-teal-700' : 'text-teal-700 hover:bg-teal-50'
                     }`}
                   >
-                    Mon Tableau de bord
+                    {t('nav.myDashboard')}
                   </Link>
                 )}
+
+                {/* Mobile Language Toggle */}
+                <button
+                  onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+                  className="block w-full text-left px-4 py-3 rounded-xl text-base font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+                >
+                  {lang === 'fr' ? '🌐 English' : '🌐 Français'}
+                </button>
               </nav>
 
-              {/* Mobile Actions Footer */}
               <div className="p-6 border-t border-slate-100 space-y-3 bg-white">
                 {user ? (
                   <Link
@@ -295,7 +295,7 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center justify-center gap-3 w-full px-5 py-3.5 text-sm font-bold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   >
-                    Accéder à mon espace
+                    {t('nav.accessPortal')}
                   </Link>
                 ) : (
                   <Link
@@ -304,7 +304,7 @@ export default function Navbar() {
                     className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-bold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   >
                     <LogIn size={16} aria-hidden="true" />
-                    Se connecter
+                    {t('nav.login')}
                   </Link>
                 )}
               </div>

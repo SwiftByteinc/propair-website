@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -33,11 +34,12 @@ const Security = lazy(() => import('./pages/dashboard/Security'));
 
 // Loader optimisé
 function PageLoader() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="flex flex-col items-center gap-4">
         <div className="w-10 h-10 border-4 border-teal-100 border-t-teal-600 rounded-full animate-spin" />
-        <span className="text-sm text-slate-500 font-medium animate-pulse">Chargement...</span>
+        <span className="text-sm text-slate-500 font-medium animate-pulse">{t('common.loading')}</span>
       </div>
     </div>
   );
@@ -81,9 +83,10 @@ function AuthLayout({ children }) {
 function App() {
   return (
     <ErrorBoundary>
-      <ToastProvider>
-        <AuthProvider>
-          <Router>
+      <LanguageProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <Router>
             <StructuredData />
             <ScrollToTop />
             <Routes>
@@ -123,9 +126,10 @@ function App() {
             </Routes>
 
             <CookieConsent />
-          </Router>
-        </AuthProvider>
-      </ToastProvider>
+            </Router>
+          </AuthProvider>
+        </ToastProvider>
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }

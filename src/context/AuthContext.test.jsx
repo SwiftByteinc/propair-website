@@ -152,4 +152,129 @@ describe('AuthContext', () => {
       expect(screen.getByText('No user')).toBeInTheDocument();
     }, { timeout: 7000 });
   });
+
+  it('exposes signUp function that calls supabase', async () => {
+    mockSignUp.mockResolvedValue({ data: { user: { id: '2' } }, error: null });
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    await act(async () => {
+      await authRef.current.signUp('new@test.com', 'password123', 'Test Name');
+    });
+    expect(mockSignUp).toHaveBeenCalledWith({
+      email: 'new@test.com',
+      password: 'password123',
+      options: { data: { full_name: 'Test Name' } },
+    });
+  });
+
+  it('exposes signInWithOAuth function', async () => {
+    mockSignInWithOAuth.mockResolvedValue({ data: {}, error: null });
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    await act(async () => {
+      await authRef.current.signInWithOAuth('google');
+    });
+    expect(mockSignInWithOAuth).toHaveBeenCalledWith({
+      provider: 'google',
+      options: { redirectTo: expect.stringContaining('/portal') },
+    });
+  });
+
+  it('exposes refreshProfile function', async () => {
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    expect(typeof authRef.current.refreshProfile).toBe('function');
+  });
+
+  it('provides isPro false by default (no session)', async () => {
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    expect(authRef.current.isPro).toBe(false);
+  });
+
+  it('handles getSession error gracefully', async () => {
+    mockGetSession.mockResolvedValue({ data: { session: null }, error: new Error('Network error') });
+    render(
+      <AuthProvider><TestConsumer /></AuthProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText('No user')).toBeInTheDocument();
+    });
+  });
+
+  it('signIn returns error when credentials are wrong', async () => {
+    mockSignIn.mockResolvedValue({ data: null, error: { message: 'Invalid login' } });
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    let result;
+    await act(async () => {
+      result = await authRef.current.signIn('bad@test.com', 'wrong');
+    });
+    expect(result.error).toBeTruthy();
+  });
+
+  it('calls onAuthStateChange on mount', async () => {
+    render(
+      <AuthProvider><TestConsumer /></AuthProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText('No user')).toBeInTheDocument();
+    });
+    expect(mockOnAuthStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('unsubscribes from auth changes on unmount', async () => {
+    const unsubscribe = vi.fn();
+    mockOnAuthStateChange.mockReturnValue({
+      data: { subscription: { unsubscribe } }
+    });
+    const { unmount } = render(
+      <AuthProvider><TestConsumer /></AuthProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText('No user')).toBeInTheDocument();
+    });
+    unmount();
+    expect(unsubscribe).toHaveBeenCalled();
+  });
+
+  it('provides profile data when session exists', async () => {
+    const mockUser = { id: '1', email: 'test@propair.ca' };
+    mockGetSession.mockResolvedValue({
+      data: { session: { user: mockUser } },
+      error: null
+    });
+    mockFrom.mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          single: vi.fn().mockResolvedValue({
+            data: { id: '1', full_name: 'Test User', user_role: 'entrepreneur' },
+            error: null
+          }),
+          limit: vi.fn().mockResolvedValue({ data: [], error: null })
+        })
+      })
+    });
+    const authRef = { current: null };
+    render(
+      <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
+    );
+    await waitFor(() => expect(authRef.current.loading).toBe(false));
+    expect(authRef.current.user).toBeTruthy();
+  });
 });

@@ -137,4 +137,62 @@ describe('Parrainage (Public Page)', () => {
       expect(ctaLink).toHaveAttribute('href', '/portal/referral');
     });
   });
+
+  describe('additional coverage', () => {
+    beforeEach(() => {
+      mockUseAuth.mockReturnValue({ user: null });
+    });
+
+    it('renders "+2 mois" flow badges', () => {
+      renderParrainage();
+      const badges = screen.getAllByText('+2 mois');
+      expect(badges.length).toBe(2);
+    });
+
+    it('renders step number 1', () => {
+      renderParrainage();
+      expect(screen.getByText('1')).toBeInTheDocument();
+    });
+
+    it('renders step number 2', () => {
+      renderParrainage();
+      expect(screen.getByText('2')).toBeInTheDocument();
+    });
+
+    it('renders step number 3', () => {
+      renderParrainage();
+      expect(screen.getByText('3')).toBeInTheDocument();
+    });
+
+    it('shows "cumulables" info in footer', () => {
+      renderParrainage();
+      expect(screen.getByText(/cumulables/i)).toBeInTheDocument();
+    });
+
+    it('CTA link to login has correct href', () => {
+      renderParrainage();
+      const ctaLink = screen.getByText('Créer mon compte').closest('a');
+      expect(ctaLink).toHaveAttribute('href', '/login');
+    });
+
+    it('renders Partagez votre code step', () => {
+      renderParrainage();
+      expect(screen.getByText('Partagez votre code')).toBeInTheDocument();
+    });
+
+    it('renders Gagnez des mois Pro step', () => {
+      renderParrainage();
+      expect(screen.getByText('Gagnez des mois Pro')).toBeInTheDocument();
+    });
+
+    it('renders entrepreneur reward card', () => {
+      renderParrainage();
+      expect(screen.getByText('Parrainez un entrepreneur')).toBeInTheDocument();
+    });
+
+    it('renders client network reward card', () => {
+      renderParrainage();
+      expect(screen.getByText('Développez votre réseau')).toBeInTheDocument();
+    });
+  });
 });

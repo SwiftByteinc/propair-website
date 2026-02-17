@@ -2,14 +2,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ReceiptText, Ban, Calendar, AlertCircle, Users, Mail } from 'lucide-react';
 import SEO from '../components/SEO';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Refund() {
+  const { t } = useLanguage();
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
       <SEO
-        title="Politique de remboursement"
+        title={t('refund.title')}
         canonical="/refund"
-        description="Politique de remboursement ProPair. Informations sur les annulations et remboursements d'abonnement."
+        description={t('refund.seoDesc')}
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -20,12 +22,12 @@ export default function Refund() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
             <ReceiptText size={14} className="text-teal-600" />
-            <span>Politique claire et transparente</span>
+            <span>{t('refund.badge')}</span>
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            Politique de remboursement
+            {t('refund.title')}
           </h1>
-          <p className="text-slate-500">Dernière mise à jour : Février 2026</p>
+          <p className="text-slate-500">{t('refund.lastUpdate')}</p>
         </motion.div>
 
         {/* Content */}
@@ -39,17 +41,17 @@ export default function Refund() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">1</span>
-              Principe de service rendu
+              {t('refund.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <p className="text-slate-600 leading-relaxed mb-4">
-                ProPair™ fournit un service d'accès à une mise en relation et à des outils de gestion.
+                {t('refund.s1P1')}
               </p>
               <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
                 <div className="flex items-start gap-3">
                   <Ban size={20} className="text-amber-600 mt-0.5" />
                   <p className="text-slate-600">
-                    En raison de la <strong>nature numérique et immédiate</strong> du service, tous les achats sont <strong>définitifs et non remboursables</strong>.
+                    {t('refund.s1Warning')}
                   </p>
                 </div>
               </div>
@@ -60,25 +62,23 @@ export default function Refund() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">2</span>
-              Abonnements SaaS
+              {t('refund.s2Title')}
             </h2>
             <div className="space-y-4">
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                 <div className="flex items-start gap-3">
                   <Calendar size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">Annulation</h3>
-                    <p className="text-slate-600">
-                      Vous pouvez annuler votre abonnement <strong>en tout temps</strong> via votre tableau de bord Web.
-                    </p>
+                    <h3 className="font-bold text-slate-900 mb-2">{t('refund.s2CancelTitle')}</h3>
+                    <p className="text-slate-600">{t('refund.s2CancelDesc')}</p>
                   </div>
                 </div>
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">Fin de période</h3>
+                <h3 className="font-bold text-slate-900 mb-2">{t('refund.s2EndTitle')}</h3>
                 <ul className="text-slate-600 space-y-2">
-                  <li>• L'accès aux fonctionnalités "Premium" reste actif jusqu'à la <strong>fin de la période de facturation</strong> en cours</li>
-                  <li>• <strong>Aucun remboursement au prorata</strong> n'est accordé</li>
+                  <li>• {t('refund.s2EndItem1')}</li>
+                  <li>• {t('refund.s2EndItem2')}</li>
                 </ul>
               </div>
             </div>
@@ -88,27 +88,27 @@ export default function Refund() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">3</span>
-              Exceptions (cas particuliers)
+              {t('refund.s3Title')}
             </h2>
             <div className="bg-teal-50 rounded-2xl p-6 border border-teal-100">
               <div className="flex items-start gap-3">
                 <AlertCircle size={20} className="text-teal-600 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    Un remboursement peut être accordé <strong>uniquement</strong> dans les cas suivants :
+                    {t('refund.s3P1')}
                   </p>
                   <ul className="text-slate-600 space-y-3">
                     <li className="flex items-start gap-2">
                       <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">1</span>
-                      <span><strong>Double facturation technique</strong> prouvée</span>
+                      <span>{t('refund.s3Case1')}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">2</span>
-                      <span><strong>Incapacité technique majeure</strong> de la plateforme empêchant l'utilisation du service payé pendant plus de <strong>72h consécutives</strong></span>
+                      <span>{t('refund.s3Case2')}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">3</span>
-                      <span><strong>Obligation légale</strong> selon la Loi sur la protection du consommateur (LPC)</span>
+                      <span>{t('refund.s3Case3')}</span>
                     </li>
                   </ul>
                 </div>
@@ -120,21 +120,21 @@ export default function Refund() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">4</span>
-              Litiges entre utilisateurs
+              {t('refund.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="flex items-start gap-3">
                 <Users size={20} className="text-teal-600 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    ProPair <strong>ne rembourse aucun frais</strong> en cas de déception liée à :
+                    {t('refund.s4P1')}
                   </p>
                   <ul className="text-slate-600 space-y-2 mb-4">
-                    <li>• La qualité des travaux d'un entrepreneur</li>
-                    <li>• Le comportement d'un client</li>
+                    <li>• {t('refund.s4Item1')}</li>
+                    <li>• {t('refund.s4Item2')}</li>
                   </ul>
                   <p className="text-slate-600">
-                    Ces litiges doivent être réglés <strong>directement entre les parties</strong>, en utilisant au besoin l'historique des conversations fourni par ProPair.
+                    {t('refund.s4P2')}
                   </p>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default function Refund() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">5</span>
-              Contact facturation
+              {t('refund.s5Title')}
             </h2>
             <div className="bg-teal-50 rounded-2xl p-6 border border-teal-100">
               <div className="flex items-center gap-4">
@@ -153,7 +153,7 @@ export default function Refund() {
                   <Mail size={24} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-slate-600 mb-1">Pour toute réclamation :</p>
+                  <p className="text-slate-600 mb-1">{t('refund.s5P1')}</p>
                   <a
                     href="mailto:billing@propairapp.com"
                     className="text-xl font-bold text-teal-600 hover:underline"
@@ -167,7 +167,7 @@ export default function Refund() {
 
           {/* Related Links */}
           <section className="mb-12">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">Documents connexes</h3>
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{t('refund.relatedTitle')}</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <Link
                 to="/privacy"
@@ -176,7 +176,7 @@ export default function Refund() {
                 <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center">
                   <ReceiptText size={18} className="text-teal-600" />
                 </div>
-                <span className="font-medium text-slate-900">Politique de confidentialité</span>
+                <span className="font-medium text-slate-900">{t('refund.relatedPrivacy')}</span>
               </Link>
               <Link
                 to="/terms"
@@ -185,7 +185,7 @@ export default function Refund() {
                 <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center">
                   <ReceiptText size={18} className="text-teal-600" />
                 </div>
-                <span className="font-medium text-slate-900">Conditions d'utilisation</span>
+                <span className="font-medium text-slate-900">{t('refund.relatedTerms')}</span>
               </Link>
             </div>
           </section>

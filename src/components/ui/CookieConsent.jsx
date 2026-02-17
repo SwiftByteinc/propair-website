@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function CookieConsent() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem('propair-cookie-consent');
     if (!consent) {
-      // Petit délai pour ne pas agresser l'utilisateur dès l'arrivée
       const timer = setTimeout(() => setIsVisible(true), 2000);
       return () => clearTimeout(timer);
     }
@@ -32,12 +33,11 @@ export default function CookieConsent() {
           exit={{ y: 100, opacity: 0 }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
         >
-          <div role="dialog" aria-label="Consentement aux cookies" className="max-w-4xl mx-auto bg-slate-900 text-white rounded-2xl p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-700">
+          <div role="dialog" aria-label={t('cookie.ariaLabel')} className="max-w-4xl mx-auto bg-slate-900 text-white rounded-2xl p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-700">
             <div className="flex-1">
-              <h3 className="font-bold text-lg mb-2">Nous respectons votre vie privée</h3>
+              <h3 className="font-bold text-lg mb-2">{t('cookie.title')}</h3>
               <p className="text-slate-300 text-sm">
-                Nous utilisons des cookies essentiels pour faire fonctionner ProPair et améliorer votre expérience.
-                Aucune donnée n'est vendue à des tiers.
+                {t('cookie.desc')}
               </p>
             </div>
             <div className="flex gap-4">
@@ -45,13 +45,13 @@ export default function CookieConsent() {
                 onClick={handleDecline}
                 className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
               >
-                Refuser
+                {t('cookie.decline')}
               </button>
               <button
                 onClick={handleAccept}
                 className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-teal-600/20"
               >
-                Accepter
+                {t('cookie.accept')}
               </button>
             </div>
           </div>

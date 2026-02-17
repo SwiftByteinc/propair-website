@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AlertCircle, ArrowLeft, Home } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function NotFound() {
+  const { t } = useLanguage();
   return (
     <div className="font-sans min-h-[70vh] flex items-center justify-center px-4 py-16">
       <motion.div
@@ -20,10 +22,10 @@ export default function NotFound() {
 
         {/* Message */}
         <h2 className="text-2xl font-bold text-slate-900 mb-3">
-          Page introuvable
+          {t('notFound.title')}
         </h2>
         <p className="text-slate-500 mb-8">
-          Oups ! La page que vous recherchez n'existe pas ou a été déplacée.
+          {t('notFound.desc')}
         </p>
 
         {/* Actions */}
@@ -33,14 +35,14 @@ export default function NotFound() {
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-xl transition-colors shadow-lg shadow-slate-900/10 active:scale-[0.98]"
           >
             <Home size={18} />
-            Retour à l'accueil
+            {t('notFound.homeBtn')}
           </Link>
           <button
             onClick={() => window.history.back()}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl transition-colors border border-slate-200 hover:border-slate-300"
           >
             <ArrowLeft size={18} />
-            Page précédente
+            {t('notFound.backBtn')}
           </button>
         </div>
       </motion.div>

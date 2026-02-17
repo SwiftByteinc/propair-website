@@ -78,4 +78,48 @@ describe('Footer', () => {
     expect(logo).toBeInTheDocument();
     expect(logo).toHaveAttribute('src', '/images/logo_ProPair.jpg');
   });
+
+  it('Confidentialité link points to /privacy', () => {
+    renderFooter();
+    const link = screen.getByText('Confidentialité').closest('a');
+    expect(link).toHaveAttribute('href', '/privacy');
+  });
+
+  it('Conditions d\'utilisation link points to /terms', () => {
+    renderFooter();
+    const link = screen.getByText("Conditions d'utilisation").closest('a');
+    expect(link).toHaveAttribute('href', '/terms');
+  });
+
+  it('Remboursement link points to /refund', () => {
+    renderFooter();
+    const link = screen.getByText('Remboursement').closest('a');
+    expect(link).toHaveAttribute('href', '/refund');
+  });
+
+  it('Connexion link points to /login', () => {
+    renderFooter();
+    const link = screen.getByText('Connexion').closest('a');
+    expect(link).toHaveAttribute('href', '/login');
+  });
+
+  it('FAQ link points to pricing page', () => {
+    renderFooter();
+    const link = screen.getByText('FAQ').closest('a');
+    expect(link.getAttribute('href')).toContain('pricing');
+  });
+
+  it('app store links open in new tab with noopener', () => {
+    renderFooter();
+    const appStoreLink = screen.getByText('App Store').closest('a');
+    const playLink = screen.getByText('Google Play').closest('a');
+    expect(appStoreLink).toHaveAttribute('rel', expect.stringContaining('noopener'));
+    expect(playLink).toHaveAttribute('rel', expect.stringContaining('noopener'));
+  });
+
+  it('renders footer element', () => {
+    renderFooter();
+    const footer = document.querySelector('footer');
+    expect(footer).toBeInTheDocument();
+  });
 });
