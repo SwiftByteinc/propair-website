@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>ProPair — Redirection</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .card {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      background: #fff;
+      border-radius: 1.25rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,.04);
+      padding: 2.5rem 2rem;
+    }
+    .spinner {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 3px solid #ccfbf1;
+      border-top-color: #0d9488;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 1.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: .5rem; }
+    p { color: #64748b; font-size: .875rem; line-height: 1.5; }
+    .fallback { display: none; margin-top: 1.5rem; }
+    .fallback.visible { display: block; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      background: #0f172a;
+      color: #fff;
+      font-weight: 600;
+      font-size: .875rem;
+      border: none;
+      border-radius: .75rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .btn:hover { background: #000; }
+    .note { margin-top: 1rem; font-size: .75rem; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="spinner" id="spinner"></div>
+    <h1 id="title">Redirection vers l'application...</h1>
+    <p id="desc">Vous allez être redirigé vers ProPair.</p>
+
+    <div class="fallback" id="fallback">
+      <a class="btn" id="retryBtn" href="#">
+        Ouvrir l'application
+      </a>
+      <p class="note" id="note">
+        Si l'application ne s'ouvre pas, assurez-vous que ProPair est installée sur votre appareil.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Grab hash fragment from Supabase (e.g. #access_token=...&type=email_change)
+      var hash = window.location.hash || '';
+      var search = window.location.search || '';
+
+      // Build deep link — forward all params to the app
+      var deepLink = 'propairapp://auth/callback' + search + hash;
+
+      // Try to open the app
+      window.location.href = deepLink;
+
+      // If still here after 2s, show fallback UI
+      setTimeout(function () {
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('title').textContent = 'Ouvrez ProPair';
+        document.getElementById('desc').textContent =
+          'Cliquez ci-dessous pour ouvrir l\'application.';
+        var fallback = document.getElementById('fallback');
+        fallback.classList.add('visible');
+        document.getElementById('retryBtn').href = deepLink;
+      }, 2000);
+    })();
+  </script>
+</body>
+</html>
