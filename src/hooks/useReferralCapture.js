@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { STORAGE_KEYS } from '../lib/constants';
 
-const REFERRAL_KEY = 'propair_referral_code';
+const REFERRAL_KEY = STORAGE_KEYS.REFERRAL_CODE;
 
 /**
  * Hook à appeler dans le Router — capture le param ?ref__= depuis n'importe quelle page
@@ -27,6 +28,5 @@ export function getStoredReferralCode() {
 /** Supprime le code après traitement */
 export function clearStoredReferralCode() {
   localStorage.removeItem(REFERRAL_KEY);
-  sessionStorage.removeItem('referral_code');
-  sessionStorage.removeItem('pending_referral');
+  sessionStorage.removeItem(STORAGE_KEYS.PENDING_REFERRAL);
 }

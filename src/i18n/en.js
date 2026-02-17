@@ -1,6 +1,7 @@
 const en = {
   common: {
     loading: 'Loading...',
+    verifying: 'Verifying...',
     backToHome: 'Back to home',
     backToHomeArrow: '← Back to home',
     backToLogin: 'Back to login',
@@ -10,6 +11,15 @@ const en = {
     downloadOn: 'Download on',
     availableOn: 'Available on',
     close: 'Close',
+    closeNotification: 'Close notification',
+  },
+
+  errorBoundary: {
+    title: 'Oops! Something went wrong',
+    desc: 'We\'re sorry, something went wrong. Please refresh the page or go back to the home page.',
+    refresh: 'Refresh page',
+    home: 'Back to home',
+    details: 'Error details (Dev Mode)',
   },
 
   nav: {
@@ -28,6 +38,8 @@ const en = {
     closeMenu: 'Close navigation menu',
     backToHomeAria: 'Back to ProPair home',
     accessPortalAria: 'Go to my portal',
+    switchToEnglish: 'Switch to English',
+    switchToFrench: 'Passer en français',
     user: 'User',
   },
 

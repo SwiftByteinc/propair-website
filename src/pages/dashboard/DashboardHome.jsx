@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
+import { copyToClipboard } from '../../lib/clipboard';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
@@ -43,19 +44,7 @@ export default function DashboardHome() {
   const referralCount = loadingStats ? 0 : (referralStats?.validatedReferrals || 0);
 
   const copyReferralLink = async () => {
-    try {
-      await navigator.clipboard.writeText(referralLink);
-    } catch {
-      // Fallback for older browsers
-      const ta = document.createElement('textarea');
-      ta.value = referralLink;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    }
+    await copyToClipboard(referralLink);
     setCopied(true);
     toast.success(t('dashboard.linkCopied'));
     setTimeout(() => setCopied(false), 2000);

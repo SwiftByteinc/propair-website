@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { copyToClipboard } from '../../lib/clipboard';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -78,18 +79,7 @@ export default function Referral() {
   const totalMonths = entreMonths + clientMonths;
 
   const copyLink = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(referralLink);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = referralLink;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    }
+    await copyToClipboard(referralLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }, [referralLink]);

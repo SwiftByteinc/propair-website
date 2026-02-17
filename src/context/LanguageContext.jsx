@@ -1,8 +1,6 @@
 import { createContext, useContext, useState, useMemo, useCallback } from 'react';
-import fr from '../i18n/fr';
-import en from '../i18n/en';
-
-const translations = { fr, en };
+import { translations } from '../i18n';
+import { STORAGE_KEYS } from '../lib/constants';
 
 const LanguageContext = createContext();
 
@@ -17,7 +15,7 @@ function getNestedValue(obj, path) {
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
     try {
-      return localStorage.getItem('propair-lang') || 'fr';
+      return localStorage.getItem(STORAGE_KEYS.LANGUAGE) || 'fr';
     } catch {
       return 'fr';
     }
@@ -26,7 +24,7 @@ export function LanguageProvider({ children }) {
   const setLang = useCallback((code) => {
     setLangState(code);
     try {
-      localStorage.setItem('propair-lang', code);
+      localStorage.setItem(STORAGE_KEYS.LANGUAGE, code);
     } catch {
       // localStorage unavailable
     }
@@ -60,6 +58,7 @@ export function LanguageProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context) {

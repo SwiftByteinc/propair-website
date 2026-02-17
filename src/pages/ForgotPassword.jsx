@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, ArrowLeft, Send, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
 export default function ForgotPassword() {
   const { t } = useLanguage();
@@ -34,7 +35,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
-      {/* Logo */}
+      <SEO noIndex />
       <div className="w-full max-w-sm flex flex-col items-center">
         <Link to="/" className="flex justify-center mb-8">
           <img

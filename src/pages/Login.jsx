@@ -30,13 +30,8 @@ export default function Login() {
   const failedAttempts = useRef(0);
   const lockoutUntil = useRef(0);
 
-  // Le capture global (useReferralCapture dans App.jsx) gère le stockage localStorage.
-  // Ici on stocke aussi en sessionStorage pour rétrocompatibilité.
-  useEffect(() => {
-    if (refCode) {
-      sessionStorage.setItem('referral_code', refCode);
-    }
-  }, [refCode]);
+  // The global capture (useReferralCapture in App.jsx) handles localStorage storage.
+  // No need to duplicate in sessionStorage — getStoredReferralCode() is the canonical source.
 
   // Auto-switch to signup if mode=signup or a plan is specified from Pricing page
   useEffect(() => {
@@ -101,7 +96,7 @@ export default function Login() {
         const { error } = await signIn(formData.email, formData.password);
         if (error) throw error;
       } else {
-        const storedRefCode = sessionStorage.getItem('referral_code') || getStoredReferralCode();
+        const storedRefCode = refCode || getStoredReferralCode();
         const { error } = await signUp(
           formData.email,
           formData.password,
@@ -109,7 +104,6 @@ export default function Login() {
           storedRefCode
         );
         if (error) throw error;
-        sessionStorage.removeItem('referral_code');
       }
     } catch (err) {
       let msg = err.message;

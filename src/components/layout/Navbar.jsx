@@ -159,7 +159,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
                 className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors px-2 py-1 rounded-lg hover:bg-slate-100"
-                aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+                aria-label={lang === 'fr' ? t('nav.switchToEnglish') : t('nav.switchToFrench')}
               >
                 {lang === 'fr' ? 'EN' : 'FR'}
               </button>
@@ -193,7 +193,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? t('nav.closeMenu') : t('nav.openMenu')}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
             </button>

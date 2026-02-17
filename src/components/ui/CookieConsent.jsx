@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { STORAGE_KEYS } from '../../lib/constants';
 
 export default function CookieConsent() {
   const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem('propair-cookie-consent');
+    const consent = localStorage.getItem(STORAGE_KEYS.COOKIE_CONSENT);
     if (!consent) {
       const timer = setTimeout(() => setIsVisible(true), 2000);
       return () => clearTimeout(timer);
@@ -15,12 +16,12 @@ export default function CookieConsent() {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('propair-cookie-consent', 'accepted');
+    localStorage.setItem(STORAGE_KEYS.COOKIE_CONSENT, 'accepted');
     setIsVisible(false);
   };
 
   const handleDecline = () => {
-    localStorage.setItem('propair-cookie-consent', 'declined');
+    localStorage.setItem(STORAGE_KEYS.COOKIE_CONSENT, 'declined');
     setIsVisible(false);
   };
 

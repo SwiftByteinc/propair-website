@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import { clearStoredReferralCode } from '../hooks/useReferralCapture';
+import { STORAGE_KEYS } from '../lib/constants';
 
 const AuthContext = createContext({});
 
@@ -36,51 +37,44 @@ export function AuthProvider({ children }) {
     setProfileLoading(true);
 
     try {
-      // 1. Fetch Profile with Timeout Race
+      // Fetch profile and subscription in parallel
       const profilePromise = supabase
         .from('profiles')
-        .select('*')
+        .select('id, email, full_name, user_role, referral_code, pro_months_balance, is_verified')
         .eq('id', userData.id)
         .single();
+
+      const subPromise = supabase
+        .from('subscriptions')
+        .select('id, user_id, status, plan, current_period_end, created_at')
+        .eq('user_id', userData.id)
+        .order('created_at', { ascending: false })
+        .limit(5);
 
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Timeout')), 5000)
       );
 
-      const { data: profileData, error: profileError } = await Promise.race([
-        profilePromise,
-        timeoutPromise
+      const [profileResult, subResult] = await Promise.race([
+        Promise.all([profilePromise, subPromise]),
+        timeoutPromise.then(() => [
+          { data: null, error: new Error('Timeout') },
+          { data: null, error: new Error('Timeout') }
+        ])
       ]);
 
+      const { data: profileData, error: profileError } = profileResult;
       if (profileError) {
-        // Silent fail to fallback
         setProfile(createFallbackProfile(userData));
       } else {
         setProfile(profileData);
       }
 
-      // 2. Fetch Subscription (Only if profile succeeded or fallback created)
-      try {
-        const subPromise = supabase
-          .from('subscriptions')
-          .select('*')
-          .eq('user_id', userData.id)
-          .order('created_at', { ascending: false })
-          .limit(5);
-
-        const { data: subData } = await Promise.race([
-          subPromise,
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
-        ]);
-
-        if (subData && subData.length > 0) {
-          // Prioritize active or trialing subscriptions
-          const activeSub = subData.find(s => ['active', 'trialing'].includes(s.status));
-          setSubscription(activeSub || null);
-        } else {
-          setSubscription(null);
-        }
-      } catch {
+      const { data: subData } = subResult;
+      if (subData && subData.length > 0) {
+        const activeSub = subData.find(s => ['active', 'trialing'].includes(s.status));
+        setSubscription(activeSub || null);
+      } else {
         setSubscription(null);
       }
 
@@ -100,10 +94,16 @@ export function AuthProvider({ children }) {
     if (!supabase || !currentUser || referralProcessed.current) return;
 
     try {
-      const pendingRaw = sessionStorage.getItem('pending_referral');
+      const pendingRaw = sessionStorage.getItem(STORAGE_KEYS.PENDING_REFERRAL);
       if (!pendingRaw) return;
 
-      const pending = JSON.parse(pendingRaw);
+      let pending;
+      try {
+        pending = JSON.parse(pendingRaw);
+      } catch {
+        clearStoredReferralCode();
+        return;
+      }
       if (!pending?.code) return;
 
       // Guard: only process within 1 hour of creation
@@ -265,8 +265,7 @@ export function AuthProvider({ children }) {
     });
 
     if (data?.user && referralCode) {
-      // Use sessionStorage instead of localStorage for slightly better security
-      sessionStorage.setItem('pending_referral', JSON.stringify({
+      sessionStorage.setItem(STORAGE_KEYS.PENDING_REFERRAL, JSON.stringify({
         code: referralCode,
         userId: data.user.id,
         timestamp: Date.now()

@@ -1,6 +1,7 @@
 const fr = {
   common: {
     loading: 'Chargement...',
+    verifying: 'Vérification...',
     backToHome: 'Retour à l\'accueil',
     backToHomeArrow: '← Retour à l\'accueil',
     backToLogin: 'Retour à la connexion',
@@ -10,6 +11,15 @@ const fr = {
     downloadOn: 'Télécharger sur',
     availableOn: 'Disponible sur',
     close: 'Fermer',
+    closeNotification: 'Fermer la notification',
+  },
+
+  errorBoundary: {
+    title: 'Oups ! Une erreur est survenue',
+    desc: 'Nous sommes désolés, quelque chose s\'est mal passé. Veuillez rafraîchir la page ou retourner à l\'accueil.',
+    refresh: 'Rafraîchir la page',
+    home: 'Retour à l\'accueil',
+    details: 'Détails de l\'erreur (Dev Mode)',
   },
 
   nav: {
@@ -28,6 +38,8 @@ const fr = {
     closeMenu: 'Fermer le menu de navigation',
     backToHomeAria: 'Retour à l\'accueil ProPair',
     accessPortalAria: 'Accéder à mon portail',
+    switchToEnglish: 'Switch to English',
+    switchToFrench: 'Passer en français',
     user: 'Utilisateur',
   },
 

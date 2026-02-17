@@ -26,7 +26,7 @@ export function useReferralStats(userId) {
 
         const { data, error } = await supabase
           .from('referral_events')
-          .select('*')
+          .select('id, referrer_id, referred_id, referrer_email, referee_type, status, created_at')
           .eq('referrer_id', userId)
           .order('created_at', { ascending: false });
 
@@ -35,12 +35,21 @@ export function useReferralStats(userId) {
 
         setError(null);
 
-        const total = data?.length || 0;
-        const validated = data?.filter(item => item.status === 'validated').length || 0;
-        const pending = data?.filter(item => item.status === 'pending').length || 0;
-        const entreValidated = data?.filter(item => item.status === 'validated' && item.referee_type === 'entrepreneur').length || 0;
-        const clientCount = data?.filter(item => item.referee_type === 'client').length || 0;
-        const earned = (entreValidated * 2) + (Math.floor(clientCount / 6) * 2);
+        // Single pass over data to compute all counts
+        let total = 0, validated = 0, pending = 0, entreValidated = 0, clientValidated = 0;
+        if (data) {
+          for (const item of data) {
+            total++;
+            if (item.status === 'validated') {
+              validated++;
+              if (item.referee_type === 'entrepreneur') entreValidated++;
+              if (item.referee_type === 'client') clientValidated++;
+            } else if (item.status === 'pending') {
+              pending++;
+            }
+          }
+        }
+        const earned = (entreValidated * 2) + (Math.floor(clientValidated / 6) * 2);
 
         setStats({
           totalReferrals: total,

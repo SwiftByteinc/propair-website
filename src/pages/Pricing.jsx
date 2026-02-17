@@ -367,6 +367,7 @@ export default function Pricing() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
                   <span className="font-semibold text-slate-900 pr-4">{faq.question}</span>

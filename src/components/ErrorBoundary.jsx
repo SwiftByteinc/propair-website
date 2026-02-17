@@ -1,5 +1,16 @@
 import { Component } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { translations } from '../i18n';
+import { STORAGE_KEYS } from '../lib/constants';
+
+function getTranslations() {
+  try {
+    const lang = localStorage.getItem(STORAGE_KEYS.LANGUAGE) || 'fr';
+    return translations[lang] || translations.fr;
+  } catch {
+    return translations.fr;
+  }
+}
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -12,7 +23,6 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log uniquement en développement
     if (import.meta.env.DEV) {
       console.error('ErrorBoundary caught an error:', error, errorInfo);
     }
@@ -24,47 +34,44 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
+      const t = getTranslations();
+
       return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 font-sans">
           <div className="max-w-md w-full text-center">
-            {/* Icon */}
             <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-100">
-              <AlertTriangle size={40} className="text-amber-600" />
+              <AlertTriangle size={40} className="text-amber-600" aria-hidden="true" />
             </div>
 
-            {/* Title */}
             <h1 className="text-2xl font-bold text-slate-900 mb-3">
-              Oups ! Une erreur est survenue
+              {t.errorBoundary.title}
             </h1>
 
-            {/* Description */}
             <p className="text-slate-500 mb-8">
-              Nous sommes désolés, quelque chose s'est mal passé. Veuillez rafraîchir la page ou retourner à l'accueil.
+              {t.errorBoundary.desc}
             </p>
 
-            {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={this.handleReload}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-xl transition-colors shadow-sm"
               >
-                <RefreshCw size={18} />
-                Rafraîchir la page
+                <RefreshCw size={18} aria-hidden="true" />
+                {t.errorBoundary.refresh}
               </button>
               <a
                 href="/"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-900 font-semibold rounded-xl transition-colors border border-slate-200"
               >
-                <Home size={18} />
-                Retour à l'accueil
+                <Home size={18} aria-hidden="true" />
+                {t.errorBoundary.home}
               </a>
             </div>
 
-            {/* Error details (development only) */}
             {import.meta.env.DEV && this.state.error && (
               <details className="mt-8 text-left">
                 <summary className="text-sm text-slate-500 cursor-pointer hover:text-slate-900 transition-colors">
-                  Détails de l'erreur (Dev Mode)
+                  {t.errorBoundary.details}
                 </summary>
                 <pre className="mt-2 p-4 bg-white rounded-xl border border-slate-200 text-xs text-red-600 overflow-auto shadow-inner">
                   {this.state.error.toString()}

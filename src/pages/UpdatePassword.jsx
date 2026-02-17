@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Lock, Eye, EyeOff, ArrowRight, Check, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useLanguage } from '../context/LanguageContext';
+import SEO from '../components/SEO';
 
 export default function UpdatePassword() {
   const { t } = useLanguage();
@@ -87,6 +88,7 @@ export default function UpdatePassword() {
   if (checkingLink) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
+        <SEO noIndex />
         <div className="text-center">
           <Loader2 size={32} className="animate-spin text-teal-600 mx-auto mb-4" />
           <p className="text-slate-500">{t('updatePassword.checkingLink')}</p>
@@ -99,6 +101,7 @@ export default function UpdatePassword() {
   if (!isValidLink) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
+        <SEO noIndex />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -147,6 +150,7 @@ export default function UpdatePassword() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
+      <SEO noIndex />
       <div className="w-full max-w-sm flex flex-col items-center">
         {/* Logo */}
         <Link to="/" className="flex justify-center mb-8">
