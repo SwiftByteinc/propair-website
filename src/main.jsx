@@ -9,7 +9,7 @@ const POSTHOG_KEY = 'phc_UPMGge1KyhOREoRHqOlJSwsROf2ejRNWhE8nhaZG6N3'
 const posthogOptions = {
   api_host: '/ingest',
   ui_host: 'https://us.i.posthog.com',
-  person_profiles: 'always',
+  person_profiles: 'identified_only',
   capture_pageview: true,
   capture_pageleave: true,
   autocapture: true,
