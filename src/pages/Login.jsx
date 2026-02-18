@@ -157,7 +157,7 @@ export default function Login() {
           alt="ProPair"
           width="120"
           height="56"
-          className="h-12 sm:h-14 w-auto"
+          className="h-12 sm:h-14 w-auto object-contain"
         />
       </Link>
 

@@ -24,8 +24,8 @@ const fr = {
 
   nav: {
     home: 'Accueil',
-    about: 'Notre Histoire',
-    pricing: 'Abonnements Pro',
+    about: 'À propos',
+    pricing: 'Tarifs Pro',
     referral: 'Parrainage',
     contact: 'Contact',
     login: 'Se connecter',

@@ -24,8 +24,8 @@ const en = {
 
   nav: {
     home: 'Home',
-    about: 'Our Story',
-    pricing: 'Pro Plans',
+    about: 'About',
+    pricing: 'Pricing',
     referral: 'Referral',
     contact: 'Contact',
     login: 'Log in',
