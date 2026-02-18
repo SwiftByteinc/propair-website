@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, CreditCard, Shield, ArrowRight, Send, Loader2 } from 'lucide-react';
+import { usePostHog } from '@posthog/react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact() {
   const { t } = useLanguage();
+  const posthog = usePostHog();
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -53,6 +55,7 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSending(true);
+    posthog?.capture('contact_form_submitted', { subject: formData.subject });
 
     // Ouvre le client email avec les infos pré-remplies
     const subject = encodeURIComponent(formData.subject || 'Question depuis le site web');

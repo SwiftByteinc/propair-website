@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
+import { usePostHog } from '@posthog/react';
 import { useAuth } from '../context/AuthContext';
 import { getStoredReferralCode } from '../hooks/useReferralCapture';
 import SEO from '../components/SEO';
@@ -13,6 +14,7 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, signIn, signUp, signInWithOAuth } = useAuth();
+  const posthog = usePostHog();
 
   // Support both ?ref__= and ?ref= (rétrocompatibilité)
   const refCode = searchParams.get('ref__') || searchParams.get('ref');
@@ -95,6 +97,7 @@ export default function Login() {
       if (isLogin) {
         const { error } = await signIn(formData.email, formData.password);
         if (error) throw error;
+        posthog?.capture('user_logged_in', { method: 'email' });
       } else {
         const storedRefCode = refCode || getStoredReferralCode();
         const { error } = await signUp(
@@ -104,12 +107,14 @@ export default function Login() {
           storedRefCode
         );
         if (error) throw error;
+        posthog?.capture('user_signed_up', { method: 'email', has_referral: !!storedRefCode });
       }
     } catch (err) {
       let msg = err.message;
       if (msg.includes('Invalid login credentials')) msg = t('login.invalidCredentials');
       if (msg.includes('already registered')) msg = t('login.alreadyRegistered');
       if (msg.includes('Email not confirmed')) msg = t('login.emailNotConfirmed');
+      posthog?.capture('auth_error', { type: isLogin ? 'login' : 'signup', error: msg });
       failedAttempts.current += 1;
       if (failedAttempts.current >= 5) {
         lockoutUntil.current = Date.now() + 30000;
@@ -124,6 +129,7 @@ export default function Login() {
   const handleSocialLogin = async (provider) => {
     setError('');
     setLoading(true);
+    posthog?.capture('social_login_attempted', { provider });
     try {
       const { error } = await signInWithOAuth(provider, '/portal');
       if (error) throw error;

@@ -1,5 +1,6 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { usePostHog } from '@posthog/react';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
@@ -47,10 +48,17 @@ function PageLoader() {
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+  const posthog = usePostHog();
+  const prevPath = useRef(pathname);
   useReferralCapture(); // Capture ?ref__= ou ?ref= depuis n'importe quelle page
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+    // Track SPA page views on route change (skip initial — PostHog handles that)
+    if (posthog && prevPath.current !== pathname) {
+      posthog.capture('$pageview', { $current_url: window.location.href });
+    }
+    prevPath.current = pathname;
+  }, [pathname, posthog]);
   return null;
 }
 

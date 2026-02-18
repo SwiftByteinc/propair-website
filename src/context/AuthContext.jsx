@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import posthog from 'posthog-js';
 import { supabase } from '../lib/supabase';
 import { clearStoredReferralCode } from '../hooks/useReferralCapture';
 import { STORAGE_KEYS } from '../lib/constants';
@@ -71,12 +72,23 @@ export function AuthProvider({ children }) {
       }
 
       const { data: subData } = subResult;
+      let activeSub = null;
       if (subData && subData.length > 0) {
-        const activeSub = subData.find(s => ['active', 'trialing'].includes(s.status));
-        setSubscription(activeSub || null);
+        activeSub = subData.find(s => ['active', 'trialing'].includes(s.status)) || null;
+        setSubscription(activeSub);
       } else {
         setSubscription(null);
       }
+
+      // PostHog: identify user with profile data
+      const p = profileData || createFallbackProfile(userData);
+      posthog.identify(userData.id, {
+        email: p.email,
+        name: p.full_name,
+        user_role: p.user_role,
+        is_pro: activeSub?.status === 'active' || activeSub?.status === 'trialing',
+        referral_code: p.referral_code,
+      });
 
     } catch {
       setProfile(createFallbackProfile(userData));
@@ -296,6 +308,7 @@ export function AuthProvider({ children }) {
     }
     const { error } = await supabase.auth.signOut();
     if (!error) {
+      posthog.reset();
       setUser(null);
       setProfile(null);
       setSubscription(null);
