@@ -5,6 +5,7 @@ import { PostHogProvider } from '@posthog/react'
 import './index.css'
 import App from './App.jsx'
 
+const POSTHOG_KEY = 'phc_UPMGge1KyhOREoRHqOlJSwsROf2ejRNWhE8nhaZG6N3'
 const posthogOptions = {
   api_host: '/ingest',
   ui_host: 'https://us.i.posthog.com',
@@ -18,7 +19,7 @@ const posthogOptions = {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={posthogOptions}>
+    <PostHogProvider apiKey={POSTHOG_KEY} options={posthogOptions}>
       <HelmetProvider>
         <App />
       </HelmetProvider>
