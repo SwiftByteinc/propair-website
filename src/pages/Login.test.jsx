@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
+import { LanguageProvider } from '../context/LanguageContext';
 
 // Mock framer-motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
@@ -28,9 +29,11 @@ vi.mock('../components/SEO', () => ({
 // Wrapper component with Router
 const renderWithRouter = (component) => {
   return render(
-    <BrowserRouter>
-      {component}
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        {component}
+      </BrowserRouter>
+    </LanguageProvider>
   );
 };
 

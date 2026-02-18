@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Parrainage from './Parrainage';
+import { LanguageProvider } from '../context/LanguageContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -22,9 +23,9 @@ vi.mock('../context/AuthContext', () => ({
 
 function renderParrainage() {
   return render(
-    <MemoryRouter>
+    <LanguageProvider><MemoryRouter>
       <Parrainage />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

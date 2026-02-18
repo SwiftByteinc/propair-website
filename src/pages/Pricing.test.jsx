@@ -2,6 +2,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Pricing from './Pricing';
+import { LanguageProvider } from '../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -14,9 +15,9 @@ vi.mock('framer-motion', () => ({
 function renderPricing() {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
+      <LanguageProvider><MemoryRouter>
         <Pricing />
-      </MemoryRouter>
+      </MemoryRouter></LanguageProvider>
     </HelmetProvider>
   );
 }

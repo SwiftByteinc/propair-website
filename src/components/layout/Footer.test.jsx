@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Footer from './Footer';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 function renderFooter() {
   return render(
-    <MemoryRouter>
+    <LanguageProvider><MemoryRouter>
       <Footer />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import DashboardLayout from './DashboardLayout';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -38,9 +39,9 @@ vi.mock('react-router-dom', async () => {
 
 function renderDashboard() {
   return render(
-    <MemoryRouter>
+    <LanguageProvider><MemoryRouter>
       <DashboardLayout />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

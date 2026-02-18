@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 // Mock lucide icons to simple spans
 vi.mock('lucide-react', () => ({
@@ -41,9 +42,9 @@ function renderSidebar(user = entrepreneurUser, props = {}) {
   };
 
   return render(
-    <MemoryRouter initialEntries={['/portal']}>
+    <LanguageProvider><MemoryRouter initialEntries={['/portal']}>
       <Sidebar {...defaultProps} />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

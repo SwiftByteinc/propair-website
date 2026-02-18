@@ -2,11 +2,16 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import UpdatePassword from './UpdatePassword';
 import { supabase } from '../lib/supabase';
+import { LanguageProvider } from '../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }) => <div {...props}>{children}</div>,
   },
+}));
+
+vi.mock('../components/SEO', () => ({
+  default: () => null,
 }));
 
 vi.mock('../lib/supabase', () => ({
@@ -39,9 +44,9 @@ describe('UpdatePassword', () => {
 
     function renderWithToken() {
       return render(
-        <MemoryRouter>
+        <LanguageProvider><MemoryRouter>
           <UpdatePassword />
-        </MemoryRouter>
+        </MemoryRouter></LanguageProvider>
       );
     }
 
@@ -139,9 +144,9 @@ describe('UpdatePassword', () => {
 
     it('shows invalid link message', async () => {
       render(
-        <MemoryRouter>
+        <LanguageProvider><MemoryRouter>
           <UpdatePassword />
-        </MemoryRouter>
+        </MemoryRouter></LanguageProvider>
       );
 
       await waitFor(() => {
@@ -151,9 +156,9 @@ describe('UpdatePassword', () => {
 
     it('shows link to request new reset', async () => {
       render(
-        <MemoryRouter>
+        <LanguageProvider><MemoryRouter>
           <UpdatePassword />
-        </MemoryRouter>
+        </MemoryRouter></LanguageProvider>
       );
 
       await waitFor(() => {
@@ -163,9 +168,9 @@ describe('UpdatePassword', () => {
 
     it('reset link points to /forgot-password', async () => {
       render(
-        <MemoryRouter>
+        <LanguageProvider><MemoryRouter>
           <UpdatePassword />
-        </MemoryRouter>
+        </MemoryRouter></LanguageProvider>
       );
 
       await waitFor(() => {
@@ -176,9 +181,9 @@ describe('UpdatePassword', () => {
 
     it('shows descriptive error text', async () => {
       render(
-        <MemoryRouter>
+        <LanguageProvider><MemoryRouter>
           <UpdatePassword />
-        </MemoryRouter>
+        </MemoryRouter></LanguageProvider>
       );
 
       await waitFor(() => {
@@ -201,14 +206,14 @@ describe('UpdatePassword', () => {
     });
 
     it('submit button text is Réinitialiser le mot de passe', async () => {
-      render(<MemoryRouter><UpdatePassword /></MemoryRouter>);
+      render(<LanguageProvider><MemoryRouter><UpdatePassword /></MemoryRouter></LanguageProvider>);
       await waitFor(() => {
         expect(screen.getByText('Réinitialiser le mot de passe')).toBeInTheDocument();
       });
     });
 
     it('password fields are type password', async () => {
-      render(<MemoryRouter><UpdatePassword /></MemoryRouter>);
+      render(<LanguageProvider><MemoryRouter><UpdatePassword /></MemoryRouter></LanguageProvider>);
       await waitFor(() => {
         expect(screen.getByLabelText('Nouveau mot de passe')).toBeInTheDocument();
       });
@@ -222,7 +227,7 @@ describe('UpdatePassword', () => {
       supabase.auth.updateUser.mockResolvedValue({
         error: { message: 'Token expired' },
       });
-      render(<MemoryRouter><UpdatePassword /></MemoryRouter>);
+      render(<LanguageProvider><MemoryRouter><UpdatePassword /></MemoryRouter></LanguageProvider>);
 
       await waitFor(() => {
         expect(screen.getByLabelText('Nouveau mot de passe')).toBeInTheDocument();
@@ -239,7 +244,7 @@ describe('UpdatePassword', () => {
 
     it('success message mentions redirect', async () => {
       supabase.auth.updateUser.mockResolvedValue({ error: null });
-      render(<MemoryRouter><UpdatePassword /></MemoryRouter>);
+      render(<LanguageProvider><MemoryRouter><UpdatePassword /></MemoryRouter></LanguageProvider>);
 
       await waitFor(() => {
         expect(screen.getByLabelText('Nouveau mot de passe')).toBeInTheDocument();

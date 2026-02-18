@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -20,9 +21,9 @@ vi.mock('../../context/AuthContext', () => ({
 
 function renderNavbar(route = '/') {
   return render(
-    <MemoryRouter initialEntries={[route]}>
+    <LanguageProvider><MemoryRouter initialEntries={[route]}>
       <Navbar />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

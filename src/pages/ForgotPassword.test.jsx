@@ -2,11 +2,16 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ForgotPassword from './ForgotPassword';
 import { supabase } from '../lib/supabase';
+import { LanguageProvider } from '../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }) => <div {...props}>{children}</div>,
   },
+}));
+
+vi.mock('../components/SEO', () => ({
+  default: () => null,
 }));
 
 vi.mock('../lib/supabase', () => ({
@@ -19,9 +24,9 @@ vi.mock('../lib/supabase', () => ({
 
 function renderForgotPassword() {
   return render(
-    <MemoryRouter>
+    <LanguageProvider><MemoryRouter>
       <ForgotPassword />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

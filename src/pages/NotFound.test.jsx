@@ -1,6 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import NotFound from './NotFound';
+import { LanguageProvider } from '../context/LanguageContext';
+
+// Mock SEO component
+vi.mock('../components/SEO', () => ({
+  default: () => null,
+}));
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -11,9 +17,9 @@ vi.mock('framer-motion', () => ({
 
 function renderNotFound() {
   return render(
-    <MemoryRouter>
+    <LanguageProvider><MemoryRouter>
       <NotFound />
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

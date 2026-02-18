@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Refund from './Refund';
+import { LanguageProvider } from '../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -12,9 +13,9 @@ vi.mock('framer-motion', () => ({
 function renderRefund() {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
+      <LanguageProvider><MemoryRouter>
         <Refund />
-      </MemoryRouter>
+      </MemoryRouter></LanguageProvider>
     </HelmetProvider>
   );
 }

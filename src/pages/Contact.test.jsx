@@ -2,6 +2,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Contact from './Contact';
+import { LanguageProvider } from '../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -12,9 +13,9 @@ vi.mock('framer-motion', () => ({
 function renderContact() {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
+      <LanguageProvider><MemoryRouter>
         <Contact />
-      </MemoryRouter>
+      </MemoryRouter></LanguageProvider>
     </HelmetProvider>
   );
 }

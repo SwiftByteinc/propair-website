@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import DashboardHome from './DashboardHome';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -35,9 +36,9 @@ Object.assign(navigator, {
 function renderDashboardHome() {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
+      <LanguageProvider><MemoryRouter>
         <DashboardHome />
-      </MemoryRouter>
+      </MemoryRouter></LanguageProvider>
     </HelmetProvider>
   );
 }

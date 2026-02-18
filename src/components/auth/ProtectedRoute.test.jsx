@@ -16,11 +16,12 @@ vi.mock('../../lib/supabase', () => ({
 }));
 
 import ProtectedRoute from './ProtectedRoute';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 function renderProtected(authValue) {
   mockUseAuth.mockReturnValue(authValue);
   return render(
-    <MemoryRouter initialEntries={['/protected']}>
+    <LanguageProvider><MemoryRouter initialEntries={['/protected']}>
       <Routes>
         <Route
           path="/protected"
@@ -32,7 +33,7 @@ function renderProtected(authValue) {
         />
         <Route path="/login" element={<div>Login Page</div>} />
       </Routes>
-    </MemoryRouter>
+    </MemoryRouter></LanguageProvider>
   );
 }
 

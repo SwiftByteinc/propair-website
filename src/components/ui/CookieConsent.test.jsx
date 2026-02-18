@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import CookieConsent from './CookieConsent';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -20,12 +21,12 @@ describe('CookieConsent', () => {
   });
 
   it('does not show banner immediately', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     expect(screen.queryByText(/vie privée/i)).not.toBeInTheDocument();
   });
 
   it('shows banner after 2 seconds on first visit', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(2000);
@@ -39,7 +40,7 @@ describe('CookieConsent', () => {
   it('does not show banner if consent was already given', () => {
     localStorage.setItem('propair-cookie-consent', 'accepted');
 
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(3000);
@@ -51,7 +52,7 @@ describe('CookieConsent', () => {
   it('does not show banner if consent was declined', () => {
     localStorage.setItem('propair-cookie-consent', 'declined');
 
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(3000);
@@ -61,7 +62,7 @@ describe('CookieConsent', () => {
   });
 
   it('sets localStorage to accepted and hides banner on accept', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(2000);
@@ -74,7 +75,7 @@ describe('CookieConsent', () => {
   });
 
   it('sets localStorage to declined and hides banner on decline', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(2000);
@@ -87,7 +88,7 @@ describe('CookieConsent', () => {
   });
 
   it('displays correct privacy message', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
 
     act(() => {
       vi.advanceTimersByTime(2000);
@@ -98,31 +99,31 @@ describe('CookieConsent', () => {
   });
 
   it('renders dialog with correct aria-label', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     act(() => { vi.advanceTimersByTime(2000); });
     expect(screen.getByRole('dialog')).toHaveAttribute('aria-label', 'Consentement aux cookies');
   });
 
   it('renders heading text', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     act(() => { vi.advanceTimersByTime(2000); });
     expect(screen.getByText('Nous respectons votre vie privée')).toBeInTheDocument();
   });
 
   it('does not show before 2 seconds', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     act(() => { vi.advanceTimersByTime(1500); });
     expect(screen.queryByText(/vie privée/i)).not.toBeInTheDocument();
   });
 
   it('accept button is rendered as button element', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     act(() => { vi.advanceTimersByTime(2000); });
     expect(screen.getByText('Accepter').tagName).toBe('BUTTON');
   });
 
   it('decline button is rendered as button element', () => {
-    render(<CookieConsent />);
+    render(<LanguageProvider><CookieConsent /></LanguageProvider>);
     act(() => { vi.advanceTimersByTime(2000); });
     expect(screen.getByText('Refuser').tagName).toBe('BUTTON');
   });

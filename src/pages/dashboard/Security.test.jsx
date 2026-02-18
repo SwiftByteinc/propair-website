@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Security from './Security';
+import { LanguageProvider } from '../../context/LanguageContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -47,9 +48,9 @@ vi.mock('../../lib/supabase', () => ({
 function renderSecurity() {
   return render(
     <HelmetProvider>
-      <MemoryRouter>
+      <LanguageProvider><MemoryRouter>
         <Security />
-      </MemoryRouter>
+      </MemoryRouter></LanguageProvider>
     </HelmetProvider>
   );
 }

@@ -98,7 +98,6 @@ describe('getStoredReferralCode', () => {
 describe('clearStoredReferralCode', () => {
   beforeEach(() => {
     localStorage.setItem('propair_referral_code', 'CODE');
-    sessionStorage.setItem('referral_code', 'CODE');
     sessionStorage.setItem('pending_referral', '{"code":"CODE"}');
   });
 
@@ -106,7 +105,6 @@ describe('clearStoredReferralCode', () => {
     clearStoredReferralCode();
 
     expect(localStorage.getItem('propair_referral_code')).toBeNull();
-    expect(sessionStorage.getItem('referral_code')).toBeNull();
     expect(sessionStorage.getItem('pending_referral')).toBeNull();
   });
 
