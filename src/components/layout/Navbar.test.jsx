@@ -37,8 +37,8 @@ describe('Navbar', () => {
     renderNavbar();
 
     expect(screen.getAllByText('Accueil').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Notre Histoire').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Abonnements Pro').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('À propos').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Tarifs Pro').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Parrainage').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Contact').length).toBeGreaterThanOrEqual(1);
   });
@@ -93,7 +93,7 @@ describe('Navbar', () => {
     renderNavbar('/about');
 
     // Desktop links
-    const aboutLinks = screen.getAllByText('Notre Histoire');
+    const aboutLinks = screen.getAllByText('À propos');
     const hasAriaCurrent = aboutLinks.some(link => link.getAttribute('aria-current') === 'page');
     expect(hasAriaCurrent).toBe(true);
   });
