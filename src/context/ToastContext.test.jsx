@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
+import { LanguageProvider } from './LanguageContext';
 import { ToastProvider, useToast } from './ToastContext';
 
 // Mock framer-motion
@@ -43,9 +44,11 @@ describe('ToastContext', () => {
 
   it('renders success toast with correct message', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -54,9 +57,11 @@ describe('ToastContext', () => {
 
   it('renders error toast with correct message', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Error'));
@@ -65,9 +70,11 @@ describe('ToastContext', () => {
 
   it('renders info toast with correct message', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Info'));
@@ -76,9 +83,11 @@ describe('ToastContext', () => {
 
   it('auto-removes toast after 4 seconds', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -93,9 +102,11 @@ describe('ToastContext', () => {
 
   it('supports multiple toasts simultaneously', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -107,9 +118,11 @@ describe('ToastContext', () => {
 
   it('removes toast when close button is clicked', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -123,9 +136,11 @@ describe('ToastContext', () => {
 
   it('has accessible region with aria-live', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     const region = screen.getByRole('region', { name: /notifications/i });
@@ -134,9 +149,11 @@ describe('ToastContext', () => {
 
   it('removes only the clicked toast, not others', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -154,9 +171,11 @@ describe('ToastContext', () => {
 
   it('auto-removes error toast after 4 seconds', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Error'));
@@ -171,9 +190,11 @@ describe('ToastContext', () => {
 
   it('auto-removes info toast after 4 seconds', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Info'));
@@ -188,9 +209,11 @@ describe('ToastContext', () => {
 
   it('toast is still visible before 4 seconds', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -204,9 +227,11 @@ describe('ToastContext', () => {
 
   it('can display 3 toasts simultaneously', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));
@@ -220,9 +245,11 @@ describe('ToastContext', () => {
 
   it('each toast has a close button', () => {
     render(
-      <ToastProvider>
-        <TestConsumer />
-      </ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
+          <TestConsumer />
+        </ToastProvider>
+      </LanguageProvider>
     );
 
     fireEvent.click(screen.getByText('Add Success'));

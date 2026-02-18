@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
+import { LanguageProvider } from '../context/LanguageContext';
 import SEO from './SEO';
 
 // Test SEO by rendering and checking the component output
@@ -9,9 +10,11 @@ import SEO from './SEO';
 
 function renderSEO(props = {}) {
   return render(
-    <HelmetProvider>
-      <SEO {...props} />
-    </HelmetProvider>
+    <LanguageProvider>
+      <HelmetProvider>
+        <SEO {...props} />
+      </HelmetProvider>
+    </LanguageProvider>
   );
 }
 
