@@ -7,7 +7,6 @@ Allow: /
 # Disallow private/auth areas
 Disallow: /portal/
 Disallow: /auth/
-Disallow: /login
 Disallow: /forgot-password
 Disallow: /update-password
 
