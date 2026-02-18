@@ -1,13 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
+import { PostHogProvider } from '@posthog/react'
 import './index.css'
 import App from './App.jsx'
 
+const posthogOptions = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '2026-01-30',
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
+    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={posthogOptions}>
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </PostHogProvider>
   </StrictMode>,
 )

@@ -17,7 +17,7 @@ export default function Contact() {
       title: t('contact.phoneTitle'),
       description: t('contact.phoneDesc'),
       value: t('contact.phoneValue'),
-      href: 'tel:+18732009806',
+      href: 'tel:+18194810882',
       detail: t('contact.phoneDetail'),
       color: 'bg-teal-600',
     },

@@ -35,7 +35,7 @@ describe('Contact', () => {
 
   it('renders phone number', () => {
     renderContact();
-    expect(screen.getByText('873-200-9806')).toBeInTheDocument();
+    expect(screen.getByText('819 481-0882')).toBeInTheDocument();
   });
 
   it('renders email addresses', () => {
@@ -104,8 +104,8 @@ describe('Contact', () => {
 
   it('phone link has tel: href', () => {
     renderContact();
-    const phoneLink = screen.getByText('873-200-9806').closest('a');
-    expect(phoneLink).toHaveAttribute('href', 'tel:+18732009806');
+    const phoneLink = screen.getByText('819 481-0882').closest('a');
+    expect(phoneLink).toHaveAttribute('href', 'tel:+18194810882');
   });
 
   it('support email has mailto: href', () => {

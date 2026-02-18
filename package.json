@@ -15,10 +15,12 @@
     "analyze": "npx vite-bundle-visualizer"
   },
   "dependencies": {
+    "@posthog/react": "^1.8.0",
     "@supabase/supabase-js": "^2.90.1",
     "@tailwindcss/postcss": "^4.1.18",
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
+    "posthog-js": "^1.350.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-helmet-async": "^2.0.5",

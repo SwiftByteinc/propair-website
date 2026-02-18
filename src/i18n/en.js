@@ -211,7 +211,7 @@ const en = {
     subtitle: 'A question, a technical issue, or a special request? Contact us through the channel that suits you.',
     phoneTitle: 'Phone',
     phoneDesc: 'Speak directly with our team',
-    phoneValue: '873-200-9806',
+    phoneValue: '819 481-0882',
     phoneDetail: 'Mon-Fri, 9am to 5pm (ET)',
     supportTitle: 'General support',
     supportDesc: 'Questions about the app or your account',
