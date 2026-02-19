@@ -31,7 +31,7 @@ vi.mock('../../context/ToastContext', () => ({
 
 // Mock supabase
 vi.mock('../../lib/supabase', () => ({
-  supabase: { functions: { invoke: vi.fn() } },
+  supabase: { functions: { invoke: vi.fn().mockResolvedValue({ data: null, error: null }) } },
 }));
 
 Object.assign(navigator, {

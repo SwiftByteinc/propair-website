@@ -12,6 +12,11 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }) => children,
 }));
 
+// Mock supabase for useEarlyBirdCount hook
+vi.mock('../lib/supabase', () => ({
+  supabase: { functions: { invoke: vi.fn().mockResolvedValue({ data: { claimed: 42, remaining: 158, limit: 200, isEarlyBird: true }, error: null }) } },
+}));
+
 function renderPricing() {
   return render(
     <HelmetProvider>
@@ -76,7 +81,7 @@ describe('Pricing', () => {
 
   it('renders Offre Lancement badge', () => {
     renderPricing();
-    expect(screen.getByText('Offre Lancement')).toBeInTheDocument();
+    expect(screen.getByText('Tarif Fondateur')).toBeInTheDocument();
   });
 
   it('renders discount badge', () => {
@@ -167,7 +172,7 @@ describe('Pricing', () => {
 
   it('renders Offre Lancement badge on annual card', () => {
     renderPricing();
-    expect(screen.getByText('Offre Lancement')).toBeInTheDocument();
+    expect(screen.getByText('Tarif Fondateur')).toBeInTheDocument();
   });
 
   it('renders annual card discount text', () => {

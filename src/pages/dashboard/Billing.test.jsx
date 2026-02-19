@@ -25,7 +25,7 @@ vi.mock('../../context/AuthContext', () => ({
 
 // Mock supabase
 vi.mock('../../lib/supabase', () => ({
-  supabase: { functions: { invoke: vi.fn() } },
+  supabase: { functions: { invoke: vi.fn().mockResolvedValue({ data: null, error: null }) } },
 }));
 
 // Mock useOutletContext

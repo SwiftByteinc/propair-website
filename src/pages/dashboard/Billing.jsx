@@ -13,6 +13,7 @@ import { useToast } from '../../context/ToastContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
+import { useEarlyBirdCount } from '../../hooks/useEarlyBirdCount';
 
 export default function Billing() {
   const { t, lang } = useLanguage();
@@ -23,6 +24,7 @@ export default function Billing() {
   const [portalLoading, setPortalLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(null); // 'monthly' | 'annual' | null
   const [verifying, setVerifying] = useState(false);
+  const { isEarlyBird, claimed, limit } = useEarlyBirdCount();
 
   // Handle checkout success/cancel from Stripe redirect
   // Includes polling to wait for webhook to update the DB
@@ -238,11 +240,20 @@ export default function Billing() {
                 className="p-6 rounded-xl border-2 border-teal-200 bg-teal-50/50 hover:border-teal-300 transition-all text-left disabled:opacity-50"
               >
                 <p className="text-xs font-bold text-teal-600 uppercase tracking-wider mb-1">
-                  {t('dashboard.annualPlanLabel')}
+                  {isEarlyBird ? t('dashboard.earlyBirdLabel') : t('dashboard.annualPlanLabel')}
                 </p>
-                <p className="text-2xl font-bold text-slate-900">149$<span className="text-sm font-normal text-slate-500">{t('dashboard.perYear')}</span></p>
+                <p className="text-2xl font-bold text-slate-900">
+                  {isEarlyBird ? '149$' : '200$'}
+                  <span className="text-sm font-normal text-slate-500">{t('dashboard.perYear')}</span>
+                </p>
                 <p className="text-xs text-green-600 font-semibold mt-1">{t('dashboard.annualSaving')}</p>
-                <div className="mt-4 w-full py-2.5 bg-slate-900 text-white rounded-lg font-semibold text-sm text-center flex items-center justify-center gap-2">
+                {isEarlyBird && (
+                  <div className="mt-2 flex items-center justify-between text-[10px] font-bold text-amber-700">
+                    <span>{t('dashboard.earlyBirdSpots')}</span>
+                    <span>{claimed}/{limit}</span>
+                  </div>
+                )}
+                <div className="mt-3 w-full py-2.5 bg-slate-900 text-white rounded-lg font-semibold text-sm text-center flex items-center justify-center gap-2">
                   {checkoutLoading === 'annual' ? (
                     <Loader2 size={16} className="animate-spin" />
                   ) : (

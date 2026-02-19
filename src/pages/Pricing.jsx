@@ -8,11 +8,13 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
+import { useEarlyBirdCount } from '../hooks/useEarlyBirdCount';
 
 export default function Pricing() {
   const { t } = useLanguage();
   const [showInsider, setShowInsider] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const { claimed, remaining, limit, isEarlyBird } = useEarlyBirdCount();
 
   // Déclencheur après 5 secondes
   useEffect(() => {
@@ -196,7 +198,7 @@ export default function Pricing() {
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
               <span className="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm uppercase tracking-wide flex items-center gap-1">
-                <Star size={12} className="fill-white" /> {t('pricing.annualBadge')}
+                <Star size={12} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
               </span>
             </div>
 
@@ -204,16 +206,45 @@ export default function Pricing() {
               <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('pricing.annualTitle')}</h3>
               <p className="text-teal-600 font-medium mb-6">{t('pricing.annualTagline')}</p>
 
-              <div className="mb-8">
+              <div className="mb-4">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900">{t('pricing.annualPrice')}</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900">
+                    {isEarlyBird ? t('pricing.annualPrice') : t('pricing.annualStandardPrice')}
+                  </span>
                   <span className="text-sm text-slate-500">{t('pricing.annualPeriod')}</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2 text-sm">
                   <span className="text-slate-500 line-through decoration-red-400">{t('pricing.annualOldPrice')}</span>
-                  <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">{t('pricing.annualDiscount')}</span>
+                  <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">
+                    {isEarlyBird ? t('pricing.annualDiscount') : t('pricing.annualStandardDiscount')}
+                  </span>
                 </div>
               </div>
+
+              {/* Early Bird Progress */}
+              {isEarlyBird && (
+                <div className="mb-8 p-3 bg-amber-50 rounded-xl border border-amber-100">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-amber-800">
+                      {t('pricing.earlyBirdLabel')}
+                    </span>
+                    <span className="text-xs font-bold text-amber-600">
+                      {claimed}/{limit}
+                    </span>
+                  </div>
+                  <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(claimed / limit) * 100}%` }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                      className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
+                    />
+                  </div>
+                  <p className="text-xs text-amber-700 font-semibold mt-1.5">
+                    {t('pricing.earlyBirdRemaining', { count: remaining })}
+                  </p>
+                </div>
+              )}
 
               <div className="space-y-4 mb-8 pt-8 border-t border-slate-100">
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('pricing.annualAllIncluded')}</p>

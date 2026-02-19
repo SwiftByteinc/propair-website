@@ -50,13 +50,30 @@ serve(async (req) => {
       )
     }
 
-    // 3. Resolve Stripe Price ID
-    const priceId = plan === 'monthly'
-      ? Deno.env.get('STRIPE_PRICE_MONTHLY')
-      : Deno.env.get('STRIPE_PRICE_ANNUAL')
+    // 3. Resolve Stripe Price ID (with early bird logic for annual)
+    let priceId: string | undefined
+
+    if (plan === 'monthly') {
+      priceId = Deno.env.get('STRIPE_PRICE_MONTHLY')
+    } else {
+      // Count active subscriptions to determine early bird eligibility
+      const earlyBirdLimit = 200
+      const { count } = await supabaseAdmin
+        .from('subscriptions')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'active')
+
+      if ((count ?? 0) < earlyBirdLimit) {
+        priceId = Deno.env.get('STRIPE_PRICE_ANNUAL_EARLY') || Deno.env.get('STRIPE_PRICE_ANNUAL')
+      } else {
+        priceId = Deno.env.get('STRIPE_PRICE_ANNUAL_STANDARD') || Deno.env.get('STRIPE_PRICE_ANNUAL')
+      }
+
+      console.log(`Annual plan: ${count ?? 0}/${earlyBirdLimit} active subs → ${(count ?? 0) < earlyBirdLimit ? 'early bird' : 'standard'} price`)
+    }
 
     if (!priceId) {
-      console.error(`Missing STRIPE_PRICE_${plan.toUpperCase()} env var`)
+      console.error(`Missing Stripe price env var for plan: ${plan}`)
       return new Response(
         JSON.stringify({ error: 'Server configuration error' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
