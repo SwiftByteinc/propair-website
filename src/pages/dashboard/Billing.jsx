@@ -7,7 +7,8 @@ import {
   Crown,
   ExternalLink,
   Loader2,
-  CheckCircle
+  Check,
+  Star
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -24,7 +25,7 @@ export default function Billing() {
   const [portalLoading, setPortalLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(null); // 'monthly' | 'annual' | null
   const [verifying, setVerifying] = useState(false);
-  const { isEarlyBird, claimed, limit } = useEarlyBirdCount();
+  const { isEarlyBird, claimed, remaining, limit } = useEarlyBirdCount();
 
   // Handle checkout success/cancel from Stripe redirect
   // Includes polling to wait for webhook to update the DB
@@ -218,73 +219,124 @@ export default function Billing() {
             </motion.section>
           </>
         ) : (
-          /* Non-Pro: Show checkout options */
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl border border-slate-100 p-8"
-          >
-            <div className="text-center mb-8">
-              <Crown size={48} className="mx-auto text-amber-600 mb-4" />
-              <h2 className="text-xl font-bold text-slate-900 mb-2">
-                {t('dashboard.goProTitle')}
-              </h2>
-              <p className="text-slate-500">{t('dashboard.goProDesc')}</p>
-            </div>
+          /* Non-Pro: Pricing-style checkout cards */
+          <div className="grid md:grid-cols-2 gap-6 items-start">
 
-            <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto">
-              {/* Annual Plan Card */}
+            {/* CARTE ANNUEL */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-teal-200 relative overflow-hidden flex flex-col justify-between"
+            >
+              {/* Badge */}
+              <div className="absolute top-5 right-5">
+                <span className="bg-amber-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide flex items-center gap-1">
+                  <Star size={10} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 mb-1">{t('pricing.annualTitle')}</h3>
+                <p className="text-teal-600 font-medium text-sm mb-5">{t('pricing.annualTagline')}</p>
+
+                <div className="mb-3">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl sm:text-5xl font-bold text-slate-900">
+                      {isEarlyBird ? t('pricing.annualPrice') : t('pricing.annualStandardPrice')}
+                    </span>
+                    <span className="text-sm text-slate-500">{t('pricing.annualPeriod')}</span>
+                  </div>
+                  <div className="mt-1.5 flex items-center gap-2 text-sm">
+                    <span className="text-slate-500 line-through decoration-red-400">{t('pricing.annualOldPrice')}</span>
+                    <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded text-xs">
+                      {isEarlyBird ? t('pricing.annualDiscount') : t('pricing.annualStandardDiscount')}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Early Bird Progress */}
+                {isEarlyBird && (
+                  <div className="mb-6 p-3 bg-amber-50 rounded-xl border border-amber-100">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-xs font-bold text-amber-800">{t('pricing.earlyBirdLabel')}</span>
+                      <span className="text-xs font-bold text-amber-600">{claimed}/{limit}</span>
+                    </div>
+                    <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${(claimed / limit) * 100}%` }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
+                      />
+                    </div>
+                    <p className="text-xs text-amber-700 font-semibold mt-1.5">
+                      {t('pricing.earlyBirdRemaining', { count: remaining })}
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('pricing.annualAllIncluded')}</p>
+                  {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <div className="w-5 h-5 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check size={12} className="text-teal-600" />
+                      </div>
+                      <span className="text-slate-600 text-sm">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 onClick={() => handleCheckout('annual')}
                 disabled={checkoutLoading !== null}
-                className="p-6 rounded-xl border-2 border-teal-200 bg-teal-50/50 hover:border-teal-300 transition-all text-left disabled:opacity-50"
+                className="w-full py-3.5 px-6 font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                <p className="text-xs font-bold text-teal-600 uppercase tracking-wider mb-1">
-                  {isEarlyBird ? t('dashboard.earlyBirdLabel') : t('dashboard.annualPlanLabel')}
-                </p>
-                <p className="text-2xl font-bold text-slate-900">
-                  {isEarlyBird ? '149$' : '200$'}
-                  <span className="text-sm font-normal text-slate-500">{t('dashboard.perYear')}</span>
-                </p>
-                <p className="text-xs text-green-600 font-semibold mt-1">{t('dashboard.annualSaving')}</p>
-                {isEarlyBird && (
-                  <div className="mt-2 flex items-center justify-between text-[10px] font-bold text-amber-700">
-                    <span>{t('dashboard.earlyBirdSpots')}</span>
-                    <span>{claimed}/{limit}</span>
-                  </div>
-                )}
-                <div className="mt-3 w-full py-2.5 bg-slate-900 text-white rounded-lg font-semibold text-sm text-center flex items-center justify-center gap-2">
-                  {checkoutLoading === 'annual' ? (
-                    <Loader2 size={16} className="animate-spin" />
-                  ) : (
-                    <CheckCircle size={16} />
-                  )}
-                  {t('dashboard.chooseAnnual')}
-                </div>
+                {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin" />}
+                {t('dashboard.chooseAnnual')}
               </button>
 
-              {/* Monthly Plan Card */}
+              <p className="text-center text-xs text-slate-500 mt-3">{t('pricing.annualNote')}</p>
+            </motion.section>
+
+            {/* CARTE MENSUEL */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 mb-1">{t('pricing.monthlyTitle')}</h3>
+                <p className="text-slate-500 text-sm mb-5">{t('pricing.monthlyTagline')}</p>
+
+                <div className="mb-6 flex items-baseline gap-1">
+                  <span className="text-4xl sm:text-5xl font-bold text-slate-900">{t('pricing.monthlyPrice')}</span>
+                  <span className="text-sm text-slate-500">{t('pricing.monthlyPeriod')}</span>
+                </div>
+
+                <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
+                  <p className="text-xs font-bold text-slate-500 uppercase">{t('pricing.monthlyIncluded')}</p>
+                  {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
+                      <Check size={12} className="text-teal-600" /> {feat}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 onClick={() => handleCheckout('monthly')}
                 disabled={checkoutLoading !== null}
-                className="p-6 rounded-xl border border-slate-200 hover:border-slate-300 transition-all text-left disabled:opacity-50"
+                className="w-full py-3.5 px-6 font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
-                  {t('dashboard.monthlyPlanLabel')}
-                </p>
-                <p className="text-2xl font-bold text-slate-900">24$<span className="text-sm font-normal text-slate-500">{t('dashboard.perMonth')}</span></p>
-                <p className="text-xs text-slate-500 mt-1">{t('dashboard.monthlyFlexible')}</p>
-                <div className="mt-4 w-full py-2.5 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm text-center flex items-center justify-center gap-2">
-                  {checkoutLoading === 'monthly' ? (
-                    <Loader2 size={16} className="animate-spin" />
-                  ) : (
-                    <CreditCard size={16} />
-                  )}
-                  {t('dashboard.chooseMonthly')}
-                </div>
+                {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
+                {t('dashboard.chooseMonthly')}
               </button>
-            </div>
-          </motion.section>
+            </motion.section>
+
+          </div>
         )}
       </div>
     </div>

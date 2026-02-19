@@ -9,6 +9,7 @@ vi.mock('framer-motion', () => ({
   motion: {
     h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
     section: ({ children, ...props }) => <section {...props}>{children}</section>,
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
   },
 }));
 
@@ -118,13 +119,14 @@ describe('Billing', () => {
       });
     });
 
-    it('shows no subscription message', () => {
+    it('shows annual and monthly cards', () => {
       renderBilling();
 
-      expect(screen.getByText('Aucun abonnement actif')).toBeInTheDocument();
+      expect(screen.getByText('Annuel')).toBeInTheDocument();
+      expect(screen.getByText('Mensuel')).toBeInTheDocument();
     });
 
-    it('shows checkout cards for both plans', () => {
+    it('shows checkout buttons for both plans', () => {
       renderBilling();
 
       expect(screen.getByText("Choisir l'annuel")).toBeInTheDocument();
@@ -245,10 +247,10 @@ describe('Billing', () => {
       expect(screen.getByText('Factures')).toBeInTheDocument();
     });
 
-    it('annual saving text is shown for non-pro', () => {
+    it('annual old price is shown for non-pro', () => {
       mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
       renderBilling();
-      expect(screen.getByText(/139\$/)).toBeInTheDocument();
+      expect(screen.getByText('200$')).toBeInTheDocument();
     });
   });
 });
