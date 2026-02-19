@@ -3,13 +3,10 @@ import { supabase } from '../lib/supabase';
 
 export function useEarlyBirdCount() {
   const [data, setData] = useState({ claimed: 0, remaining: 200, limit: 200, isEarlyBird: true });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!!supabase);
 
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false);
-      return;
-    }
+    if (!supabase) return;
 
     supabase.functions.invoke('get-early-bird-count', { method: 'GET' })
       .then(({ data: result, error }) => {
