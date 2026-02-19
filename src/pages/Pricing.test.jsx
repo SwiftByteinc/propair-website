@@ -17,6 +17,11 @@ vi.mock('../lib/supabase', () => ({
   supabase: { functions: { invoke: vi.fn().mockResolvedValue({ data: { claimed: 42, remaining: 158, limit: 200, isEarlyBird: true }, error: null }) } },
 }));
 
+// Mock AuthContext (user not logged in by default)
+vi.mock('../context/AuthContext', () => ({
+  useAuth: () => ({ user: null }),
+}));
+
 function renderPricing() {
   return render(
     <HelmetProvider>
@@ -67,16 +72,16 @@ describe('Pricing', () => {
     expect(screen.getByText('/mois + tx')).toBeInTheDocument();
   });
 
-  it('renders Choisir l\'annuel link to signup', () => {
+  it('renders Choisir l\'annuel button', () => {
     renderPricing();
-    const link = screen.getByText("Choisir l'annuel");
-    expect(link.closest('a')).toHaveAttribute('href', '/login?plan=annual');
+    const btn = screen.getByText("Choisir l'annuel");
+    expect(btn.closest('button')).toBeInTheDocument();
   });
 
-  it('renders Choisir le mensuel link to signup', () => {
+  it('renders Choisir le mensuel button', () => {
     renderPricing();
-    const link = screen.getByText('Choisir le mensuel');
-    expect(link.closest('a')).toHaveAttribute('href', '/login?plan=monthly');
+    const btn = screen.getByText('Choisir le mensuel');
+    expect(btn.closest('button')).toBeInTheDocument();
   });
 
   it('renders Offre Lancement badge', () => {
@@ -180,9 +185,9 @@ describe('Pricing', () => {
     expect(screen.getByText('-25% de rabais')).toBeInTheDocument();
   });
 
-  it('CTA section has annual signup link', () => {
+  it('CTA section has annual signup button', () => {
     renderPricing();
-    const link = screen.getByText('Choisir l\'annuel').closest('a');
-    expect(link).toHaveAttribute('href', '/login?plan=annual');
+    const btn = screen.getByText('Choisir l\'annuel').closest('button');
+    expect(btn).toBeInTheDocument();
   });
 });
