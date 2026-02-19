@@ -354,6 +354,8 @@ const en = {
     alreadyRegistered: 'Unable to create the account. Try logging in.',
     emailNotConfirmed: 'Please confirm your email before logging in.',
     socialError: 'Social login error.',
+    redirectingToCheckout: 'Redirecting to secure checkout...',
+    pleaseWait: 'Please wait, you will be redirected to Stripe.',
   },
 
   forgotPassword: {

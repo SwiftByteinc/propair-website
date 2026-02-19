@@ -354,6 +354,8 @@ const fr = {
     alreadyRegistered: 'Impossible de créer le compte. Essayez de vous connecter.',
     emailNotConfirmed: 'Veuillez confirmer votre courriel avant de vous connecter.',
     socialError: 'Erreur de connexion sociale.',
+    redirectingToCheckout: 'Redirection vers le paiement sécurisé...',
+    pleaseWait: 'Patientez, vous allez être redirigé vers Stripe.',
   },
 
   forgotPassword: {

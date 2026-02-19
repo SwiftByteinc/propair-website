@@ -1,20 +1,44 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check, Zap, Shield, Bell, Users, Star, Info, Heart,
   MessageSquare, Briefcase, CreditCard,
-  Smartphone, ArrowRight, ChevronDown, X
+  Smartphone, ArrowRight, ChevronDown, X, Loader2
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { useEarlyBirdCount } from '../hooks/useEarlyBirdCount';
+import { useAuth } from '../context/AuthContext';
+import { supabase } from '../lib/supabase';
 
 export default function Pricing() {
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [showInsider, setShowInsider] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const [checkoutLoading, setCheckoutLoading] = useState(null);
   const { claimed, remaining, limit, isEarlyBird } = useEarlyBirdCount();
+
+  const handlePlanClick = async (plan) => {
+    if (!user) {
+      navigate(`/login?plan=${plan}`);
+      return;
+    }
+    setCheckoutLoading(plan);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+        body: { plan },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setCheckoutLoading(null);
+    }
+  };
 
   // Déclencheur après 5 secondes
   useEffect(() => {
@@ -259,12 +283,14 @@ export default function Pricing() {
               </div>
             </div>
 
-            <Link
-              to="/login?plan=annual"
-              className="block w-full py-4 px-6 text-center font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98]"
+            <button
+              onClick={() => handlePlanClick('annual')}
+              disabled={checkoutLoading !== null}
+              className="block w-full py-4 px-6 text-center font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
             >
+              {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin" />}
               {t('pricing.annualCta')}
-            </Link>
+            </button>
 
             <p className="text-center text-xs text-slate-500 mt-4">
               {t('pricing.annualNote')}
@@ -282,12 +308,14 @@ export default function Pricing() {
                 <span className="text-sm text-slate-500">{t('pricing.monthlyPeriod')}</span>
               </div>
 
-              <Link
-                to="/login?plan=monthly"
-                className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98]"
+              <button
+                onClick={() => handlePlanClick('monthly')}
+                disabled={checkoutLoading !== null}
+                className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
+                {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
                 {t('pricing.monthlyCta')}
-              </Link>
+              </button>
 
               <div className="space-y-3">
                 <p className="text-xs font-bold text-slate-500 uppercase">{t('pricing.monthlyIncluded')}</p>
@@ -327,12 +355,14 @@ export default function Pricing() {
                       <p className="text-slate-500 text-xs mb-5">
                         {t('pricing.insiderNote')}
                       </p>
-                      <Link
-                        to="/login?plan=annual"
-                        className="inline-block px-6 py-2.5 bg-slate-900 hover:bg-black text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+                      <button
+                        onClick={() => handlePlanClick('annual')}
+                        disabled={checkoutLoading !== null}
+                        className="inline-block px-6 py-2.5 bg-slate-900 hover:bg-black text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98] disabled:opacity-50"
                       >
+                        {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin inline mr-1" />}
                         {t('pricing.insiderCta')}
-                      </Link>
+                      </button>
                     </div>
                   </motion.div>
                 )}

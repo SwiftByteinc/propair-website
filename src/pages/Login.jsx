@@ -6,6 +6,7 @@ import { usePostHog } from '@posthog/react';
 import { useAuth } from '../context/AuthContext';
 import { getStoredReferralCode } from '../hooks/useReferralCapture';
 import { STORAGE_KEYS } from '../lib/constants';
+import { supabase } from '../lib/supabase';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -23,6 +24,7 @@ export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [checkoutRedirecting, setCheckoutRedirecting] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
@@ -47,10 +49,29 @@ export default function Login() {
 
   // Redirect if already logged in (or after successful login)
   useEffect(() => {
-    if (user) {
-      const from = location.state?.from?.pathname || '/portal';
-      navigate(from, { replace: true });
+    if (!user) return;
+
+    // Check for pending plan (from Pricing page flow)
+    const pendingPlan = sessionStorage.getItem(STORAGE_KEYS.PENDING_PLAN);
+    if (pendingPlan && ['monthly', 'annual'].includes(pendingPlan) && supabase) {
+      sessionStorage.removeItem(STORAGE_KEYS.PENDING_PLAN);
+      setCheckoutRedirecting(true);
+      supabase.functions.invoke('create-checkout-session', {
+        body: { plan: pendingPlan },
+      }).then(({ data, error }) => {
+        if (!error && data?.url) {
+          window.location.href = data.url;
+        } else {
+          navigate('/portal', { replace: true });
+        }
+      }).catch(() => {
+        navigate('/portal', { replace: true });
+      });
+      return;
     }
+
+    const from = location.state?.from?.pathname || '/portal';
+    navigate(from, { replace: true });
   }, [user, navigate, location.state]);
 
   // --- VALIDATION LOGIC ---
@@ -151,6 +172,19 @@ export default function Login() {
   };
 
   const inputClass = "w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm";
+
+  // Show loading screen while redirecting to Stripe after login
+  if (checkoutRedirecting) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 size={32} className="animate-spin mx-auto text-teal-600 mb-4" />
+          <p className="font-semibold text-slate-900">{t('login.redirectingToCheckout')}</p>
+          <p className="text-sm text-slate-500 mt-1">{t('login.pleaseWait')}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-8 sm:py-12 font-sans">
