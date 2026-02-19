@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Billing from './Billing';
@@ -16,6 +16,16 @@ vi.mock('framer-motion', () => ({
 const mockToast = { info: vi.fn(), success: vi.fn(), error: vi.fn() };
 vi.mock('../../context/ToastContext', () => ({
   useToast: () => mockToast,
+}));
+
+// Mock AuthContext
+vi.mock('../../context/AuthContext', () => ({
+  useAuth: () => ({ refreshProfile: vi.fn() }),
+}));
+
+// Mock supabase
+vi.mock('../../lib/supabase', () => ({
+  supabase: { functions: { invoke: vi.fn() } },
 }));
 
 // Mock useOutletContext
@@ -48,6 +58,7 @@ describe('Billing', () => {
       mockOutletContext.mockReturnValue({
         subscription: {
           status: 'active',
+          plan: 'annual',
           current_period_end: 1740000000,
         },
         isPro: true,
@@ -57,7 +68,7 @@ describe('Billing', () => {
     it('shows Pro subscription status', () => {
       renderBilling();
 
-      expect(screen.getByText('ProPair Élite')).toBeInTheDocument();
+      expect(screen.getByText(/ProPair Élite/)).toBeInTheDocument();
       expect(screen.getByText('Plan actif')).toBeInTheDocument();
     });
 
@@ -67,16 +78,11 @@ describe('Billing', () => {
       expect(screen.getByText(/Renouvellement le/)).toBeInTheDocument();
     });
 
-    it('shows manage via app button', () => {
+    it('shows manage subscription button', () => {
       renderBilling();
 
-      const btn = screen.getByText("Gérer via l'app");
+      const btn = screen.getByText("Gérer l'abonnement");
       expect(btn).toBeInTheDocument();
-
-      fireEvent.click(btn);
-      expect(mockToast.info).toHaveBeenCalledWith(
-        expect.stringContaining('application mobile')
-      );
     });
 
     it('shows invoices section', () => {
@@ -89,6 +95,18 @@ describe('Billing', () => {
       renderBilling();
 
       expect(screen.getByText('Gérez votre abonnement ProPair.')).toBeInTheDocument();
+    });
+
+    it('shows plan type (Annual)', () => {
+      renderBilling();
+
+      expect(screen.getByText(/Annuel/)).toBeInTheDocument();
+    });
+
+    it('shows billing portal link in invoices section', () => {
+      renderBilling();
+
+      expect(screen.getByText('portail de facturation')).toBeInTheDocument();
     });
   });
 
@@ -106,10 +124,23 @@ describe('Billing', () => {
       expect(screen.getByText('Aucun abonnement actif')).toBeInTheDocument();
     });
 
-    it('shows upgrade CTA button', () => {
+    it('shows checkout cards for both plans', () => {
       renderBilling();
 
-      expect(screen.getByText('Voir les offres')).toBeInTheDocument();
+      expect(screen.getByText("Choisir l'annuel")).toBeInTheDocument();
+      expect(screen.getByText('Choisir le mensuel')).toBeInTheDocument();
+    });
+
+    it('shows annual plan price', () => {
+      renderBilling();
+
+      expect(screen.getByText(/149\$/)).toBeInTheDocument();
+    });
+
+    it('shows monthly plan price', () => {
+      renderBilling();
+
+      expect(screen.getByText(/24\$/)).toBeInTheDocument();
     });
 
     it('shows correct subtitle for free users', () => {
@@ -124,6 +155,7 @@ describe('Billing', () => {
       mockOutletContext.mockReturnValue({
         subscription: {
           status: 'active',
+          plan: 'monthly',
           current_period_end: 1740000000,
         },
         isPro: true,
@@ -131,7 +163,6 @@ describe('Billing', () => {
 
       renderBilling();
 
-      // The date should be formatted in fr-CA locale
       const renewalText = screen.getByText(/Renouvellement le/);
       expect(renewalText.textContent).not.toContain('Non disponible');
     });
@@ -140,6 +171,7 @@ describe('Billing', () => {
       mockOutletContext.mockReturnValue({
         subscription: {
           status: 'active',
+          plan: 'annual',
           current_period_end: '2026-03-15T00:00:00Z',
         },
         isPro: true,
@@ -153,7 +185,7 @@ describe('Billing', () => {
 
     it('shows fallback when no subscription end date', () => {
       mockOutletContext.mockReturnValue({
-        subscription: { status: 'active' },
+        subscription: { status: 'active', plan: 'monthly' },
         isPro: true,
       });
 
@@ -170,25 +202,26 @@ describe('Billing', () => {
       expect(screen.getByText('Abonnement')).toBeInTheDocument();
     });
 
-    it('pro user does not show "Voir les offres"', () => {
+    it('pro user does not show checkout cards', () => {
       mockOutletContext.mockReturnValue({
-        subscription: { status: 'active', current_period_end: 1740000000 },
+        subscription: { status: 'active', plan: 'annual', current_period_end: 1740000000 },
         isPro: true,
       });
       renderBilling();
-      expect(screen.queryByText('Voir les offres')).not.toBeInTheDocument();
+      expect(screen.queryByText("Choisir l'annuel")).not.toBeInTheDocument();
+      expect(screen.queryByText('Choisir le mensuel')).not.toBeInTheDocument();
     });
 
-    it('non-pro user does not show "Gérer via l\'app"', () => {
+    it('non-pro user does not show manage subscription button', () => {
       mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
       renderBilling();
-      expect(screen.queryByText("Gérer via l'app")).not.toBeInTheDocument();
+      expect(screen.queryByText("Gérer l'abonnement")).not.toBeInTheDocument();
     });
 
     it('non-pro user does not show "ProPair Élite"', () => {
       mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
       renderBilling();
-      expect(screen.queryByText('ProPair Élite')).not.toBeInTheDocument();
+      expect(screen.queryByText(/ProPair Élite/)).not.toBeInTheDocument();
     });
 
     it('non-pro user does not show "Plan actif"', () => {
@@ -205,18 +238,17 @@ describe('Billing', () => {
 
     it('pro user shows "Factures" section', () => {
       mockOutletContext.mockReturnValue({
-        subscription: { status: 'active', current_period_end: 1740000000 },
+        subscription: { status: 'active', plan: 'annual', current_period_end: 1740000000 },
         isPro: true,
       });
       renderBilling();
       expect(screen.getByText('Factures')).toBeInTheDocument();
     });
 
-    it('Voir les offres links to pricing', () => {
+    it('annual saving text is shown for non-pro', () => {
       mockOutletContext.mockReturnValue({ subscription: null, isPro: false });
       renderBilling();
-      const link = screen.getByText('Voir les offres').closest('a');
-      expect(link).toHaveAttribute('href', '/pricing');
+      expect(screen.getByText(/139\$/)).toBeInTheDocument();
     });
   });
 });

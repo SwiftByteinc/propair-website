@@ -41,7 +41,7 @@ describe('About', () => {
 
   it('renders quote', () => {
     renderAbout();
-    expect(screen.getByText(/Arrêter de compliquer la vie des artisans/)).toBeInTheDocument();
+    expect(screen.getByText(/bâti ProPair parce que personne ne le faisait/)).toBeInTheDocument();
   });
 
   it('renders founder attribution', () => {

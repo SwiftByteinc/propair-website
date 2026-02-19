@@ -17,7 +17,8 @@ const createFallbackProfile = (userData) => ({
   user_role: 'client',
   referral_code: null,
   pro_months_balance: 0,
-  is_verified: false
+  is_verified: false,
+  activated: false
 });
 
 export function AuthProvider({ children }) {
@@ -41,7 +42,7 @@ export function AuthProvider({ children }) {
       // Fetch profile and subscription in parallel
       const profilePromise = supabase
         .from('profiles')
-        .select('id, email, full_name, user_role, referral_code, pro_months_balance, is_verified')
+        .select('id, email, full_name, user_role, referral_code, pro_months_balance, is_verified, activated')
         .eq('id', userData.id)
         .single();
 
@@ -318,7 +319,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   // Computed values
-  const isPro = subscription?.status === 'active' || subscription?.status === 'trialing';
+  // Check both: profiles.activated (mobile app gate) + subscriptions table (website gate)
+  const isPro = profile?.activated === true || subscription?.status === 'active' || subscription?.status === 'trialing';
   const hasReferralMonths = (profile?.pro_months_balance || 0) > 0;
 
   // Memoize the context value to prevent unnecessary re-renders

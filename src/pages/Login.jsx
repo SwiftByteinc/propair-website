@@ -5,6 +5,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckC
 import { usePostHog } from '@posthog/react';
 import { useAuth } from '../context/AuthContext';
 import { getStoredReferralCode } from '../hooks/useReferralCapture';
+import { STORAGE_KEYS } from '../lib/constants';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -108,6 +109,11 @@ export default function Login() {
         );
         if (error) throw error;
         posthog?.capture('user_signed_up', { method: 'email', has_referral: !!storedRefCode });
+        // Preserve selected plan for post-signup checkout
+        const plan = searchParams.get('plan');
+        if (plan && ['monthly', 'annual'].includes(plan)) {
+          sessionStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan);
+        }
       }
     } catch (err) {
       let msg = err.message;
@@ -131,6 +137,11 @@ export default function Login() {
     setLoading(true);
     posthog?.capture('social_login_attempted', { provider });
     try {
+      // Store plan before OAuth redirect (user leaves the page)
+      const plan = searchParams.get('plan');
+      if (plan && ['monthly', 'annual'].includes(plan)) {
+        sessionStorage.setItem(STORAGE_KEYS.PENDING_PLAN, plan);
+      }
       const { error } = await signInWithOAuth(provider, '/portal');
       if (error) throw error;
     } catch (err) {

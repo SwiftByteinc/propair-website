@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { copyToClipboard } from '../../lib/clipboard';
 import { Helmet } from 'react-helmet-async';
@@ -14,18 +14,52 @@ import {
   Users,
   Briefcase,
   HelpCircle,
-  Shield
+  Shield,
+  Loader2
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
 import { useToast } from '../../context/ToastContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { STORAGE_KEYS } from '../../lib/constants';
+import { supabase } from '../../lib/supabase';
 
 export default function DashboardHome() {
   const { t } = useLanguage();
-  const { user } = useOutletContext();
+  const { user, isPro } = useOutletContext();
   const toast = useToast();
   const isEntrepreneur = user?.role === 'entrepreneur';
   const [copied, setCopied] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  // Process pending plan from signup flow (auto-redirect to Stripe Checkout)
+  useEffect(() => {
+    const pendingPlan = sessionStorage.getItem(STORAGE_KEYS.PENDING_PLAN);
+    if (!pendingPlan || isPro || !supabase) return;
+
+    // Clear immediately to prevent infinite loop if user cancels on Stripe
+    sessionStorage.removeItem(STORAGE_KEYS.PENDING_PLAN);
+
+    if (!['monthly', 'annual'].includes(pendingPlan)) return;
+
+    const startCheckout = async () => {
+      setCheckoutLoading(true);
+      try {
+        const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+          body: { plan: pendingPlan },
+        });
+        if (error) throw error;
+        if (data?.url) {
+          window.location.href = data.url;
+        }
+      } catch (err) {
+        console.error('Checkout error:', err);
+        toast.error(t('dashboard.checkoutError'));
+        setCheckoutLoading(false);
+      }
+    };
+
+    startCheckout();
+  }, [isPro, toast, t]);
 
   // Stats réelles
   const { stats: referralStats, loading: loadingStats } = useReferralStats(user?.id);
@@ -57,6 +91,19 @@ export default function DashboardHome() {
   };
 
   const firstName = user?.full_name?.split(' ')[0] || t('dashboard.helloFallback');
+
+  // Show loading overlay when checkout session is being created
+  if (checkoutLoading) {
+    return (
+      <div className="p-4 sm:p-6 md:p-8 max-w-4xl flex items-center justify-center min-h-[50vh]">
+        <div className="text-center">
+          <Loader2 size={32} className="animate-spin mx-auto text-teal-600 mb-4" />
+          <p className="font-semibold text-slate-900">{t('dashboard.redirectingToCheckout')}</p>
+          <p className="text-sm text-slate-500 mt-1">{t('dashboard.pleaseWait')}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-4xl">

@@ -29,6 +29,11 @@ vi.mock('../../context/ToastContext', () => ({
   useToast: () => mockToast,
 }));
 
+// Mock supabase
+vi.mock('../../lib/supabase', () => ({
+  supabase: { functions: { invoke: vi.fn() } },
+}));
+
 Object.assign(navigator, {
   clipboard: { writeText: vi.fn().mockResolvedValue(undefined) },
 });
@@ -65,6 +70,7 @@ describe('DashboardHome', () => {
           referral_code: 'NICOLAS123',
           trial_connections_count: 1,
         },
+        isPro: false,
       });
     });
 
@@ -128,6 +134,7 @@ describe('DashboardHome', () => {
           referral_code: 'NICOLAS123',
           trial_connections_count: 0,
         },
+        isPro: true,
       });
     });
 
@@ -159,6 +166,7 @@ describe('DashboardHome', () => {
           referral_code: 'JEAN456',
           trial_connections_count: 0,
         },
+        isPro: false,
       });
     });
 
@@ -191,6 +199,7 @@ describe('DashboardHome', () => {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
           role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 3,
         },
+        isPro: false,
       });
       mockUseReferralStats.mockReturnValue({
         stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
@@ -206,6 +215,7 @@ describe('DashboardHome', () => {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
           role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 3,
         },
+        isPro: false,
       });
       renderDashboardHome();
       expect(screen.getByText('0 connexion(s) restante(s)')).toBeInTheDocument();
@@ -217,6 +227,7 @@ describe('DashboardHome', () => {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
           role: 'entrepreneur', isPro: false, referral_code: 'TEST999', trial_connections_count: 1,
         },
+        isPro: false,
       });
       renderDashboardHome();
       fireEvent.click(screen.getByText('Copier'));
@@ -231,6 +242,7 @@ describe('DashboardHome', () => {
           id: 'abc-123', full_name: 'Test User', email: 'test@test.com',
           role: 'entrepreneur', isPro: false, referral_code: 'CODE', trial_connections_count: 0,
         },
+        isPro: false,
       });
       renderDashboardHome();
       expect(mockUseReferralStats).toHaveBeenCalledWith('abc-123');
@@ -242,6 +254,7 @@ describe('DashboardHome', () => {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
           role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 1,
         },
+        isPro: false,
       });
       mockUseReferralStats.mockReturnValue({
         stats: { totalReferrals: 3, validatedReferrals: 3, pendingReferrals: 0, earnedMonths: 6 },
@@ -257,6 +270,7 @@ describe('DashboardHome', () => {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
           role: 'entrepreneur', isPro: true, referral_code: 'NICOLAS123', trial_connections_count: 0,
         },
+        isPro: true,
       });
       renderDashboardHome();
       expect(screen.queryByText(/Mode Essai/)).not.toBeInTheDocument();
@@ -268,6 +282,7 @@ describe('DashboardHome', () => {
           id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
           role: 'client', isPro: false, referral_code: 'JEAN456', trial_connections_count: 0,
         },
+        isPro: false,
       });
       renderDashboardHome();
       expect(screen.getByText(/Mode Essai/)).toBeInTheDocument();
@@ -279,6 +294,7 @@ describe('DashboardHome', () => {
           id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
           role: 'client', isPro: false, referral_code: 'JEAN456', trial_connections_count: 0,
         },
+        isPro: false,
       });
       renderDashboardHome();
       expect(screen.queryByText(/Encore \d+ parrainage/)).not.toBeInTheDocument();
