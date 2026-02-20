@@ -142,12 +142,12 @@ export default function DashboardHome() {
               {user?.isPro ? <Crown size={28} /> : <Zap size={28} />}
             </div>
             <div>
-              <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium mb-1 ${
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold mb-1 ${
                 user?.isPro ? 'bg-teal-100 text-teal-800' : 'bg-amber-100 text-amber-800'
               }`}>
                 {user?.isPro ? (
                   <>
-                    <Shield size={10} />
+                    <Shield size={12} />
                     {t('dashboard.memberElite')}
                   </>
                 ) : (
@@ -160,8 +160,8 @@ export default function DashboardHome() {
                 {user?.isPro ? t('dashboard.unlimitedConnections') : t('dashboard.connectionsRemaining', { count: connectionsRemaining })}
               </p>
               {!user?.isPro && (
-                <div className="mt-2 w-48">
-                  <div className="h-1.5 bg-amber-200 rounded-full overflow-hidden">
+                <div className="mt-2 w-full max-w-48">
+                  <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${(connectionsUsed / connectionsTotal) * 100}%` }}
@@ -216,7 +216,7 @@ export default function DashboardHome() {
                   {t('dashboard.yourUniqueLink')}
                 </label>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-lg border border-slate-100 text-sm font-mono text-slate-600 truncate">
+                  <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-100/60 text-sm font-mono text-slate-600 truncate">
                     {referralLink}
                   </div>
                   <motion.button
@@ -225,7 +225,7 @@ export default function DashboardHome() {
                     className={`px-4 py-2.5 rounded-lg font-semibold text-sm flex items-center gap-2 transition-all ${
                       copied
                         ? 'bg-teal-600 text-white'
-                        : 'bg-slate-900 text-white hover:bg-slate-800'
+                        : 'bg-slate-900 text-white hover:bg-black'
                     }`}
                   >
                     {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -265,7 +265,7 @@ export default function DashboardHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             <Link
               to="/portal/billing"
@@ -308,7 +308,7 @@ export default function DashboardHome() {
             </p>
           </motion.section>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
              <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all">
                 <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>

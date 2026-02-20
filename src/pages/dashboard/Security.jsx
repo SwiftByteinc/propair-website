@@ -276,7 +276,7 @@ export default function Security() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-2.5 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>

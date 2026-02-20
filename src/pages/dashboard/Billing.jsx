@@ -181,7 +181,7 @@ export default function Billing() {
                 <button
                   onClick={handleStripePortal}
                   disabled={portalLoading}
-                  className="px-5 py-2.5 bg-white text-slate-700 rounded-xl font-semibold text-sm border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-2 disabled:opacity-50"
+                  className="px-6 py-3 bg-white text-slate-700 rounded-xl font-semibold text-sm border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-2 disabled:opacity-50"
                 >
                   {portalLoading ? (
                     <Loader2 size={14} className="animate-spin" />
@@ -226,7 +226,7 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-teal-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-teal-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
             >
               {/* Badge */}
               <div className="absolute top-5 right-5">
@@ -319,8 +319,11 @@ export default function Billing() {
                 <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
                   <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
-                    <div key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
-                      <Check size={12} className="text-teal-600" /> {feat}
+                    <div key={i} className="flex items-start gap-2.5">
+                      <div className="w-5 h-5 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check size={12} className="text-teal-600" />
+                      </div>
+                      <span className="text-slate-600 text-sm">{feat}</span>
                     </div>
                   ))}
                 </div>

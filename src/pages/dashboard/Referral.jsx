@@ -18,7 +18,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
   const colorMap = {
     teal: { bg: 'bg-teal-100', fill: 'bg-teal-600', text: 'text-teal-600', iconBg: 'bg-teal-50' },
     amber: { bg: 'bg-amber-100', fill: 'bg-amber-500', text: 'text-amber-600', iconBg: 'bg-amber-50' },
-    pink: { bg: 'bg-pink-100', fill: 'bg-pink-500', text: 'text-pink-600', iconBg: 'bg-pink-50' },
+    slate: { bg: 'bg-slate-200', fill: 'bg-slate-600', text: 'text-slate-600', iconBg: 'bg-slate-50' },
   };
   const c = colorMap[color] || colorMap.teal;
 
@@ -39,7 +39,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
           <span className="text-xs text-slate-500">/ {max}</span>
         </div>
       </div>
-      <div className={`h-2.5 ${c.bg} rounded-full overflow-hidden`}>
+      <div className={`h-2 ${c.bg} rounded-full overflow-hidden`}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${progress * 100}%` }}
@@ -125,15 +125,15 @@ export default function Referral() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-pink-50 to-slate-50/50 rounded-2xl border border-pink-100 p-6"
+          className="bg-gradient-to-br from-teal-50 to-slate-50/50 rounded-2xl border border-teal-100 p-6"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-pink-100 flex items-center justify-center shadow-sm">
-                <Gift size={28} className="text-pink-500" />
+              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm">
+                <Gift size={28} className="text-teal-500" />
               </div>
               <div>
-                <p className="text-xs font-medium text-pink-500 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
+                <p className="text-xs font-medium text-teal-600 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
                 <p className="text-sm text-slate-500">
                   {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
                   {entreMonths > 0 && clientMonths > 0 && ' + '}
@@ -182,7 +182,7 @@ export default function Referral() {
             max={6}
             label={t('dashboard.clientNetwork')}
             sublabel={t('dashboard.clientNetworkDesc')}
-            color="pink"
+            color="slate"
             icon={Users}
             goalReachedText={t('dashboard.goalReached')}
           />
@@ -213,7 +213,7 @@ export default function Referral() {
           <div className="p-6">
             {/* Code display */}
             <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-4">
-              <span className="flex-1 text-lg font-bold text-slate-900 tracking-widest font-mono">
+              <span className="flex-1 text-lg font-bold text-slate-900 tracking-wider font-mono">
                 {referralCode}
               </span>
               <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full">
@@ -223,7 +223,7 @@ export default function Referral() {
 
             {/* Link display */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="flex-1 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-mono text-slate-500 truncate">
+              <div className="flex-1 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100/60 text-sm font-mono text-slate-500 truncate">
                 {referralLink}
               </div>
             </div>
@@ -236,7 +236,7 @@ export default function Referral() {
                 className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                   copied
                     ? 'bg-teal-600 text-white'
-                    : 'bg-slate-900 text-white hover:bg-slate-800'
+                    : 'bg-slate-900 text-white hover:bg-black'
                 }`}
               >
                 <AnimatePresence mode="wait">
@@ -255,7 +255,7 @@ export default function Referral() {
               <motion.button
                 onClick={handleShare}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-pink-600 text-white hover:bg-pink-700 transition-all"
+                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-slate-900 text-white hover:bg-black transition-all"
               >
                 <Share2 size={16} />
                 {t('dashboard.share')}
@@ -337,9 +337,9 @@ export default function Referral() {
                 <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonths')}</span>
               </div>
             </div>
-            <div className="bg-pink-50/50 rounded-xl p-4 border border-pink-100/50">
+            <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/50">
               <div className="flex items-center gap-2.5 mb-2">
-                <Users size={16} className="text-pink-600" />
+                <Users size={16} className="text-slate-600" />
                 <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.client')}</h3>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
@@ -394,7 +394,7 @@ export default function Referral() {
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                           ref.referee_type === 'entrepreneur'
                             ? 'bg-slate-100 text-slate-600'
-                            : 'bg-pink-50 text-pink-600'
+                            : 'bg-teal-50 text-teal-600'
                         }`}>
                           {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                         </span>
@@ -427,7 +427,15 @@ export default function Referral() {
           >
             <Users size={40} className="mx-auto text-slate-200 mb-4" />
             <p className="text-slate-500 font-medium mb-1">{t('dashboard.noReferralsYet')}</p>
-            <p className="text-sm text-slate-500">{t('dashboard.shareYourLink')}</p>
+            <p className="text-sm text-slate-500 mb-5">{t('dashboard.shareYourLink')}</p>
+            <motion.button
+              onClick={copyLink}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-all"
+            >
+              <Copy size={16} />
+              {t('dashboard.copyLink')}
+            </motion.button>
           </motion.div>
         )}
 
@@ -438,9 +446,13 @@ export default function Referral() {
             animate={{ opacity: 1 }}
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
           >
-            <div className="animate-pulse space-y-3">
-              <div className="h-4 bg-slate-100 rounded w-1/3 mx-auto" />
-              <div className="h-4 bg-slate-100 rounded w-1/2 mx-auto" />
+            <div className="animate-pulse space-y-4">
+              <div className="h-5 bg-slate-100 rounded-lg w-2/5 mx-auto" />
+              <div className="h-3 bg-slate-100 rounded w-3/5 mx-auto" />
+              <div className="flex justify-center gap-3 mt-4">
+                <div className="h-10 bg-slate-100 rounded-xl w-28" />
+                <div className="h-10 bg-slate-100 rounded-xl w-28" />
+              </div>
             </div>
           </motion.div>
         )}
