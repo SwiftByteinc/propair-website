@@ -11,6 +11,12 @@
       ]
     },
     {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
+    },
+    {
       "source": "/portal/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
@@ -20,6 +26,7 @@
   "rewrites": [
     { "source": "/ingest/static/:path*", "destination": "https://us-assets.i.posthog.com/static/:path*" },
     { "source": "/ingest/:path*", "destination": "https://us.i.posthog.com/:path*" },
+    { "source": "/.well-known/:path*", "destination": "/.well-known/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
