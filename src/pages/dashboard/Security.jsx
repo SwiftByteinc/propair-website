@@ -403,14 +403,14 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
           <button
             onClick={onClose}
             disabled={isDeleting}
-            className="flex-1 py-2.5 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50"
+            className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50"
           >
             {t('dashboard.cancelBtn')}
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="flex-1 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {isDeleting ? (
               <>

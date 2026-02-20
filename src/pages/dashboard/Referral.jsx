@@ -74,8 +74,8 @@ export default function Referral() {
   const clientReferrals = referralList.filter(r => r.referee_type === 'client');
   const entreValidated = entreReferrals.filter(r => r.status === 'validated').length;
   const clientCount = clientReferrals.length;
-  const entreMonths = entreValidated * 2;
-  const clientMonths = Math.floor(clientCount / 6) * 2;
+  const entreMonths = entreValidated * 3;
+  const clientMonths = Math.floor(clientCount / 6) * 3;
   const totalMonths = entreMonths + clientMonths;
 
   const copyLink = useCallback(async () => {
@@ -127,9 +127,9 @@ export default function Referral() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-br from-teal-50 to-slate-50/50 rounded-2xl border border-teal-100 p-6"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
                 <Gift size={28} className="text-teal-500" />
               </div>
               <div>
@@ -255,7 +255,7 @@ export default function Referral() {
               <motion.button
                 onClick={handleShare}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-slate-900 text-white hover:bg-black transition-all"
+                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all"
               >
                 <Share2 size={16} />
                 {t('dashboard.share')}
@@ -329,12 +329,13 @@ export default function Referral() {
                 <Briefcase size={16} className="text-slate-600" />
                 <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.entrepreneur')}</h3>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-slate-600">
+              <div className="flex items-center gap-1.5 text-xs text-slate-600 flex-wrap">
                 <span>{t('dashboard.signUp')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
                 <span>{t('dashboard.threeMonthsActive')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonths')}</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusThreeMonthsParrain')}</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonthsFilleul')}</span>
               </div>
             </div>
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/50">
@@ -345,7 +346,7 @@ export default function Referral() {
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
                 <span>{t('dashboard.sixSignedUp')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonths')}</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusThreeMonths')}</span>
               </div>
             </div>
           </div>

@@ -222,7 +222,7 @@ export default function DashboardHome() {
                   <motion.button
                     onClick={copyReferralLink}
                     whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2.5 rounded-lg font-semibold text-sm flex items-center gap-2 transition-all ${
+                    className={`px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all ${
                       copied
                         ? 'bg-teal-600 text-white'
                         : 'bg-slate-900 text-white hover:bg-black'
@@ -247,7 +247,7 @@ export default function DashboardHome() {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min((referralCount / referralGoal) * 100, 100)}%` }}
-                    className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
+                    className="h-full bg-teal-600 rounded-full"
                   />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
