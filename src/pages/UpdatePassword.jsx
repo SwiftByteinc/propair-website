@@ -117,7 +117,7 @@ export default function UpdatePassword() {
             />
           </Link>
 
-          <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8 text-center">
+          <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8 text-center">
             <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle size={32} className="text-amber-600" />
             </div>
@@ -166,7 +166,7 @@ export default function UpdatePassword() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
+          className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
         >
           {/* Error Message */}
           <div aria-live="polite" aria-atomic="true">

@@ -129,19 +129,17 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-slate-50 rounded-[2rem] p-8 md:p-12 border border-slate-100"
+            className="max-w-4xl mx-auto bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-100/60 shadow-sm"
           >
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center">
-                <Briefcase size={24} className="text-amber-600" />
-              </div>
+              <Briefcase size={22} className="text-slate-700" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">{t('pricing.proSectionTitle')}</h2>
-                <span className="px-3 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-full uppercase tracking-wide">{t('pricing.proBadge')}</span>
+                <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">{t('pricing.proSectionTitle')}</h2>
+                <span className="px-3 py-0.5 bg-slate-900 text-white text-[10px] font-semibold rounded-full">{t('pricing.proBadge')}</span>
               </div>
             </div>
 
-            <p className="text-lg font-medium text-amber-600 mt-4 mb-6">{t('pricing.proTagline')}</p>
+            <p className="text-lg font-medium text-slate-500 mt-4 mb-6">{t('pricing.proTagline')}</p>
 
             <p className="text-slate-600 leading-relaxed mb-4">
               {t('pricing.proDesc1')}
@@ -154,24 +152,24 @@ export default function Pricing() {
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100">
-                <div className="p-1.5 bg-amber-100 rounded-full mt-0.5"><Bell size={16} className="text-amber-700" /></div>
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+                <Bell size={16} className="text-teal-600 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-bold text-slate-900 text-sm">{t('pricing.proNotifTitle')}</p>
+                  <p className="font-semibold text-slate-900 text-sm">{t('pricing.proNotifTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proNotifDesc')}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100">
-                <div className="p-1.5 bg-amber-100 rounded-full mt-0.5"><Shield size={16} className="text-amber-700" /></div>
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+                <Shield size={16} className="text-teal-600 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-bold text-slate-900 text-sm">{t('pricing.proCommTitle')}</p>
+                  <p className="font-semibold text-slate-900 text-sm">{t('pricing.proCommTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proCommDesc')}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100">
-                <div className="p-1.5 bg-amber-100 rounded-full mt-0.5"><MessageSquare size={16} className="text-amber-700" /></div>
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+                <MessageSquare size={16} className="text-teal-600 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-bold text-slate-900 text-sm">{t('pricing.proChatTitle')}</p>
+                  <p className="font-semibold text-slate-900 text-sm">{t('pricing.proChatTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proChatDesc')}</p>
                 </div>
               </div>
@@ -182,7 +180,7 @@ export default function Pricing() {
         {/* POURQUOI PROPAIR (6 raisons) */}
         <section className="mb-24">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('pricing.reasonsTitle')}</h2>
+            <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('pricing.reasonsTitle')}</h2>
             <p className="text-slate-500">{t('pricing.reasonsSubtitle')}</p>
           </div>
 
@@ -194,12 +192,10 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.06 }}
-                className="bg-slate-50 rounded-2xl border border-slate-100 p-6 hover:border-teal-100 transition-colors"
+                className="bg-slate-50 rounded-2xl border border-slate-100/60 p-6 hover:shadow-md transition-all"
               >
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-4 border border-slate-100">
-                  <reason.icon size={20} className="text-teal-600" />
-                </div>
-                <h3 className="font-bold text-slate-900 mb-2">{reason.title}</h3>
+                <reason.icon size={20} className="text-teal-600 mb-4" />
+                <h3 className="font-semibold text-slate-900 mb-2">{reason.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{reason.description}</p>
               </motion.div>
             ))}
@@ -217,17 +213,17 @@ export default function Pricing() {
               boxShadow: showInsider ? '0 25px 50px -12px rgba(13, 148, 136, 0.15)' : '0 0 0 0 rgba(0,0,0,0)'
             }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-[2rem] p-5 sm:p-8 md:p-10 border-2 relative overflow-hidden h-full flex flex-col justify-between"
+            className="bg-white rounded-2xl p-5 sm:p-8 md:p-10 border-2 relative overflow-hidden h-full flex flex-col justify-between"
           >
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
-              <span className="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm uppercase tracking-wide flex items-center gap-1">
+              <span className="bg-teal-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
                 <Star size={12} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
               </span>
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('pricing.annualTitle')}</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.annualTitle')}</h3>
               <p className="text-teal-600 font-medium mb-6">{t('pricing.annualTagline')}</p>
 
               <div className="mb-4">
@@ -239,7 +235,7 @@ export default function Pricing() {
                 </div>
                 <div className="mt-2 flex items-center gap-2 text-sm">
                   <span className="text-slate-500 line-through decoration-red-400">{t('pricing.annualOldPrice')}</span>
-                  <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">
+                  <span className="text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded">
                     {isEarlyBird ? t('pricing.annualDiscount') : t('pricing.annualStandardDiscount')}
                   </span>
                 </div>
@@ -247,36 +243,34 @@ export default function Pricing() {
 
               {/* Early Bird Progress */}
               {isEarlyBird && (
-                <div className="mb-8 p-3 bg-amber-50 rounded-xl border border-amber-100">
+                <div className="mb-8 p-3 bg-teal-50 rounded-xl border border-teal-100">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-amber-800">
+                    <span className="text-xs font-semibold text-teal-800">
                       {t('pricing.earlyBirdLabel')}
                     </span>
-                    <span className="text-xs font-bold text-amber-600">
+                    <span className="text-xs font-semibold text-teal-600">
                       {claimed}/{limit}
                     </span>
                   </div>
-                  <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
+                  <div className="h-2 bg-teal-200 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${(claimed / limit) * 100}%` }}
                       transition={{ duration: 1, delay: 0.3 }}
-                      className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
+                      className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
                     />
                   </div>
-                  <p className="text-xs text-amber-700 font-semibold mt-1.5">
+                  <p className="text-xs text-teal-700 font-semibold mt-1.5">
                     {t('pricing.earlyBirdRemaining', { count: remaining })}
                   </p>
                 </div>
               )}
 
               <div className="space-y-4 mb-8 pt-8 border-t border-slate-100">
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('pricing.annualAllIncluded')}</p>
+                <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                 {proFeatures.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check size={14} className="text-teal-600" />
-                    </div>
+                    <Check size={16} className="text-teal-600 flex-shrink-0 mt-0.5" />
                     <span className="text-slate-600 text-sm font-medium">{feature.text}</span>
                   </div>
                 ))}
@@ -299,8 +293,8 @@ export default function Pricing() {
 
           {/* CARTE DROITE : MENSUEL + Overlay Insider */}
           <div className="relative h-full flex flex-col">
-            <div className="bg-white rounded-[2rem] p-5 sm:p-8 border border-slate-200 flex-1 relative z-10 overflow-hidden">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('pricing.monthlyTitle')}</h3>
+            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-100/60 shadow-sm flex-1 relative z-10 overflow-hidden">
+              <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.monthlyTitle')}</h3>
               <p className="text-slate-500 mb-6">{t('pricing.monthlyTagline')}</p>
 
               <div className="mb-8 flex items-baseline gap-1">
@@ -311,14 +305,14 @@ export default function Pricing() {
               <button
                 onClick={() => handlePlanClick('monthly')}
                 disabled={checkoutLoading !== null}
-                className="block w-full py-3 px-6 text-center font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                className="block w-full py-3 px-6 text-center font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all mb-8 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
                 {t('pricing.monthlyCta')}
               </button>
 
               <div className="space-y-3">
-                <p className="text-xs font-bold text-slate-500 uppercase">{t('pricing.monthlyIncluded')}</p>
+                <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                 {proFeatures.map((f, i) => (
                   <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
                     <Check size={14} className="text-teal-600" /> {f.text}
@@ -335,7 +329,7 @@ export default function Pricing() {
                     transition={{ duration: 0.6 }}
                     role="dialog"
                     aria-label={t('pricing.insiderTitle')}
-                    className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-[2rem] flex items-center justify-center p-4 sm:p-8"
+                    className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center p-4 sm:p-8"
                   >
                     <div className="text-center max-w-xs relative">
                       <button
@@ -345,10 +339,8 @@ export default function Pricing() {
                       >
                         <X size={16} />
                       </button>
-                      <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Info size={22} className="text-amber-600" />
-                      </div>
-                      <p className="font-bold text-slate-900 text-lg mb-2">{t('pricing.insiderTitle')}</p>
+                      <Info size={22} className="text-slate-600 mx-auto mb-4" />
+                      <p className="font-semibold text-slate-900 text-lg mb-2">{t('pricing.insiderTitle')}</p>
                       <p className="text-slate-600 text-sm leading-relaxed mb-4">
                         {t('pricing.insiderDesc1')} <span className="text-red-500 font-bold">{t('pricing.insiderDesc2')}</span> {t('pricing.insiderDesc3')} <span className="text-green-600 font-bold">{t('pricing.insiderDesc4')}</span> {t('pricing.insiderDesc5')}
                       </p>
@@ -374,11 +366,11 @@ export default function Pricing() {
 
         {/* CTA DARK - Prêt à développer votre clientèle ? */}
         <section className="mb-24">
-          <div className="max-w-3xl mx-auto bg-slate-900 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+          <div className="max-w-3xl mx-auto bg-slate-900 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
             <div className="relative z-10">
               <Smartphone size={40} className="text-teal-400 mx-auto mb-6" />
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
                 {t('pricing.ctaTitle')}
               </h3>
               <p className="text-slate-300 mb-8 max-w-lg mx-auto">
@@ -387,14 +379,14 @@ export default function Pricing() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/login?mode=signup"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3.5 px-8 rounded-xl hover:bg-slate-100 transition-all active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-semibold py-3.5 px-8 rounded-xl hover:bg-slate-100 transition-all active:scale-[0.98]"
                 >
                   {t('pricing.ctaSignup')}
                   <ArrowRight size={18} />
                 </Link>
                 <a
                   href="#faq"
-                  className="inline-flex items-center justify-center gap-2 border border-slate-600 text-slate-300 font-bold py-3.5 px-8 rounded-xl hover:border-slate-400 hover:text-white transition-all active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 border border-slate-600 text-slate-300 font-semibold py-3.5 px-8 rounded-xl hover:border-slate-400 hover:text-white transition-all active:scale-[0.98]"
                 >
                   {t('pricing.ctaFaq')}
                 </a>
@@ -406,8 +398,8 @@ export default function Pricing() {
         {/* TRUST / GARANTIE */}
         <div className="text-center border-t border-slate-100 pt-16 mb-24">
           <div className="inline-flex flex-col items-center">
-            <Heart size={32} className="text-amber-400 fill-amber-400 mb-4" />
-            <h3 className="text-lg font-bold text-slate-900">{t('pricing.trustTitle')}</h3>
+            <Heart size={32} className="text-teal-400 fill-teal-400 mb-4" />
+            <h3 className="text-lg font-semibold text-slate-900">{t('pricing.trustTitle')}</h3>
             <p className="text-slate-500 max-w-lg mx-auto mt-2">
               {t('pricing.trustDesc')}
             </p>
@@ -416,7 +408,7 @@ export default function Pricing() {
 
         {/* FAQ Section */}
         <div id="faq" className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-3xl font-semibold text-center text-slate-900 mb-12">
             {t('pricing.faqTitle')}
           </h2>
 
@@ -424,7 +416,7 @@ export default function Pricing() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden hover:border-teal-100 transition-colors"
+                className="bg-slate-50 rounded-2xl border border-slate-100/60 overflow-hidden hover:shadow-sm transition-all"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}

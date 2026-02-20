@@ -39,8 +39,8 @@ export default function Refund() {
         >
           {/* Section 1 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">1</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">1</span>
               {t('refund.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -60,8 +60,8 @@ export default function Refund() {
 
           {/* Section 2 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">2</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">2</span>
               {t('refund.s2Title')}
             </h2>
             <div className="space-y-4">
@@ -69,13 +69,13 @@ export default function Refund() {
                 <div className="flex items-start gap-3">
                   <Calendar size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('refund.s2CancelTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('refund.s2CancelTitle')}</h3>
                     <p className="text-slate-600">{t('refund.s2CancelDesc')}</p>
                   </div>
                 </div>
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">{t('refund.s2EndTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-2">{t('refund.s2EndTitle')}</h3>
                 <ul className="text-slate-600 space-y-2">
                   <li>• {t('refund.s2EndItem1')}</li>
                   <li>• {t('refund.s2EndItem2')}</li>
@@ -86,8 +86,8 @@ export default function Refund() {
 
           {/* Section 3 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">3</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">3</span>
               {t('refund.s3Title')}
             </h2>
             <div className="bg-teal-50 rounded-2xl p-6 border border-teal-100">
@@ -99,15 +99,15 @@ export default function Refund() {
                   </p>
                   <ul className="text-slate-600 space-y-3">
                     <li className="flex items-start gap-2">
-                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">1</span>
+                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-semibold flex-shrink-0">1</span>
                       <span>{t('refund.s3Case1')}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">2</span>
+                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-semibold flex-shrink-0">2</span>
                       <span>{t('refund.s3Case2')}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-bold flex-shrink-0">3</span>
+                      <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-sm font-semibold flex-shrink-0">3</span>
                       <span>{t('refund.s3Case3')}</span>
                     </li>
                   </ul>
@@ -118,8 +118,8 @@ export default function Refund() {
 
           {/* Section 4 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">4</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">4</span>
               {t('refund.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -143,8 +143,8 @@ export default function Refund() {
 
           {/* Section 5 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">5</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">5</span>
               {t('refund.s5Title')}
             </h2>
             <div className="bg-teal-50 rounded-2xl p-6 border border-teal-100">
@@ -167,11 +167,11 @@ export default function Refund() {
 
           {/* Related Links */}
           <section className="mb-12">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">{t('refund.relatedTitle')}</h3>
+            <h3 className="text-lg font-semibold text-slate-900 mb-4">{t('refund.relatedTitle')}</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <Link
                 to="/privacy"
-                className="bg-slate-50 rounded-xl p-4 border border-slate-100 hover:border-teal-200 transition-colors flex items-center gap-3"
+                className="bg-slate-50 rounded-xl p-4 border border-slate-100/60 hover:shadow-md transition-all flex items-center gap-3"
               >
                 <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center">
                   <ReceiptText size={18} className="text-teal-600" />
@@ -180,7 +180,7 @@ export default function Refund() {
               </Link>
               <Link
                 to="/terms"
-                className="bg-slate-50 rounded-xl p-4 border border-slate-100 hover:border-teal-200 transition-colors flex items-center gap-3"
+                className="bg-slate-50 rounded-xl p-4 border border-slate-100/60 hover:shadow-md transition-all flex items-center gap-3"
               >
                 <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center">
                   <ReceiptText size={18} className="text-teal-600" />

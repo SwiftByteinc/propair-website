@@ -34,7 +34,7 @@ export default function Footer() {
 
           {/* Product Links */}
           <div>
-            <h3 className="font-bold text-slate-900 mb-6">{t('footer.productTitle')}</h3>
+            <h3 className="font-semibold text-slate-900 mb-6">{t('footer.productTitle')}</h3>
             <ul className="space-y-4">
               <li>
                 <Link to="/pricing" className="text-slate-600 hover:text-teal-600 transition-colors">
@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-bold text-slate-900 mb-6">{t('footer.companyTitle')}</h3>
+            <h3 className="font-semibold text-slate-900 mb-6">{t('footer.companyTitle')}</h3>
             <ul className="space-y-4">
               <li>
                 <Link to="/contact" className="text-slate-600 hover:text-teal-600 transition-colors">
@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* Download */}
           <div>
-            <h3 className="font-bold text-slate-900 mb-6">{t('footer.downloadTitle')}</h3>
+            <h3 className="font-semibold text-slate-900 mb-6">{t('footer.downloadTitle')}</h3>
             <p className="text-slate-600 mb-4">{t('footer.downloadDesc')}</p>
             <div className="space-y-3">
               <a

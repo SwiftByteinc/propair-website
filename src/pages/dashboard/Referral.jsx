@@ -125,7 +125,7 @@ export default function Referral() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-pink-50 to-amber-50/50 rounded-2xl border border-pink-100 p-6"
+          className="bg-gradient-to-br from-pink-50 to-slate-50/50 rounded-2xl border border-pink-100 p-6"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -133,7 +133,7 @@ export default function Referral() {
                 <Gift size={28} className="text-pink-500" />
               </div>
               <div>
-                <p className="text-xs font-bold text-pink-500 uppercase tracking-wider mb-0.5">{t('dashboard.proMonthsEarned')}</p>
+                <p className="text-xs font-medium text-pink-500 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
                 <p className="text-sm text-slate-500">
                   {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
                   {entreMonths > 0 && clientMonths > 0 && ' + '}
@@ -156,13 +156,13 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-slate-100 p-6 space-y-5"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6 space-y-5"
         >
           <div className="flex items-center gap-3 mb-1">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Award size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">{t('dashboard.progression')}</h2>
+            <h2 className="font-semibold text-slate-900">{t('dashboard.progression')}</h2>
           </div>
 
           {/* Entrepreneur progress */}
@@ -171,7 +171,7 @@ export default function Referral() {
             max={1}
             label={t('dashboard.entrepReferral')}
             sublabel={t('dashboard.entrepReferralDesc')}
-            color="amber"
+            color="teal"
             icon={Briefcase}
             goalReachedText={t('dashboard.goalReached')}
           />
@@ -189,7 +189,7 @@ export default function Referral() {
 
           {/* Info */}
           <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
-            <Sparkles size={14} className="text-amber-600 mt-0.5 shrink-0" />
+            <Sparkles size={14} className="text-teal-600 mt-0.5 shrink-0" />
             <p className="text-[11px] text-slate-500 leading-relaxed">
               {t('dashboard.progressResetInfo')}
             </p>
@@ -201,13 +201,13 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Copy size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">{t('dashboard.yourReferralLink')}</h2>
+            <h2 className="font-semibold text-slate-900">{t('dashboard.yourReferralLink')}</h2>
           </div>
 
           <div className="p-6">
@@ -216,7 +216,7 @@ export default function Referral() {
               <span className="flex-1 text-lg font-bold text-slate-900 tracking-widest font-mono">
                 {referralCode}
               </span>
-              <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full uppercase">
+              <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full">
                 {t('dashboard.yourCode')}
               </span>
             </div>
@@ -278,30 +278,30 @@ export default function Referral() {
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
-          <div className="bg-white rounded-xl border border-slate-100 p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
               <Users size={18} className="text-slate-500" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsSignedUp')}</span>
+              <span className="text-xs font-medium text-slate-500">{t('dashboard.statsSignedUp')}</span>
             </div>
             <p className="text-2xl font-bold text-slate-900">
               {loading ? '-' : stats.totalReferrals}
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100 p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
               <CheckCircle size={18} className="text-teal-600" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsValidated')}</span>
+              <span className="text-xs font-medium text-slate-500">{t('dashboard.statsValidated')}</span>
             </div>
             <p className="text-2xl font-bold text-teal-600">
               {loading ? '-' : stats.validatedReferrals}
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100 p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
               <Clock size={18} className="text-amber-600" />
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('dashboard.statsPending')}</span>
+              <span className="text-xs font-medium text-slate-500">{t('dashboard.statsPending')}</span>
             </div>
             <p className="text-2xl font-bold text-amber-600">
               {loading ? '-' : stats.pendingReferrals}
@@ -314,19 +314,19 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="bg-white rounded-2xl border border-slate-100 p-6"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6"
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Award size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">{t('dashboard.howItWorks')}</h2>
+            <h2 className="font-semibold text-slate-900">{t('dashboard.howItWorks')}</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100/50">
+            <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/50">
               <div className="flex items-center gap-2.5 mb-2">
-                <Briefcase size={16} className="text-amber-600" />
+                <Briefcase size={16} className="text-slate-600" />
                 <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.entrepreneur')}</h3>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
@@ -334,7 +334,7 @@ export default function Referral() {
                 <ArrowRight size={12} className="text-slate-500" />
                 <span>{t('dashboard.threeMonthsActive')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">{t('dashboard.plusTwoMonths')}</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonths')}</span>
               </div>
             </div>
             <div className="bg-pink-50/50 rounded-xl p-4 border border-pink-100/50">
@@ -345,7 +345,7 @@ export default function Referral() {
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
                 <span>{t('dashboard.sixSignedUp')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">{t('dashboard.plusTwoMonths')}</span>
+                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonths')}</span>
               </div>
             </div>
           </div>
@@ -357,14 +357,14 @@ export default function Referral() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
                   <Users size={16} className="text-slate-500" />
                 </div>
-                <h2 className="font-bold text-slate-900">{t('dashboard.history')}</h2>
+                <h2 className="font-semibold text-slate-900">{t('dashboard.history')}</h2>
               </div>
               <span className="text-xs text-slate-500 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
             </div>
@@ -391,16 +391,16 @@ export default function Referral() {
                           : t('dashboard.emailHidden')}
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                           ref.referee_type === 'entrepreneur'
-                            ? 'bg-amber-50 text-amber-600'
+                            ? 'bg-slate-100 text-slate-600'
                             : 'bg-pink-50 text-pink-600'
                         }`}>
                           {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
                           ref.status === 'validated' ? 'bg-teal-50 text-teal-600' :
                           ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                           'bg-slate-100 text-slate-500'
@@ -423,7 +423,7 @@ export default function Referral() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-2xl border border-slate-100 p-12 text-center"
+            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
           >
             <Users size={40} className="mx-auto text-slate-200 mb-4" />
             <p className="text-slate-500 font-medium mb-1">{t('dashboard.noReferralsYet')}</p>
@@ -436,7 +436,7 @@ export default function Referral() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl border border-slate-100 p-12 text-center"
+            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
           >
             <div className="animate-pulse space-y-3">
               <div className="h-4 bg-slate-100 rounded w-1/3 mx-auto" />

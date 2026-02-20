@@ -167,7 +167,7 @@ export default function Navbar() {
               {user ? (
                 <Link
                   to="/portal"
-                  className="flex items-center gap-3 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-white rounded-full transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+                  className="flex items-center gap-3 px-4 py-2.5 bg-slate-900 hover:bg-black text-white rounded-full transition-all shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   aria-label={t('nav.accessPortalAria')}
                 >
                   <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm" aria-hidden="true">
@@ -225,7 +225,7 @@ export default function Navbar() {
               className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-50 md:hidden shadow-2xl border-l border-slate-100 flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                <span className="font-bold text-lg text-slate-900">{t('nav.menu')}</span>
+                <span className="font-semibold text-lg text-slate-900">{t('nav.menu')}</span>
                 <button
                   onClick={() => setIsOpen(false)}
                   aria-label={t('nav.closeMenu')}
@@ -243,7 +243,7 @@ export default function Navbar() {
                       {profile?.full_name?.charAt(0) || <User size={20}/>}
                     </div>
                     <div className="overflow-hidden">
-                      <p className="font-bold text-slate-900 truncate">{profile?.full_name || t('nav.user')}</p>
+                      <p className="font-semibold text-slate-900 truncate">{profile?.full_name || t('nav.user')}</p>
                       <p className="text-sm text-slate-500 truncate">{user.email}</p>
                     </div>
                   </div>
@@ -293,7 +293,7 @@ export default function Navbar() {
                   <Link
                     to="/portal"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center gap-3 w-full px-5 py-3.5 text-sm font-bold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                    className="flex items-center justify-center gap-3 w-full px-5 py-3.5 text-sm font-semibold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   >
                     {t('nav.accessPortal')}
                   </Link>
@@ -301,7 +301,7 @@ export default function Navbar() {
                   <Link
                     to="/login"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-bold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-semibold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   >
                     <LogIn size={16} aria-hidden="true" />
                     {t('nav.login')}

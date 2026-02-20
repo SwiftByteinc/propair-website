@@ -50,7 +50,7 @@ export default function ForgotPassword() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
+          className="w-full bg-white rounded-2xl sm:rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
         >
           {/* Back to login */}
           <Link
@@ -89,7 +89,7 @@ export default function ForgotPassword() {
               <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send size={28} className="text-teal-600" />
               </div>
-              <h2 className="text-lg font-bold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
+              <h2 className="text-lg font-semibold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
               <p className="text-slate-500 mb-4">
                 {t('forgotPassword.sentDesc1')}<br />
                 <span className="font-semibold text-slate-900">{email}</span>

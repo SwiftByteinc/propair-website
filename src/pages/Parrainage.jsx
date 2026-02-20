@@ -66,13 +66,13 @@ export default function Parrainage() {
           transition={{ delay: 0.1 }}
           className="mb-10"
         >
-          <h2 className="text-xl font-bold text-slate-900 mb-6">{t('parrainage.howTitle')}</h2>
+          <h2 className="text-xl font-semibold text-slate-900 mb-6">{t('parrainage.howTitle')}</h2>
 
           <div className="space-y-4">
             {steps.map((step, i) => (
               <div key={i} className="flex items-start gap-4 bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
                 <div className="flex items-center justify-center gap-3 shrink-0">
-                  <span className="w-7 h-7 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-xs font-bold">
+                  <span className="w-7 h-7 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-xs font-semibold">
                     {i + 1}
                   </span>
                   <div className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center">
@@ -95,16 +95,16 @@ export default function Parrainage() {
           transition={{ delay: 0.2 }}
           className="mb-10"
         >
-          <h2 className="text-xl font-bold text-slate-900 mb-6">{t('parrainage.rewardsTitle')}</h2>
+          <h2 className="text-xl font-semibold text-slate-900 mb-6">{t('parrainage.rewardsTitle')}</h2>
 
           <div className="grid sm:grid-cols-2 gap-4">
             {/* Voie entrepreneur */}
             <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
-                  <Briefcase size={20} className="text-amber-600" />
+                <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center">
+                  <Briefcase size={20} className="text-slate-600" />
                 </div>
-                <h3 className="font-bold text-slate-900">{t('parrainage.entrepTitle')}</h3>
+                <h3 className="font-semibold text-slate-900">{t('parrainage.entrepTitle')}</h3>
               </div>
 
               <div className="space-y-3 mb-5">
@@ -117,18 +117,18 @@ export default function Parrainage() {
                   <p className="text-sm text-slate-600">{t('parrainage.entrepStep2')}</p>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Sparkles size={16} className="text-amber-600 mt-0.5 shrink-0" />
+                  <Sparkles size={16} className="text-teal-600 mt-0.5 shrink-0" />
                   <p className="text-sm text-slate-900 font-semibold">{t('parrainage.entrepReward')}</p>
                 </div>
               </div>
 
               {/* Flow visuel */}
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-amber-50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-slate-50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
                 <span>{t('parrainage.entrepFlow1')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
                 <span>{t('parrainage.entrepFlow2')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">{t('parrainage.entrepFlowReward')}</span>
+                <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">{t('parrainage.entrepFlowReward')}</span>
               </div>
             </div>
 
@@ -138,7 +138,7 @@ export default function Parrainage() {
                 <div className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center">
                   <Users size={20} className="text-pink-600" />
                 </div>
-                <h3 className="font-bold text-slate-900">{t('parrainage.clientTitle')}</h3>
+                <h3 className="font-semibold text-slate-900">{t('parrainage.clientTitle')}</h3>
               </div>
 
               <div className="space-y-3 mb-5">
@@ -151,7 +151,7 @@ export default function Parrainage() {
                   <p className="text-sm text-slate-600">{t('parrainage.clientStep2')}</p>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Sparkles size={16} className="text-amber-600 mt-0.5 shrink-0" />
+                  <Sparkles size={16} className="text-teal-600 mt-0.5 shrink-0" />
                   <p className="text-sm text-slate-900 font-semibold">{t('parrainage.clientReward')}</p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ export default function Parrainage() {
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-pink-50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
                 <span>{t('parrainage.clientFlow1')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">{t('parrainage.clientFlowReward')}</span>
+                <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">{t('parrainage.clientFlowReward')}</span>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default function Parrainage() {
           transition={{ delay: 0.3 }}
           className="bg-slate-900 rounded-2xl p-8 md:p-10 text-center"
         >
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+          <h2 className="text-xl md:text-2xl font-semibold text-white mb-3">
             {user ? t('parrainage.ctaLoggedIn') : t('parrainage.ctaLoggedOut')}
           </h2>
           <p className="text-slate-400 text-sm mb-6 max-w-md mx-auto">

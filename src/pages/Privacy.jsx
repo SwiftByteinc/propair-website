@@ -38,8 +38,8 @@ export default function Privacy() {
         >
           {/* Section 1 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">1</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">1</span>
               {t('privacy.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -52,8 +52,8 @@ export default function Privacy() {
 
           {/* Section 2 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">2</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">2</span>
               {t('privacy.s2Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -79,21 +79,21 @@ export default function Privacy() {
 
           {/* Section 3 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">3</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">3</span>
               {t('privacy.s3Title')}
             </h2>
             <div className="space-y-4">
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-3">{t('privacy.s3DirectTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-3">{t('privacy.s3DirectTitle')}</h3>
                 <p className="text-slate-600">{t('privacy.s3DirectDesc')}</p>
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-3">{t('privacy.s3AutoTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-3">{t('privacy.s3AutoTitle')}</h3>
                 <p className="text-slate-600">{t('privacy.s3AutoDesc')}</p>
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-3">{t('privacy.s3ThirdTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-3">{t('privacy.s3ThirdTitle')}</h3>
                 <p className="text-slate-600">{t('privacy.s3ThirdDesc')}</p>
               </div>
             </div>
@@ -101,8 +101,8 @@ export default function Privacy() {
 
           {/* Section 4 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">4</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">4</span>
               {t('privacy.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -115,24 +115,24 @@ export default function Privacy() {
 
           {/* Section 5 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">5</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">5</span>
               {t('privacy.s5Title')}
             </h2>
             <div className="space-y-4">
               <div className="bg-teal-50 rounded-2xl p-6 border border-teal-100">
-                <h3 className="font-bold text-teal-600 mb-2 flex items-center gap-2">
+                <h3 className="font-semibold text-teal-600 mb-2 flex items-center gap-2">
                   <Lock size={18} />
                   {t('privacy.s5NoSaleTitle')}
                 </h3>
                 <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('privacy.s5NoSaleDesc') }} />
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">{t('privacy.s5ShareTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-2">{t('privacy.s5ShareTitle')}</h3>
                 <p className="text-slate-600">{t('privacy.s5ShareDesc')}</p>
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">{t('privacy.s5TransferTitle')}</h3>
+                <h3 className="font-semibold text-slate-900 mb-2">{t('privacy.s5TransferTitle')}</h3>
                 <p className="text-slate-600">{t('privacy.s5TransferDesc')}</p>
               </div>
             </div>
@@ -140,8 +140,8 @@ export default function Privacy() {
 
           {/* Section 6 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">6</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">6</span>
               {t('privacy.s6Title')}
             </h2>
             <div className="space-y-4">
@@ -149,7 +149,7 @@ export default function Privacy() {
                 <div className="flex items-start gap-3">
                   <Database size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('privacy.s6RetentionTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('privacy.s6RetentionTitle')}</h3>
                     <ul className="text-slate-600 space-y-2">
                       <li>• {t('privacy.s6Retention1')}</li>
                       <li>• {t('privacy.s6Retention2')}</li>
@@ -162,7 +162,7 @@ export default function Privacy() {
                 <div className="flex items-start gap-3">
                   <Lock size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('privacy.s6SecurityTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('privacy.s6SecurityTitle')}</h3>
                     <p className="text-slate-600">{t('privacy.s6SecurityDesc')}</p>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function Privacy() {
                 <div className="flex items-start gap-3">
                   <AlertTriangle size={20} className="text-amber-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('privacy.s6IncidentTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('privacy.s6IncidentTitle')}</h3>
                     <p className="text-slate-600">{t('privacy.s6IncidentDesc')}</p>
                   </div>
                 </div>
@@ -181,8 +181,8 @@ export default function Privacy() {
 
           {/* Section 7 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">7</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">7</span>
               {t('privacy.s7Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">

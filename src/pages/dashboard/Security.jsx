@@ -143,13 +143,13 @@ export default function Security() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Shield size={16} className="text-slate-500" />
             </div>
-            <h2 className="font-bold text-slate-900">{t('dashboard.verifications')}</h2>
+            <h2 className="font-semibold text-slate-900">{t('dashboard.verifications')}</h2>
           </div>
 
           <div className="px-6 py-4 flex items-center justify-between">
@@ -160,7 +160,7 @@ export default function Security() {
                 <p className="text-xs text-slate-500">{verification.email.value}</p>
               </div>
             </div>
-            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
               verification.email.verified
                 ? 'bg-teal-50 text-teal-600'
                 : 'bg-amber-50 text-amber-600'
@@ -175,7 +175,7 @@ export default function Security() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <button
             onClick={() => setShowPasswordForm(!showPasswordForm)}
@@ -186,7 +186,7 @@ export default function Security() {
                 <Lock size={16} className="text-slate-500" />
               </div>
               <div className="text-left">
-                <p className="font-bold text-slate-900">{t('dashboard.password')}</p>
+                <p className="font-semibold text-slate-900">{t('dashboard.password')}</p>
                 <p className="text-xs text-slate-500">{t('dashboard.changePassword')}</p>
               </div>
             </div>
@@ -298,7 +298,7 @@ export default function Security() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -306,7 +306,7 @@ export default function Security() {
                 <Trash2 size={16} className="text-red-500" />
               </div>
               <div>
-                <p className="font-bold text-slate-900">{t('dashboard.deleteAccount')}</p>
+                <p className="font-semibold text-slate-900">{t('dashboard.deleteAccount')}</p>
                 <p className="text-xs text-slate-500">{t('dashboard.irreversibleAction')}</p>
               </div>
             </div>
@@ -393,7 +393,7 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
         <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
           <Trash2 size={24} />
         </div>
-        <h3 id="delete-title" className="text-lg font-bold text-center text-slate-900 mb-2">
+        <h3 id="delete-title" className="text-lg font-semibold text-center text-slate-900 mb-2">
           {t('dashboard.deleteModalTitle')}
         </h3>
         <p id="delete-desc" className="text-center text-sm text-slate-500 mb-6">

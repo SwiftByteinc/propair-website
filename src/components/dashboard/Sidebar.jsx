@@ -102,7 +102,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
           </div>
 
           {/* Status Badge */}
-          <div className={`mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+          <div className={`mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${
             user?.isPro
               ? 'bg-teal-50 text-teal-600'
               : 'bg-amber-50 text-amber-600'

@@ -9,10 +9,10 @@
   --color-teal-dark: #0F766E;      /* Teal plus foncé */
   --color-teal-light: #14B8A6;     /* Teal clair */
 
-  /* CORRECTION CONTRASTE (P0) : Amber plus foncé pour le texte */
-  --color-amber: #D97706;          /* Ambre foncé (était #F59E0B) */
-  --color-amber-dark: #B45309;     /* Ambre très foncé */
-  --color-amber-light: #FBBF24;    /* Ambre clair (fonds seulement) */
+  /* Amber: réservé aux warnings et statut trial */
+  --color-amber: #D97706;
+  --color-amber-dark: #B45309;
+  --color-amber-light: #FBBF24;
 
   --color-background: #FFFFFF;     /* Fond principal blanc pur */
   --color-surface: #F9FAFB;        /* Fond sections alternées */
@@ -21,8 +21,8 @@
   --color-success: #10B981;        /* Vert Émeraude */
 
   /* Alias pour compatibilité */
-  --color-action: #D97706;
-  --color-action-dark: #B45309;
+  --color-action: #09090B;         /* slate-900 — CTA principal */
+  --color-action-dark: #18181B;    /* slate-800 — CTA hover */
   --color-brand: #0D9488;
 }
 

@@ -109,14 +109,14 @@ export default function Contact() {
             <a
               key={channel.title}
               href={channel.href}
-              className="group bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-teal-200 hover:shadow-md transition-all"
+              className="group bg-slate-50 rounded-2xl p-6 border border-slate-100/60 hover:shadow-md transition-all"
             >
               <div className="flex items-start gap-4">
                 <div className={`w-12 h-12 ${channel.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
                   <channel.icon size={22} className="text-white" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-bold text-slate-900 mb-1">{channel.title}</h3>
+                  <h3 className="font-semibold text-slate-900 mb-1">{channel.title}</h3>
                   <p className="text-slate-500 text-sm mb-3">{channel.description}</p>
                   <p className="text-teal-600 font-semibold group-hover:underline break-all">
                     {channel.value}
@@ -140,14 +140,14 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-3 bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100"
           >
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
 
             {sent ? (
               <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
                 <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>
                 <p className="text-slate-600 mb-2">
                   {t('contact.sentDesc')}
                 </p>
@@ -258,7 +258,7 @@ export default function Contact() {
           >
             {/* Address */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <MapPin size={18} className="text-teal-600" />
                 {t('contact.addressTitle')}
               </h3>
@@ -271,7 +271,7 @@ export default function Contact() {
 
             {/* Hours */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <Clock size={18} className="text-teal-600" />
                 {t('contact.hoursTitle')}
               </h3>
@@ -290,7 +290,7 @@ export default function Contact() {
 
             {/* Quick Links */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4">{t('contact.quickTitle')}</h3>
+              <h3 className="font-semibold text-slate-900 mb-4">{t('contact.quickTitle')}</h3>
               <div className="space-y-3">
                 <Link
                   to="/pricing#faq"

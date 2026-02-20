@@ -43,7 +43,7 @@ const Counter = ({ value, label }) => {
       <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
         {showRawValue ? value : count.toLocaleString()}
       </div>
-      <div className="text-slate-500 font-medium uppercase tracking-wider text-xs">{label}</div>
+      <div className="text-slate-500 font-medium text-xs">{label}</div>
     </div>
   );
 };
@@ -114,7 +114,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 bg-white text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-teal-100 shadow-sm">
-              <Mountain size={16} className="text-amber-600" />
+              <Mountain size={16} className="text-teal-600" />
               <span>{t('about.badge')}</span>
             </div>
 
@@ -148,8 +148,8 @@ export default function About() {
             />
 
             <div className="flex flex-col items-center">
-              <div className="w-12 h-1 bg-amber-500 rounded-full mb-4"></div>
-              <div className="font-bold text-slate-900">{t('about.quoteAuthor')}</div>
+              <div className="w-12 h-1 bg-teal-500 rounded-full mb-4"></div>
+              <div className="font-semibold text-slate-900">{t('about.quoteAuthor')}</div>
               <div className="text-sm text-slate-500">{t('about.quoteRole')}</div>
             </div>
           </motion.div>
@@ -157,10 +157,10 @@ export default function About() {
       </section>
 
       {/* PARCOURS (Timeline Storytelling) */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('about.timelineTitle')}</h2>
+            <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('about.timelineTitle')}</h2>
             <p className="text-slate-600">{t('about.timelineSubtitle')}</p>
           </div>
 
@@ -184,10 +184,10 @@ export default function About() {
 
                 {/* Contenu */}
                 <div className={`pl-20 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
-                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-amber-600 mb-2 uppercase tracking-wide">
+                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-teal-600 mb-2">
                     {item.year}
                   </span>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">{item.title}</h3>
                   <p className="text-slate-600 leading-relaxed text-sm">{item.description}</p>
                 </div>
 
@@ -203,16 +203,14 @@ export default function About() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('about.valuesTitle')}</h2>
+            <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('about.valuesTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-teal-100 transition-all group">
-                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-50 transition-colors">
-                  <value.icon size={24} className="text-slate-600 group-hover:text-teal-600 transition-colors" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">{value.title}</h3>
+              <div key={index} className="bg-white p-8 rounded-2xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all group">
+                <value.icon size={22} className="text-slate-600 group-hover:text-teal-600 transition-colors mb-6" />
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">{value.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
               </div>
             ))}
@@ -221,7 +219,7 @@ export default function About() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
             <Counter value={t('about.stat1Value')} label={t('about.stat1Label')} />
@@ -235,7 +233,7 @@ export default function About() {
       {/* CTA */}
       <section className="py-16 sm:py-24 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 mb-6">
             {t('about.ctaTitle')}
           </h2>
           <p className="text-slate-600 text-lg mb-10 max-w-xl mx-auto">
@@ -251,7 +249,7 @@ export default function About() {
             </Link>
             <Link
               to="/pricing"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-2xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-semibold py-4 px-8 rounded-2xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
             >
               {t('about.ctaLearnMore')}
             </Link>

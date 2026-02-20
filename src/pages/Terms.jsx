@@ -38,8 +38,8 @@ export default function Terms() {
         >
           {/* Section 1 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">1</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">1</span>
               {t('terms.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -64,8 +64,8 @@ export default function Terms() {
 
           {/* Section 2 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">2</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">2</span>
               {t('terms.s2Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -92,8 +92,8 @@ export default function Terms() {
 
           {/* Section 3 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">3</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">3</span>
               {t('terms.s3Title')}
             </h2>
             <div className="space-y-4">
@@ -101,7 +101,7 @@ export default function Terms() {
                 <div className="flex items-start gap-3">
                   <Scale size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('terms.s3IndTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s3IndTitle')}</h3>
                     <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s3IndDesc') }} />
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export default function Terms() {
                 <div className="flex items-start gap-3">
                   <CreditCard size={20} className="text-teal-600 mt-1" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{t('terms.s3PayTitle')}</h3>
+                    <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s3PayTitle')}</h3>
                     <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s3PayDesc') }} />
                   </div>
                 </div>
@@ -120,8 +120,8 @@ export default function Terms() {
 
           {/* Section 4 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">4</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">4</span>
               {t('terms.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -152,22 +152,22 @@ export default function Terms() {
 
           {/* Section 5 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">5</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">5</span>
               {t('terms.s5Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-bold text-slate-900 mb-2">{t('terms.s5ExclTitle')}</h3>
+                  <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s5ExclTitle')}</h3>
                   <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s5ExclDesc') }} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 mb-2">{t('terms.s5IndirectTitle')}</h3>
+                  <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s5IndirectTitle')}</h3>
                   <p className="text-slate-600">{t('terms.s5IndirectDesc')}</p>
                 </div>
                 <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                  <h3 className="font-bold text-slate-900 mb-2">{t('terms.s5CapTitle')}</h3>
+                  <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s5CapTitle')}</h3>
                   <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s5CapDesc') }} />
                 </div>
               </div>
@@ -176,8 +176,8 @@ export default function Terms() {
 
           {/* Section 6 */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-bold">6</span>
+            <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">6</span>
               {t('terms.s6Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">

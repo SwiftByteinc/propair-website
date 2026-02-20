@@ -159,7 +159,7 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-teal-50 to-white rounded-2xl border border-teal-100 p-6"
+              className="bg-gradient-to-br from-teal-50 to-white rounded-2xl border border-teal-100/60 shadow-sm p-6"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
@@ -167,8 +167,8 @@ export default function Billing() {
                     <Crown size={24} className="text-teal-700" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-teal-600 uppercase tracking-wider">{t('dashboard.activePlan')}</p>
-                    <p className="text-xl font-bold text-slate-900">
+                    <p className="text-xs font-medium text-teal-600">{t('dashboard.activePlan')}</p>
+                    <p className="text-xl font-semibold text-slate-900">
                       {t('dashboard.planName')} — {subscription?.plan === 'annual'
                         ? t('dashboard.planAnnual')
                         : t('dashboard.planMonthly')}
@@ -198,13 +198,13 @@ export default function Billing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl border border-slate-100 overflow-hidden"
+              className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
             >
               <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
                   <CreditCard size={16} className="text-slate-500" />
                 </div>
-                <h2 className="font-bold text-slate-900">{t('dashboard.invoicesTitle')}</h2>
+                <h2 className="font-semibold text-slate-900">{t('dashboard.invoicesTitle')}</h2>
               </div>
               <div className="px-6 py-8 text-center text-sm text-slate-500">
                 {t('dashboard.invoicesViaPortal')}{' '}
@@ -226,17 +226,17 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-teal-200 relative overflow-hidden flex flex-col justify-between"
+              className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-teal-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
             >
               {/* Badge */}
               <div className="absolute top-5 right-5">
-                <span className="bg-amber-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide flex items-center gap-1">
+                <span className="bg-teal-600 text-white text-[10px] font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1">
                   <Star size={10} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
                 </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{t('pricing.annualTitle')}</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-1">{t('pricing.annualTitle')}</h3>
                 <p className="text-teal-600 font-medium text-sm mb-5">{t('pricing.annualTagline')}</p>
 
                 <div className="mb-3">
@@ -248,7 +248,7 @@ export default function Billing() {
                   </div>
                   <div className="mt-1.5 flex items-center gap-2 text-sm">
                     <span className="text-slate-500 line-through decoration-red-400">{t('pricing.annualOldPrice')}</span>
-                    <span className="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded text-xs">
+                    <span className="text-green-600 font-semibold bg-green-50 px-2 py-0.5 rounded text-xs">
                       {isEarlyBird ? t('pricing.annualDiscount') : t('pricing.annualStandardDiscount')}
                     </span>
                   </div>
@@ -256,27 +256,27 @@ export default function Billing() {
 
                 {/* Early Bird Progress */}
                 {isEarlyBird && (
-                  <div className="mb-6 p-3 bg-amber-50 rounded-xl border border-amber-100">
+                  <div className="mb-6 p-3 bg-teal-50 rounded-xl border border-teal-100">
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs font-bold text-amber-800">{t('pricing.earlyBirdLabel')}</span>
-                      <span className="text-xs font-bold text-amber-600">{claimed}/{limit}</span>
+                      <span className="text-xs font-semibold text-teal-800">{t('pricing.earlyBirdLabel')}</span>
+                      <span className="text-xs font-bold text-teal-600">{claimed}/{limit}</span>
                     </div>
-                    <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-teal-200 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(claimed / limit) * 100}%` }}
                         transition={{ duration: 1, delay: 0.3 }}
-                        className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
+                        className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
                       />
                     </div>
-                    <p className="text-xs text-amber-700 font-semibold mt-1.5">
+                    <p className="text-xs text-teal-700 font-semibold mt-1.5">
                       {t('pricing.earlyBirdRemaining', { count: remaining })}
                     </p>
                   </div>
                 )}
 
                 <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('pricing.annualAllIncluded')}</p>
+                  <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5">
                       <div className="w-5 h-5 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -305,10 +305,10 @@ export default function Billing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col justify-between"
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/60 shadow-sm flex flex-col justify-between"
             >
               <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{t('pricing.monthlyTitle')}</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-1">{t('pricing.monthlyTitle')}</h3>
                 <p className="text-slate-500 text-sm mb-5">{t('pricing.monthlyTagline')}</p>
 
                 <div className="mb-6 flex items-baseline gap-1">
@@ -317,7 +317,7 @@ export default function Billing() {
                 </div>
 
                 <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs font-bold text-slate-500 uppercase">{t('pricing.monthlyIncluded')}</p>
+                  <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
                       <Check size={12} className="text-teal-600" /> {feat}
@@ -329,7 +329,7 @@ export default function Billing() {
               <button
                 onClick={() => handleCheckout('monthly')}
                 disabled={checkoutLoading !== null}
-                className="w-full py-3.5 px-6 font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-6 font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
                 {t('dashboard.chooseMonthly')}

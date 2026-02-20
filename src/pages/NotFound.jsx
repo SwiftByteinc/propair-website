@@ -23,7 +23,7 @@ export default function NotFound() {
         <h1 className="text-6xl font-bold text-slate-900 mb-4">404</h1>
 
         {/* Message */}
-        <h2 className="text-2xl font-bold text-slate-900 mb-3">
+        <h2 className="text-2xl font-semibold text-slate-900 mb-3">
           {t('notFound.title')}
         </h2>
         <p className="text-slate-500 mb-8">
