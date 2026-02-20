@@ -76,7 +76,7 @@ describe('DashboardHome', () => {
 
     it('renders greeting with first name', () => {
       renderDashboardHome();
-      expect(screen.getByText('Bonjour, Nicolas')).toBeInTheDocument();
+      expect(screen.getByText(/Bon.+Nicolas/)).toBeInTheDocument();
     });
 
     it('shows subtitle', () => {
@@ -172,7 +172,7 @@ describe('DashboardHome', () => {
 
     it('renders greeting with first name', () => {
       renderDashboardHome();
-      expect(screen.getByText('Bonjour, Jean')).toBeInTheDocument();
+      expect(screen.getByText(/Bon.+Jean/)).toBeInTheDocument();
     });
 
     it('shows Espace Client section', () => {

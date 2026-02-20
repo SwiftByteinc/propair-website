@@ -576,6 +576,9 @@ const fr = {
     // DashboardHome
     homeTitle: 'Accueil — Mon Espace ProPair',
     hello: 'Bonjour, {name}',
+    helloMorning: 'Bon matin, {name}',
+    helloAfternoon: 'Bon après-midi, {name}',
+    helloEvening: 'Bonsoir, {name}',
     helloFallback: 'Partenaire',
     controlTower: 'Votre tour de contrôle ProPair.',
     memberElite: 'Membre Élite',

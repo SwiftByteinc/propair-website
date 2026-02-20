@@ -122,8 +122,8 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
               className={({ isActive }) => `
                 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
                 ${isActive
-                  ? 'bg-teal-50 text-teal-600'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  ? 'bg-teal-50 text-teal-600 border-l-2 border-teal-600'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-2 border-transparent'
                 }
               `}
             >

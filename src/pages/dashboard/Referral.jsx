@@ -121,78 +121,66 @@ export default function Referral() {
 
       <div className="space-y-6">
 
-        {/* REWARD BANNER */}
+        {/* REWARDS & PROGRESSION */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-teal-50 to-slate-50/50 rounded-2xl border border-teal-100 p-6"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
-                <Gift size={28} className="text-teal-500" />
+          {/* Reward summary header */}
+          <div className="bg-gradient-to-br from-teal-50 to-slate-50/30 px-6 py-5 border-b border-teal-100/60">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
+                  <Gift size={24} className="text-teal-500" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-teal-600 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
+                  <p className="text-sm text-slate-500">
+                    {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
+                    {entreMonths > 0 && clientMonths > 0 && ' + '}
+                    {clientMonths > 0 && t('dashboard.viaClients', { count: clientMonths })}
+                    {totalMonths === 0 && t('dashboard.shareToStart')}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-medium text-teal-600 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
-                <p className="text-sm text-slate-500">
-                  {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
-                  {entreMonths > 0 && clientMonths > 0 && ' + '}
-                  {clientMonths > 0 && t('dashboard.viaClients', { count: clientMonths })}
-                  {totalMonths === 0 && t('dashboard.shareToStart')}
+              <div className="text-right">
+                <p className="text-3xl font-bold text-slate-900">
+                  {loading ? '-' : totalMonths}
                 </p>
+                <p className="text-[11px] text-slate-500 font-medium">{t('dashboard.months')}</p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-4xl font-bold text-slate-900">
-                {loading ? '-' : totalMonths}
+          </div>
+
+          {/* Progress bars */}
+          <div className="p-6 space-y-5">
+            <ProgressBar
+              current={loading ? 0 : entreValidated}
+              max={1}
+              label={t('dashboard.entrepReferral')}
+              sublabel={t('dashboard.entrepReferralDesc')}
+              color="teal"
+              icon={Briefcase}
+              goalReachedText={t('dashboard.goalReached')}
+            />
+
+            <ProgressBar
+              current={loading ? 0 : clientCount}
+              max={6}
+              label={t('dashboard.clientNetwork')}
+              sublabel={t('dashboard.clientNetworkDesc')}
+              color="slate"
+              icon={Users}
+              goalReachedText={t('dashboard.goalReached')}
+            />
+
+            <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
+              <Sparkles size={14} className="text-teal-600 mt-0.5 shrink-0" />
+              <p className="text-[11px] text-slate-500 leading-relaxed">
+                {t('dashboard.progressResetInfo')}
               </p>
-              <p className="text-[11px] text-slate-500 font-medium">{t('dashboard.months')}</p>
             </div>
-          </div>
-        </motion.section>
-
-        {/* PROGRESS BARS */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6 space-y-5"
-        >
-          <div className="flex items-center gap-3 mb-1">
-            <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-              <Award size={16} className="text-slate-500" />
-            </div>
-            <h2 className="font-semibold text-slate-900">{t('dashboard.progression')}</h2>
-          </div>
-
-          {/* Entrepreneur progress */}
-          <ProgressBar
-            current={loading ? 0 : entreValidated}
-            max={1}
-            label={t('dashboard.entrepReferral')}
-            sublabel={t('dashboard.entrepReferralDesc')}
-            color="teal"
-            icon={Briefcase}
-            goalReachedText={t('dashboard.goalReached')}
-          />
-
-          {/* Client progress */}
-          <ProgressBar
-            current={loading ? 0 : clientCount}
-            max={6}
-            label={t('dashboard.clientNetwork')}
-            sublabel={t('dashboard.clientNetworkDesc')}
-            color="slate"
-            icon={Users}
-            goalReachedText={t('dashboard.goalReached')}
-          />
-
-          {/* Info */}
-          <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
-            <Sparkles size={14} className="text-teal-600 mt-0.5 shrink-0" />
-            <p className="text-[11px] text-slate-500 leading-relaxed">
-              {t('dashboard.progressResetInfo')}
-            </p>
           </div>
         </motion.section>
 
@@ -278,7 +266,7 @@ export default function Referral() {
           transition={{ delay: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-slate-300">
             <div className="flex items-center gap-3 mb-3">
               <Users size={18} className="text-slate-500" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsSignedUp')}</span>
@@ -288,7 +276,7 @@ export default function Referral() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-teal-500">
             <div className="flex items-center gap-3 mb-3">
               <CheckCircle size={18} className="text-teal-600" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsValidated')}</span>
@@ -298,7 +286,7 @@ export default function Referral() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-amber-400">
             <div className="flex items-center gap-3 mb-3">
               <Clock size={18} className="text-amber-600" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsPending')}</span>
@@ -382,7 +370,7 @@ export default function Referral() {
                 </thead>
                 <tbody className="divide-y divide-slate-50">
                   {referralList.map((ref) => (
-                    <tr key={ref.id} className="hover:bg-slate-50/50">
+                    <tr key={ref.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4 text-slate-600">
                         {new Date(ref.created_at).toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA')}
                       </td>
@@ -426,8 +414,10 @@ export default function Referral() {
             transition={{ delay: 0.3 }}
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
           >
-            <Users size={40} className="mx-auto text-slate-200 mb-4" />
-            <p className="text-slate-500 font-medium mb-1">{t('dashboard.noReferralsYet')}</p>
+            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-4">
+              <Gift size={32} className="text-slate-300" />
+            </div>
+            <p className="text-slate-900 font-semibold mb-1">{t('dashboard.noReferralsYet')}</p>
             <p className="text-sm text-slate-500 mb-5">{t('dashboard.shareYourLink')}</p>
             <motion.button
               onClick={copyLink}

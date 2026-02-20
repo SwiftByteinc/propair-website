@@ -91,6 +91,8 @@ export default function DashboardHome() {
   };
 
   const firstName = user?.full_name?.split(' ')[0] || t('dashboard.helloFallback');
+  const hour = new Date().getHours();
+  const greetingKey = hour < 12 ? 'dashboard.helloMorning' : hour < 18 ? 'dashboard.helloAfternoon' : 'dashboard.helloEvening';
 
   // Show loading overlay when checkout session is being created
   if (checkoutLoading) {
@@ -116,7 +118,7 @@ export default function DashboardHome() {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-slate-900"
         >
-          {t('dashboard.hello', { name: firstName })}
+          {t(greetingKey, { name: firstName })}
         </motion.h1>
         <p className="text-slate-500 mt-1">
           {t('dashboard.controlTower')}
@@ -269,7 +271,7 @@ export default function DashboardHome() {
           >
             <Link
               to="/portal/billing"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all group"
+              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
               <CreditCard size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.subscriptionLink')}</p>
@@ -278,7 +280,7 @@ export default function DashboardHome() {
 
             <a
               href="mailto:support@propairapp.com"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all group"
+              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
               <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.supportLink')}</p>
@@ -309,11 +311,11 @@ export default function DashboardHome() {
           </motion.section>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all">
+             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                 <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>
              </Link>
-             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all">
+             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                 <Gift size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.referralLink')}</p>
              </Link>

@@ -183,7 +183,6 @@ describe('Referral Page', () => {
   it('shows progress bars section', () => {
     renderReferral();
 
-    expect(screen.getByText('Progression')).toBeInTheDocument();
     expect(screen.getByText('Parrainage entrepreneur')).toBeInTheDocument();
     expect(screen.getByText('Réseau client')).toBeInTheDocument();
   });
