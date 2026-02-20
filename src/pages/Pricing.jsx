@@ -19,7 +19,7 @@ export default function Pricing() {
   const [showInsider, setShowInsider] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [checkoutLoading, setCheckoutLoading] = useState(null);
-  const { claimed, remaining, limit, isEarlyBird } = useEarlyBirdCount();
+  const { remaining, isEarlyBird } = useEarlyBirdCount();
 
   const handlePlanClick = async (plan) => {
     if (!user) {
@@ -241,26 +241,13 @@ export default function Pricing() {
                 </div>
               </div>
 
-              {/* Early Bird Progress */}
+              {/* Early Bird */}
               {isEarlyBird && (
                 <div className="mb-8 p-3 bg-teal-50 rounded-xl border border-teal-100">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-semibold text-teal-800">
-                      {t('pricing.earlyBirdLabel')}
-                    </span>
-                    <span className="text-xs font-semibold text-teal-600">
-                      {claimed}/{limit}
-                    </span>
-                  </div>
-                  <div className="h-2 bg-teal-200 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${(claimed / limit) * 100}%` }}
-                      transition={{ duration: 1, delay: 0.3 }}
-                      className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
-                    />
-                  </div>
-                  <p className="text-xs text-teal-700 font-semibold mt-1.5">
+                  <p className="text-xs font-semibold text-teal-800">
+                    {t('pricing.earlyBirdLabel')}
+                  </p>
+                  <p className="text-xs text-teal-700 font-semibold mt-1">
                     {t('pricing.earlyBirdRemaining', { count: remaining })}
                   </p>
                 </div>

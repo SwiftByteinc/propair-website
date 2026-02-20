@@ -136,7 +136,7 @@ describe('Billing', () => {
     it('shows annual plan price', () => {
       renderBilling();
 
-      expect(screen.getByText(/149\$/)).toBeInTheDocument();
+      expect(screen.getAllByText(/149\$/).length).toBeGreaterThanOrEqual(1);
     });
 
     it('shows monthly plan price', () => {
