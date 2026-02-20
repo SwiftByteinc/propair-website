@@ -222,7 +222,7 @@ export default function Home() {
                   <img
                     src="/apple-touch-icon.png"
                     alt="ProPair App"
-                    className="w-24 h-24 md:w-32 md:h-32 rounded-[22px] md:rounded-[28px] shadow-2xl shadow-black/30 border-4 border-white/10 flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
+                    className="w-24 h-24 md:w-32 md:h-32 rounded-2xl shadow-2xl shadow-black/30 border-4 border-white/10 flex-shrink-0 group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
                 </div>

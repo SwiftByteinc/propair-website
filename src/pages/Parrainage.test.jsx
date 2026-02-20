@@ -71,29 +71,30 @@ describe('Parrainage (Public Page)', () => {
       renderParrainage();
 
       expect(screen.getByText('Parrainez un entrepreneur')).toBeInTheDocument();
-      expect(screen.getByText('Développez votre réseau')).toBeInTheDocument();
+      expect(screen.getByText('Parrainez des clients')).toBeInTheDocument();
     });
 
     it('renders entrepreneur reward details', () => {
       renderParrainage();
 
       expect(screen.getByText(/il s'inscrit via votre code/i)).toBeInTheDocument();
-      expect(screen.getByText(/il reste actif pendant 3 mois/i)).toBeInTheDocument();
-      expect(screen.getByText(/vous gagnez tous les deux 2 mois pro/i)).toBeInTheDocument();
+      expect(screen.getByText(/il paie 2 mois mensuels ou 1 abonnement annuel/i)).toBeInTheDocument();
+      expect(screen.getByText(/votre filleul gagne 2 mois pro gratuits/i)).toBeInTheDocument();
     });
 
     it('renders client reward details', () => {
       renderParrainage();
 
-      expect(screen.getByText(/invitez vos contacts clients/i)).toBeInTheDocument();
-      expect(screen.getByText(/6 clients s'inscrivent/i)).toBeInTheDocument();
+      expect(screen.getByText(/invitez vos contacts clients via votre code/i)).toBeInTheDocument();
+      expect(screen.getByText(/accumulez 6 clients validés/i)).toBeInTheDocument();
     });
 
-    it('renders flow badges (+2 mois)', () => {
+    it('renders flow badges', () => {
       renderParrainage();
 
-      const badges = screen.getAllByText('+2 mois');
-      expect(badges).toHaveLength(2); // One for each reward path
+      expect(screen.getByText('+3 mois parrain')).toBeInTheDocument();
+      expect(screen.getByText('+2 mois filleul')).toBeInTheDocument();
+      expect(screen.getByText('+3 mois')).toBeInTheDocument();
     });
 
     it('renders info footer about rules', () => {
@@ -144,10 +145,10 @@ describe('Parrainage (Public Page)', () => {
       mockUseAuth.mockReturnValue({ user: null });
     });
 
-    it('renders "+2 mois" flow badges', () => {
+    it('renders flow reward badges', () => {
       renderParrainage();
-      const badges = screen.getAllByText('+2 mois');
-      expect(badges.length).toBe(2);
+      expect(screen.getByText('+3 mois parrain')).toBeInTheDocument();
+      expect(screen.getByText('+3 mois')).toBeInTheDocument();
     });
 
     it('renders step number 1', () => {
@@ -193,7 +194,7 @@ describe('Parrainage (Public Page)', () => {
 
     it('renders client network reward card', () => {
       renderParrainage();
-      expect(screen.getByText('Développez votre réseau')).toBeInTheDocument();
+      expect(screen.getByText('Parrainez des clients')).toBeInTheDocument();
     });
   });
 });

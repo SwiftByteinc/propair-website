@@ -217,7 +217,7 @@ describe('Referral Page', () => {
   it('shows entrepreneur-specific help text', () => {
     renderReferral();
 
-    expect(screen.getByText(/filleul s'abonne/i)).toBeInTheDocument();
+    expect(screen.getByText(/filleul paie 2 mois mensuels/i)).toBeInTheDocument();
   });
 
   it('shows client help text for client users', () => {
@@ -231,7 +231,7 @@ describe('Referral Page', () => {
 
     renderReferral();
 
-    expect(screen.getByText(/entrepreneurs à découvrir/i)).toBeInTheDocument();
+    expect(screen.getByText(/client est validé quand son profil/i)).toBeInTheDocument();
   });
 
   it('displays client referral code in link', () => {

@@ -192,7 +192,7 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.06 }}
-                className="bg-slate-50 rounded-2xl border border-slate-100/60 p-6 hover:shadow-md transition-all"
+                className="bg-slate-50 rounded-2xl border border-slate-100/60 p-6 shadow-sm hover:shadow-md transition-all"
               >
                 <reason.icon size={20} className="text-teal-600 mb-4" />
                 <h3 className="font-semibold text-slate-900 mb-2">{reason.title}</h3>
@@ -342,7 +342,7 @@ export default function Pricing() {
                       <Info size={22} className="text-slate-600 mx-auto mb-4" />
                       <p className="font-semibold text-slate-900 text-lg mb-2">{t('pricing.insiderTitle')}</p>
                       <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                        {t('pricing.insiderDesc1')} <span className="text-red-500 font-bold">{t('pricing.insiderDesc2')}</span> {t('pricing.insiderDesc3')} <span className="text-green-600 font-bold">{t('pricing.insiderDesc4')}</span> {t('pricing.insiderDesc5')}
+                        {t('pricing.insiderDesc1')} <span className="text-red-500 font-semibold">{t('pricing.insiderDesc2')}</span> {t('pricing.insiderDesc3')} <span className="text-green-600 font-semibold">{t('pricing.insiderDesc4')}</span> {t('pricing.insiderDesc5')}
                       </p>
                       <p className="text-slate-500 text-xs mb-5">
                         {t('pricing.insiderNote')}
