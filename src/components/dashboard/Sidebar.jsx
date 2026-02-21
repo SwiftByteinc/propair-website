@@ -6,10 +6,8 @@ import {
   Gift,
   Shield,
   LogOut,
-  ChevronLeft,
   Crown,
-  Zap,
-  X
+  Zap
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -67,21 +65,13 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         md:translate-x-0
       `}>
 
-        {/* Logo & Back */}
-        <div className="h-16 px-6 flex items-center justify-between border-b border-slate-50">
+        {/* Logo */}
+        <div className="h-16 px-6 flex items-center border-b border-slate-50">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors"
+            className="flex items-center transition-opacity hover:opacity-70"
           >
-            <ChevronLeft size={18} />
-            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7" />
-          </button>
-          <button
-            onClick={onClose}
-            className="md:hidden w-11 h-11 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-600"
-            aria-label={t('dashboard.closeMenu')}
-          >
-            <X size={18} />
+            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="100" height="40" className="h-9" />
           </button>
         </div>
 

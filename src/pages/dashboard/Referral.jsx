@@ -128,15 +128,16 @@ export default function Referral() {
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           {/* Reward summary header */}
-          <div className="bg-gradient-to-br from-teal-50 to-slate-50/30 px-6 py-5 border-b border-teal-100/60">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
-                  <Gift size={24} className="text-teal-500" />
+          <div className="bg-gradient-to-br from-teal-50 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-100/60">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
+                  <Gift size={20} className="text-teal-500 sm:hidden" />
+                  <Gift size={24} className="text-teal-500 hidden sm:block" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs font-medium text-teal-600 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
-                  <p className="text-sm text-slate-500">
+                  <p className="text-xs sm:text-sm text-slate-500 truncate">
                     {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
                     {entreMonths > 0 && clientMonths > 0 && ' + '}
                     {clientMonths > 0 && t('dashboard.viaClients', { count: clientMonths })}
@@ -144,8 +145,8 @@ export default function Referral() {
                   </p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-3xl font-bold text-slate-900">
+              <div className="text-right shrink-0">
+                <p className="text-2xl sm:text-3xl font-bold text-slate-900">
                   {loading ? '-' : totalMonths}
                 </p>
                 <p className="text-[11px] text-slate-500 font-medium">{t('dashboard.months')}</p>
@@ -154,7 +155,7 @@ export default function Referral() {
           </div>
 
           {/* Progress bars */}
-          <div className="p-6 space-y-5">
+          <div className="p-4 sm:p-6 space-y-5">
             <ProgressBar
               current={loading ? 0 : entreValidated}
               max={1}
@@ -191,27 +192,27 @@ export default function Referral() {
           transition={{ delay: 0.15 }}
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
-          <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
+          <div className="px-4 sm:px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
               <Copy size={16} className="text-slate-500" />
             </div>
             <h2 className="font-semibold text-slate-900">{t('dashboard.yourReferralLink')}</h2>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {/* Code display */}
-            <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 mb-4">
-              <span className="flex-1 text-lg font-bold text-slate-900 tracking-wider font-mono">
+            <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-3 sm:px-4 py-3 mb-4">
+              <span className="flex-1 text-base sm:text-lg font-bold text-slate-900 tracking-wider font-mono">
                 {referralCode}
               </span>
-              <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded-full whitespace-nowrap">
                 {t('dashboard.yourCode')}
               </span>
             </div>
 
             {/* Link display */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex-1 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100/60 text-sm font-mono text-slate-500 truncate">
+            <div className="mb-4">
+              <div className="px-3 sm:px-4 py-3 bg-slate-50 rounded-xl border border-slate-100/60 text-xs sm:text-sm font-mono text-slate-500 break-all">
                 {referralLink}
               </div>
             </div>
@@ -302,7 +303,7 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6"
+          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-4 sm:p-6"
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -313,27 +314,30 @@ export default function Referral() {
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/50">
-              <div className="flex items-center gap-2.5 mb-2">
+              <div className="flex items-center gap-2.5 mb-3">
                 <Briefcase size={16} className="text-slate-600" />
                 <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.entrepreneur')}</h3>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-slate-600 flex-wrap">
-                <span>{t('dashboard.signUp')}</span>
-                <ArrowRight size={12} className="text-slate-500" />
-                <span>{t('dashboard.threeMonthsActive')}</span>
-                <ArrowRight size={12} className="text-slate-500" />
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusThreeMonthsParrain')}</span>
-                <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonthsFilleul')}</span>
+              <div className="space-y-1.5 text-xs text-slate-600">
+                <div className="flex items-center gap-1.5">
+                  <span>{t('dashboard.signUp')}</span>
+                  <ArrowRight size={12} className="text-slate-400 shrink-0" />
+                  <span>{t('dashboard.threeMonthsActive')}</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mt-1">
+                  <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusThreeMonthsParrain')}</span>
+                  <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusTwoMonthsFilleul')}</span>
+                </div>
               </div>
             </div>
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/50">
-              <div className="flex items-center gap-2.5 mb-2">
+              <div className="flex items-center gap-2.5 mb-3">
                 <Users size={16} className="text-slate-600" />
                 <h3 className="font-semibold text-slate-900 text-sm">{t('dashboard.client')}</h3>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-slate-600">
                 <span>{t('dashboard.sixSignedUp')}</span>
-                <ArrowRight size={12} className="text-slate-500" />
+                <ArrowRight size={12} className="text-slate-400 shrink-0" />
                 <span className="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">{t('dashboard.plusThreeMonths')}</span>
               </div>
             </div>
@@ -358,7 +362,8 @@ export default function Referral() {
               <span className="text-xs text-slate-500 bg-slate-50 px-2 py-0.5 rounded-full">{referralList.length}</span>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* Desktop table */}
+            <div className="hidden sm:block overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead className="bg-slate-50 text-slate-500 border-b border-slate-100">
                   <tr>
@@ -402,6 +407,41 @@ export default function Referral() {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile card list */}
+            <div className="sm:hidden divide-y divide-slate-50">
+              {referralList.map((ref) => (
+                <div key={ref.id} className="px-4 py-3.5 flex items-center justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-slate-900 truncate">
+                      {ref.referee_email
+                        ? `${ref.referee_email.substring(0, 2)}***@${ref.referee_email.split('@')[1] || '***'}`
+                        : t('dashboard.emailHidden')}
+                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs text-slate-500">
+                        {new Date(ref.created_at).toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA')}
+                      </span>
+                      <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium ${
+                        ref.referee_type === 'entrepreneur'
+                          ? 'bg-slate-100 text-slate-600'
+                          : 'bg-teal-50 text-teal-600'
+                      }`}>
+                        {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
+                      </span>
+                    </div>
+                  </div>
+                  <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0 ${
+                    ref.status === 'validated' ? 'bg-teal-50 text-teal-600' :
+                    ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
+                    'bg-slate-100 text-slate-500'
+                  }`}>
+                    {ref.status === 'validated' ? t('dashboard.statusValidated') :
+                     ref.status === 'rejected' ? t('dashboard.statusRejected') : t('dashboard.statusPending')}
+                  </span>
+                </div>
+              ))}
             </div>
           </motion.section>
         )}

@@ -106,21 +106,6 @@ describe('Sidebar', () => {
     expect(onSignOut).toHaveBeenCalledTimes(1);
   });
 
-  it('shows mobile close button', () => {
-    renderSidebar(entrepreneurUser, { isOpen: true });
-
-    const closeBtn = screen.getByRole('button', { name: /fermer le menu/i });
-    expect(closeBtn).toBeInTheDocument();
-  });
-
-  it('calls onClose when close button is clicked', () => {
-    const onClose = vi.fn();
-    renderSidebar(entrepreneurUser, { isOpen: true, onClose });
-
-    fireEvent.click(screen.getByRole('button', { name: /fermer le menu/i }));
-    expect(onClose).toHaveBeenCalled();
-  });
-
   it('shows mobile backdrop when open', () => {
     renderSidebar(entrepreneurUser, { isOpen: true });
 

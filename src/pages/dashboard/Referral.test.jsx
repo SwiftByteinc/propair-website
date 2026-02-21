@@ -139,9 +139,9 @@ describe('Referral Page', () => {
     renderReferral();
 
     expect(screen.getByText('Historique')).toBeInTheDocument();
-    // Emails are masked: first 2 chars + ***@ + domain
-    expect(screen.getByText('a@***@test.com')).toBeInTheDocument();
-    expect(screen.getByText('b@***@test.com')).toBeInTheDocument();
+    // Emails are masked: first 2 chars + ***@ + domain (appear in both desktop table and mobile cards)
+    expect(screen.getAllByText('a@***@test.com').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('b@***@test.com').length).toBeGreaterThanOrEqual(1);
   });
 
   it('shows correct type badges in history', () => {
