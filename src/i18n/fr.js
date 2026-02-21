@@ -173,7 +173,7 @@ const fr = {
     heroTitle2: '"Qu\'est-ce que je voudrais utiliser ?"',
     heroParagraph1: 'Je m\'appelle <span class="font-bold text-slate-900">Nicolas Lepage</span>. Je suis né et j\'ai grandi ici, à Magog. L\'entrepreneuriat a toujours fait partie de ma vie.',
     heroParagraph2: 'ProPair, c\'est ma réponse concrète à un problème que je voyais chaque jour : des gens qui cherchent de l\'aide, et des entrepreneurs qui méritent mieux que des plateformes qui les traitent comme des numéros.',
-    quote: '"J\'ai bâti ProPair parce que personne ne le faisait pour nous. <span class="text-cyan-600 font-bold">Un outil local, fait pour les vrais besoins d\'ici.</span>"',
+    quote: '"J\'ai bâti ProPair parce que personne ne le faisait pour nous. <span class="text-teal-600 font-bold">Un outil local, fait pour les vrais besoins d\'ici.</span>"',
     quoteAuthor: 'Nicolas Lepage',
     quoteRole: 'Fondateur de ProPair',
     timelineTitle: 'L\'histoire d\'une obsession',

@@ -90,7 +90,7 @@ export default function UpdatePassword() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
         <SEO noIndex />
         <div className="text-center">
-          <Loader2 size={32} className="animate-spin text-cyan-600 mx-auto mb-4" />
+          <Loader2 size={32} className="animate-spin text-teal-600 mx-auto mb-4" />
           <p className="text-slate-500">{t('updatePassword.checkingLink')}</p>
         </div>
       </div>
@@ -185,8 +185,8 @@ export default function UpdatePassword() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center"
             >
-              <div className="w-20 h-20 bg-cyan-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check size={40} className="text-cyan-600" />
+              <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check size={40} className="text-teal-600" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">
                 {t('updatePassword.successTitle')}
@@ -210,8 +210,8 @@ export default function UpdatePassword() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <div className="w-16 h-16 bg-cyan-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Lock size={32} className="text-cyan-600" />
+              <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Lock size={32} className="text-teal-600" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 text-center mb-2">
                 {t('updatePassword.newPasswordTitle')}

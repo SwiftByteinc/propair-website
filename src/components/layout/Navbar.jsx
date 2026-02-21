@@ -90,7 +90,7 @@ export default function Navbar() {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-cyan-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-teal-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
       >
         {t('nav.skipToContent')}
       </a>
@@ -109,7 +109,7 @@ export default function Navbar() {
 
             <Link
               to="/"
-              className="group focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-lg p-1"
+              className="group focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-lg p-1"
               aria-label={t('nav.backToHomeAria')}
             >
               <div className="flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function Navbar() {
                   onMouseLeave={() => setHovered(null)}
                   className={`relative text-sm font-semibold pb-1 transition-colors outline-none px-1 ${
                     isActive(link.path)
-                      ? 'text-cyan-700'
+                      ? 'text-teal-700'
                       : 'text-slate-500 hover:text-slate-900'
                   }`}
                   aria-current={isActive(link.path) ? 'page' : undefined}
@@ -144,7 +144,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <motion.span
-                className="absolute bottom-0 h-0.5 bg-cyan-600 rounded-full pointer-events-none"
+                className="absolute bottom-0 h-0.5 bg-teal-600 rounded-full pointer-events-none"
                 animate={{
                   left: indicator.left,
                   width: indicator.width,
@@ -193,7 +193,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? t('nav.closeMenu') : t('nav.openMenu')}
-              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
             </button>
@@ -230,7 +230,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   aria-label={t('nav.closeMenu')}
                   autoFocus
-                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <X size={20} aria-hidden="true" />
                 </button>
@@ -239,7 +239,7 @@ export default function Navbar() {
               {user && (
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-cyan-100 text-cyan-700 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
+                    <div className="w-12 h-12 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
                       {profile?.full_name?.charAt(0) || <User size={20}/>}
                     </div>
                     <div className="overflow-hidden">
@@ -256,9 +256,9 @@ export default function Navbar() {
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
+                    className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 ${
                       isActive(link.path)
-                        ? 'bg-cyan-50 text-cyan-700'
+                        ? 'bg-teal-50 text-teal-700'
                         : 'text-slate-600 hover:bg-slate-50'
                     }`}
                     aria-current={isActive(link.path) ? 'page' : undefined}
@@ -271,8 +271,8 @@ export default function Navbar() {
                   <Link
                     to="/portal"
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-                      isActive('/portal') ? 'bg-cyan-50 text-cyan-700' : 'text-cyan-700 hover:bg-cyan-50'
+                    className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+                      isActive('/portal') ? 'bg-teal-50 text-teal-700' : 'text-teal-700 hover:bg-teal-50'
                     }`}
                   >
                     {t('nav.myDashboard')}

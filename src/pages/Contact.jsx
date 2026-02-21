@@ -21,7 +21,7 @@ export default function Contact() {
       value: t('contact.phoneValue'),
       href: 'tel:+18194810882',
       detail: t('contact.phoneDetail'),
-      color: 'bg-cyan-600',
+      color: 'bg-teal-600',
     },
     {
       icon: Mail,
@@ -72,7 +72,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-cyan-50 selection:text-cyan-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
       <SEO
         title={t('seo.contactTitle')}
         canonical="/contact"
@@ -87,7 +87,7 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
-            <Mail size={14} className="text-cyan-600" />
+            <Mail size={14} className="text-teal-600" />
             <span>{t('contact.badge')}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
@@ -118,7 +118,7 @@ export default function Contact() {
                 <div className="min-w-0">
                   <h3 className="font-semibold text-slate-900 mb-1">{channel.title}</h3>
                   <p className="text-slate-500 text-sm mb-3">{channel.description}</p>
-                  <p className="text-cyan-600 font-semibold group-hover:underline break-all">
+                  <p className="text-teal-600 font-semibold group-hover:underline break-all">
                     {channel.value}
                   </p>
                   <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
@@ -143,9 +143,9 @@ export default function Contact() {
             <h2 className="text-2xl font-semibold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
 
             {sent ? (
-              <div className="bg-cyan-50 border border-cyan-100 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
-                <div className="w-14 h-14 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail size={24} className="text-cyan-600" />
+              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
+                <div className="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail size={24} className="text-teal-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>
                 <p className="text-slate-600 mb-2">
@@ -153,11 +153,11 @@ export default function Contact() {
                 </p>
                 <p className="text-slate-500 text-sm mb-4">
                   {t('contact.sentFallback')}{' '}
-                  <a href="mailto:support@propairapp.com" className="text-cyan-600 hover:underline">support@propairapp.com</a>
+                  <a href="mailto:support@propairapp.com" className="text-teal-600 hover:underline">support@propairapp.com</a>
                 </p>
                 <button
                   onClick={() => { setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}
-                  className="text-cyan-600 font-semibold hover:underline"
+                  className="text-teal-600 font-semibold hover:underline"
                 >
                   {t('contact.sentAnother')}
                 </button>
@@ -259,7 +259,7 @@ export default function Contact() {
             {/* Address */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                <MapPin size={18} className="text-cyan-600" />
+                <MapPin size={18} className="text-teal-600" />
                 {t('contact.addressTitle')}
               </h3>
               <address className="text-slate-600 not-italic leading-relaxed">
@@ -272,7 +272,7 @@ export default function Contact() {
             {/* Hours */}
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                <Clock size={18} className="text-cyan-600" />
+                <Clock size={18} className="text-teal-600" />
                 {t('contact.hoursTitle')}
               </h3>
               <div className="space-y-2 text-slate-600 text-sm">
@@ -294,21 +294,21 @@ export default function Contact() {
               <div className="space-y-3">
                 <Link
                   to="/pricing#faq"
-                  className="flex items-center justify-between text-sm text-slate-600 hover:text-cyan-600 transition-colors"
+                  className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
                   <span>{t('contact.quickFaq')}</span>
                   <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/refund"
-                  className="flex items-center justify-between text-sm text-slate-600 hover:text-cyan-600 transition-colors"
+                  className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
                   <span>{t('contact.quickRefund')}</span>
                   <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/privacy"
-                  className="flex items-center justify-between text-sm text-slate-600 hover:text-cyan-600 transition-colors"
+                  className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-600 transition-colors"
                 >
                   <span>{t('contact.quickPrivacy')}</span>
                   <ArrowRight size={14} />
