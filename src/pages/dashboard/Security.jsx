@@ -231,7 +231,7 @@ export default function Security() {
                       type="password"
                       value={passwords.current}
                       onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm transition-all"
                       placeholder="••••••••"
                       autoComplete="current-password"
                     />
@@ -247,7 +247,7 @@ export default function Security() {
                           type={showPassword ? 'text' : 'password'}
                           value={passwords.new}
                           onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all pr-10"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm transition-all pr-10"
                           placeholder={t('dashboard.minCharsPlaceholder')}
                         />
                         <button
@@ -267,7 +267,7 @@ export default function Security() {
                         type={showPassword ? 'text' : 'password'}
                         value={passwords.confirm}
                         onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-slate-900 focus:ring-1 focus:ring-slate-900/10 text-sm transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm transition-all"
                         placeholder="••••••••"
                       />
                     </div>

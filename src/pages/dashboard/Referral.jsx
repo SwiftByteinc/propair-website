@@ -189,7 +189,7 @@ export default function Referral() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.05 }}
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-4 sm:px-6 py-4 border-b border-slate-50 flex items-center gap-3">
@@ -264,7 +264,7 @@ export default function Referral() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.1 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
           <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-slate-300">
@@ -302,7 +302,7 @@ export default function Referral() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
+          transition={{ delay: 0.15 }}
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-4 sm:p-6"
         >
           <div className="flex items-center gap-3 mb-5">
@@ -349,7 +349,7 @@ export default function Referral() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
@@ -451,7 +451,7 @@ export default function Referral() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-4">

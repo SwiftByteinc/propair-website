@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -44,6 +44,7 @@ export default function DashboardLayout() {
   } = useAuth();
 
   const { t } = useLanguage();
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Redirect to login if not authenticated
@@ -79,6 +80,18 @@ export default function DashboardLayout() {
     };
   }, [user, profile, subscription, isPro, t]);
 
+  const pageTitle = useMemo(() => {
+    const path = location.pathname;
+    if (path === '/portal/billing') {
+      return userData?.role === 'entrepreneur'
+        ? t('dashboard.sideBillingEntrep')
+        : t('dashboard.sideBillingClient');
+    }
+    if (path === '/portal/referral') return t('dashboard.sideReferral');
+    if (path === '/portal/security') return t('dashboard.sideSecurity');
+    return t('dashboard.sideHome');
+  }, [location.pathname, t, userData?.role]);
+
   // Show skeleton while loading
   if (loading || profileLoading) {
     return <DashboardSkeleton />;
@@ -103,7 +116,7 @@ export default function DashboardLayout() {
         >
           <Menu size={20} />
         </button>
-        <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7 ml-3" />
+        <span className="font-semibold text-sm text-slate-900 ml-3 truncate">{pageTitle}</span>
       </div>
 
       {/* Sidebar */}

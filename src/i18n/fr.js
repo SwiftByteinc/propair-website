@@ -137,7 +137,7 @@ const fr = {
     monthlyPrice: '24$',
     monthlyPeriod: '/mois + tx',
     monthlyCta: 'Choisir le mensuel',
-    monthlyIncluded: 'Inclus :',
+    monthlyIncluded: 'Mêmes fonctionnalités que le plan annuel',
     insiderTitle: 'Le saviez-vous ?',
     insiderDesc1: 'Les frais Stripe coûtent',
     insiderDesc2: '10.47%',

@@ -242,7 +242,11 @@ export default function DashboardHome() {
                     {t('dashboard.freeMonthGoal')}
                   </span>
                   <span className="text-sm font-bold text-slate-900">
-                    {referralCount}/{referralGoal}
+                    {loadingStats ? (
+                      <span className="inline-block w-8 h-4 bg-slate-100 rounded animate-pulse" />
+                    ) : (
+                      <>{referralCount}/{referralGoal}</>
+                    )}
                   </span>
                 </div>
                 <div className="h-2 bg-slate-100 rounded-full overflow-hidden">

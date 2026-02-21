@@ -94,39 +94,13 @@ describe('Pricing', () => {
     expect(screen.getByText('-25% de rabais')).toBeInTheDocument();
   });
 
-  it('renders all 5 pro features', () => {
+  it('renders all 5 pro features in annual card', () => {
     renderPricing();
-    // Features appear on both cards, so getAllByText
-    expect(screen.getAllByText('Accès illimité aux demandes').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText('Profil vérifié & Badge').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText('Notifications instantanées').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText('0% de commission (garanti)').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText('Outils de gestion inclus').length).toBeGreaterThanOrEqual(2);
-  });
-
-  it('shows insider overlay after 5 seconds', () => {
-    renderPricing();
-    expect(screen.queryByText('Le saviez-vous ?')).not.toBeInTheDocument();
-
-    act(() => {
-      vi.advanceTimersByTime(5000);
-    });
-
-    expect(screen.getByText('Le saviez-vous ?')).toBeInTheDocument();
-  });
-
-  it('dismiss button closes overlay', () => {
-    renderPricing();
-
-    act(() => {
-      vi.advanceTimersByTime(5000);
-    });
-
-    expect(screen.getByText('Le saviez-vous ?')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByLabelText('Fermer'));
-
-    expect(screen.queryByText('Le saviez-vous ?')).not.toBeInTheDocument();
+    expect(screen.getByText('Accès illimité aux demandes')).toBeInTheDocument();
+    expect(screen.getByText('Profil vérifié & Badge')).toBeInTheDocument();
+    expect(screen.getByText('Notifications instantanées')).toBeInTheDocument();
+    expect(screen.getByText('0% de commission (garanti)')).toBeInTheDocument();
+    expect(screen.getByText('Outils de gestion inclus')).toBeInTheDocument();
   });
 
   it('renders all FAQ questions', () => {

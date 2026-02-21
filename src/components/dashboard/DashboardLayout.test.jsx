@@ -169,15 +169,14 @@ describe('DashboardLayout', () => {
     expect(screen.getByRole('button', { name: /ouvrir le menu/i })).toBeInTheDocument();
   });
 
-  it('renders ProPair logo in mobile header', () => {
+  it('renders page title in mobile header', () => {
     mockUseAuth.mockReturnValue({
       user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'Test' }, email_confirmed_at: '2026-01-01' },
       profile: { full_name: 'Test', user_role: 'entrepreneur', referral_code: 'T1' },
       subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
     });
     renderDashboard();
-    const logos = screen.getAllByAltText('ProPair');
-    expect(logos.length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('Accueil')).toBeInTheDocument();
   });
 
   it('does not show skeleton when fully loaded', () => {

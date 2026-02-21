@@ -137,7 +137,7 @@ const en = {
     monthlyPrice: '$24',
     monthlyPeriod: '/mo + tax',
     monthlyCta: 'Choose monthly',
-    monthlyIncluded: 'Included:',
+    monthlyIncluded: 'Same features as the annual plan',
     insiderTitle: 'Did you know?',
     insiderDesc1: 'Stripe fees cost',
     insiderDesc2: '10.47%',

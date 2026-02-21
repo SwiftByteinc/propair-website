@@ -39,7 +39,7 @@ export default function Contact() {
       value: t('contact.billingValue'),
       href: 'mailto:billing@propairapp.com',
       detail: t('contact.billingDetail'),
-      color: 'bg-amber-600',
+      color: 'bg-slate-800',
     },
     {
       icon: Shield,
@@ -48,7 +48,7 @@ export default function Contact() {
       value: t('contact.privacyValue'),
       href: 'mailto:privacy@propairapp.com',
       detail: t('contact.privacyDetail'),
-      color: 'bg-slate-700',
+      color: 'bg-slate-800',
     },
   ];
 
@@ -116,7 +116,7 @@ export default function Contact() {
                   <channel.icon size={22} className="text-white" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-slate-900 mb-1">{channel.title}</h3>
+                  <p className="font-semibold text-slate-900 mb-1">{channel.title}</p>
                   <p className="text-slate-500 text-sm mb-3">{channel.description}</p>
                   <p className="text-teal-600 font-semibold group-hover:underline break-all">
                     {channel.value}

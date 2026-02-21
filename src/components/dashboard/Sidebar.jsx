@@ -6,6 +6,7 @@ import {
   Gift,
   Shield,
   LogOut,
+  ChevronLeft,
   Crown,
   Zap
 } from 'lucide-react';
@@ -65,13 +66,14 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         md:translate-x-0
       `}>
 
-        {/* Logo */}
+        {/* Logo & Back */}
         <div className="h-16 px-6 flex items-center border-b border-slate-50">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center transition-opacity hover:opacity-70"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors"
           >
-            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="100" height="40" className="h-9" />
+            <ChevronLeft size={18} />
+            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7" />
           </button>
         </div>
 

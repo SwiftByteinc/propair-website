@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Check, Zap, Shield, Bell, Users, Star, Info, Heart,
+  Check, Zap, Shield, Bell, Users, Star, Heart,
   MessageSquare, Briefcase, CreditCard,
-  Smartphone, ArrowRight, ChevronDown, X, Loader2
+  Smartphone, ArrowRight, ChevronDown, Loader2
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
@@ -16,7 +16,6 @@ export default function Pricing() {
   const { t } = useLanguage();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [showInsider, setShowInsider] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [checkoutLoading, setCheckoutLoading] = useState(null);
   const { remaining, isEarlyBird } = useEarlyBirdCount();
@@ -39,15 +38,6 @@ export default function Pricing() {
       setCheckoutLoading(null);
     }
   };
-
-  // Déclencheur après 5 secondes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowInsider(true);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const reasons = [
     {
@@ -206,14 +196,8 @@ export default function Pricing() {
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto items-center mb-24">
 
           {/* CARTE GAUCHE : ANNUEL (La Star) */}
-          <motion.div
-            animate={{
-              scale: showInsider ? 1.02 : 1,
-              borderColor: showInsider ? '#0E7490' : '#e2e8f0',
-              boxShadow: showInsider ? '0 25px 50px -12px rgba(14, 116, 144, 0.15)' : '0 0 0 0 rgba(0,0,0,0)'
-            }}
-            transition={{ duration: 0.8 }}
-            className="bg-white rounded-2xl p-5 sm:p-8 md:p-10 border-2 relative overflow-hidden h-full flex flex-col justify-between"
+          <div
+            className="bg-white rounded-2xl p-5 sm:p-8 md:p-10 border-2 border-teal-200 shadow-lg relative overflow-hidden h-full flex flex-col justify-between"
           >
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
@@ -276,11 +260,11 @@ export default function Pricing() {
             <p className="text-center text-xs text-slate-500 mt-4">
               {t('pricing.annualNote')}
             </p>
-          </motion.div>
+          </div>
 
-          {/* CARTE DROITE : MENSUEL + Overlay Insider */}
-          <div className="relative h-full flex flex-col">
-            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-100/60 shadow-sm flex-1 relative z-10 overflow-hidden">
+          {/* CARTE DROITE : MENSUEL */}
+          <div className="h-full flex flex-col">
+            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-100/60 shadow-sm flex-1 overflow-hidden">
               <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.monthlyTitle')}</h3>
               <p className="text-slate-500 mb-6">{t('pricing.monthlyTagline')}</p>
 
@@ -298,54 +282,11 @@ export default function Pricing() {
                 {t('pricing.monthlyCta')}
               </button>
 
-              <div className="space-y-3">
-                <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
-                {proFeatures.map((f, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                    <Check size={14} className="text-teal-600" /> {f.text}
-                  </div>
-                ))}
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <Check size={14} className="text-teal-600" />
+                <span>{t('pricing.monthlyIncluded')}</span>
               </div>
 
-              {/* Overlay Insider - apparaît après 5s SUR la carte */}
-              <AnimatePresence>
-                {showInsider && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6 }}
-                    role="dialog"
-                    aria-label={t('pricing.insiderTitle')}
-                    className="absolute inset-0 z-20 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center p-4 sm:p-8"
-                  >
-                    <div className="text-center max-w-xs relative">
-                      <button
-                        onClick={() => setShowInsider(false)}
-                        className="absolute -top-2 -right-2 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-500 transition-colors"
-                        aria-label={t('common.close')}
-                      >
-                        <X size={16} />
-                      </button>
-                      <Info size={22} className="text-slate-600 mx-auto mb-4" />
-                      <p className="font-semibold text-slate-900 text-lg mb-2">{t('pricing.insiderTitle')}</p>
-                      <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                        {t('pricing.insiderDesc1')} <span className="text-red-500 font-semibold">{t('pricing.insiderDesc2')}</span> {t('pricing.insiderDesc3')} <span className="text-green-600 font-semibold">{t('pricing.insiderDesc4')}</span> {t('pricing.insiderDesc5')}
-                      </p>
-                      <p className="text-slate-500 text-xs mb-5">
-                        {t('pricing.insiderNote')}
-                      </p>
-                      <button
-                        onClick={() => handlePlanClick('annual')}
-                        disabled={checkoutLoading !== null}
-                        className="inline-block px-6 py-2.5 bg-slate-900 hover:bg-black text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98] disabled:opacity-50"
-                      >
-                        {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin inline mr-1" />}
-                        {t('pricing.insiderCta')}
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </div>
 
@@ -403,6 +344,7 @@ export default function Pricing() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
+                id={`faq-${index}`}
                 className="bg-slate-50 rounded-2xl border border-slate-100/60 overflow-hidden hover:shadow-sm transition-all"
               >
                 <button
