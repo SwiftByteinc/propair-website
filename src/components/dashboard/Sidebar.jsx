@@ -88,7 +88,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         {/* User Card */}
         <div className="p-6 border-b border-slate-50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-sm">
+            <div className="w-10 h-10 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold text-sm">
               {user?.full_name?.charAt(0) || 'U'}
             </div>
             <div className="flex-1 min-w-0">
@@ -104,7 +104,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
           {/* Status Badge */}
           <div className={`mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${
             user?.isPro
-              ? 'bg-teal-50 text-teal-600'
+              ? 'bg-cyan-50 text-cyan-600'
               : 'bg-amber-50 text-amber-600'
           }`}>
             {user?.isPro ? <Crown size={12} /> : <Zap size={12} />}
@@ -122,7 +122,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
               className={({ isActive }) => `
                 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
                 ${isActive
-                  ? 'bg-teal-50 text-teal-600 border-l-2 border-teal-600'
+                  ? 'bg-cyan-50 text-cyan-600 border-l-2 border-cyan-600'
                   : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-2 border-transparent'
                 }
               `}

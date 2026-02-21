@@ -5,9 +5,9 @@
   --color-primary: #09090B;        /* Noir Onyx - Titres */
   --color-body: #4B5563;           /* Gris Slate - Corps de texte */
   --color-muted: #6B7280;          /* Gris moyen */
-  --color-teal: #0D9488;           /* Teal Foncé - Accent primaire */
-  --color-teal-dark: #0F766E;      /* Teal plus foncé */
-  --color-teal-light: #14B8A6;     /* Teal clair */
+  --color-cyan: #0E7490;           /* Cyan 700 - Accent primaire */
+  --color-cyan-dark: #155E75;      /* Cyan 800 - Plus foncé */
+  --color-cyan-light: #0891B2;     /* Cyan 600 - Plus clair */
 
   /* Amber: réservé aux warnings et statut trial */
   --color-amber: #D97706;
@@ -67,14 +67,14 @@ body {
 /* Input styles - Clean */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--color-teal);
+  border-color: var(--color-cyan);
   box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
 }
 
 /* Custom checkbox */
 input[type="checkbox"]:checked {
-  background-color: var(--color-teal);
-  border-color: var(--color-teal);
+  background-color: var(--color-cyan);
+  border-color: var(--color-cyan);
 }
 
 /* Accessibilité - Réduire les animations pour les utilisateurs sensibles */
@@ -91,6 +91,6 @@ input[type="checkbox"]:checked {
 
 /* Focus visible pour navigation clavier */
 :focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-cyan);
   outline-offset: 2px;
 }

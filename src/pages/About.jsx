@@ -96,7 +96,7 @@ export default function About() {
   ];
 
   return (
-    <div className="w-full overflow-hidden bg-white selection:bg-teal-50 selection:text-teal-700 font-sans">
+    <div className="w-full overflow-hidden bg-white selection:bg-cyan-50 selection:text-cyan-700 font-sans">
       <SEO
         title={t('seo.aboutTitle')}
         canonical="/about"
@@ -113,14 +113,14 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-white text-teal-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-teal-100 shadow-sm">
-              <Mountain size={16} className="text-teal-600" />
+            <div className="inline-flex items-center gap-2 bg-white text-cyan-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-cyan-100 shadow-sm">
+              <Mountain size={16} className="text-cyan-600" />
               <span>{t('about.badge')}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-8 tracking-tight">
               {t('about.heroTitle1')}{' '}
-              <span className="text-teal-600 block mt-2">
+              <span className="text-cyan-600 block mt-2">
                 {t('about.heroTitle2')}
               </span>
             </h1>
@@ -148,7 +148,7 @@ export default function About() {
             />
 
             <div className="flex flex-col items-center">
-              <div className="w-12 h-1 bg-teal-500 rounded-full mb-4"></div>
+              <div className="w-12 h-1 bg-cyan-500 rounded-full mb-4"></div>
               <div className="font-semibold text-slate-900">{t('about.quoteAuthor')}</div>
               <div className="text-sm text-slate-500">{t('about.quoteRole')}</div>
             </div>
@@ -166,7 +166,7 @@ export default function About() {
 
           <div className="relative space-y-12">
             {/* Ligne verticale */}
-            <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-teal-200 via-slate-200 to-teal-200 transform md:-translate-x-1/2" />
+            <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-200 via-slate-200 to-cyan-200 transform md:-translate-x-1/2" />
 
             {timeline.map((item, index) => (
               <motion.div
@@ -178,13 +178,13 @@ export default function About() {
                 className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start md:items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 {/* Point Icone */}
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-2 border-teal-200 text-teal-600 flex items-center justify-center rounded-full z-10 shadow-md shadow-teal-100">
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-2 border-cyan-200 text-cyan-600 flex items-center justify-center rounded-full z-10 shadow-md shadow-cyan-100">
                   <item.icon size={18} />
                 </div>
 
                 {/* Contenu */}
                 <div className={`pl-20 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
-                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-teal-600 mb-2">
+                  <span className="inline-block px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-cyan-600 mb-2">
                     {item.year}
                   </span>
                   <h3 className="text-xl font-semibold text-slate-900 mb-2">{item.title}</h3>
@@ -209,7 +209,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <div key={index} className="bg-white p-8 rounded-2xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all group">
-                <value.icon size={22} className="text-slate-600 group-hover:text-teal-600 transition-colors mb-6" />
+                <value.icon size={22} className="text-slate-600 group-hover:text-cyan-600 transition-colors mb-6" />
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">{value.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
               </div>

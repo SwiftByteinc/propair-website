@@ -84,10 +84,10 @@ export default function ForgotPassword() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-teal-50 p-6 rounded-2xl border border-teal-100 text-center"
+              className="bg-cyan-50 p-6 rounded-2xl border border-cyan-100 text-center"
             >
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Send size={28} className="text-teal-600" />
+              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Send size={28} className="text-cyan-600" />
               </div>
               <h2 className="text-lg font-semibold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
               <p className="text-slate-500 mb-4">
@@ -103,7 +103,7 @@ export default function ForgotPassword() {
                   setSent(false);
                   setEmail('');
                 }}
-                className="mt-6 text-teal-600 hover:text-teal-700 font-medium transition-colors text-sm"
+                className="mt-6 text-cyan-600 hover:text-cyan-700 font-medium transition-colors text-sm"
               >
                 {t('forgotPassword.useAnother')}
               </button>
