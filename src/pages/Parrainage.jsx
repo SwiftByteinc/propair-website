@@ -31,7 +31,7 @@ export default function Parrainage() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans">
       <SEO
         title={t('seo.parrainageTitle')}
         canonical="/parrainage"
@@ -44,7 +44,7 @@ export default function Parrainage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-teal-700 to-teal-700/30 rounded-2xl p-5 sm:p-8 md:p-10 flex items-center gap-4 sm:gap-6 mb-10 border border-teal-700"
+          className="bg-gradient-to-br from-teal-700/15 to-teal-700/5 rounded-2xl p-5 sm:p-8 md:p-10 flex items-center gap-4 sm:gap-6 mb-10 border border-teal-700/20"
         >
           <div className="flex-1">
             <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -72,10 +72,10 @@ export default function Parrainage() {
             {steps.map((step, i) => (
               <div key={i} className="flex items-start gap-4 bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
                 <div className="flex items-center justify-center gap-3 shrink-0">
-                  <span className="w-7 h-7 rounded-full bg-teal-700 text-teal-700 flex items-center justify-center text-xs font-semibold">
+                  <span className="w-7 h-7 rounded-full bg-teal-700/10 text-teal-700 flex items-center justify-center text-xs font-semibold">
                     {i + 1}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-teal-700 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-teal-700/10 flex items-center justify-center">
                     <step.icon size={20} className="text-teal-700" />
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function Parrainage() {
             {/* Voie client */}
             <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-teal-700/10 flex items-center justify-center">
                   <Users size={20} className="text-teal-700" />
                 </div>
                 <h3 className="font-semibold text-slate-900">{t('parrainage.clientTitle')}</h3>
@@ -169,7 +169,7 @@ export default function Parrainage() {
               <p className="text-xs text-slate-500 mb-4">{t('parrainage.clientNote')}</p>
 
               {/* Flow visuel */}
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-teal-700/50 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 bg-teal-700/10 rounded-xl p-3 text-[11px] sm:text-xs font-semibold text-slate-600 flex-wrap">
                 <span>{t('parrainage.clientFlow1')}</span>
                 <ArrowRight size={12} className="text-slate-500" />
                 <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">{t('parrainage.clientFlowReward')}</span>

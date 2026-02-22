@@ -186,7 +186,7 @@ export default function UpdatePassword() {
               className="text-center"
             >
               <div className="w-20 h-20 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check size={40} className="text-teal-700" />
+                <Check size={40} className="text-white" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">
                 {t('updatePassword.successTitle')}
@@ -211,7 +211,7 @@ export default function UpdatePassword() {
               animate={{ opacity: 1 }}
             >
               <div className="w-16 h-16 bg-teal-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Lock size={32} className="text-teal-700" />
+                <Lock size={32} className="text-white" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 text-center mb-2">
                 {t('updatePassword.newPasswordTitle')}

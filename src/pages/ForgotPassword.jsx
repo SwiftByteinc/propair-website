@@ -84,9 +84,9 @@ export default function ForgotPassword() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-teal-700 p-6 rounded-2xl border border-teal-700 text-center"
+              className="bg-teal-700/10 p-6 rounded-2xl border border-teal-700/20 text-center"
             >
-              <div className="w-16 h-16 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-teal-700/15 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send size={28} className="text-teal-700" />
               </div>
               <h2 className="text-lg font-semibold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>

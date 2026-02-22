@@ -159,11 +159,11 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-teal-700 to-white rounded-2xl border border-teal-700/60 shadow-sm p-6"
+              className="bg-gradient-to-br from-teal-700/15 to-white rounded-2xl border border-teal-700/20 shadow-sm p-6"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-teal-700/10 flex items-center justify-center">
                     <Crown size={24} className="text-teal-700" />
                   </div>
                   <div>
@@ -226,7 +226,7 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 border border-teal-700/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-teal-700/20 shadow-sm relative overflow-hidden flex flex-col justify-between"
             >
               {/* Badge */}
               <div className="absolute top-5 right-5">
@@ -256,7 +256,7 @@ export default function Billing() {
 
                 {/* Early Bird */}
                 {isEarlyBird && (
-                  <div className="mb-6 p-3 bg-teal-700 rounded-xl border border-teal-700">
+                  <div className="mb-6 p-3 bg-teal-700/10 rounded-xl border border-teal-700/20">
                     <p className="text-xs font-semibold text-teal-700">{t('pricing.earlyBirdLabel')}</p>
                     <p className="text-xs text-teal-700 font-semibold mt-1">
                       {t('pricing.earlyBirdRemaining', { count: remaining })}
@@ -268,7 +268,7 @@ export default function Billing() {
                   <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Check size={12} className="text-teal-700" />
                       </div>
                       <span className="text-slate-600 text-sm">{feat}</span>
@@ -309,7 +309,7 @@ export default function Billing() {
                   <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Check size={12} className="text-teal-700" />
                       </div>
                       <span className="text-slate-600 text-sm">{feat}</span>

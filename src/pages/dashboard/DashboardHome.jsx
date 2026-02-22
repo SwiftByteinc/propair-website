@@ -132,20 +132,20 @@ export default function DashboardHome() {
         transition={{ delay: 0.1 }}
         className={`rounded-2xl p-6 mb-6 ${
           user?.isPro
-            ? 'bg-teal-700 border border-teal-700'
+            ? 'bg-teal-700/10 border border-teal-700/20'
             : 'bg-amber-50 border border-amber-100'
         }`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-              user?.isPro ? 'bg-teal-700 text-teal-700' : 'bg-amber-100 text-amber-700'
+              user?.isPro ? 'bg-teal-700/10 text-teal-700' : 'bg-amber-100 text-amber-700'
             }`}>
               {user?.isPro ? <Crown size={28} /> : <Zap size={28} />}
             </div>
             <div>
               <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold mb-1 ${
-                user?.isPro ? 'bg-teal-700 text-teal-700' : 'bg-amber-100 text-amber-800'
+                user?.isPro ? 'bg-teal-700/10 text-teal-700' : 'bg-amber-100 text-amber-800'
               }`}>
                 {user?.isPro ? (
                   <>
@@ -301,7 +301,7 @@ export default function DashboardHome() {
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6 mb-6"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-teal-700/10 flex items-center justify-center">
                 <Users size={24} className="text-teal-700" />
               </div>
               <div>

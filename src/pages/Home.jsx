@@ -18,7 +18,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Home() {
   const { t } = useLanguage();
   return (
-    <div className="w-full overflow-hidden bg-white font-sans selection:bg-teal-700 selection:text-teal-700">
+    <div className="w-full overflow-hidden bg-white font-sans">
       <SEO
         canonical="/"
         description={t('seo.homeDesc')}

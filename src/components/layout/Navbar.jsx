@@ -239,7 +239,7 @@ export default function Navbar() {
               {user && (
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-teal-700 text-teal-700 rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
+                    <div className="w-12 h-12 bg-teal-700 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-sm">
                       {profile?.full_name?.charAt(0) || <User size={20}/>}
                     </div>
                     <div className="overflow-hidden">
@@ -258,7 +258,7 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700 ${
                       isActive(link.path)
-                        ? 'bg-teal-700 text-teal-700'
+                        ? 'bg-teal-700/10 text-teal-700'
                         : 'text-slate-600 hover:bg-slate-50'
                     }`}
                     aria-current={isActive(link.path) ? 'page' : undefined}
@@ -272,7 +272,7 @@ export default function Navbar() {
                     to="/portal"
                     onClick={() => setIsOpen(false)}
                     className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-teal-700 ${
-                      isActive('/portal') ? 'bg-teal-700 text-teal-700' : 'text-teal-700 hover:bg-teal-700'
+                      isActive('/portal') ? 'bg-teal-700/10 text-teal-700' : 'text-teal-700 hover:bg-teal-700/10'
                     }`}
                   >
                     {t('nav.myDashboard')}

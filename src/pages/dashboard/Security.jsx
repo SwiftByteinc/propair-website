@@ -162,7 +162,7 @@ export default function Security() {
             </div>
             <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
               verification.email.verified
-                ? 'bg-teal-700 text-teal-700'
+                ? 'bg-teal-700/10 text-teal-700'
                 : 'bg-amber-50 text-amber-600'
             }`}>
               {verification.email.verified ? t('dashboard.verified') : t('dashboard.notVerified')}
@@ -217,7 +217,7 @@ export default function Security() {
                       </div>
                     )}
                     {success && (
-                      <div className="p-3 bg-teal-700 border border-teal-700 rounded-lg text-sm text-teal-700" role="status">
+                      <div className="p-3 bg-teal-700/10 border border-teal-700/20 rounded-lg text-sm text-teal-700" role="status">
                         {success}
                       </div>
                     )}

@@ -215,7 +215,7 @@ export default function Login() {
       >
         {/* Referral Badge */}
         {(refCode || getStoredReferralCode()) && (
-          <div className="mb-6 p-3.5 bg-teal-700 border border-teal-700 rounded-xl flex items-start gap-3">
+          <div className="mb-6 p-3.5 bg-teal-700/10 border border-teal-700/20 rounded-xl flex items-start gap-3">
             <CheckCircle size={18} className="text-teal-700 mt-0.5 shrink-0" />
             <p className="text-sm text-teal-700 font-medium">
               {t('login.referralBadge')}

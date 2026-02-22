@@ -90,7 +90,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans">
       <SEO
         title={t('seo.pricingTitle')}
         canonical="/pricing"
@@ -227,7 +227,7 @@ export default function Pricing() {
 
               {/* Early Bird */}
               {isEarlyBird && (
-                <div className="mb-8 p-3 bg-teal-700 rounded-xl border border-teal-700">
+                <div className="mb-8 p-3 bg-teal-700/10 rounded-xl border border-teal-700/20">
                   <p className="text-xs font-semibold text-teal-700">
                     {t('pricing.earlyBirdLabel')}
                   </p>

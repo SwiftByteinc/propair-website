@@ -78,7 +78,7 @@ export function ToastProvider({ children }) {
               role="alert"
               className={`
                 pointer-events-auto w-full sm:min-w-[300px] sm:max-w-[400px] p-4 rounded-xl shadow-lg border flex items-start gap-3
-                ${item.type === 'success' ? 'bg-white border-teal-700 text-teal-700' : ''}
+                ${item.type === 'success' ? 'bg-white border-teal-700/20 text-teal-700' : ''}
                 ${item.type === 'error' ? 'bg-white border-red-200 text-red-700' : ''}
                 ${item.type === 'info' ? 'bg-slate-900 border-slate-700 text-white' : ''}
               `}

@@ -6,7 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Terms() {
   const { t } = useLanguage();
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans">
       <SEO
         title={t('terms.title')}
         canonical="/terms"
@@ -39,7 +39,7 @@ export default function Terms() {
           {/* Section 1 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">1</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">1</span>
               {t('terms.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -65,7 +65,7 @@ export default function Terms() {
           {/* Section 2 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">2</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">2</span>
               {t('terms.s2Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -93,7 +93,7 @@ export default function Terms() {
           {/* Section 3 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">3</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">3</span>
               {t('terms.s3Title')}
             </h2>
             <div className="space-y-4">
@@ -121,7 +121,7 @@ export default function Terms() {
           {/* Section 4 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">4</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">4</span>
               {t('terms.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -132,7 +132,7 @@ export default function Terms() {
                     {t('terms.s4P1')}
                   </p>
                   <div className="space-y-4">
-                    <div className="p-4 bg-teal-700 rounded-xl border border-teal-700">
+                    <div className="p-4 bg-teal-700/10 rounded-xl border border-teal-700/20">
                       <h4 className="font-semibold text-slate-900 mb-1">{t('terms.s4AccessTitle')}</h4>
                       <p className="text-slate-600 text-sm">
                         {t('terms.s4AccessDesc')}
@@ -153,7 +153,7 @@ export default function Terms() {
           {/* Section 5 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">5</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">5</span>
               {t('terms.s5Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -177,7 +177,7 @@ export default function Terms() {
           {/* Section 6 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">6</span>
+              <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">6</span>
               {t('terms.s6Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">

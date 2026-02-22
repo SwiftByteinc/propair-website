@@ -72,7 +72,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans">
       <SEO
         title={t('seo.contactTitle')}
         canonical="/contact"
@@ -143,8 +143,8 @@ export default function Contact() {
             <h2 className="text-2xl font-semibold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
 
             {sent ? (
-              <div className="bg-teal-700 border border-teal-700 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
-                <div className="w-14 h-14 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-teal-700/10 border border-teal-700/20 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
+                <div className="w-14 h-14 bg-teal-700/15 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-700" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>

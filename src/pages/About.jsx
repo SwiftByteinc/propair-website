@@ -96,7 +96,7 @@ export default function About() {
   ];
 
   return (
-    <div className="w-full overflow-hidden bg-white selection:bg-teal-700 selection:text-teal-700 font-sans">
+    <div className="w-full overflow-hidden bg-white font-sans">
       <SEO
         title={t('seo.aboutTitle')}
         canonical="/about"
