@@ -9,11 +9,6 @@
   --color-teal-dark: #155E75;      /* Accent foncé */
   --color-teal-light: #0891B2;     /* Accent clair */
 
-  /* Override Tailwind teal palette — accent #0E7490 */
-  --color-teal-600: #0E7490;
-  --color-teal-700: #0C6478;
-  --color-teal-800: #155E75;
-
   /* Amber: réservé aux warnings et statut trial */
   --color-amber: #D97706;
   --color-amber-dark: #B45309;
