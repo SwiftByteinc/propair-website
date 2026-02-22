@@ -99,7 +99,7 @@ export default function DashboardHome() {
     return (
       <div className="p-4 sm:p-6 md:p-8 max-w-4xl flex items-center justify-center min-h-[50vh]">
         <div className="text-center">
-          <Loader2 size={32} className="animate-spin mx-auto text-teal-600 mb-4" />
+          <Loader2 size={32} className="animate-spin mx-auto text-teal-700 mb-4" />
           <p className="font-semibold text-slate-900">{t('dashboard.redirectingToCheckout')}</p>
           <p className="text-sm text-slate-500 mt-1">{t('dashboard.pleaseWait')}</p>
         </div>
@@ -132,20 +132,20 @@ export default function DashboardHome() {
         transition={{ delay: 0.1 }}
         className={`rounded-2xl p-6 mb-6 ${
           user?.isPro
-            ? 'bg-teal-50 border border-teal-100'
+            ? 'bg-teal-700 border border-teal-700'
             : 'bg-amber-50 border border-amber-100'
         }`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-              user?.isPro ? 'bg-teal-100 text-teal-700' : 'bg-amber-100 text-amber-700'
+              user?.isPro ? 'bg-teal-700 text-teal-700' : 'bg-amber-100 text-amber-700'
             }`}>
               {user?.isPro ? <Crown size={28} /> : <Zap size={28} />}
             </div>
             <div>
               <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold mb-1 ${
-                user?.isPro ? 'bg-teal-100 text-teal-800' : 'bg-amber-100 text-amber-800'
+                user?.isPro ? 'bg-teal-700 text-teal-700' : 'bg-amber-100 text-amber-800'
               }`}>
                 {user?.isPro ? (
                   <>
@@ -207,7 +207,7 @@ export default function DashboardHome() {
                 </div>
                 <h2 className="font-semibold text-slate-900">{t('dashboard.referralSection')}</h2>
               </div>
-              <Link to="/portal/referral" className="text-xs font-semibold text-teal-600 hover:text-teal-700">
+              <Link to="/portal/referral" className="text-xs font-semibold text-teal-700 hover:text-teal-700">
                 {t('dashboard.seeAll')}
               </Link>
             </div>
@@ -226,7 +226,7 @@ export default function DashboardHome() {
                     whileTap={{ scale: 0.95 }}
                     className={`px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all ${
                       copied
-                        ? 'bg-teal-600 text-white'
+                        ? 'bg-teal-700 text-white'
                         : 'bg-slate-900 text-white hover:bg-black'
                     }`}
                   >
@@ -253,7 +253,7 @@ export default function DashboardHome() {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min((referralCount / referralGoal) * 100, 100)}%` }}
-                    className="h-full bg-teal-600 rounded-full"
+                    className="h-full bg-teal-700 rounded-full"
                   />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
@@ -277,7 +277,7 @@ export default function DashboardHome() {
               to="/portal/billing"
               className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
-              <CreditCard size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
+              <CreditCard size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.subscriptionLink')}</p>
               <p className="text-xs text-slate-500">{t('dashboard.invoicesAndPayment')}</p>
             </Link>
@@ -286,7 +286,7 @@ export default function DashboardHome() {
               href="mailto:support@propairapp.com"
               className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
             >
-              <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-600 mb-2" />
+              <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.supportLink')}</p>
               <p className="text-xs text-slate-500">{t('dashboard.technicalHelp')}</p>
             </a>
@@ -301,8 +301,8 @@ export default function DashboardHome() {
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6 mb-6"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center">
-                <Users size={24} className="text-teal-600" />
+              <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center">
+                <Users size={24} className="text-teal-700" />
               </div>
               <div>
                 <p className="font-semibold text-slate-900">{t('dashboard.clientSpace')}</p>

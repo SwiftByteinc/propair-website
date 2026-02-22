@@ -178,7 +178,7 @@ export default function Login() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 size={32} className="animate-spin mx-auto text-teal-600 mb-4" />
+          <Loader2 size={32} className="animate-spin mx-auto text-teal-700 mb-4" />
           <p className="font-semibold text-slate-900">{t('login.redirectingToCheckout')}</p>
           <p className="text-sm text-slate-500 mt-1">{t('login.pleaseWait')}</p>
         </div>
@@ -215,8 +215,8 @@ export default function Login() {
       >
         {/* Referral Badge */}
         {(refCode || getStoredReferralCode()) && (
-          <div className="mb-6 p-3.5 bg-teal-50 border border-teal-100 rounded-xl flex items-start gap-3">
-            <CheckCircle size={18} className="text-teal-600 mt-0.5 shrink-0" />
+          <div className="mb-6 p-3.5 bg-teal-700 border border-teal-700 rounded-xl flex items-start gap-3">
+            <CheckCircle size={18} className="text-teal-700 mt-0.5 shrink-0" />
             <p className="text-sm text-teal-700 font-medium">
               {t('login.referralBadge')}
             </p>

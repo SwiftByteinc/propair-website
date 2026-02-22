@@ -18,7 +18,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Home() {
   const { t } = useLanguage();
   return (
-    <div className="w-full overflow-hidden bg-white font-sans selection:bg-teal-50 selection:text-teal-700">
+    <div className="w-full overflow-hidden bg-white font-sans selection:bg-teal-700 selection:text-teal-700">
       <SEO
         canonical="/"
         description={t('seo.homeDesc')}
@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-50/50 via-white to-white" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-700/50 via-white to-white" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-24 relative z-10">
           <motion.div
@@ -36,15 +36,15 @@ export default function Home() {
             className="text-center"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6 md:mb-8">
-              <Star size={14} className="fill-teal-500 text-teal-500" />
+              <Star size={14} className="fill-teal-700 text-teal-700" />
               <span>{t('home.badge')}</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-[1.1] mb-6 md:mb-8 tracking-tight">
               {t('home.heroTitle1')}{' '}
-              <span className="text-teal-600 relative inline-block">
+              <span className="text-teal-700 relative inline-block">
                 {t('home.heroTitle2')}
-                <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-2 md:h-3 text-teal-400 opacity-60" viewBox="0 0 300 12" fill="none"><path d="M2 9.5C55.5 3.5 168.5 -1.5 298 9.5" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/></svg>
+                <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-2 md:h-3 text-teal-700 opacity-60" viewBox="0 0 300 12" fill="none"><path d="M2 9.5C55.5 3.5 168.5 -1.5 298 9.5" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/></svg>
               </span>
             </h1>
 
@@ -72,13 +72,13 @@ export default function Home() {
 
             <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6 justify-center text-sm font-medium text-slate-500 px-4 sm:px-0">
               <div className="flex items-center justify-center gap-2">
-                <Check size={18} className="text-teal-600" /> {t('home.badgeCommission')}
+                <Check size={18} className="text-teal-700" /> {t('home.badgeCommission')}
               </div>
               <div className="flex items-center justify-center gap-2">
-                <Check size={18} className="text-teal-600" /> {t('home.badgeTools')}
+                <Check size={18} className="text-teal-700" /> {t('home.badgeTools')}
               </div>
               <div className="flex items-center justify-center gap-2 col-span-2 sm:col-span-1">
-                <Check size={18} className="text-teal-600" /> {t('home.badgeChat')}
+                <Check size={18} className="text-teal-700" /> {t('home.badgeChat')}
               </div>
             </div>
           </motion.div>
@@ -104,9 +104,9 @@ export default function Home() {
             <motion.div
               className="bg-white rounded-2xl p-6 md:p-10 shadow-lg shadow-slate-200/50 border border-slate-100/60 hover:shadow-lg transition-all"
             >
-              <Users size={24} className="text-teal-600 mb-6 md:mb-8" />
+              <Users size={24} className="text-teal-700 mb-6 md:mb-8" />
               <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-2">{t('home.clientTitle')}</h3>
-              <p className="text-base md:text-lg font-medium text-teal-600 mb-4 md:mb-6">{t('home.clientTagline')}</p>
+              <p className="text-base md:text-lg font-medium text-teal-700 mb-4 md:mb-6">{t('home.clientTagline')}</p>
 
               <p className="text-slate-600 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
                 {t('home.clientDescription')}
@@ -114,15 +114,15 @@ export default function Home() {
 
               <ul className="space-y-3 md:space-y-4">
                 <li className="flex items-start gap-3">
-                  <MessageSquare size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <MessageSquare size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.clientFeature1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Layout size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <Layout size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.clientFeature2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <Check size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.clientFeature3')}</span>
                 </li>
               </ul>
@@ -147,15 +147,15 @@ export default function Home() {
 
               <ul className="space-y-3 md:space-y-4">
                 <li className="flex items-start gap-3">
-                  <Clock size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <Clock size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.proFeature1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Check size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <Check size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.proFeature2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Layout size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                  <Layout size={16} className="text-teal-700 mt-0.5 shrink-0" />
                   <span className="text-slate-700 text-sm md:text-base">{t('home.proFeature3')}</span>
                 </li>
               </ul>
@@ -178,10 +178,10 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto relative">
-            <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-teal-200 via-slate-200 to-teal-200" />
+            <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-teal-700 via-slate-200 to-teal-700" />
 
             <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100/60 shadow-sm">
-              <Search size={24} className="text-teal-600 mx-auto mb-4 md:mb-6 relative z-10" />
+              <Search size={24} className="text-teal-700 mx-auto mb-4 md:mb-6 relative z-10" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">{t('home.step1Title')}</h3>
               <p className="text-slate-600 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: t('home.step1Desc') }} />
             </div>
@@ -195,7 +195,7 @@ export default function Home() {
             </div>
 
             <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100/60 shadow-sm">
-              <Layout size={24} className="text-teal-600 mx-auto mb-4 md:mb-6 relative z-10" />
+              <Layout size={24} className="text-teal-700 mx-auto mb-4 md:mb-6 relative z-10" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">{t('home.step3Title')}</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
                 {t('home.step3Desc')}

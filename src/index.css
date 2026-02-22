@@ -5,9 +5,9 @@
   --color-primary: #09090B;        /* Noir Onyx - Titres */
   --color-body: #4B5563;           /* Gris Slate - Corps de texte */
   --color-muted: #6B7280;          /* Gris moyen */
-  --color-teal: #0E7490;           /* Accent primaire */
-  --color-teal-dark: #155E75;      /* Accent foncé */
-  --color-teal-light: #0891B2;     /* Accent clair */
+  --color-teal: #0F766E;           /* Accent primaire — teal-700 */
+  --color-teal-dark: #115E59;      /* Accent foncé — teal-800 */
+  --color-teal-light: #0D9488;     /* Accent clair — teal-600 */
 
   /* Amber: réservé aux warnings et statut trial */
   --color-amber: #D97706;
@@ -23,7 +23,7 @@
   /* Alias pour compatibilité */
   --color-action: #09090B;         /* slate-900 — CTA principal */
   --color-action-dark: #18181B;    /* slate-800 — CTA hover */
-  --color-brand: #0E7490;
+  --color-brand: #0F766E;
 }
 
 /* Reset et base */
@@ -41,7 +41,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(14, 116, 144, 0.15);
+  background: rgba(15, 118, 110, 0.15);
   color: var(--color-primary);
 }
 
@@ -68,7 +68,7 @@ body {
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--color-teal);
-  box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.1);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
 }
 
 /* Custom checkbox */

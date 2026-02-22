@@ -27,7 +27,7 @@ export default function Footer() {
               {t('footer.brandDesc')}
             </p>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <MapPin size={16} className="text-teal-600" />
+              <MapPin size={16} className="text-teal-700" />
               <span>{t('footer.location')}</span>
             </div>
           </div>
@@ -37,17 +37,17 @@ export default function Footer() {
             <h3 className="font-semibold text-slate-900 mb-6">{t('footer.productTitle')}</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/pricing" className="text-slate-600 hover:text-teal-600 transition-colors py-1 inline-block">
+                <Link to="/pricing" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.productPricing')}
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-slate-600 hover:text-teal-600 transition-colors py-1 inline-block">
+                <Link to="/about" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.productAbout')}
                 </Link>
               </li>
               <li>
-                <Link to="/pricing#faq" className="text-slate-600 hover:text-teal-600 transition-colors py-1 inline-block">
+                <Link to="/pricing#faq" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.productFaq')}
                 </Link>
               </li>
@@ -59,12 +59,12 @@ export default function Footer() {
             <h3 className="font-semibold text-slate-900 mb-6">{t('footer.companyTitle')}</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/contact" className="text-slate-600 hover:text-teal-600 transition-colors py-1 inline-block">
+                <Link to="/contact" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.companyContact')}
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-slate-600 hover:text-teal-600 transition-colors py-1 inline-block">
+                <Link to="/login" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.companyLogin')}
                 </Link>
               </li>
@@ -108,13 +108,13 @@ export default function Footer() {
             {t('footer.copyright', { year: currentYear })}
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
-            <Link to="/privacy" className="hover:text-teal-600 transition-colors py-1">
+            <Link to="/privacy" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalPrivacy')}
             </Link>
-            <Link to="/terms" className="hover:text-teal-600 transition-colors py-1">
+            <Link to="/terms" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalTerms')}
             </Link>
-            <Link to="/refund" className="hover:text-teal-600 transition-colors py-1">
+            <Link to="/refund" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalRefund')}
             </Link>
           </div>

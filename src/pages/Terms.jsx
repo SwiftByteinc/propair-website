@@ -6,7 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Terms() {
   const { t } = useLanguage();
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
       <SEO
         title={t('terms.title')}
         canonical="/terms"
@@ -20,7 +20,7 @@ export default function Terms() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
-            <FileText size={14} className="text-teal-600" />
+            <FileText size={14} className="text-teal-700" />
             <span>{t('terms.badge')}</span>
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
@@ -39,12 +39,12 @@ export default function Terms() {
           {/* Section 1 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">1</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">1</span>
               {t('terms.s1Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="flex items-start gap-3 mb-4">
-                <Users size={20} className="text-teal-600 mt-1" />
+                <Users size={20} className="text-teal-700 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('terms.s1P1') }} />
                 </div>
@@ -65,12 +65,12 @@ export default function Terms() {
           {/* Section 2 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">2</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">2</span>
               {t('terms.s2Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="flex items-start gap-3">
-                <Building2 size={20} className="text-teal-600 mt-1" />
+                <Building2 size={20} className="text-teal-700 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed mb-4">
                     {t('terms.s2P1')}
@@ -93,13 +93,13 @@ export default function Terms() {
           {/* Section 3 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">3</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">3</span>
               {t('terms.s3Title')}
             </h2>
             <div className="space-y-4">
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                 <div className="flex items-start gap-3">
-                  <Scale size={20} className="text-teal-600 mt-1" />
+                  <Scale size={20} className="text-teal-700 mt-1" />
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s3IndTitle')}</h3>
                     <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s3IndDesc') }} />
@@ -108,7 +108,7 @@ export default function Terms() {
               </div>
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                 <div className="flex items-start gap-3">
-                  <CreditCard size={20} className="text-teal-600 mt-1" />
+                  <CreditCard size={20} className="text-teal-700 mt-1" />
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-2">{t('terms.s3PayTitle')}</h3>
                     <p className="text-slate-600" dangerouslySetInnerHTML={{ __html: t('terms.s3PayDesc') }} />
@@ -121,18 +121,18 @@ export default function Terms() {
           {/* Section 4 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">4</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">4</span>
               {t('terms.s4Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="flex items-start gap-3">
-                <MessageSquare size={20} className="text-teal-600 mt-1" />
+                <MessageSquare size={20} className="text-teal-700 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed mb-4">
                     {t('terms.s4P1')}
                   </p>
                   <div className="space-y-4">
-                    <div className="p-4 bg-teal-50 rounded-xl border border-teal-100">
+                    <div className="p-4 bg-teal-700 rounded-xl border border-teal-700">
                       <h4 className="font-semibold text-slate-900 mb-1">{t('terms.s4AccessTitle')}</h4>
                       <p className="text-slate-600 text-sm">
                         {t('terms.s4AccessDesc')}
@@ -153,7 +153,7 @@ export default function Terms() {
           {/* Section 5 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">5</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">5</span>
               {t('terms.s5Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -177,12 +177,12 @@ export default function Terms() {
           {/* Section 6 */}
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-sm font-semibold">6</span>
+              <span className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">6</span>
               {t('terms.s6Title')}
             </h2>
             <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
               <div className="flex items-start gap-3">
-                <Gavel size={20} className="text-teal-600 mt-1" />
+                <Gavel size={20} className="text-teal-700 mt-1" />
                 <div>
                   <p className="text-slate-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: t('terms.s6P1') }} />
                   <p className="text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('terms.s6P2') }} />

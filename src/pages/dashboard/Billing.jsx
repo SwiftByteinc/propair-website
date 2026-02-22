@@ -128,7 +128,7 @@ export default function Billing() {
     return (
       <div className="p-4 sm:p-6 md:p-8 max-w-4xl flex items-center justify-center min-h-[50vh]">
         <div className="text-center">
-          <Loader2 size={32} className="animate-spin mx-auto text-teal-600 mb-4" />
+          <Loader2 size={32} className="animate-spin mx-auto text-teal-700 mb-4" />
           <p className="font-semibold text-slate-900">{t('dashboard.verifyingPayment')}</p>
           <p className="text-sm text-slate-500 mt-1">{t('dashboard.pleaseWait')}</p>
         </div>
@@ -159,15 +159,15 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-teal-50 to-white rounded-2xl border border-teal-100/60 shadow-sm p-6"
+              className="bg-gradient-to-br from-teal-700 to-white rounded-2xl border border-teal-700/60 shadow-sm p-6"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-teal-700 flex items-center justify-center">
                     <Crown size={24} className="text-teal-700" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-teal-600">{t('dashboard.activePlan')}</p>
+                    <p className="text-xs font-medium text-teal-700">{t('dashboard.activePlan')}</p>
                     <p className="text-xl font-semibold text-slate-900">
                       {t('dashboard.planName')} — {subscription?.plan === 'annual'
                         ? t('dashboard.planAnnual')
@@ -211,7 +211,7 @@ export default function Billing() {
                 <button
                   onClick={handleStripePortal}
                   disabled={portalLoading}
-                  className="text-teal-600 font-semibold hover:underline"
+                  className="text-teal-700 font-semibold hover:underline"
                 >
                   {t('dashboard.openPortal')}
                 </button>
@@ -226,18 +226,18 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 border border-teal-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-teal-700/60 shadow-sm relative overflow-hidden flex flex-col justify-between"
             >
               {/* Badge */}
               <div className="absolute top-5 right-5">
-                <span className="bg-teal-600 text-white text-[10px] font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span className="bg-teal-700 text-white text-[10px] font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1">
                   <Star size={10} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
                 </span>
               </div>
 
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-1">{t('pricing.annualTitle')}</h3>
-                <p className="text-teal-600 font-medium text-sm mb-5">{t('pricing.annualTagline')}</p>
+                <p className="text-teal-700 font-medium text-sm mb-5">{t('pricing.annualTagline')}</p>
 
                 <div className="mb-3">
                   <div className="flex items-baseline gap-2">
@@ -256,8 +256,8 @@ export default function Billing() {
 
                 {/* Early Bird */}
                 {isEarlyBird && (
-                  <div className="mb-6 p-3 bg-teal-50 rounded-xl border border-teal-100">
-                    <p className="text-xs font-semibold text-teal-800">{t('pricing.earlyBirdLabel')}</p>
+                  <div className="mb-6 p-3 bg-teal-700 rounded-xl border border-teal-700">
+                    <p className="text-xs font-semibold text-teal-700">{t('pricing.earlyBirdLabel')}</p>
                     <p className="text-xs text-teal-700 font-semibold mt-1">
                       {t('pricing.earlyBirdRemaining', { count: remaining })}
                     </p>
@@ -268,8 +268,8 @@ export default function Billing() {
                   <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check size={12} className="text-teal-600" />
+                      <div className="w-5 h-5 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check size={12} className="text-teal-700" />
                       </div>
                       <span className="text-slate-600 text-sm">{feat}</span>
                     </div>
@@ -309,8 +309,8 @@ export default function Billing() {
                   <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                   {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check size={12} className="text-teal-600" />
+                      <div className="w-5 h-5 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check size={12} className="text-teal-700" />
                       </div>
                       <span className="text-slate-600 text-sm">{feat}</span>
                     </div>

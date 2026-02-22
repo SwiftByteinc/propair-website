@@ -16,7 +16,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
   const progress = Math.min(current / max, 1);
 
   const colorMap = {
-    teal: { bg: 'bg-teal-100', fill: 'bg-teal-600', text: 'text-teal-600', iconBg: 'bg-teal-50' },
+    teal: { bg: 'bg-teal-700', fill: 'bg-teal-700', text: 'text-teal-700', iconBg: 'bg-teal-700' },
     amber: { bg: 'bg-amber-100', fill: 'bg-amber-500', text: 'text-amber-600', iconBg: 'bg-amber-50' },
     slate: { bg: 'bg-slate-200', fill: 'bg-slate-600', text: 'text-slate-600', iconBg: 'bg-slate-50' },
   };
@@ -128,15 +128,15 @@ export default function Referral() {
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           {/* Reward summary header */}
-          <div className="bg-gradient-to-br from-teal-50 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-100/60">
+          <div className="bg-gradient-to-br from-teal-700 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-700/60">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/80 border border-teal-100 flex items-center justify-center shadow-sm shrink-0">
-                  <Gift size={20} className="text-teal-500 sm:hidden" />
-                  <Gift size={24} className="text-teal-500 hidden sm:block" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/80 border border-teal-700 flex items-center justify-center shadow-sm shrink-0">
+                  <Gift size={20} className="text-teal-700 sm:hidden" />
+                  <Gift size={24} className="text-teal-700 hidden sm:block" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-medium text-teal-600 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
+                  <p className="text-xs font-medium text-teal-700 mb-0.5">{t('dashboard.proMonthsEarned')}</p>
                   <p className="text-xs sm:text-sm text-slate-500 truncate">
                     {entreMonths > 0 && t('dashboard.viaEntrepreneurs', { count: entreMonths })}
                     {entreMonths > 0 && clientMonths > 0 && ' + '}
@@ -177,7 +177,7 @@ export default function Referral() {
             />
 
             <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
-              <Sparkles size={14} className="text-teal-600 mt-0.5 shrink-0" />
+              <Sparkles size={14} className="text-teal-700 mt-0.5 shrink-0" />
               <p className="text-[11px] text-slate-500 leading-relaxed">
                 {t('dashboard.progressResetInfo')}
               </p>
@@ -224,7 +224,7 @@ export default function Referral() {
                 whileTap={{ scale: 0.95 }}
                 className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                   copied
-                    ? 'bg-teal-600 text-white'
+                    ? 'bg-teal-700 text-white'
                     : 'bg-slate-900 text-white hover:bg-black'
                 }`}
               >
@@ -277,12 +277,12 @@ export default function Referral() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-teal-500">
+          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-teal-700">
             <div className="flex items-center gap-3 mb-3">
-              <CheckCircle size={18} className="text-teal-600" />
+              <CheckCircle size={18} className="text-teal-700" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsValidated')}</span>
             </div>
-            <p className="text-2xl font-bold text-teal-600">
+            <p className="text-2xl font-bold text-teal-700">
               {loading ? '-' : stats.validatedReferrals}
             </p>
           </div>
@@ -388,14 +388,14 @@ export default function Referral() {
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                           ref.referee_type === 'entrepreneur'
                             ? 'bg-slate-100 text-slate-600'
-                            : 'bg-teal-50 text-teal-600'
+                            : 'bg-teal-700 text-teal-700'
                         }`}>
                           {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
-                          ref.status === 'validated' ? 'bg-teal-50 text-teal-600' :
+                          ref.status === 'validated' ? 'bg-teal-700 text-teal-700' :
                           ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                           'bg-slate-100 text-slate-500'
                         }`}>
@@ -426,14 +426,14 @@ export default function Referral() {
                       <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium ${
                         ref.referee_type === 'entrepreneur'
                           ? 'bg-slate-100 text-slate-600'
-                          : 'bg-teal-50 text-teal-600'
+                          : 'bg-teal-700 text-teal-700'
                       }`}>
                         {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                       </span>
                     </div>
                   </div>
                   <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0 ${
-                    ref.status === 'validated' ? 'bg-teal-50 text-teal-600' :
+                    ref.status === 'validated' ? 'bg-teal-700 text-teal-700' :
                     ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                     'bg-slate-100 text-slate-500'
                   }`}>

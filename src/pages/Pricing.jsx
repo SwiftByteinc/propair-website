@@ -90,7 +90,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-50 selection:text-teal-700">
+    <div className="pt-32 pb-24 bg-white min-h-screen font-sans selection:bg-teal-700 selection:text-teal-700">
       <SEO
         title={t('seo.pricingTitle')}
         canonical="/pricing"
@@ -101,12 +101,12 @@ export default function Pricing() {
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6 md:mb-8">
-            <Shield size={14} className="text-teal-600" />
+            <Shield size={14} className="text-teal-700" />
             <span>{t('pricing.badge')}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
             {t('pricing.title1')}<br/>
-            <span className="text-teal-600">{t('pricing.title2')}</span>
+            <span className="text-teal-700">{t('pricing.title2')}</span>
           </h1>
           <p className="text-xl text-slate-600 font-light">
             {t('pricing.subtitle')}
@@ -143,21 +143,21 @@ export default function Pricing() {
 
             <div className="grid sm:grid-cols-3 gap-4">
               <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
-                <Bell size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                <Bell size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proNotifTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proNotifDesc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
-                <Shield size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                <Shield size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proCommTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proCommDesc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
-                <MessageSquare size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                <MessageSquare size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proChatTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proChatDesc')}</p>
@@ -184,7 +184,7 @@ export default function Pricing() {
                 transition={{ delay: index * 0.06 }}
                 className="bg-slate-50 rounded-2xl border border-slate-100/60 p-6 shadow-sm hover:shadow-md transition-all"
               >
-                <reason.icon size={20} className="text-teal-600 mb-4" />
+                <reason.icon size={20} className="text-teal-700 mb-4" />
                 <h3 className="font-semibold text-slate-900 mb-2">{reason.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{reason.description}</p>
               </motion.div>
@@ -197,18 +197,18 @@ export default function Pricing() {
 
           {/* CARTE GAUCHE : ANNUEL (La Star) */}
           <div
-            className="bg-white rounded-2xl p-5 sm:p-8 md:p-10 border-2 border-teal-200 shadow-lg relative overflow-hidden h-full flex flex-col justify-between"
+            className="bg-white rounded-2xl p-5 sm:p-8 md:p-10 border-2 border-teal-700 shadow-lg relative overflow-hidden h-full flex flex-col justify-between"
           >
             {/* Ruban Promo */}
             <div className="absolute top-6 right-6">
-              <span className="bg-teal-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+              <span className="bg-teal-700 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
                 <Star size={12} className="fill-white" /> {isEarlyBird ? t('pricing.earlyBirdBadge') : t('pricing.annualBadge')}
               </span>
             </div>
 
             <div>
               <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.annualTitle')}</h3>
-              <p className="text-teal-600 font-medium mb-6">{t('pricing.annualTagline')}</p>
+              <p className="text-teal-700 font-medium mb-6">{t('pricing.annualTagline')}</p>
 
               <div className="mb-4">
                 <div className="flex items-baseline gap-2">
@@ -227,8 +227,8 @@ export default function Pricing() {
 
               {/* Early Bird */}
               {isEarlyBird && (
-                <div className="mb-8 p-3 bg-teal-50 rounded-xl border border-teal-100">
-                  <p className="text-xs font-semibold text-teal-800">
+                <div className="mb-8 p-3 bg-teal-700 rounded-xl border border-teal-700">
+                  <p className="text-xs font-semibold text-teal-700">
                     {t('pricing.earlyBirdLabel')}
                   </p>
                   <p className="text-xs text-teal-700 font-semibold mt-1">
@@ -241,7 +241,7 @@ export default function Pricing() {
                 <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                 {proFeatures.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <Check size={16} className="text-teal-600 flex-shrink-0 mt-0.5" />
+                    <Check size={16} className="text-teal-700 flex-shrink-0 mt-0.5" />
                     <span className="text-slate-600 text-sm font-medium">{feature.text}</span>
                   </div>
                 ))}
@@ -283,7 +283,7 @@ export default function Pricing() {
               </button>
 
               <div className="flex items-center gap-2 text-sm text-slate-500">
-                <Check size={14} className="text-teal-600" />
+                <Check size={14} className="text-teal-700" />
                 <span>{t('pricing.monthlyIncluded')}</span>
               </div>
 
@@ -297,7 +297,7 @@ export default function Pricing() {
           <div className="max-w-3xl mx-auto bg-slate-900 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
             <div className="relative z-10">
-              <Smartphone size={40} className="text-teal-400 mx-auto mb-6" />
+              <Smartphone size={40} className="text-teal-700 mx-auto mb-6" />
               <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
                 {t('pricing.ctaTitle')}
               </h3>
@@ -326,7 +326,7 @@ export default function Pricing() {
         {/* TRUST / GARANTIE */}
         <div className="text-center border-t border-slate-100 pt-16 mb-24">
           <div className="inline-flex flex-col items-center">
-            <Heart size={32} className="text-teal-400 fill-teal-400 mb-4" />
+            <Heart size={32} className="text-teal-700 fill-teal-700 mb-4" />
             <h3 className="text-lg font-semibold text-slate-900">{t('pricing.trustTitle')}</h3>
             <p className="text-slate-500 max-w-lg mx-auto mt-2">
               {t('pricing.trustDesc')}
