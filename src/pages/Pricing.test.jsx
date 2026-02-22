@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Pricing from './Pricing';
 import { LanguageProvider } from '../context/LanguageContext';
+import { ToastProvider } from '../context/ToastContext';
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -25,9 +26,9 @@ vi.mock('../context/AuthContext', () => ({
 function renderPricing() {
   return render(
     <HelmetProvider>
-      <LanguageProvider><MemoryRouter>
+      <LanguageProvider><ToastProvider><MemoryRouter>
         <Pricing />
-      </MemoryRouter></LanguageProvider>
+      </MemoryRouter></ToastProvider></LanguageProvider>
     </HelmetProvider>
   );
 }

@@ -60,7 +60,10 @@ describe('Referral Page', () => {
     });
 
     mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 5, validatedReferrals: 2, pendingReferrals: 3, earnedMonths: 2 },
+      stats: {
+        totalReferrals: 5, validatedReferrals: 2, pendingReferrals: 3,
+        entreValidated: 1, clientValidated: 1, entreMonths: 3, clientMonths: 0, earnedMonths: 3,
+      },
       referralList: [
         { id: 1, referee_type: 'entrepreneur', status: 'validated', created_at: '2026-01-01', referee_email: 'a@test.com' },
         { id: 2, referee_type: 'entrepreneur', status: 'pending', created_at: '2026-01-02', referee_email: 'b@test.com' },
@@ -168,8 +171,8 @@ describe('Referral Page', () => {
   it('calculates earned months correctly', () => {
     renderReferral();
 
-    // 1 entrepreneur validated * 2 = 2 months, 3 clients < 6 = 0 months, total = 2
-    const monthsDisplay = screen.getAllByText('2');
+    // 1 entrepreneur validated * 3 = 3 months, 1 client < 6 = 0 months, total = 3
+    const monthsDisplay = screen.getAllByText('3');
     expect(monthsDisplay.length).toBeGreaterThanOrEqual(1);
   });
 
@@ -189,7 +192,7 @@ describe('Referral Page', () => {
 
   it('shows empty state when no referrals', () => {
     mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, entreValidated: 0, clientValidated: 0, entreMonths: 0, clientMonths: 0, earnedMonths: 0 },
       referralList: [],
       loading: false,
     });
@@ -201,7 +204,7 @@ describe('Referral Page', () => {
 
   it('shows loading state', () => {
     mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, entreValidated: 0, clientValidated: 0, entreMonths: 0, clientMonths: 0, earnedMonths: 0 },
       referralList: [],
       loading: true,
     });
@@ -230,7 +233,7 @@ describe('Referral Page', () => {
 
     renderReferral();
 
-    expect(screen.getByText(/client est validé quand son profil/i)).toBeInTheDocument();
+    expect(screen.getByText(/client est validé dès son inscription/i)).toBeInTheDocument();
   });
 
   it('displays client referral code in link', () => {
@@ -259,7 +262,7 @@ describe('Referral Page', () => {
 
   it('shows empty history when no referrals', () => {
     mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, entreValidated: 0, clientValidated: 0, entreMonths: 0, clientMonths: 0, earnedMonths: 0 },
       referralList: [],
       loading: false,
     });
@@ -269,7 +272,7 @@ describe('Referral Page', () => {
 
   it('loading state hides stats values', () => {
     mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
+      stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, entreValidated: 0, clientValidated: 0, entreMonths: 0, clientMonths: 0, earnedMonths: 0 },
       referralList: [],
       loading: true,
     });

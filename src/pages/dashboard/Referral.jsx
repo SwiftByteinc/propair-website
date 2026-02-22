@@ -68,15 +68,7 @@ export default function Referral() {
 
   // Fetch real referral stats from Supabase
   const { stats, referralList, loading } = useReferralStats(user?.id);
-
-  // Compute detailed stats from referralList
-  const entreReferrals = referralList.filter(r => r.referee_type === 'entrepreneur');
-  const clientReferrals = referralList.filter(r => r.referee_type === 'client');
-  const entreValidated = entreReferrals.filter(r => r.status === 'validated').length;
-  const clientCount = clientReferrals.filter(r => r.status === 'validated').length;
-  const entreMonths = entreValidated * 3;
-  const clientMonths = Math.floor(clientCount / 6) * 3;
-  const totalMonths = entreMonths + clientMonths;
+  const { entreValidated, clientValidated: clientCount, entreMonths, clientMonths, earnedMonths: totalMonths } = stats;
 
   const copyLink = useCallback(async () => {
     await copyToClipboard(referralLink);

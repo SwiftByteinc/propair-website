@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
@@ -27,8 +27,11 @@ export default function Billing() {
   const [verifying, setVerifying] = useState(false);
   const { isEarlyBird, remaining } = useEarlyBirdCount();
 
+  // Keep refs to avoid stale closures in async polling
+  const isProRef = useRef(isPro);
+  useEffect(() => { isProRef.current = isPro; }, [isPro]);
+
   // Handle checkout success/cancel from Stripe redirect
-  // Includes polling to wait for webhook to update the DB
   useEffect(() => {
     const checkout = searchParams.get('checkout');
     if (!checkout) return;
@@ -39,30 +42,30 @@ export default function Billing() {
 
     if (checkout === 'success') {
       setVerifying(true);
+      let cancelled = false;
 
-      // Poll for subscription activation (webhook may take 1-5s)
-      let attempts = 0;
-      const maxAttempts = 4;
-      const interval = setInterval(async () => {
-        attempts++;
-        try {
-          await refreshProfile();
-        } catch { /* ignore */ }
-
-        // Check if subscription is now active
-        if (isPro || attempts >= maxAttempts) {
-          clearInterval(interval);
-          setVerifying(false);
-          if (isPro) {
+      const poll = async () => {
+        const maxAttempts = 5;
+        for (let i = 0; i < maxAttempts; i++) {
+          if (cancelled) return;
+          await new Promise(r => setTimeout(r, 2000));
+          if (cancelled) return;
+          try { await refreshProfile(); } catch { /* ignore */ }
+          if (isProRef.current) {
+            setVerifying(false);
             toast.success(t('dashboard.checkoutSuccess'));
-          } else {
-            // Show success anyway — webhook might still be processing
-            toast.success(t('dashboard.checkoutSuccess'));
+            return;
           }
         }
-      }, 2000);
+        // Webhook might still be processing — show success, user can reload
+        if (!cancelled) {
+          setVerifying(false);
+          toast.success(t('dashboard.checkoutSuccess'));
+        }
+      };
+      poll();
 
-      return () => clearInterval(interval);
+      return () => { cancelled = true; };
     } else if (checkout === 'cancelled') {
       toast.info(t('dashboard.checkoutCancelled'));
     }

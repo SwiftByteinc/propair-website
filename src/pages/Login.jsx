@@ -9,6 +9,7 @@ import { STORAGE_KEYS } from '../lib/constants';
 import { supabase } from '../lib/supabase';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
 
 export default function Login() {
   const { t } = useLanguage();
@@ -17,6 +18,7 @@ export default function Login() {
   const location = useLocation();
   const { user, signIn, signUp, signInWithOAuth } = useAuth();
   const posthog = usePostHog();
+  const toast = useToast();
 
   // Support both ?ref__= and ?ref= (rétrocompatibilité)
   const refCode = searchParams.get('ref__') || searchParams.get('ref');
@@ -62,9 +64,11 @@ export default function Login() {
         if (!error && data?.url) {
           window.location.href = data.url;
         } else {
+          toast.error(t('login.checkoutError') || 'Erreur lors du paiement. Réessayez depuis le tableau de bord.');
           navigate('/portal', { replace: true });
         }
       }).catch(() => {
+        toast.error(t('login.checkoutError') || 'Erreur lors du paiement. Réessayez depuis le tableau de bord.');
         navigate('/portal', { replace: true });
       });
       return;

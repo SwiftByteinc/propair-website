@@ -8,12 +8,16 @@ export function useEarlyBirdCount() {
   useEffect(() => {
     if (!supabase) return;
 
+    let isMounted = true;
+
     supabase.functions.invoke('get-early-bird-count', { method: 'GET' })
       .then(({ data: result, error }) => {
-        if (!error && result) setData(result);
+        if (isMounted && !error && result) setData(result);
       })
       .catch(() => {})
-      .finally(() => setLoading(false));
+      .finally(() => { if (isMounted) setLoading(false); });
+
+    return () => { isMounted = false; };
   }, []);
 
   return { ...data, loading };

@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 import { LanguageProvider } from '../context/LanguageContext';
+import { ToastProvider } from '../context/ToastContext';
 
 // Mock framer-motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
@@ -30,9 +31,11 @@ vi.mock('../components/SEO', () => ({
 const renderWithRouter = (component) => {
   return render(
     <LanguageProvider>
-      <BrowserRouter>
-        {component}
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          {component}
+        </BrowserRouter>
+      </ToastProvider>
     </LanguageProvider>
   );
 };

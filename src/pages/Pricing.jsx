@@ -10,6 +10,7 @@ import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
 import { useEarlyBirdCount } from '../hooks/useEarlyBirdCount';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import { supabase } from '../lib/supabase';
 
 export default function Pricing() {
@@ -18,6 +19,7 @@ export default function Pricing() {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState(null);
   const [checkoutLoading, setCheckoutLoading] = useState(null);
+  const toast = useToast();
   const { remaining, isEarlyBird } = useEarlyBirdCount();
 
   const handlePlanClick = async (plan) => {
@@ -36,6 +38,7 @@ export default function Pricing() {
       }
     } catch {
       setCheckoutLoading(null);
+      toast.error(t('pricing.checkoutError') || 'Une erreur est survenue. Veuillez réessayer.');
     }
   };
 

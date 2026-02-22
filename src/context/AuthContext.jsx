@@ -53,16 +53,16 @@ export function AuthProvider({ children }) {
         .order('created_at', { ascending: false })
         .limit(5);
 
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timeout')), 5000)
+      const timeoutFallback = new Promise((resolve) =>
+        setTimeout(() => resolve([
+          { data: null, error: new Error('Timeout') },
+          { data: null, error: new Error('Timeout') }
+        ]), 5000)
       );
 
       const [profileResult, subResult] = await Promise.race([
         Promise.all([profilePromise, subPromise]),
-        timeoutPromise.then(() => [
-          { data: null, error: new Error('Timeout') },
-          { data: null, error: new Error('Timeout') }
-        ])
+        timeoutFallback
       ]);
 
       const { data: profileData, error: profileError } = profileResult;
@@ -167,20 +167,24 @@ export function AuthProvider({ children }) {
       const refereeType = newProfile?.user_role === 'entrepreneur' ? 'entrepreneur' : 'client';
 
       // 5. Create the referral_event
+      const now = new Date().toISOString();
+      const isClient = refereeType === 'client';
       await supabase.from('referral_events').insert({
         referrer_id: referrer.id,
         referrer_email: referrer.email,
         referee_id: currentUser.id,
+        referee_email: currentUser.email,
         referee_type: refereeType,
-        status: refereeType === 'client' ? 'validated' : 'pending',
-        created_at: new Date().toISOString()
+        status: isClient ? 'validated' : 'pending',
+        validated_at: isClient ? now : null,
+        created_at: now
       });
 
       // 6. Cleanup
       clearStoredReferralCode();
 
-    } catch {
-      // Silent fail — don't block auth flow
+    } catch (err) {
+      if (import.meta.env.DEV) console.error('Referral processing error:', err);
       clearStoredReferralCode();
     }
   }, []);

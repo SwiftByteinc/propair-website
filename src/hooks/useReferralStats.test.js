@@ -48,6 +48,10 @@ describe('useReferralStats', () => {
     expect(result.current.stats.totalReferrals).toBe(3);
     expect(result.current.stats.validatedReferrals).toBe(2);
     expect(result.current.stats.pendingReferrals).toBe(1);
+    expect(result.current.stats.entreValidated).toBe(2);
+    expect(result.current.stats.clientValidated).toBe(0);
+    expect(result.current.stats.entreMonths).toBe(6);
+    expect(result.current.stats.clientMonths).toBe(0);
     // 2 validated entrepreneurs * 3 = 6 months, 0 clients = 0 → total 6
     expect(result.current.stats.earnedMonths).toBe(6);
     expect(result.current.referralList).toHaveLength(3);
@@ -173,6 +177,10 @@ describe('useReferralStats', () => {
     });
     const { result } = renderHook(() => useReferralStats('u1'));
     await waitFor(() => expect(result.current.loading).toBe(false));
+    expect(result.current.stats.entreValidated).toBe(0);
+    expect(result.current.stats.clientValidated).toBe(6);
+    expect(result.current.stats.entreMonths).toBe(0);
+    expect(result.current.stats.clientMonths).toBe(3);
     // 6 clients = floor(6/6) * 3 = 3 months
     expect(result.current.stats.earnedMonths).toBe(3);
   });

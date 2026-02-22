@@ -3,10 +3,14 @@ import { supabase } from '../lib/supabase';
 
 export function useReferralStats(userId) {
   const [stats, setStats] = useState({
-    totalReferrals: 0,      // Total des invitations
-    validatedReferrals: 0,  // Ceux qui ont payé/sont validés
-    pendingReferrals: 0,    // En attente
-    earnedMonths: 0         // Mois gratuits gagnés
+    totalReferrals: 0,
+    validatedReferrals: 0,
+    pendingReferrals: 0,
+    entreValidated: 0,
+    clientValidated: 0,
+    entreMonths: 0,
+    clientMonths: 0,
+    earnedMonths: 0
   });
   const [referralList, setReferralList] = useState([]); // Pour afficher la liste
   const [loading, setLoading] = useState(true);
@@ -26,7 +30,7 @@ export function useReferralStats(userId) {
 
         const { data, error } = await supabase
           .from('referral_events')
-          .select('id, referrer_id, referee_id, referrer_email, referee_type, status, created_at')
+          .select('id, referrer_id, referee_id, referrer_email, referee_email, referee_type, status, created_at')
           .eq('referrer_id', userId)
           .order('created_at', { ascending: false });
 
@@ -49,13 +53,18 @@ export function useReferralStats(userId) {
             }
           }
         }
-        const earned = (entreValidated * 3) + (Math.floor(clientValidated / 6) * 3);
+        const entreMonths = entreValidated * 3;
+        const clientMonths = Math.floor(clientValidated / 6) * 3;
 
         setStats({
           totalReferrals: total,
           validatedReferrals: validated,
           pendingReferrals: pending,
-          earnedMonths: earned
+          entreValidated,
+          clientValidated,
+          entreMonths,
+          clientMonths,
+          earnedMonths: entreMonths + clientMonths
         });
 
         setReferralList(data || []);
