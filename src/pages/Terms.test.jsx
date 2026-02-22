@@ -4,12 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Terms from './Terms';
 import { LanguageProvider } from '../context/LanguageContext';
 
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-  },
-}));
-
 function renderTerms() {
   return render(
     <HelmetProvider>
@@ -26,24 +20,94 @@ describe('Terms', () => {
     expect(screen.getByText("Conditions d'utilisation")).toBeInTheDocument();
   });
 
-  it('renders transparency badge', () => {
+  it('renders version info', () => {
     renderTerms();
-    expect(screen.getByText('Conditions claires et transparentes')).toBeInTheDocument();
-  });
-
-  it('renders last updated date', () => {
-    renderTerms();
-    expect(screen.getByText(/Dernière mise à jour/)).toBeInTheDocument();
+    expect(screen.getByText(/Version 1\.0/)).toBeInTheDocument();
   });
 
   it('renders Nature du service section', () => {
     renderTerms();
-    expect(screen.getByText('Nature du service et admissibilité')).toBeInTheDocument();
+    expect(screen.getByText('1. Nature du service et admissibilité')).toBeInTheDocument();
   });
 
-  it('renders RBQ obligations section', () => {
+  it('renders Comptes section', () => {
     renderTerms();
-    expect(screen.getByText('Obligations des entrepreneurs (RBQ)')).toBeInTheDocument();
+    expect(screen.getByText('2. Comptes utilisateur')).toBeInTheDocument();
+  });
+
+  it('renders Obligations section', () => {
+    renderTerms();
+    expect(screen.getByText('3. Obligations professionnelles des entrepreneurs')).toBeInTheDocument();
+  });
+
+  it('renders Accès section', () => {
+    renderTerms();
+    expect(screen.getByText('4. Accès aux fonctionnalités')).toBeInTheDocument();
+  });
+
+  it('renders Utilisation acceptable section', () => {
+    renderTerms();
+    expect(screen.getByText('5. Utilisation acceptable')).toBeInTheDocument();
+  });
+
+  it('renders Contenu section', () => {
+    renderTerms();
+    expect(screen.getByText('6. Contenu utilisateur')).toBeInTheDocument();
+  });
+
+  it('renders Messagerie section', () => {
+    renderTerms();
+    expect(screen.getByText('7. Messagerie')).toBeInTheDocument();
+  });
+
+  it('renders Documentation section', () => {
+    renderTerms();
+    expect(screen.getByText('8. Documentation des échanges')).toBeInTheDocument();
+  });
+
+  it('renders Propriété intellectuelle section', () => {
+    renderTerms();
+    expect(screen.getByText('9. Propriété intellectuelle')).toBeInTheDocument();
+  });
+
+  it('renders Limitation section', () => {
+    renderTerms();
+    expect(screen.getByText('10. Limitation de responsabilité')).toBeInTheDocument();
+  });
+
+  it('renders Indemnisation section', () => {
+    renderTerms();
+    expect(screen.getByText('11. Indemnisation')).toBeInTheDocument();
+  });
+
+  it('renders Suspension section', () => {
+    renderTerms();
+    expect(screen.getByText('12. Suspension et résiliation')).toBeInTheDocument();
+  });
+
+  it('renders Notifications section', () => {
+    renderTerms();
+    expect(screen.getByText('13. Notifications push')).toBeInTheDocument();
+  });
+
+  it('renders Force majeure section', () => {
+    renderTerms();
+    expect(screen.getByText('14. Force majeure')).toBeInTheDocument();
+  });
+
+  it('renders Modifications section', () => {
+    renderTerms();
+    expect(screen.getByText('15. Modifications')).toBeInTheDocument();
+  });
+
+  it('renders Droit applicable section', () => {
+    renderTerms();
+    expect(screen.getByText('16. Droit applicable et règlement des litiges')).toBeInTheDocument();
+  });
+
+  it('renders Divisibilité section', () => {
+    renderTerms();
+    expect(screen.getByText('17. Divisibilité')).toBeInTheDocument();
   });
 
   it('mentions age requirement', () => {
@@ -56,20 +120,9 @@ describe('Terms', () => {
     expect(screen.getAllByText(/SwiftByte inc\./).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders Paiements subsection', () => {
-    renderTerms();
-    expect(screen.getByText('Paiements')).toBeInTheDocument();
-  });
-
   it('mentions ProPair trademark', () => {
     renderTerms();
     expect(screen.getAllByText(/ProPair™/).length).toBeGreaterThanOrEqual(1);
-  });
-
-  it('renders numbered sections', () => {
-    renderTerms();
-    expect(screen.getByText('1')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
   });
 
   it('mentions Québec jurisdiction', () => {
@@ -77,16 +130,14 @@ describe('Terms', () => {
     expect(screen.getAllByText(/Québec/).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders legal capacity requirement', () => {
+  it('mentions 100$ CAD liability cap', () => {
     renderTerms();
-    expect(screen.getByText(/capacité juridique/)).toBeInTheDocument();
+    expect(screen.getByText(/100 \$ CAD/)).toBeInTheDocument();
   });
 
-  it('renders all 6 sections', () => {
+  it('has no navigation links', () => {
     renderTerms();
-    const sectionNumbers = ['1', '2', '3', '4', '5', '6'];
-    sectionNumbers.forEach((num) => {
-      expect(screen.getByText(num)).toBeInTheDocument();
-    });
+    const nav = document.querySelector('nav');
+    expect(nav).toBeNull();
   });
 });

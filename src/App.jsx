@@ -103,9 +103,9 @@ function App() {
               <Route path="/pricing" element={<MainLayout><Pricing /></MainLayout>} />
               <Route path="/about" element={<MainLayout><About /></MainLayout>} />
 
-              {/* Legal Pages */}
-              <Route path="/privacy" element={<MainLayout><Privacy /></MainLayout>} />
-              <Route path="/terms" element={<MainLayout><Terms /></MainLayout>} />
+              {/* Legal Pages (orphan — no nav/footer for App Store review) */}
+              <Route path="/privacy" element={<AuthLayout><Privacy /></AuthLayout>} />
+              <Route path="/terms" element={<AuthLayout><Terms /></AuthLayout>} />
               <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
               <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
               <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} />

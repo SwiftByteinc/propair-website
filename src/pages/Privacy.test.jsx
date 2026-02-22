@@ -4,12 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Privacy from './Privacy';
 import { LanguageProvider } from '../context/LanguageContext';
 
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-  },
-}));
-
 function renderPrivacy() {
   return render(
     <HelmetProvider>
@@ -26,49 +20,74 @@ describe('Privacy', () => {
     expect(screen.getByText('Politique de confidentialité')).toBeInTheDocument();
   });
 
-  it('renders Loi 25 badge', () => {
+  it('renders version info', () => {
     renderPrivacy();
-    expect(screen.getByText('Loi 25 / RGPD conforme')).toBeInTheDocument();
-  });
-
-  it('renders last updated date', () => {
-    renderPrivacy();
-    expect(screen.getByText(/Dernière mise à jour/)).toBeInTheDocument();
+    expect(screen.getByText(/Version 1\.0/)).toBeInTheDocument();
   });
 
   it('renders Introduction section', () => {
     renderPrivacy();
-    expect(screen.getByText('Introduction')).toBeInTheDocument();
+    expect(screen.getByText('1. Introduction')).toBeInTheDocument();
   });
 
   it('renders Responsable section', () => {
     renderPrivacy();
-    expect(screen.getByText('Responsable de la protection des renseignements personnels')).toBeInTheDocument();
+    expect(screen.getByText('2. Responsable de la protection des renseignements personnels')).toBeInTheDocument();
   });
 
-  it('renders Renseignements collectés section', () => {
+  it('renders Renseignements section', () => {
     renderPrivacy();
-    expect(screen.getByText('Renseignements collectés')).toBeInTheDocument();
+    expect(screen.getByText('3. Renseignements que nous recueillons')).toBeInTheDocument();
   });
 
-  it('renders Finalités et consentement section', () => {
+  it('renders Finalités section', () => {
     renderPrivacy();
-    expect(screen.getByText('Finalités et consentement')).toBeInTheDocument();
+    expect(screen.getByText('4. Finalités du traitement')).toBeInTheDocument();
   });
 
-  it('renders Communication et transferts section', () => {
+  it('renders Partage section', () => {
     renderPrivacy();
-    expect(screen.getByText('Communication et transferts')).toBeInTheDocument();
+    expect(screen.getByText('5. Partage de vos renseignements')).toBeInTheDocument();
   });
 
-  it('renders Conservation et sécurité section', () => {
+  it('renders Conservation section', () => {
     renderPrivacy();
-    expect(screen.getByText('Conservation et sécurité')).toBeInTheDocument();
+    expect(screen.getByText('6. Conservation des données')).toBeInTheDocument();
   });
 
-  it('renders Vos droits section', () => {
+  it('renders Sécurité section', () => {
     renderPrivacy();
-    expect(screen.getByText(/Vos droits/)).toBeInTheDocument();
+    expect(screen.getByText('7. Sécurité et incidents')).toBeInTheDocument();
+  });
+
+  it('renders Droits section', () => {
+    renderPrivacy();
+    expect(screen.getByText('8. Vos droits')).toBeInTheDocument();
+  });
+
+  it('renders Mineurs section', () => {
+    renderPrivacy();
+    expect(screen.getByText('9. Mineurs')).toBeInTheDocument();
+  });
+
+  it('renders Autorisations section', () => {
+    renderPrivacy();
+    expect(screen.getByText("10. Autorisations de l'appareil")).toBeInTheDocument();
+  });
+
+  it('renders Transferts section', () => {
+    renderPrivacy();
+    expect(screen.getByText('11. Transferts internationaux')).toBeInTheDocument();
+  });
+
+  it('renders Modifications section', () => {
+    renderPrivacy();
+    expect(screen.getByText('12. Modifications')).toBeInTheDocument();
+  });
+
+  it('renders Contact section', () => {
+    renderPrivacy();
+    expect(screen.getByText('13. Contact et recours')).toBeInTheDocument();
   });
 
   it('mentions SwiftByte inc.', () => {
@@ -76,24 +95,34 @@ describe('Privacy', () => {
     expect(screen.getAllByText(/SwiftByte inc\./).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders privacy email links', () => {
+  it('renders privacy email', () => {
     renderPrivacy();
-    const links = screen.getAllByText('privacy@propairapp.com');
-    expect(links.length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/privacy@propairapp\.com/).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('mentions Loi 25 in content', () => {
+  it('mentions Loi 25', () => {
     renderPrivacy();
     expect(screen.getAllByText(/Loi 25/).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders encryption details', () => {
+  it('mentions encryption', () => {
     renderPrivacy();
     expect(screen.getByText(/TLS 1\.3/)).toBeInTheDocument();
   });
 
-  it('states no data selling policy', () => {
+  it('states no data selling', () => {
     renderPrivacy();
-    expect(screen.getByText(/Aucune vente/)).toBeInTheDocument();
+    expect(screen.getByText(/ne vendons jamais/)).toBeInTheDocument();
+  });
+
+  it('mentions 30 day deletion delay', () => {
+    renderPrivacy();
+    expect(screen.getAllByText(/30 jours/).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('has no navigation links', () => {
+    renderPrivacy();
+    const nav = document.querySelector('nav');
+    expect(nav).toBeNull();
   });
 });
