@@ -26,7 +26,7 @@ export function useReferralStats(userId) {
 
         const { data, error } = await supabase
           .from('referral_events')
-          .select('id, referrer_id, referred_id, referrer_email, referee_type, status, created_at')
+          .select('id, referrer_id, referee_id, referrer_email, referee_type, status, created_at')
           .eq('referrer_id', userId)
           .order('created_at', { ascending: false });
 
@@ -49,7 +49,7 @@ export function useReferralStats(userId) {
             }
           }
         }
-        const earned = (entreValidated * 2) + (Math.floor(clientValidated / 6) * 2);
+        const earned = (entreValidated * 3) + (Math.floor(clientValidated / 6) * 3);
 
         setStats({
           totalReferrals: total,

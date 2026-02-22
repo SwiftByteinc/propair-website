@@ -58,6 +58,15 @@ serve(async (req) => {
     else console.log(`profiles.activated=${activated} for user ${userId}`)
   }
 
+  // Helper: validate pending entrepreneur referral and credit months (atomic SQL transaction)
+  const validatePendingReferrals = async (userId: string) => {
+    const { error } = await supabaseAdmin.rpc('validate_and_credit_referral', {
+      new_pro_id: userId
+    })
+    if (error) console.error(`Referral validation error for ${userId}:`, error)
+    else console.log(`Referral validation check completed for ${userId}`)
+  }
+
   try {
     switch (event.type) {
       case 'checkout.session.completed': {
@@ -94,6 +103,9 @@ serve(async (req) => {
 
         // Activate profile (syncs with mobile app's Pro gate)
         await setActivated(userId, true)
+
+        // Validate any pending entrepreneur referral for this user
+        await validatePendingReferrals(userId)
         break
       }
 
@@ -128,6 +140,11 @@ serve(async (req) => {
         // Sync activated flag with subscription status
         const isActive = ['active', 'trialing'].includes(subscription.status)
         await setActivated(userId, isActive)
+
+        // Validate pending referral only on real payment (not trialing)
+        if (subscription.status === 'active') {
+          await validatePendingReferrals(userId)
+        }
         break
       }
 

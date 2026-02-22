@@ -149,7 +149,7 @@ export function AuthProvider({ children }) {
       const { data: existing } = await supabase
         .from('referral_events')
         .select('id')
-        .eq('referred_id', currentUser.id)
+        .eq('referee_id', currentUser.id)
         .limit(1);
 
       if (existing && existing.length > 0) {
@@ -170,7 +170,7 @@ export function AuthProvider({ children }) {
       await supabase.from('referral_events').insert({
         referrer_id: referrer.id,
         referrer_email: referrer.email,
-        referred_id: currentUser.id,
+        referee_id: currentUser.id,
         referee_type: refereeType,
         status: refereeType === 'client' ? 'validated' : 'pending',
         created_at: new Date().toISOString()

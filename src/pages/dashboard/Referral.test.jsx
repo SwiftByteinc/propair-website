@@ -216,7 +216,7 @@ describe('Referral Page', () => {
   it('shows entrepreneur-specific help text', () => {
     renderReferral();
 
-    expect(screen.getByText(/filleul paie 2 mois mensuels/i)).toBeInTheDocument();
+    expect(screen.getByText(/filleul s'abonne à propair pro/i)).toBeInTheDocument();
   });
 
   it('shows client help text for client users', () => {

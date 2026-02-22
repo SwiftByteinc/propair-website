@@ -16,7 +16,7 @@ function ProgressBar({ current, max, label, sublabel, color = 'teal', icon: Icon
   const progress = Math.min(current / max, 1);
 
   const colorMap = {
-    teal: { bg: 'bg-teal-700', fill: 'bg-teal-700', text: 'text-teal-700', iconBg: 'bg-teal-700' },
+    teal: { bg: 'bg-teal-700/10', fill: 'bg-teal-700', text: 'text-teal-700', iconBg: 'bg-teal-700/10' },
     amber: { bg: 'bg-amber-100', fill: 'bg-amber-500', text: 'text-amber-600', iconBg: 'bg-amber-50' },
     slate: { bg: 'bg-slate-200', fill: 'bg-slate-600', text: 'text-slate-600', iconBg: 'bg-slate-50' },
   };
@@ -73,7 +73,7 @@ export default function Referral() {
   const entreReferrals = referralList.filter(r => r.referee_type === 'entrepreneur');
   const clientReferrals = referralList.filter(r => r.referee_type === 'client');
   const entreValidated = entreReferrals.filter(r => r.status === 'validated').length;
-  const clientCount = clientReferrals.length;
+  const clientCount = clientReferrals.filter(r => r.status === 'validated').length;
   const entreMonths = entreValidated * 3;
   const clientMonths = Math.floor(clientCount / 6) * 3;
   const totalMonths = entreMonths + clientMonths;
@@ -128,10 +128,10 @@ export default function Referral() {
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           {/* Reward summary header */}
-          <div className="bg-gradient-to-br from-teal-700 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-700/60">
+          <div className="bg-gradient-to-br from-teal-700/15 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-700/20">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/80 border border-teal-700 flex items-center justify-center shadow-sm shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/80 border border-teal-700/20 flex items-center justify-center shadow-sm shrink-0">
                   <Gift size={20} className="text-teal-700 sm:hidden" />
                   <Gift size={24} className="text-teal-700 hidden sm:block" />
                 </div>
@@ -388,14 +388,14 @@ export default function Referral() {
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                           ref.referee_type === 'entrepreneur'
                             ? 'bg-slate-100 text-slate-600'
-                            : 'bg-teal-700 text-teal-700'
+                            : 'bg-teal-700/10 text-teal-700'
                         }`}>
                           {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
-                          ref.status === 'validated' ? 'bg-teal-700 text-teal-700' :
+                          ref.status === 'validated' ? 'bg-teal-700/10 text-teal-700' :
                           ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                           'bg-slate-100 text-slate-500'
                         }`}>
@@ -426,14 +426,14 @@ export default function Referral() {
                       <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium ${
                         ref.referee_type === 'entrepreneur'
                           ? 'bg-slate-100 text-slate-600'
-                          : 'bg-teal-700 text-teal-700'
+                          : 'bg-teal-700/10 text-teal-700'
                       }`}>
                         {ref.referee_type === 'entrepreneur' ? 'Pro' : 'Client'}
                       </span>
                     </div>
                   </div>
                   <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0 ${
-                    ref.status === 'validated' ? 'bg-teal-700 text-teal-700' :
+                    ref.status === 'validated' ? 'bg-teal-700/10 text-teal-700' :
                     ref.status === 'rejected' ? 'bg-red-100 text-red-600' :
                     'bg-slate-100 text-slate-500'
                   }`}>

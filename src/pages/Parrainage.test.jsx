@@ -78,7 +78,7 @@ describe('Parrainage (Public Page)', () => {
       renderParrainage();
 
       expect(screen.getByText(/il s'inscrit via votre code/i)).toBeInTheDocument();
-      expect(screen.getByText(/il paie 2 mois mensuels ou 1 abonnement annuel/i)).toBeInTheDocument();
+      expect(screen.getByText(/il s'abonne à propair pro/i)).toBeInTheDocument();
       expect(screen.getByText(/votre filleul gagne 2 mois pro gratuits/i)).toBeInTheDocument();
     });
 
