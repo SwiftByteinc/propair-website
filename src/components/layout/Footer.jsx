@@ -108,13 +108,19 @@ export default function Footer() {
             {t('footer.copyright', { year: currentYear })}
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
-            <Link to="/privacy" className="hover:text-teal-700 transition-colors py-1">
+            <Link to="/site/privacy" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalPrivacy')}
             </Link>
-            <Link to="/terms" className="hover:text-teal-700 transition-colors py-1">
+            <Link to="/site/terms" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalTerms')}
             </Link>
-            <Link to="/refund" className="hover:text-teal-700 transition-colors py-1">
+            <Link to="/site/cookies" className="hover:text-teal-700 transition-colors py-1">
+              {t('footer.legalCookies')}
+            </Link>
+            <Link to="/site/legal" className="hover:text-teal-700 transition-colors py-1">
+              {t('footer.legalNotice')}
+            </Link>
+            <Link to="/site/refund" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalRefund')}
             </Link>
           </div>

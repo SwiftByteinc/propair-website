@@ -287,9 +287,6 @@ export default function Pricing() {
               {t('pricing.annualCta')}
             </button>
 
-            <p className="text-center text-xs text-slate-500 mt-4">
-              {t('pricing.annualNote')}
-            </p>
           </div>
 
           {/* CARTE DROITE : MENSUEL */}

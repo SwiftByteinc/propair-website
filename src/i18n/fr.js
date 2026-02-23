@@ -319,6 +319,8 @@ const fr = {
     copyright: '© {year} ProPair™ — Une marque de SwiftByte inc.',
     legalPrivacy: 'Confidentialité',
     legalTerms: 'Conditions d\'utilisation',
+    legalCookies: 'Cookies',
+    legalNotice: 'Mentions légales',
     legalRefund: 'Remboursement',
   },
 
@@ -733,6 +735,412 @@ const fr = {
     deleting: 'Suppression...',
     deleteError: 'Erreur lors de la suppression. Veuillez contacter support@propairapp.com',
     serviceUnavailable: 'Service non disponible',
+  },
+
+  // ═══════════════════════════════════════════════
+  // DOCUMENTS LÉGAUX — SITE WEB (propairapp.com)
+  // ═══════════════════════════════════════════════
+
+  sitePrivacy: {
+    title: 'Politique de confidentialité — Site Web',
+    seoDesc: 'Politique de confidentialité du site web propairapp.com. Gestion des données personnelles conformément à la Loi 25, LPRPDE et RGPD.',
+    lastUpdate: 'Dernière mise à jour : février 2026',
+    intro: 'La présente politique décrit comment SwiftByte inc. (« nous », « notre »), exploitant du site web propairapp.com (le « Site »), collecte, utilise et protège vos renseignements personnels lors de votre utilisation du Site. Cette politique est distincte de celle de l\'application mobile ProPair.',
+    trademark: 'ProPair™ est une marque de commerce de SwiftByte inc.',
+
+    s1Title: '1. Responsable de la protection des renseignements personnels',
+    s1P1: 'Conformément à la Loi 25 du Québec, SwiftByte inc. a désigné un responsable de la protection des renseignements personnels :',
+    s1Role: 'Responsable de la protection des données — Direction des opérations',
+    s1Email: 'privacy@propairapp.com',
+    s1Address: '528 Rue Castle, Magog, Québec, Canada',
+    s1Delay: 'Nous répondons à toute demande dans un délai maximal de 30 jours.',
+
+    s2Title: '2. Renseignements collectés',
+    s2DirectTitle: '2.1 Renseignements fournis par vous',
+    s2DirectItems: [
+      'Nom complet (création de compte)',
+      'Adresse courriel (création de compte, connexion)',
+      'Mot de passe chiffré (authentification par courriel)',
+      'Rôle choisi : client ou entrepreneur (inscription)',
+      'Code de parrainage utilisé, le cas échéant',
+    ],
+    s2AutoTitle: '2.2 Renseignements collectés automatiquement',
+    s2AutoItems: [
+      'Adresse IP et journaux d\'accès serveur',
+      'Type de navigateur, système d\'exploitation, résolution d\'écran',
+      'Pages consultées, durée des visites, interactions (via PostHog)',
+      'Données de performance de chargement des pages',
+    ],
+    s2ThirdTitle: '2.3 Renseignements collectés via des tiers',
+    s2ThirdItems: [
+      'Authentification Google : nom et adresse courriel associés à votre compte Google',
+      'Authentification Apple : nom (si partagé) et adresse courriel (ou adresse relais Apple)',
+      'Stripe : confirmation de paiement, identifiant client Stripe (aucune donnée bancaire n\'est stockée sur nos serveurs)',
+    ],
+
+    s3Title: '3. Finalités du traitement',
+    s3Items: [
+      'Créer et gérer votre compte utilisateur',
+      'Traiter vos paiements d\'abonnement via Stripe',
+      'Gérer le programme de parrainage et attribuer les récompenses',
+      'Améliorer la performance et l\'expérience utilisateur du Site (analytique)',
+      'Assurer la sécurité du Site et prévenir les abus',
+      'Respecter nos obligations légales (fiscalité, Loi 25)',
+    ],
+    s3Consent: 'En utilisant le Site et en créant un compte, vous offrez un consentement manifeste, libre et éclairé à la collecte et au traitement de vos renseignements personnels aux fins décrites ci-dessus.',
+    s3Withdraw: 'Vous pouvez retirer votre consentement en tout temps en nous contactant à privacy@propairapp.com ou en supprimant votre compte depuis les paramètres de sécurité du tableau de bord.',
+
+    s4Title: '4. Cookies et technologies de suivi',
+    s4P1: 'Le Site utilise des cookies et des technologies similaires. Pour le détail complet, consultez notre',
+    s4Link: 'Politique de cookies',
+    s4Summary: 'En résumé :',
+    s4Items: [
+      'Cookies essentiels : session d\'authentification Supabase, préférence de consentement',
+      'Cookies d\'analytique (PostHog) : désactivés par défaut, activés uniquement après votre consentement explicite via le bandeau de cookies',
+    ],
+
+    s5Title: '5. Partage et sous-traitants',
+    s5NoSale: 'Nous ne vendons jamais vos renseignements personnels.',
+    s5Intro: 'Nous partageons vos données uniquement avec les tiers suivants, strictement nécessaires au fonctionnement du Site :',
+    s5Sub1Name: 'Supabase',
+    s5Sub1Role: 'Hébergement, base de données, authentification',
+    s5Sub1Location: 'AWS (États-Unis)',
+    s5Sub2Name: 'Stripe',
+    s5Sub2Role: 'Traitement des paiements par abonnement',
+    s5Sub2Location: 'États-Unis',
+    s5Sub3Name: 'PostHog',
+    s5Sub3Role: 'Analytique d\'utilisation (avec consentement)',
+    s5Sub3Location: 'Union européenne',
+    s5Sub4Name: 'Vercel',
+    s5Sub4Role: 'Hébergement et diffusion du Site',
+    s5Sub4Location: 'États-Unis',
+    s5Legal: 'Nous pouvons également divulguer vos renseignements si la loi l\'exige ou sur ordonnance d\'un tribunal compétent.',
+
+    s6Title: '6. Transferts internationaux',
+    s6P1: 'Certains de nos sous-traitants (Supabase, Stripe, Vercel) sont situés aux États-Unis. Ces transferts sont encadrés par des clauses contractuelles types et les certifications de conformité de ces fournisseurs. PostHog est hébergé dans l\'Union européenne.',
+    s6P2: 'Nous nous assurons que tous nos sous-traitants respectent des standards de protection équivalents à ceux de la Loi 25 du Québec.',
+
+    s7Title: '7. Conservation des données',
+    s7Items: [
+      'Compte actif : vos données sont conservées tant que votre compte existe.',
+      'Compte inactif : après 3 ans d\'inactivité, nous vous aviserons avant de procéder à la suppression.',
+      'Suppression de compte : lorsque vous demandez la suppression (tableau de bord → Sécurité → Supprimer le compte ou par courriel à privacy@propairapp.com), un délai de grâce de 30 jours s\'applique. Passé ce délai, toutes vos données personnelles sont supprimées de façon permanente.',
+      'Données de paiement : les reçus et identifiants Stripe sont conservés 7 ans à des fins fiscales.',
+      'Données analytiques : les données d\'utilisation anonymisées sont conservées jusqu\'à 12 mois.',
+    ],
+
+    s8Title: '8. Sécurité',
+    s8Items: [
+      'Chiffrement des données en transit (TLS 1.3) et au repos (AES-256)',
+      'Authentification sécurisée via Supabase Auth avec jetons JWT',
+      'Contrôle d\'accès par lignes (Row Level Security) dans la base de données',
+      'En-têtes de sécurité HTTP : Content-Security-Policy, X-Content-Type-Options, X-Frame-Options',
+      'Aucun mot de passe stocké en clair — hachage bcrypt',
+    ],
+    s8Incident: 'En cas d\'incident de confidentialité présentant un risque de préjudice sérieux, nous aviserons la Commission d\'accès à l\'information du Québec (CAI) et les personnes concernées dans les plus brefs délais, conformément à la Loi 25. Un registre des incidents est tenu en permanence.',
+
+    s9Title: '9. Vos droits',
+    s9P1: 'Conformément à la Loi 25, à la LPRPDE et au RGPD (le cas échéant), vous disposez des droits suivants :',
+    s9Rights: [
+      { title: 'Accès', desc: 'Obtenir une copie de vos renseignements personnels.' },
+      { title: 'Rectification', desc: 'Corriger des renseignements inexacts ou incomplets.' },
+      { title: 'Suppression', desc: 'Demander la suppression de votre compte et de vos données.' },
+      { title: 'Portabilité', desc: 'Recevoir vos données dans un format structuré et lisible (JSON).' },
+      { title: 'Retrait du consentement', desc: 'Retirer votre consentement au traitement à tout moment.' },
+      { title: 'Opposition', desc: 'Vous opposer au traitement de vos données à des fins d\'analytique.' },
+      { title: 'Désindexation', desc: 'Demander la cessation de la diffusion de vos renseignements.' },
+    ],
+    s9How: 'Pour exercer vos droits, contactez-nous à privacy@propairapp.com. Nous répondrons dans un délai maximal de 30 jours.',
+
+    s10Title: '10. Mineurs',
+    s10P1: 'Le Site est destiné aux personnes âgées de 18 ans et plus. Nous ne collectons pas sciemment de renseignements personnels de mineurs. Si nous apprenons qu\'un mineur a créé un compte, nous le supprimerons dans les plus brefs délais.',
+
+    s11Title: '11. Modifications',
+    s11P1: 'Nous pouvons mettre à jour la présente politique. En cas de modification substantielle, nous vous en informerons par courriel ou par notification sur le Site au moins 15 jours avant l\'entrée en vigueur. L\'utilisation continue du Site après ce délai constitue votre acceptation de la politique modifiée.',
+
+    s12Title: '12. Contact et recours',
+    s12P1: 'Pour toute question, demande d\'accès ou plainte :',
+    s12Company: 'SwiftByte inc. (exploitant de ProPair)',
+    s12Address: '528 Rue Castle, Magog, QC, Canada',
+    s12Email: 'privacy@propairapp.com',
+    s12Recourse: 'Si vous n\'êtes pas satisfait de notre réponse, vous pouvez déposer une plainte auprès de la Commission d\'accès à l\'information du Québec (CAI) : www.cai.gouv.qc.ca',
+  },
+
+  siteTerms: {
+    title: 'Conditions d\'utilisation — Site Web',
+    seoDesc: 'Conditions d\'utilisation du site web propairapp.com. Règles, droits et obligations des visiteurs et utilisateurs.',
+    lastUpdate: 'Dernière mise à jour : février 2026',
+    intro: 'Les présentes conditions régissent votre utilisation du site web propairapp.com (le « Site »), exploité par SwiftByte inc. En accédant au Site ou en créant un compte, vous acceptez d\'être lié par ces conditions. Si vous n\'êtes pas d\'accord, veuillez ne pas utiliser le Site.',
+    trademark: 'ProPair™ est une marque de commerce de SwiftByte inc.',
+
+    s1Title: '1. Nature du Site',
+    s1P1: 'Le Site propairapp.com est un portail web permettant de :',
+    s1Items: [
+      'Présenter les services et fonctionnalités de la plateforme ProPair',
+      'Créer un compte utilisateur (client ou entrepreneur)',
+      'Gérer son abonnement ProPair Pro via un tableau de bord sécurisé',
+      'Accéder au programme de parrainage',
+      'Consulter les documents légaux et informations de contact',
+    ],
+    s1P2: 'Le Site ne permet pas la mise en relation directe entre clients et entrepreneurs, ni la messagerie. Ces fonctionnalités sont exclusives à l\'application mobile ProPair.',
+
+    s2Title: '2. Création de compte',
+    s2P1: 'Pour accéder au tableau de bord et aux fonctionnalités protégées, vous devez créer un compte. En créant un compte, vous déclarez :',
+    s2Items: [
+      'Être âgé d\'au moins 18 ans',
+      'Avoir la capacité juridique de contracter au Canada',
+      'Fournir des renseignements exacts et complets',
+      'Être responsable de la confidentialité de vos identifiants de connexion',
+    ],
+    s2P2: 'Chaque personne ne peut détenir qu\'un seul compte actif. Toute activité effectuée sous votre compte est votre responsabilité.',
+
+    s3Title: '3. Abonnements et paiements',
+    s3P1: 'Le Site permet de souscrire à un abonnement ProPair Pro. Les paiements sont traités exclusivement par Stripe. Aucune donnée bancaire n\'est stockée sur nos serveurs.',
+    s3Items: [
+      'L\'abonnement est à renouvellement automatique (mensuel ou annuel)',
+      'Vous pouvez annuler à tout moment depuis votre tableau de bord',
+      'L\'accès aux fonctionnalités Pro reste actif jusqu\'à la fin de la période payée',
+      'Les prix affichés sont en dollars canadiens, hors taxes applicables',
+    ],
+    s3P2: 'Pour les conditions de remboursement, consultez notre Politique de remboursement.',
+
+    s4Title: '4. Programme de parrainage',
+    s4P1: 'Le programme de parrainage permet aux utilisateurs inscrits de gagner des mois d\'abonnement gratuits en référant de nouveaux utilisateurs.',
+    s4Items: [
+      'Chaque utilisateur reçoit un code de parrainage unique',
+      'Les récompenses sont attribuées selon les conditions décrites sur la page Parrainage',
+      'ProPair se réserve le droit de modifier ou de suspendre le programme à tout moment avec un préavis de 30 jours',
+      'Toute tentative de fraude (comptes fictifs, auto-parrainage) entraînera la suspension du compte et l\'annulation des récompenses',
+    ],
+
+    s5Title: '5. Propriété intellectuelle',
+    s5P1: 'Le Site, son design, son code source, ses textes, images, logos et tout autre contenu sont la propriété exclusive de SwiftByte inc. et sont protégés par les lois canadiennes et internationales en matière de propriété intellectuelle.',
+    s5P2: 'Il est interdit de reproduire, modifier, distribuer ou utiliser tout élément du Site sans autorisation écrite préalable, sauf dans les limites permises par la loi.',
+
+    s6Title: '6. Utilisation acceptable',
+    s6P1: 'En utilisant le Site, vous vous engagez à :',
+    s6Items: [
+      'Fournir des renseignements véridiques lors de l\'inscription',
+      'Utiliser le Site uniquement aux fins prévues',
+      'Ne pas tenter de contourner les mesures de sécurité',
+      'Ne pas extraire de données de manière automatisée (scraping, bots)',
+      'Ne pas interférer avec le fonctionnement normal du Site',
+      'Respecter les droits des autres utilisateurs',
+    ],
+
+    s7Title: '7. Limitation de responsabilité',
+    s7P1: 'Le Site est fourni « tel quel » et « selon la disponibilité ». SwiftByte inc. ne garantit pas que le Site sera exempt d\'erreurs ou accessible en permanence.',
+    s7Items: [
+      'Nous ne sommes pas responsables des dommages indirects, accessoires ou consécutifs découlant de l\'utilisation du Site',
+      'Notre responsabilité totale à votre égard pour toute réclamation ne pourra excéder le montant que vous avez payé au cours des 6 derniers mois, ou 100 $ CAD (le montant le plus élevé prévalant)',
+      'Nous ne sommes pas responsables des interruptions de service causées par des tiers (Stripe, Supabase, hébergeur)',
+    ],
+
+    s8Title: '8. Indemnisation',
+    s8P1: 'Vous acceptez d\'indemniser et de dégager SwiftByte inc. de toute responsabilité à l\'égard de toute réclamation, perte ou dépense (y compris les honoraires d\'avocats raisonnables) découlant de votre utilisation du Site ou de votre violation des présentes conditions.',
+
+    s9Title: '9. Suspension et résiliation',
+    s9P1: 'Nous nous réservons le droit de suspendre ou de résilier votre accès au Site si :',
+    s9Items: [
+      'Vous enfreignez les présentes conditions',
+      'Votre compte fait l\'objet de plaintes répétées ou d\'activité suspecte',
+      'Nous soupçonnons une fraude ou une utilisation abusive',
+      'La loi applicable l\'exige',
+    ],
+    s9P2: 'Sauf en cas de fraude avérée, nous vous aviserons par courriel et vous accorderons un délai raisonnable pour répondre avant la suspension.',
+
+    s10Title: '10. Force majeure',
+    s10P1: 'SwiftByte inc. ne saurait être tenue responsable de tout retard ou défaillance résultant d\'événements échappant à son contrôle raisonnable, notamment les catastrophes naturelles, les pannes d\'infrastructure, les cyberattaques, les grèves ou les décisions gouvernementales.',
+
+    s11Title: '11. Divisibilité',
+    s11P1: 'Si une disposition des présentes conditions est jugée invalide ou inapplicable par un tribunal compétent, les autres dispositions demeurent pleinement en vigueur.',
+
+    s12Title: '12. Modifications',
+    s12P1: 'Nous pouvons modifier les présentes conditions à tout moment. Les modifications substantielles vous seront communiquées par courriel ou par notification sur le Site au moins 15 jours avant leur entrée en vigueur. L\'utilisation continue du Site après ce délai constitue votre acceptation des conditions modifiées.',
+
+    s13Title: '13. Droit applicable et litiges',
+    s13P1: 'Les présentes conditions sont régies par les lois de la province de Québec et les lois fédérales du Canada.',
+    s13P2: 'En cas de litige, les parties conviennent de tenter de bonne foi une résolution à l\'amiable en contactant support@propairapp.com. Si le litige n\'est pas résolu dans un délai de 30 jours, les parties pourront recourir à la médiation.',
+    s13P3: 'Tout litige non résolu par médiation sera soumis à la compétence exclusive des tribunaux du district judiciaire de Saint-François (Sherbrooke), Québec.',
+
+    s14Title: '14. Contact',
+    s14Company: 'SwiftByte inc. (exploitant de ProPair)',
+    s14Address: '528 Rue Castle, Magog, QC, Canada',
+    s14Email: 'support@propairapp.com',
+    s14Website: 'propairapp.com',
+  },
+
+  siteCookies: {
+    title: 'Politique de cookies',
+    seoDesc: 'Politique de cookies du site propairapp.com. Détail des cookies utilisés, finalités et options de gestion.',
+    lastUpdate: 'Dernière mise à jour : février 2026',
+    intro: 'La présente politique explique comment le site web propairapp.com (le « Site »), exploité par SwiftByte inc., utilise les cookies et technologies similaires. Cette politique complète notre Politique de confidentialité du Site.',
+
+    s1Title: '1. Qu\'est-ce qu\'un cookie ?',
+    s1P1: 'Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, téléphone, tablette) par votre navigateur lorsque vous visitez un site web. Les cookies permettent au site de se souvenir de vos actions et préférences (comme la connexion ou la langue) pendant une période déterminée.',
+
+    s2Title: '2. Cookies utilisés par le Site',
+    s2EssentialTitle: '2.1 Cookies essentiels (toujours actifs)',
+    s2EssentialDesc: 'Ces cookies sont nécessaires au fonctionnement du Site. Ils ne peuvent pas être désactivés.',
+    s2Essential: [
+      { name: 'sb-*-auth-token', provider: 'Supabase', purpose: 'Session d\'authentification — maintient votre connexion active', duration: 'Session / 7 jours' },
+      { name: 'propair-cookie-consent', provider: 'ProPair', purpose: 'Mémorise votre choix de consentement aux cookies', duration: 'Permanent' },
+      { name: 'propair-lang', provider: 'ProPair', purpose: 'Préférence de langue (FR/EN)', duration: 'Permanent' },
+    ],
+    s2AnalyticsTitle: '2.2 Cookies d\'analytique (avec consentement)',
+    s2AnalyticsDesc: 'Ces cookies sont activés uniquement si vous cliquez sur « Accepter » dans le bandeau de cookies. Ils nous permettent de comprendre comment le Site est utilisé afin d\'améliorer l\'expérience.',
+    s2Analytics: [
+      { name: 'ph_*', provider: 'PostHog', purpose: 'Analytique d\'utilisation : pages visitées, clics, durée des sessions, parcours utilisateur', duration: '1 an' },
+    ],
+    s2NoneTitle: '2.3 Cookies publicitaires',
+    s2NoneDesc: 'Le Site n\'utilise aucun cookie publicitaire. Aucune donnée n\'est partagée avec des régies publicitaires.',
+
+    s3Title: '3. Gestion de vos cookies',
+    s3P1: 'Vous pouvez gérer vos préférences de cookies de plusieurs façons :',
+    s3Methods: [
+      { title: 'Bandeau de cookies', desc: 'Lors de votre première visite, un bandeau vous permet d\'accepter ou de refuser les cookies d\'analytique. Les cookies essentiels restent actifs dans les deux cas.' },
+      { title: 'Paramètres du navigateur', desc: 'Vous pouvez configurer votre navigateur pour bloquer ou supprimer les cookies. Attention : bloquer les cookies essentiels peut empêcher le fonctionnement du Site (connexion, tableau de bord).' },
+      { title: 'Supprimer les cookies existants', desc: 'Vous pouvez supprimer les cookies déjà déposés via les paramètres de votre navigateur. Au prochain chargement du Site, le bandeau de consentement apparaîtra à nouveau.' },
+    ],
+
+    s4Title: '4. Données collectées par PostHog',
+    s4P1: 'Lorsque vous acceptez les cookies d\'analytique, PostHog collecte :',
+    s4Items: [
+      'Pages visitées et temps passé sur chaque page',
+      'Clics et interactions avec les éléments du Site',
+      'Type de navigateur, système d\'exploitation et résolution d\'écran',
+      'Pays d\'origine (via l\'adresse IP, sans géolocalisation précise)',
+      'Parcours de navigation (de quelle page à quelle page)',
+    ],
+    s4P2: 'PostHog est hébergé dans l\'Union européenne. Aucune donnée personnelle identifiable n\'est transmise si vous refusez les cookies d\'analytique.',
+    s4P3: 'Si vous refusez les cookies, PostHog est complètement désactivé grâce à l\'option opt_out_capturing_by_default. Aucune requête n\'est envoyée vers les serveurs PostHog.',
+
+    s5Title: '5. Base légale',
+    s5P1: 'Conformément à la Loi 25 du Québec et au RGPD :',
+    s5Items: [
+      'Les cookies essentiels sont déposés sur la base de notre intérêt légitime à fournir un Site fonctionnel.',
+      'Les cookies d\'analytique (PostHog) sont déposés uniquement après votre consentement explicite.',
+    ],
+
+    s6Title: '6. Modifications',
+    s6P1: 'Nous pouvons mettre à jour cette politique si de nouveaux cookies sont ajoutés ou si nos pratiques changent. Toute modification substantielle sera signalée via le bandeau de cookies ou par notification sur le Site.',
+
+    s7Title: '7. Contact',
+    s7P1: 'Pour toute question relative aux cookies :',
+    s7Email: 'privacy@propairapp.com',
+    s7RelatedTitle: 'Documents connexes',
+    s7RelatedPrivacy: 'Politique de confidentialité du Site',
+    s7RelatedTerms: 'Conditions d\'utilisation du Site',
+  },
+
+  siteLegal: {
+    title: 'Mentions légales',
+    seoDesc: 'Mentions légales du site propairapp.com. Informations sur l\'éditeur, l\'hébergement et la propriété intellectuelle.',
+    lastUpdate: 'Dernière mise à jour : février 2026',
+
+    s1Title: '1. Éditeur du Site',
+    s1Company: 'SwiftByte inc.',
+    s1Form: 'Société par actions (fédérale)',
+    s1Address: '528 Rue Castle, Magog, Québec, Canada',
+    s1Email: 'support@propairapp.com',
+    s1Phone: '819 481-0882',
+    s1Director: 'Nicolas Lepage, Président et fondateur',
+    s1NEQ: 'Numéro NEQ : [À compléter]',
+
+    s2Title: '2. Hébergement',
+    s2P1: 'Le Site est hébergé par :',
+    s2Host: 'Vercel Inc.',
+    s2HostAddress: '340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis',
+    s2HostWebsite: 'vercel.com',
+    s2P2: 'Les données applicatives (comptes, profils, abonnements) sont hébergées par :',
+    s2Db: 'Supabase Inc.',
+    s2DbAddress: 'San Francisco, Californie, États-Unis (infrastructure AWS)',
+    s2DbWebsite: 'supabase.com',
+
+    s3Title: '3. Propriété intellectuelle',
+    s3P1: 'L\'ensemble du contenu du Site (textes, images, graphismes, logo, icônes, logiciels, code source, structure) est la propriété exclusive de SwiftByte inc., sauf mention contraire.',
+    s3P2: 'La marque ProPair™ et le logo associé sont des marques de commerce de SwiftByte inc.',
+    s3P3: 'Toute reproduction, distribution, modification ou utilisation du contenu du Site, en tout ou en partie, sans autorisation écrite préalable de SwiftByte inc., est strictement interdite et constitue une contrefaçon sanctionnable selon les lois canadiennes en matière de propriété intellectuelle.',
+
+    s4Title: '4. Responsable de la protection des renseignements personnels',
+    s4P1: 'Conformément à la Loi 25 du Québec, le responsable de la protection des renseignements personnels est :',
+    s4Role: 'Responsable de la protection des données — Direction des opérations',
+    s4Email: 'privacy@propairapp.com',
+    s4Address: '528 Rue Castle, Magog, QC, Canada',
+
+    s5Title: '5. Conditions d\'utilisation',
+    s5P1: 'L\'utilisation du Site est soumise aux Conditions d\'utilisation du Site, disponibles à l\'adresse /site/terms.',
+
+    s6Title: '6. Crédits',
+    s6P1: 'Icônes : Lucide Icons (licence MIT)',
+    s6P2: 'Police : Inter (licence OFL)',
+    s6P3: 'Développement : SwiftByte inc.',
+  },
+
+  siteRefund: {
+    title: 'Politique de remboursement — Abonnements Web',
+    seoDesc: 'Politique de remboursement des abonnements souscrits via le site web propairapp.com.',
+    lastUpdate: 'Dernière mise à jour : février 2026',
+    intro: 'La présente politique s\'applique aux abonnements ProPair Pro souscrits via le site web propairapp.com. Pour les achats effectués via l\'application mobile, consultez la politique de remboursement de l\'application.',
+
+    s1Title: '1. Principe général',
+    s1P1: 'ProPair Pro est un service numérique d\'abonnement donnant accès à des fonctionnalités de mise en relation et de gestion. En raison de la nature immédiate et numérique du service :',
+    s1Items: [
+      'Tous les paiements d\'abonnement sont définitifs',
+      'Aucun remboursement au prorata n\'est accordé en cas d\'annulation en cours de période',
+      'Le service reste accessible jusqu\'à la fin de la période de facturation en cours',
+    ],
+
+    s2Title: '2. Annulation de l\'abonnement',
+    s2P1: 'Vous pouvez annuler votre abonnement à tout moment :',
+    s2Methods: [
+      { title: 'Via le tableau de bord', desc: 'Connectez-vous à votre compte → Abonnement → Gérer l\'abonnement. Vous serez redirigé vers le portail Stripe pour procéder à l\'annulation.' },
+      { title: 'Par courriel', desc: 'Envoyez une demande à billing@propairapp.com avec l\'adresse courriel associée à votre compte.' },
+    ],
+    s2P2: 'Après l\'annulation :',
+    s2After: [
+      'Votre accès Pro reste actif jusqu\'à la fin de la période payée',
+      'Aucun nouveau paiement ne sera prélevé',
+      'Vos données et votre compte restent accessibles — seules les fonctionnalités Pro sont désactivées à l\'échéance',
+    ],
+
+    s3Title: '3. Cas de remboursement exceptionnels',
+    s3P1: 'Un remboursement peut être accordé exclusivement dans les cas suivants :',
+    s3Cases: [
+      { title: 'Double facturation technique', desc: 'Si un problème technique a entraîné un double prélèvement pour la même période. Vous devez fournir les preuves de la double facturation (relevé bancaire ou reçu Stripe).' },
+      { title: 'Panne majeure de la plateforme', desc: 'Si le Site ou les fonctionnalités Pro sont inaccessibles pendant plus de 72 heures consécutives en raison d\'un problème technique de notre côté (pas une panne de votre fournisseur Internet).' },
+      { title: 'Obligation légale', desc: 'Si la Loi sur la protection du consommateur du Québec (LPC) ou toute autre loi applicable l\'exige.' },
+    ],
+
+    s4Title: '4. Procédure de demande de remboursement',
+    s4P1: 'Pour soumettre une demande de remboursement :',
+    s4Steps: [
+      'Envoyez un courriel à billing@propairapp.com',
+      'Indiquez votre adresse courriel de compte et la raison de votre demande',
+      'Joignez toute preuve pertinente (capture d\'écran, relevé bancaire)',
+      'Nous traiterons votre demande dans un délai de 10 jours ouvrables',
+    ],
+    s4P2: 'Si le remboursement est approuvé, il sera effectué via Stripe sur le même moyen de paiement utilisé lors de l\'achat. Le délai de crédit dépend de votre institution bancaire (généralement 5 à 10 jours ouvrables).',
+
+    s5Title: '5. Ce qui n\'est pas remboursable',
+    s5Items: [
+      'Les mois d\'abonnement déjà écoulés',
+      'Les périodes partiellement utilisées (aucun prorata)',
+      'Les mois Pro gratuits obtenus via le programme de parrainage',
+      'Les différences de prix dues à un changement de plan (mensuel vers annuel ou vice-versa)',
+    ],
+
+    s6Title: '6. Litiges de paiement',
+    s6P1: 'Si vous contestez un paiement auprès de votre banque (chargeback) sans nous contacter au préalable, votre compte sera automatiquement suspendu jusqu\'à la résolution du litige.',
+    s6P2: 'Nous vous encourageons à nous contacter directement à billing@propairapp.com avant d\'initier une contestation bancaire. Nous résolvons la majorité des situations en moins de 48 heures.',
+
+    s7Title: '7. Contact',
+    s7P1: 'Pour toute question relative à la facturation ou aux remboursements :',
+    s7Email: 'billing@propairapp.com',
+    s7Delay: 'Réponse sous 24 heures ouvrables.',
+    s7RelatedTitle: 'Documents connexes',
+    s7RelatedTerms: 'Conditions d\'utilisation du Site',
+    s7RelatedPrivacy: 'Politique de confidentialité du Site',
   },
 };
 

@@ -46,6 +46,8 @@ describe('Footer', () => {
 
     expect(screen.getByText('Confidentialité')).toBeInTheDocument();
     expect(screen.getByText("Conditions d'utilisation")).toBeInTheDocument();
+    expect(screen.getByText('Cookies')).toBeInTheDocument();
+    expect(screen.getByText('Mentions légales')).toBeInTheDocument();
     expect(screen.getByText('Remboursement')).toBeInTheDocument();
   });
 
@@ -80,22 +82,34 @@ describe('Footer', () => {
     expect(logo).toHaveAttribute('src', '/images/logo_ProPair.jpg');
   });
 
-  it('Confidentialité link points to /privacy', () => {
+  it('Confidentialité link points to /site/privacy', () => {
     renderFooter();
     const link = screen.getByText('Confidentialité').closest('a');
-    expect(link).toHaveAttribute('href', '/privacy');
+    expect(link).toHaveAttribute('href', '/site/privacy');
   });
 
-  it('Conditions d\'utilisation link points to /terms', () => {
+  it('Conditions d\'utilisation link points to /site/terms', () => {
     renderFooter();
     const link = screen.getByText("Conditions d'utilisation").closest('a');
-    expect(link).toHaveAttribute('href', '/terms');
+    expect(link).toHaveAttribute('href', '/site/terms');
   });
 
-  it('Remboursement link points to /refund', () => {
+  it('Cookies link points to /site/cookies', () => {
+    renderFooter();
+    const link = screen.getByText('Cookies').closest('a');
+    expect(link).toHaveAttribute('href', '/site/cookies');
+  });
+
+  it('Mentions légales link points to /site/legal', () => {
+    renderFooter();
+    const link = screen.getByText('Mentions légales').closest('a');
+    expect(link).toHaveAttribute('href', '/site/legal');
+  });
+
+  it('Remboursement link points to /site/refund', () => {
     renderFooter();
     const link = screen.getByText('Remboursement').closest('a');
-    expect(link).toHaveAttribute('href', '/refund');
+    expect(link).toHaveAttribute('href', '/site/refund');
   });
 
   it('Connexion link points to /connexion', () => {

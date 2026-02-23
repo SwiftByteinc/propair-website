@@ -26,6 +26,13 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Parrainage = lazy(() => import('./pages/Parrainage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+// Website legal pages
+const SitePrivacy = lazy(() => import('./pages/site/SitePrivacy'));
+const SiteTerms = lazy(() => import('./pages/site/SiteTerms'));
+const SiteCookies = lazy(() => import('./pages/site/SiteCookies'));
+const SiteLegal = lazy(() => import('./pages/site/SiteLegal'));
+const SiteRefund = lazy(() => import('./pages/site/SiteRefund'));
+
 // Dashboard components
 const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout'));
 const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
@@ -109,6 +116,13 @@ function App() {
               <Route path="/refund" element={<MainLayout><Refund /></MainLayout>} />
               <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
               <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} />
+
+              {/* Website Legal Pages (with nav/footer) */}
+              <Route path="/site/privacy" element={<MainLayout><SitePrivacy /></MainLayout>} />
+              <Route path="/site/terms" element={<MainLayout><SiteTerms /></MainLayout>} />
+              <Route path="/site/cookies" element={<MainLayout><SiteCookies /></MainLayout>} />
+              <Route path="/site/legal" element={<MainLayout><SiteLegal /></MainLayout>} />
+              <Route path="/site/refund" element={<MainLayout><SiteRefund /></MainLayout>} />
 
               {/* Auth Pages */}
               <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />

@@ -300,7 +300,6 @@ export default function Billing() {
                 {t('dashboard.chooseAnnual')}
               </button>
 
-              <p className="text-center text-xs text-slate-500 mt-3">{t('pricing.annualNote')}</p>
             </motion.section>
 
             {/* CARTE MENSUEL */}

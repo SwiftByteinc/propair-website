@@ -154,6 +154,6 @@ describe('CookieConsent', () => {
     act(() => { vi.advanceTimersByTime(2000); });
     const link = screen.getByText('En savoir plus');
     expect(link).toBeInTheDocument();
-    expect(link.closest('a')).toHaveAttribute('href', '/privacy');
+    expect(link.closest('a')).toHaveAttribute('href', '/site/cookies');
   });
 });
