@@ -7,7 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Refund() {
   const { t } = useLanguage();
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen font-sans">
+    <div className="py-12 bg-white min-h-screen font-sans">
       <SEO
         title={t('refund.title')}
         canonical="/refund"
