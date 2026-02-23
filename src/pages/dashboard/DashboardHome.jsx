@@ -121,7 +121,7 @@ export default function DashboardHome() {
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-bold text-slate-900"
+          className="text-xl sm:text-2xl font-bold text-slate-900"
         >
           {t(greetingKey, { name: firstName })}
         </motion.h1>
@@ -163,7 +163,7 @@ export default function DashboardHome() {
                   </>
                 )}
               </div>
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-base sm:text-lg font-semibold text-slate-900">
                 {user?.isPro ? t('dashboard.unlimitedConnections') : t('dashboard.connectionsRemaining', { count: connectionsRemaining })}
               </p>
               {!user?.isPro && (

@@ -82,7 +82,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
       )}
 
       <aside className={`
-        w-64 h-screen bg-white border-r border-slate-100 flex flex-col fixed left-0 top-0 z-50
+        w-64 h-dvh bg-white border-r border-slate-100 flex flex-col fixed left-0 top-0 z-50
         transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
@@ -153,7 +153,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         </nav>
 
         {/* Sign Out */}
-        <div className="p-4 border-t border-slate-50">
+        <div className="p-4 pb-[max(1rem,env(safe-area-inset-bottom))] border-t border-slate-50">
           <button
             onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"

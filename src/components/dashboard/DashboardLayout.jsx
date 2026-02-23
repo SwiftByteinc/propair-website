@@ -12,7 +12,7 @@ function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar skeleton - hidden on mobile */}
-      <aside className="hidden md:block w-64 h-screen bg-white border-r border-slate-100 fixed left-0 top-0">
+      <aside className="hidden md:block w-64 h-dvh bg-white border-r border-slate-100 fixed left-0 top-0">
         <div className="animate-pulse">
           {/* Back button area */}
           <div className="h-16 px-6 flex items-center border-b border-slate-50">

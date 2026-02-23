@@ -148,7 +148,7 @@ export default function Billing() {
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-bold text-slate-900"
+          className="text-xl sm:text-2xl font-bold text-slate-900"
         >
           {t('dashboard.billingHeading')}
         </motion.h1>
@@ -173,7 +173,7 @@ export default function Billing() {
                   </div>
                   <div>
                     <p className="text-xs font-medium text-teal-700">{t('dashboard.activePlan')}</p>
-                    <p className="text-xl font-semibold text-slate-900">
+                    <p className="text-base sm:text-xl font-semibold text-slate-900">
                       {t('dashboard.planName')} — {subscription?.plan === 'annual'
                         ? t('dashboard.planAnnual')
                         : t('dashboard.planMonthly')}
