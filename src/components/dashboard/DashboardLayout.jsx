@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Menu } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { supabase } from '../../lib/supabase';
 import Sidebar from './Sidebar';
 
 // Skeleton loader for initial auth loading
@@ -110,9 +111,16 @@ export default function DashboardLayout() {
       is_verified: profile?.is_verified || false,
       activated: profile?.activated || false,
       leads_used: profile?.leads_used || 0,
-      avatar_url: (profile?.user_role === 'entrepreneur'
-        ? profile?.profile_customization?.logo_image
-        : profile?.profile_customization?.profile_photo) || null,
+      avatar_url: (() => {
+        const isEntrep = profile?.user_role === 'entrepreneur';
+        const path = isEntrep
+          ? profile?.profile_customization?.logo_image
+          : profile?.profile_customization?.profile_photo;
+        if (!path) return null;
+        if (path.startsWith('http')) return path;
+        const bucket = isEntrep ? 'documents' : 'avatars';
+        return supabase?.storage.from(bucket).getPublicUrl(path).data?.publicUrl || null;
+      })(),
       subscription_status: subscription?.status,
       subscription_end: subscription?.current_period_end,
       email_confirmed_at: user.email_confirmed_at
