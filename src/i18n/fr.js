@@ -144,6 +144,7 @@ const fr = {
     overlayHighlight2: '2,8%',
     overlayLabel1: 'Mensuel',
     overlayLabel2: 'Annuel',
+    overlayTrust: 'Choisir le mensuel, c\'est aussi nous faire confiance. Chaque abonnement nous encourage à offrir un meilleur service et à investir dans notre croissance.',
     ctaTitle: 'Prêt à développer votre clientèle ?',
     ctaDesc: 'Téléchargez ProPair, créez votre profil en 2 minutes et commencez à recevoir des demandes de clients près de chez vous.',
     ctaSignup: 'Créer mon compte',

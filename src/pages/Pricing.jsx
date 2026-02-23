@@ -298,7 +298,9 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-600 text-center mb-8 max-w-xs leading-relaxed">{t('pricing.overlayDesc')}</p>
+                <p className="text-sm text-slate-600 text-center mb-4 max-w-xs leading-relaxed">{t('pricing.overlayDesc')}</p>
+
+                <p className="text-xs text-slate-500 text-center mb-6 max-w-xs italic">{t('pricing.overlayTrust')}</p>
 
                 <button
                   onClick={() => handlePlanClick('monthly')}

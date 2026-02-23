@@ -144,6 +144,7 @@ const en = {
     overlayHighlight2: '2.8%',
     overlayLabel1: 'Monthly',
     overlayLabel2: 'Annual',
+    overlayTrust: 'Choosing monthly is also a sign of trust. Every subscription encourages us to deliver a better service and invest in our growth.',
     ctaTitle: 'Ready to grow your client base?',
     ctaDesc: 'Download ProPair, create your profile in 2 minutes, and start receiving client requests near you.',
     ctaSignup: 'Create my account',
