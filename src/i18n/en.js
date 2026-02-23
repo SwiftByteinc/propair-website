@@ -150,8 +150,9 @@ const en = {
     ctaDesc: 'Download ProPair, create your profile in 2 minutes, and start receiving client requests near you.',
     ctaSignup: 'Create my account',
     ctaFaq: 'See the FAQ',
-    trustTitle: 'Support the local economy',
-    trustDesc: 'By choosing ProPair, you support a Magog business fighting to let tradespeople keep their profits.',
+    trustSecure: 'Secure Stripe Payment',
+    trustCancel: 'Cancel anytime',
+    trustSupport: 'Dedicated support',
     faqTitle: 'Frequently Asked Questions',
     faq1Q: 'Can I cancel anytime?',
     faq1A: 'Yes, absolutely. You can cancel your subscription with one click from your dashboard. Your access stays active until the end of the paid period.',
@@ -536,8 +537,9 @@ const en = {
   },
 
   cookie: {
-    title: 'We respect your privacy',
-    desc: 'We use essential cookies to run ProPair and improve your experience. No data is sold to third parties.',
+    title: 'Cookies & Privacy',
+    desc: 'ProPair uses essential cookies to run the site and analytics cookies to improve our services. No data is sold.',
+    learnMore: 'Learn more',
     accept: 'Accept',
     decline: 'Decline',
     ariaLabel: 'Cookie consent',

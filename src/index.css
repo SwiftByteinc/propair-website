@@ -94,3 +94,8 @@ input[type="checkbox"]:checked {
   outline: 2px solid var(--color-teal);
   outline-offset: 2px;
 }
+
+@keyframes gradientShift {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.7; }
+}

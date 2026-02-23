@@ -73,7 +73,7 @@ export default function ForgotPassword() {
           <div aria-live="polite" aria-atomic="true">
             {error && (
               <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm" role="alert">
-                <AlertCircle size={18} />
+                <AlertCircle size={20} />
                 {error}
               </div>
             )}
@@ -87,7 +87,7 @@ export default function ForgotPassword() {
               className="bg-teal-700/10 p-6 rounded-2xl border border-teal-700/20 text-center"
             >
               <div className="w-16 h-16 bg-teal-700/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Send size={28} className="text-teal-700" />
+                <Send size={32} className="text-teal-700" />
               </div>
               <h2 className="text-lg font-semibold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
               <p className="text-slate-500 mb-4">
@@ -113,7 +113,7 @@ export default function ForgotPassword() {
             <form onSubmit={handleReset} className="space-y-4">
               <div>
                 <div className="relative">
-                  <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                  <Mail size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                   <input
                     type="email"
                     id="email"
@@ -133,11 +133,11 @@ export default function ForgotPassword() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+                className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
                 {loading ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={20} className="animate-spin" />
                     {t('forgotPassword.sending')}
                   </>
                 ) : (

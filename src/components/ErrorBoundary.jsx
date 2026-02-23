@@ -40,7 +40,7 @@ export default class ErrorBoundary extends Component {
         <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 font-sans">
           <div className="max-w-md w-full text-center">
             <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-100">
-              <AlertTriangle size={40} className="text-amber-600" aria-hidden="true" />
+              <AlertTriangle size={32} className="text-amber-600" aria-hidden="true" />
             </div>
 
             <h1 className="text-2xl font-bold text-slate-900 mb-3">
@@ -56,14 +56,14 @@ export default class ErrorBoundary extends Component {
                 onClick={this.handleReload}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-xl transition-colors shadow-sm"
               >
-                <RefreshCw size={18} aria-hidden="true" />
+                <RefreshCw size={20} aria-hidden="true" />
                 {t.errorBoundary.refresh}
               </button>
               <a
                 href="/"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-900 font-semibold rounded-xl transition-colors border border-slate-200"
               >
-                <Home size={18} aria-hidden="true" />
+                <Home size={20} aria-hidden="true" />
                 {t.errorBoundary.home}
               </a>
             </div>

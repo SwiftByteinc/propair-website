@@ -6,6 +6,10 @@ import './index.css'
 import App from './App.jsx'
 
 const POSTHOG_KEY = 'phc_UPMGge1KyhOREoRHqOlJSwsROf2ejRNWhE8nhaZG6N3'
+
+// Only enable capturing if user has explicitly accepted cookies
+const cookieConsent = localStorage.getItem('propair-cookie-consent')
+
 const posthogOptions = {
   api_host: '/ingest',
   ui_host: 'https://us.i.posthog.com',
@@ -15,6 +19,7 @@ const posthogOptions = {
   autocapture: true,
   scroll_depth: true,
   capture_performance: true,
+  opt_out_capturing_by_default: cookieConsent !== 'accepted',
 }
 
 createRoot(document.getElementById('root')).render(

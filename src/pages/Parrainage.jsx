@@ -70,7 +70,7 @@ export default function Parrainage() {
 
           <div className="space-y-4">
             {steps.map((step, i) => (
-              <div key={i} className="flex items-start gap-4 bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+              <div key={i} className="flex items-start gap-4 bg-white rounded-2xl border border-slate-200 p-5 shadow-md shadow-slate-200/40">
                 <div className="flex items-center justify-center gap-3 shrink-0">
                   <span className="w-7 h-7 rounded-full bg-teal-700/10 text-teal-700 flex items-center justify-center text-xs font-semibold">
                     {i + 1}
@@ -99,7 +99,7 @@ export default function Parrainage() {
 
           <div className="grid sm:grid-cols-2 gap-4">
             {/* Voie entrepreneur */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-md shadow-slate-200/40">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center">
                   <Briefcase size={20} className="text-slate-600" />
@@ -138,7 +138,7 @@ export default function Parrainage() {
             </div>
 
             {/* Voie client */}
-            <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-md shadow-slate-200/40">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-teal-700/10 flex items-center justify-center">
                   <Users size={20} className="text-teal-700" />
@@ -183,7 +183,7 @@ export default function Parrainage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="bg-slate-50 rounded-2xl p-5 border border-slate-100 mb-10"
+          className="bg-slate-50 rounded-2xl p-5 border border-slate-200 mb-10"
         >
           <p className="text-xs text-slate-500 leading-relaxed">
             {t('parrainage.infoText')}

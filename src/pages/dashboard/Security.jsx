@@ -141,7 +141,7 @@ export default function Security() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -152,7 +152,7 @@ export default function Security() {
 
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Mail size={18} className="text-slate-500" />
+              <Mail size={20} className="text-slate-500" />
               <div>
                 <p className="text-sm font-medium text-slate-900">{t('dashboard.emailLabel')}</p>
                 <p className="text-xs text-slate-500">{verification.email.value}</p>
@@ -173,7 +173,7 @@ export default function Security() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
           <button
             onClick={() => setShowPasswordForm(!showPasswordForm)}
@@ -192,7 +192,7 @@ export default function Security() {
               animate={{ rotate: showPasswordForm ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={18} className="text-slate-500" />
+              <ChevronDown size={20} className="text-slate-500" />
             </motion.div>
           </button>
 
@@ -298,7 +298,7 @@ export default function Security() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">

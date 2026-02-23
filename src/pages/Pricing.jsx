@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check, Zap, Shield, Bell, Users, Star, Heart,
   MessageSquare, Briefcase, CreditCard,
-  Smartphone, ArrowRight, ChevronDown, Loader2, Clover
+  Smartphone, ArrowRight, ChevronDown, Loader2, Clover, RefreshCw
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
@@ -131,7 +131,7 @@ export default function Pricing() {
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6 md:mb-8">
-            <Shield size={14} className="text-teal-700" />
+            <Shield size={16} className="text-teal-700" />
             <span>{t('pricing.badge')}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
@@ -144,15 +144,15 @@ export default function Pricing() {
         </div>
 
         {/* SECTION PRO — Votre vitrine entrepreneur */}
-        <section className="mb-24">
+        <section className="py-20 md:py-28 mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-100/60 shadow-sm"
+            className="max-w-4xl mx-auto bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-200 shadow-md shadow-slate-200/40"
           >
             <div className="flex items-center gap-3 mb-2">
-              <Briefcase size={22} className="text-slate-700" />
+              <Briefcase size={20} className="text-slate-700" />
               <div>
                 <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">{t('pricing.proSectionTitle')}</h2>
                 <span className="px-3 py-0.5 bg-slate-900 text-white text-[10px] font-semibold rounded-full">{t('pricing.proBadge')}</span>
@@ -172,21 +172,21 @@ export default function Pricing() {
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200">
                 <Bell size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proNotifTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proNotifDesc')}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200">
                 <Shield size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proCommTitle')}</p>
                   <p className="text-slate-500 text-xs mt-1">{t('pricing.proCommDesc')}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100/60">
+              <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-200">
                 <MessageSquare size={16} className="text-teal-700 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-slate-900 text-sm">{t('pricing.proChatTitle')}</p>
@@ -198,7 +198,7 @@ export default function Pricing() {
         </section>
 
         {/* POURQUOI PROPAIR (6 raisons) */}
-        <section className="mb-24">
+        <section className="py-20 md:py-28 mb-24">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('pricing.reasonsTitle')}</h2>
             <p className="text-slate-500">{t('pricing.reasonsSubtitle')}</p>
@@ -212,9 +212,9 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.06 }}
-                className="bg-slate-50 rounded-2xl border border-slate-100/60 p-6 shadow-sm hover:shadow-md transition-all"
+                className="bg-slate-50 rounded-2xl border border-slate-200 p-6 shadow-md shadow-slate-200/40 hover:shadow-lg transition-all"
               >
-                <reason.icon size={20} className="text-teal-700 mb-4" />
+                <reason.icon size={20} className={`${index % 2 === 0 ? 'text-teal-700' : 'text-slate-700'} mb-4`} />
                 <h3 className="font-semibold text-slate-900 mb-2">{reason.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{reason.description}</p>
               </motion.div>
@@ -283,7 +283,7 @@ export default function Pricing() {
               disabled={checkoutLoading !== null}
               className="block w-full py-4 px-6 text-center font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin" />}
+              {checkoutLoading === 'annual' && <Loader2 size={20} className="animate-spin" />}
               {t('pricing.annualCta')}
             </button>
 
@@ -294,7 +294,7 @@ export default function Pricing() {
 
           {/* CARTE DROITE : MENSUEL */}
           <div ref={monthlyRef} className="h-full flex flex-col">
-            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-100/60 shadow-sm flex-1 overflow-hidden">
+            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-md shadow-slate-200/40 flex-1 overflow-hidden">
               <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.monthlyTitle')}</h3>
               <p className="text-slate-500 mb-6">{t('pricing.monthlyTagline')}</p>
 
@@ -308,12 +308,12 @@ export default function Pricing() {
                 disabled={checkoutLoading !== null}
                 className="w-full py-3 px-6 text-center text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
+                {checkoutLoading === 'monthly' && <Loader2 size={20} className="animate-spin" />}
                 {t('pricing.monthlyCta')}
               </button>
 
               <div className="flex items-center gap-2 text-sm text-slate-500 mt-4">
-                <Check size={14} className="text-teal-700" />
+                <Check size={16} className="text-teal-700" />
                 <span>{t('pricing.monthlyIncluded')}</span>
               </div>
 
@@ -345,11 +345,11 @@ export default function Pricing() {
         </div>
 
         {/* CTA DARK - Prêt à développer votre clientèle ? */}
-        <section className="mb-24">
+        <section className="py-24 md:py-32 mb-24">
           <div className="max-w-3xl mx-auto bg-slate-900 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
             <div className="relative z-10">
-              <Smartphone size={40} className="text-teal-700 mx-auto mb-6" />
+              <Smartphone size={32} className="text-teal-700 mx-auto mb-6" />
               <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
                 {t('pricing.ctaTitle')}
               </h3>
@@ -362,7 +362,7 @@ export default function Pricing() {
                   className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-semibold py-3.5 px-8 rounded-xl hover:bg-slate-100 transition-all active:scale-[0.98]"
                 >
                   {t('pricing.ctaSignup')}
-                  <ArrowRight size={18} />
+                  <ArrowRight size={20} />
                 </Link>
                 <a
                   href="#faq"
@@ -376,13 +376,20 @@ export default function Pricing() {
         </section>
 
         {/* TRUST / GARANTIE */}
-        <div className="text-center border-t border-slate-100 pt-16 mb-24">
-          <div className="inline-flex flex-col items-center">
-            <Heart size={32} className="text-teal-700 fill-teal-700 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-900">{t('pricing.trustTitle')}</h3>
-            <p className="text-slate-500 max-w-lg mx-auto mt-2">
-              {t('pricing.trustDesc')}
-            </p>
+        <div className="py-8 border-t border-slate-200 mb-24">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+            <div className="flex items-center gap-2.5 text-sm text-slate-600">
+              <Shield size={20} className="text-teal-700" />
+              <span>{t('pricing.trustSecure')}</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-sm text-slate-600">
+              <RefreshCw size={20} className="text-teal-700" />
+              <span>{t('pricing.trustCancel')}</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-sm text-slate-600">
+              <Heart size={20} className="text-teal-700 fill-teal-700" />
+              <span>{t('pricing.trustSupport')}</span>
+            </div>
           </div>
         </div>
 
@@ -397,7 +404,7 @@ export default function Pricing() {
               <div
                 key={index}
                 id={`faq-${index}`}
-                className="bg-slate-50 rounded-2xl border border-slate-100/60 overflow-hidden hover:shadow-sm transition-all"
+                className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden hover:shadow-sm transition-all"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -410,7 +417,7 @@ export default function Pricing() {
                     transition={{ duration: 0.2 }}
                     className="shrink-0"
                   >
-                    <ChevronDown size={18} className="text-slate-400" />
+                    <ChevronDown size={20} className="text-slate-400" />
                   </motion.div>
                 </button>
                 <AnimatePresence>

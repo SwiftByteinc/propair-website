@@ -146,7 +146,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
                 }
               `}
             >
-              <link.icon size={18} />
+              <link.icon size={20} />
               {link.label}
             </NavLink>
           ))}
@@ -158,7 +158,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
             onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
           >
-            <LogOut size={18} />
+            <LogOut size={20} />
             {t('dashboard.signOut')}
           </button>
         </div>

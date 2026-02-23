@@ -150,8 +150,9 @@ const fr = {
     ctaDesc: 'Téléchargez ProPair, créez votre profil en 2 minutes et commencez à recevoir des demandes de clients près de chez vous.',
     ctaSignup: 'Créer mon compte',
     ctaFaq: 'Voir la FAQ',
-    trustTitle: 'Soutenez l\'économie locale',
-    trustDesc: 'En choisissant ProPair, vous encouragez une entreprise de Magog qui se bat pour que les artisans gardent leurs profits.',
+    trustSecure: 'Paiement sécurisé Stripe',
+    trustCancel: 'Annulez à tout moment',
+    trustSupport: 'Support dédié',
     faqTitle: 'Questions fréquentes',
     faq1Q: 'Puis-je annuler à tout moment ?',
     faq1A: 'Oui, absolument. Vous pouvez annuler votre abonnement en un clic depuis votre espace. Votre accès reste actif jusqu\'à la fin de la période payée.',
@@ -536,8 +537,9 @@ const fr = {
   },
 
   cookie: {
-    title: 'Nous respectons votre vie privée',
-    desc: 'Nous utilisons des cookies essentiels pour faire fonctionner ProPair et améliorer votre expérience. Aucune donnée n\'est vendue à des tiers.',
+    title: 'Cookies & vie privée',
+    desc: 'ProPair utilise des cookies essentiels au fonctionnement du site et des cookies d\'analyse pour améliorer nos services. Aucune donnée n\'est vendue.',
+    learnMore: 'En savoir plus',
     accept: 'Accepter',
     decline: 'Refuser',
     ariaLabel: 'Consentement aux cookies',

@@ -87,7 +87,7 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
-            <Mail size={14} className="text-teal-700" />
+            <Mail size={16} className="text-teal-700" />
             <span>{t('contact.badge')}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
@@ -109,11 +109,11 @@ export default function Contact() {
             <a
               key={channel.title}
               href={channel.href}
-              className="group bg-slate-50 rounded-2xl p-6 border border-slate-100/60 hover:shadow-md transition-all"
+              className="group bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-md transition-all"
             >
               <div className="flex items-start gap-4">
                 <div className={`w-12 h-12 ${channel.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
-                  <channel.icon size={22} className="text-white" />
+                  <channel.icon size={20} className="text-white" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-semibold text-slate-900 mb-1">{channel.title}</p>
@@ -138,7 +138,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-3 bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100"
+            className="lg:col-span-3 bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200"
           >
             <h2 className="text-2xl font-semibold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
 
@@ -237,10 +237,10 @@ export default function Contact() {
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-slate-900 hover:bg-black text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/10 disabled:opacity-50 active:scale-[0.98]"
                 >
                   {sending ? (
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={20} className="animate-spin" />
                   ) : (
                     <>
-                      <Send size={18} />
+                      <Send size={20} />
                       {t('contact.formSubmit')}
                     </>
                   )}
@@ -257,9 +257,9 @@ export default function Contact() {
             className="lg:col-span-2 space-y-6"
           >
             {/* Address */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                <MapPin size={18} className="text-teal-700" />
+                <MapPin size={20} className="text-teal-700" />
                 {t('contact.addressTitle')}
               </h3>
               <address className="text-slate-600 not-italic leading-relaxed">
@@ -270,9 +270,9 @@ export default function Contact() {
             </div>
 
             {/* Hours */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                <Clock size={18} className="text-teal-700" />
+                <Clock size={20} className="text-teal-700" />
                 {t('contact.hoursTitle')}
               </h3>
               <div className="space-y-2 text-slate-600 text-sm">
@@ -289,7 +289,7 @@ export default function Contact() {
             </div>
 
             {/* Quick Links */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
               <h3 className="font-semibold text-slate-900 mb-4">{t('contact.quickTitle')}</h3>
               <div className="space-y-3">
                 <Link
@@ -297,21 +297,21 @@ export default function Contact() {
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-700 transition-colors"
                 >
                   <span>{t('contact.quickFaq')}</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/refund"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-700 transition-colors"
                 >
                   <span>{t('contact.quickRefund')}</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/privacy"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-700 transition-colors"
                 >
                   <span>{t('contact.quickPrivacy')}</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={16} />
                 </Link>
               </div>
             </div>

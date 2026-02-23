@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import posthog from 'posthog-js';
 import { useLanguage } from '../../context/LanguageContext';
 import { STORAGE_KEYS } from '../../lib/constants';
 
@@ -17,11 +19,13 @@ export default function CookieConsent() {
 
   const handleAccept = () => {
     localStorage.setItem(STORAGE_KEYS.COOKIE_CONSENT, 'accepted');
+    posthog.opt_in_capturing();
     setIsVisible(false);
   };
 
   const handleDecline = () => {
     localStorage.setItem(STORAGE_KEYS.COOKIE_CONSENT, 'declined');
+    posthog.opt_out_capturing();
     setIsVisible(false);
   };
 
@@ -38,7 +42,10 @@ export default function CookieConsent() {
             <div className="flex-1">
               <h3 className="font-bold text-lg mb-2">{t('cookie.title')}</h3>
               <p className="text-slate-300 text-sm">
-                {t('cookie.desc')}
+                {t('cookie.desc')}{' '}
+                <Link to="/privacy" className="text-teal-400 hover:text-teal-300 underline underline-offset-2">
+                  {t('cookie.learnMore')}
+                </Link>
               </p>
             </div>
             <div className="flex gap-4">

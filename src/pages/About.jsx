@@ -134,7 +134,7 @@ export default function About() {
       </section>
 
       {/* CITATION */}
-      <section className="py-20 bg-gradient-to-b from-white via-slate-50/50 to-white relative">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white via-slate-50/50 to-white relative">
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -157,7 +157,7 @@ export default function About() {
       </section>
 
       {/* PARCOURS (Timeline Storytelling) */}
-      <section className="py-24 bg-white border-t border-slate-100">
+      <section className="py-20 md:py-28 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('about.timelineTitle')}</h2>
@@ -179,7 +179,7 @@ export default function About() {
               >
                 {/* Point Icone */}
                 <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-2 border-teal-700 text-teal-700 flex items-center justify-center rounded-full z-10 shadow-md shadow-teal-700">
-                  <item.icon size={18} />
+                  <item.icon size={20} />
                 </div>
 
                 {/* Contenu */}
@@ -200,7 +200,7 @@ export default function About() {
       </section>
 
       {/* VALEURS */}
-      <section className="py-24 bg-white">
+      <section className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-semibold text-slate-900 mb-4">{t('about.valuesTitle')}</h2>
@@ -208,8 +208,8 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl border border-slate-100/60 shadow-sm hover:shadow-md transition-all group">
-                <value.icon size={22} className="text-slate-600 group-hover:text-teal-700 transition-colors mb-6" />
+              <div key={index} className={`bg-white p-8 rounded-2xl border border-slate-200 border-t-2 ${index % 2 === 0 ? 'border-t-teal-700' : 'border-t-slate-700'} shadow-md shadow-slate-200/40 hover:shadow-lg transition-all group`}>
+                <value.icon size={20} className={`${index % 2 === 0 ? 'text-slate-600 group-hover:text-teal-700' : 'text-slate-600 group-hover:text-slate-700'} transition-colors mb-6`} />
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">{value.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
               </div>
@@ -219,9 +219,9 @@ export default function About() {
       </section>
 
       {/* STATS */}
-      <section className="py-16 bg-white border-t border-slate-100">
+      <section className="py-20 md:py-28 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-y md:divide-y-0 divide-slate-100">
             <Counter value={t('about.stat1Value')} label={t('about.stat1Label')} />
             <Counter value={t('about.stat2Value')} label={t('about.stat2Label')} />
             <Counter value={t('about.stat3Value')} label={t('about.stat3Label')} />
@@ -231,7 +231,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 text-center">
+      <section className="py-24 md:py-32 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 mb-6">
             {t('about.ctaTitle')}
@@ -245,7 +245,7 @@ export default function About() {
               className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
               {t('about.ctaSignup')}
-              <ArrowRight size={18} />
+              <ArrowRight size={20} />
             </Link>
             <Link
               to="/pricing"

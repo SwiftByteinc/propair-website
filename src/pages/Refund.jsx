@@ -21,7 +21,7 @@ export default function Refund() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6">
-            <ReceiptText size={14} className="text-teal-700" />
+            <ReceiptText size={16} className="text-teal-700" />
             <span>{t('refund.badge')}</span>
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
@@ -43,7 +43,7 @@ export default function Refund() {
               <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">1</span>
               {t('refund.s1Title')}
             </h2>
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
               <p className="text-slate-600 leading-relaxed mb-4">
                 {t('refund.s1P1')}
               </p>
@@ -65,7 +65,7 @@ export default function Refund() {
               {t('refund.s2Title')}
             </h2>
             <div className="space-y-4">
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
                 <div className="flex items-start gap-3">
                   <Calendar size={20} className="text-teal-700 mt-1" />
                   <div>
@@ -74,7 +74,7 @@ export default function Refund() {
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
                 <h3 className="font-semibold text-slate-900 mb-2">{t('refund.s2EndTitle')}</h3>
                 <ul className="text-slate-600 space-y-2">
                   <li>• {t('refund.s2EndItem1')}</li>
@@ -122,7 +122,7 @@ export default function Refund() {
               <span className="w-8 h-8 bg-teal-700/10 rounded-lg flex items-center justify-center text-teal-700 text-sm font-semibold">4</span>
               {t('refund.s4Title')}
             </h2>
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
               <div className="flex items-start gap-3">
                 <Users size={20} className="text-teal-700 mt-1" />
                 <div>
@@ -171,19 +171,19 @@ export default function Refund() {
             <div className="grid sm:grid-cols-2 gap-4">
               <Link
                 to="/privacy"
-                className="bg-slate-50 rounded-xl p-4 border border-slate-100/60 hover:shadow-md transition-all flex items-center gap-3"
+                className="bg-slate-50 rounded-xl p-4 border border-slate-200 hover:shadow-md transition-all flex items-center gap-3"
               >
                 <div className="w-10 h-10 bg-teal-700/10 rounded-lg flex items-center justify-center">
-                  <ReceiptText size={18} className="text-teal-700" />
+                  <ReceiptText size={20} className="text-teal-700" />
                 </div>
                 <span className="font-medium text-slate-900">{t('refund.relatedPrivacy')}</span>
               </Link>
               <Link
                 to="/terms"
-                className="bg-slate-50 rounded-xl p-4 border border-slate-100/60 hover:shadow-md transition-all flex items-center gap-3"
+                className="bg-slate-50 rounded-xl p-4 border border-slate-200 hover:shadow-md transition-all flex items-center gap-3"
               >
                 <div className="w-10 h-10 bg-teal-700/10 rounded-lg flex items-center justify-center">
-                  <ReceiptText size={18} className="text-teal-700" />
+                  <ReceiptText size={20} className="text-teal-700" />
                 </div>
                 <span className="font-medium text-slate-900">{t('refund.relatedTerms')}</span>
               </Link>

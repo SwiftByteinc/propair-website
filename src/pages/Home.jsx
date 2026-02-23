@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-700/50 via-white to-white" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-700/50 via-white to-white animate-[gradientShift_8s_ease_infinite]" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-24 relative z-10">
           <motion.div
@@ -36,7 +36,7 @@ export default function Home() {
             className="text-center"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-xs sm:text-sm font-medium mb-6 md:mb-8">
-              <Star size={14} className="fill-teal-700 text-teal-700" />
+              <Star size={16} className="fill-teal-700 text-teal-700" />
               <span>{t('home.badge')}</span>
             </div>
 
@@ -59,7 +59,7 @@ export default function Home() {
               >
                 <Smartphone size={20} />
                 {t('home.ctaDownload')}
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <Link
                 to="/pricing"
@@ -72,13 +72,13 @@ export default function Home() {
 
             <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6 justify-center text-sm font-medium text-slate-500 px-4 sm:px-0">
               <div className="flex items-center justify-center gap-2">
-                <Check size={18} className="text-teal-700" /> {t('home.badgeCommission')}
+                <Check size={20} className="text-teal-700" /> {t('home.badgeCommission')}
               </div>
               <div className="flex items-center justify-center gap-2">
-                <Check size={18} className="text-teal-700" /> {t('home.badgeTools')}
+                <Check size={20} className="text-teal-700" /> {t('home.badgeTools')}
               </div>
               <div className="flex items-center justify-center gap-2 col-span-2 sm:col-span-1">
-                <Check size={18} className="text-teal-700" /> {t('home.badgeChat')}
+                <Check size={20} className="text-teal-700" /> {t('home.badgeChat')}
               </div>
             </div>
           </motion.div>
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* POURQUOI PROPAIR */}
-      <section className="py-20 md:py-32 bg-white border-t border-slate-100 relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-white border-t border-slate-100 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           <div className="text-center mb-12 md:mb-20">
@@ -102,7 +102,7 @@ export default function Home() {
 
             {/* Carte CLIENTS */}
             <motion.div
-              className="bg-white rounded-2xl p-6 md:p-10 shadow-lg shadow-slate-200/50 border border-slate-100/60 hover:shadow-lg transition-all"
+              className="bg-white rounded-2xl p-6 md:p-10 shadow-xl shadow-slate-200/60 border border-slate-200 hover:shadow-lg transition-all"
             >
               <Users size={24} className="text-teal-700 mb-6 md:mb-8" />
               <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-2">{t('home.clientTitle')}</h3>
@@ -130,7 +130,7 @@ export default function Home() {
 
             {/* Carte PROS */}
             <motion.div
-              className="bg-white rounded-2xl p-6 md:p-10 shadow-lg shadow-slate-200/50 border border-slate-100/60 relative overflow-hidden hover:shadow-lg transition-all"
+              className="bg-slate-50 rounded-2xl p-6 md:p-10 shadow-xl shadow-slate-200/60 border border-slate-200 relative overflow-hidden hover:shadow-lg transition-all"
             >
               <Layout size={24} className="text-slate-700 mb-6 md:mb-8" />
 
@@ -166,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* COMMENT ÇA MARCHE */}
-      <section className="py-20 md:py-24 bg-white">
+      <section className="py-20 md:py-28 bg-slate-50" style={{ backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-4 md:mb-6">
@@ -180,21 +180,21 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto relative">
             <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-teal-700 via-slate-200 to-teal-700" />
 
-            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100/60 shadow-sm">
+            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 shadow-md shadow-slate-200/40">
               <Search size={24} className="text-teal-700 mx-auto mb-4 md:mb-6 relative z-10" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">{t('home.step1Title')}</h3>
               <p className="text-slate-600 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: t('home.step1Desc') }} />
             </div>
 
-            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100/60 shadow-sm">
-              <MessageSquare size={24} className="text-slate-600 mx-auto mb-4 md:mb-6 relative z-10" />
+            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 shadow-md shadow-slate-200/40">
+              <MessageSquare size={24} className="text-slate-700 mx-auto mb-4 md:mb-6 relative z-10" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">{t('home.step2Title')}</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
                 {t('home.step2Desc')}
               </p>
             </div>
 
-            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100/60 shadow-sm">
+            <div className="text-center relative bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 shadow-md shadow-slate-200/40">
               <Layout size={24} className="text-teal-700 mx-auto mb-4 md:mb-6 relative z-10" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900 mb-2 md:mb-3">{t('home.step3Title')}</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -207,7 +207,7 @@ export default function Home() {
       </section>
 
       {/* TÉLÉCHARGER */}
-      <section id="telecharger" className="py-20 md:py-24 bg-slate-900 relative overflow-hidden">
+      <section id="telecharger" className="py-24 md:py-32 bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

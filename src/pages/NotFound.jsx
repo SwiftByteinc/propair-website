@@ -16,7 +16,7 @@ export default function NotFound() {
       >
         {/* Icon */}
         <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <AlertCircle size={40} className="text-amber-600" />
+          <AlertCircle size={32} className="text-amber-600" />
         </div>
 
         {/* 404 Number */}
@@ -36,14 +36,14 @@ export default function NotFound() {
             to="/"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-xl transition-colors shadow-lg shadow-slate-900/10 active:scale-[0.98]"
           >
-            <Home size={18} />
+            <Home size={20} />
             {t('notFound.homeBtn')}
           </Link>
           <button
             onClick={() => window.history.back()}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl transition-colors border border-slate-200 hover:border-slate-300"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={20} />
             {t('notFound.backBtn')}
           </button>
         </div>

@@ -84,9 +84,9 @@ export function ToastProvider({ children }) {
               `}
             >
               <div className="mt-0.5 shrink-0">
-                {item.type === 'success' && <CheckCircle size={18} className="text-teal-700" />}
-                {item.type === 'error' && <AlertCircle size={18} className="text-red-500" />}
-                {item.type === 'info' && <Info size={18} className="text-blue-400" />}
+                {item.type === 'success' && <CheckCircle size={20} className="text-teal-700" />}
+                {item.type === 'error' && <AlertCircle size={20} className="text-red-500" />}
+                {item.type === 'info' && <Info size={20} className="text-blue-400" />}
               </div>
               <p className="text-sm font-medium flex-1">{item.message}</p>
               <button

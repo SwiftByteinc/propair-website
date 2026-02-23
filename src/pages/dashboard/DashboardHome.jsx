@@ -146,7 +146,7 @@ export default function DashboardHome() {
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${
               user?.isPro ? 'bg-teal-700/10 text-teal-700' : 'bg-amber-100 text-amber-700'
             }`}>
-              {user?.isPro ? <Crown size={22} /> : <Zap size={22} />}
+              {user?.isPro ? <Crown size={20} /> : <Zap size={20} />}
             </div>
             <div>
               <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold mb-1 ${
@@ -188,7 +188,7 @@ export default function DashboardHome() {
                 : 'bg-slate-900 text-white hover:bg-black shadow-lg shadow-slate-900/10'
             }`}
           >
-            <CreditCard size={18} />
+            <CreditCard size={20} />
             {user?.isPro ? t('dashboard.manageSubscription') : t('dashboard.upgradeToPro')}
             <ChevronRight size={16} />
           </button>
@@ -203,7 +203,7 @@ export default function DashboardHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden mb-6"
+            className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden mb-6"
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -223,7 +223,7 @@ export default function DashboardHome() {
                   {t('dashboard.yourUniqueLink')}
                 </label>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-100/60 text-sm font-mono text-slate-600 truncate">
+                  <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-sm font-mono text-slate-600 truncate">
                     {referralLink}
                   </div>
                   <motion.button
@@ -280,7 +280,7 @@ export default function DashboardHome() {
           >
             <Link
               to="/portal/billing"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
+              className="p-4 bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
             >
               <CreditCard size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.subscriptionLink')}</p>
@@ -289,7 +289,7 @@ export default function DashboardHome() {
 
             <a
               href="mailto:support@propairapp.com"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
+              className="p-4 bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
             >
               <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.supportLink')}</p>
@@ -303,7 +303,7 @@ export default function DashboardHome() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-6 mb-6"
+            className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 p-6 mb-6"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-xl bg-teal-700/10 flex items-center justify-center">
@@ -320,11 +320,11 @@ export default function DashboardHome() {
           </motion.section>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
+             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
                 <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>
              </Link>
-             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
+             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
                 <Gift size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.referralLink')}</p>
              </Link>

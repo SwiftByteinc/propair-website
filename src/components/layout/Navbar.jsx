@@ -171,7 +171,7 @@ export default function Navbar() {
                   aria-label={t('nav.accessPortalAria')}
                 >
                   <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm" aria-hidden="true">
-                    {profile?.full_name?.charAt(0)?.toUpperCase() || <User size={14}/>}
+                    {profile?.full_name?.charAt(0)?.toUpperCase() || <User size={16}/>}
                   </div>
                   <span className="text-sm font-semibold">
                     {profile?.full_name?.split(' ')[0] || t('nav.myAccount')}

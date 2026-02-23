@@ -134,7 +134,7 @@ export default function UpdatePassword() {
               className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
               {t('updatePassword.requestNewLink')}
-              <ArrowRight size={18} />
+              <ArrowRight size={20} />
             </Link>
 
             <div className="mt-6">
@@ -172,7 +172,7 @@ export default function UpdatePassword() {
           <div aria-live="polite" aria-atomic="true">
             {error && (
               <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm" role="alert">
-                <AlertCircle size={18} />
+                <AlertCircle size={20} />
                 {error}
               </div>
             )}
@@ -186,7 +186,7 @@ export default function UpdatePassword() {
               className="text-center"
             >
               <div className="w-20 h-20 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check size={40} className="text-white" />
+                <Check size={32} className="text-white" />
               </div>
               <h1 className="text-2xl font-bold text-slate-900 mb-2">
                 {t('updatePassword.successTitle')}
@@ -201,7 +201,7 @@ export default function UpdatePassword() {
                 className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
                 {t('updatePassword.loginBtn')}
-                <ArrowRight size={18} />
+                <ArrowRight size={20} />
               </Link>
             </motion.div>
           ) : (
@@ -223,7 +223,7 @@ export default function UpdatePassword() {
               <form onSubmit={handleUpdatePassword} className="space-y-4">
                 <div>
                   <div className="relative">
-                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                    <Lock size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       id="password"
@@ -244,14 +244,14 @@ export default function UpdatePassword() {
                       aria-label={showPassword ? t('updatePassword.hidePassword') : t('updatePassword.showPassword')}
                       className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
                     >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
                 </div>
 
                 <div>
                   <div className="relative">
-                    <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                    <Lock size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       id="confirmPassword"
@@ -274,11 +274,11 @@ export default function UpdatePassword() {
                   className="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-slate-900/10 active:scale-[0.98]"
                 >
                   {loading ? (
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={20} className="animate-spin" />
                   ) : (
                     <>
                       {t('updatePassword.resetBtn')}
-                      <ArrowRight size={18} />
+                      <ArrowRight size={20} />
                     </>
                   )}
                 </button>

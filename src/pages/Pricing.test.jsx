@@ -138,7 +138,9 @@ describe('Pricing', () => {
 
   it('renders trust section', () => {
     renderPricing();
-    expect(screen.getByText("Soutenez l'économie locale")).toBeInTheDocument();
+    expect(screen.getByText('Paiement sécurisé Stripe')).toBeInTheDocument();
+    expect(screen.getByText('Annulez à tout moment')).toBeInTheDocument();
+    expect(screen.getByText('Support dédié')).toBeInTheDocument();
   });
 
   it('renders FAQ heading', () => {

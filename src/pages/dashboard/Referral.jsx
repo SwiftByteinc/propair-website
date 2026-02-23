@@ -142,7 +142,7 @@ export default function Referral() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
           {/* Reward summary header */}
           <div className="bg-gradient-to-br from-teal-700/15 to-slate-50/30 px-4 sm:px-6 py-5 border-b border-teal-700/20">
@@ -194,7 +194,7 @@ export default function Referral() {
             />
 
             <div className="bg-slate-50 rounded-xl p-3 flex items-start gap-2.5">
-              <Sparkles size={14} className="text-teal-700 mt-0.5 shrink-0" />
+              <Sparkles size={16} className="text-teal-700 mt-0.5 shrink-0" />
               <p className="text-[11px] text-slate-500 leading-relaxed">
                 {t('dashboard.progressResetInfo')}
               </p>
@@ -207,7 +207,7 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
           <div className="px-4 sm:px-6 py-4 border-b border-slate-50 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -229,7 +229,7 @@ export default function Referral() {
 
             {/* Link display */}
             <div className="mb-4">
-              <div className="px-3 sm:px-4 py-3 bg-slate-50 rounded-xl border border-slate-100/60 text-xs sm:text-sm font-mono text-slate-500 break-all">
+              <div className="px-3 sm:px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-mono text-slate-500 break-all">
                 {referralLink}
               </div>
             </div>
@@ -284,9 +284,9 @@ export default function Referral() {
           transition={{ delay: 0.1 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-slate-300">
+          <div className="bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 p-5 border-t-2 border-t-slate-300">
             <div className="flex items-center gap-3 mb-3">
-              <Users size={18} className="text-slate-500" />
+              <Users size={20} className="text-slate-500" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsSignedUp')}</span>
             </div>
             <p className="text-2xl font-bold text-slate-900">
@@ -294,9 +294,9 @@ export default function Referral() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-teal-700">
+          <div className="bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 p-5 border-t-2 border-t-teal-700">
             <div className="flex items-center gap-3 mb-3">
-              <CheckCircle size={18} className="text-teal-700" />
+              <CheckCircle size={20} className="text-teal-700" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsValidated')}</span>
             </div>
             <p className="text-2xl font-bold text-teal-700">
@@ -304,9 +304,9 @@ export default function Referral() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-100/60 shadow-sm p-5 border-t-2 border-t-amber-400">
+          <div className="bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 p-5 border-t-2 border-t-amber-400">
             <div className="flex items-center gap-3 mb-3">
-              <Clock size={18} className="text-amber-600" />
+              <Clock size={20} className="text-amber-600" />
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsPending')}</span>
             </div>
             <p className="text-2xl font-bold text-amber-600">
@@ -320,7 +320,7 @@ export default function Referral() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-4 sm:p-6"
+          className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 p-4 sm:p-6"
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -367,7 +367,7 @@ export default function Referral() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
+            className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -467,7 +467,7 @@ export default function Referral() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
+            className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 p-12 text-center"
           >
             <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-4">
               <Gift size={32} className="text-slate-300" />
@@ -490,7 +490,7 @@ export default function Referral() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl border border-slate-100/60 shadow-sm p-12 text-center"
+            className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 p-12 text-center"
           >
             <div className="animate-pulse space-y-4">
               <div className="h-5 bg-slate-100 rounded-lg w-2/5 mx-auto" />
