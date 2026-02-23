@@ -50,14 +50,14 @@ export default function DashboardLayout() {
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!loading && !user) {
-      navigate('/login');
+      navigate('/connexion');
     }
   }, [user, loading, navigate]);
 
   // Handle sign out
   const handleSignOut = async () => {
     await signOut();
-    navigate('/login');
+    navigate('/connexion');
   };
 
   // Build user object for components — memoized to avoid re-renders
@@ -68,7 +68,6 @@ export default function DashboardLayout() {
       id: user.id,
       email: user.email || profile?.email,
       full_name: profile?.full_name || user.user_metadata?.full_name || t('dashboard.userFallback'),
-      company_name: profile?.company_name || null,
       role: profile?.user_role || 'client',
       isPro: isPro,
       referral_code: profile?.referral_code,

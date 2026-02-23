@@ -14,7 +14,6 @@ const createFallbackProfile = (userData) => ({
   id: userData?.id || 'unknown',
   email: userData?.email || '',
   full_name: userData?.user_metadata?.full_name || userData?.email?.split('@')[0] || 'Utilisateur',
-  company_name: null,
   user_role: 'client',
   referral_code: null,
   pro_months_balance: 0,
@@ -44,7 +43,7 @@ export function AuthProvider({ children }) {
       // Fetch profile and subscription in parallel
       const profilePromise = supabase
         .from('profiles')
-        .select('id, email, full_name, company_name, user_role, referral_code, pro_months_balance, is_verified, activated, leads_used')
+        .select('id, email, full_name, user_role, referral_code, pro_months_balance, is_verified, activated, leads_used')
         .eq('id', userData.id)
         .single();
 

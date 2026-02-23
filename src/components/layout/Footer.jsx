@@ -64,7 +64,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/connexion" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
                   {t('footer.companyLogin')}
                 </Link>
               </li>

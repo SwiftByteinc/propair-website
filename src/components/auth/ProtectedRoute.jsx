@@ -20,7 +20,7 @@ export default function ProtectedRoute({ children }) {
 
   if (!user) {
     // Redirige vers login, mais garde en mémoire la page demandée
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/connexion" state={{ from: location }} replace />;
   }
 
   return children;

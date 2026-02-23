@@ -23,7 +23,7 @@ export default function Login() {
   // Support both ?ref__= and ?ref= (rétrocompatibilité)
   const refCode = searchParams.get('ref__') || searchParams.get('ref');
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(location.pathname === '/connexion');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [checkoutRedirecting, setCheckoutRedirecting] = useState(false);
@@ -196,7 +196,7 @@ export default function Login() {
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-8 sm:py-12 font-sans">
       <SEO
         title={isLogin ? t('login.loginTitle') : t('login.signupTitle')}
-        canonical="/login"
+        canonical={isLogin ? "/connexion" : "/login"}
         description={t('login.seoDesc')}
         noIndex={true}
       />

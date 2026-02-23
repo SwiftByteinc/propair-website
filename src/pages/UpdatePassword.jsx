@@ -75,7 +75,7 @@ export default function UpdatePassword() {
 
       // Redirect to login after 3 seconds
       redirectTimer.current = setTimeout(() => {
-        navigate('/login');
+        navigate('/connexion');
       }, 3000);
     } catch (err) {
       setError(err.message || t('updatePassword.genericError'));
@@ -138,7 +138,7 @@ export default function UpdatePassword() {
             </Link>
 
             <div className="mt-6">
-              <Link to="/login" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
+              <Link to="/connexion" className="text-sm text-slate-500 hover:text-slate-900 transition-colors">
                 {t('common.backToLoginArrow')}
               </Link>
             </div>
@@ -197,7 +197,7 @@ export default function UpdatePassword() {
               </p>
 
               <Link
-                to="/login"
+                to="/connexion"
                 className="inline-flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
               >
                 {t('updatePassword.loginBtn')}

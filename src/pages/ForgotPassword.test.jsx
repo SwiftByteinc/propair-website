@@ -124,10 +124,10 @@ describe('ForgotPassword', () => {
     expect(btn.closest('form')).toBeInTheDocument();
   });
 
-  it('back to login link points to /login', () => {
+  it('back to login link points to /connexion', () => {
     renderForgotPassword();
     const link = screen.getByText('Retour à la connexion').closest('a');
-    expect(link).toHaveAttribute('href', '/login');
+    expect(link).toHaveAttribute('href', '/connexion');
   });
 
   it('back to home link points to /', () => {

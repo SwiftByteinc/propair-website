@@ -54,7 +54,7 @@ export default function ForgotPassword() {
         >
           {/* Back to login */}
           <Link
-            to="/login"
+            to="/connexion"
             className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-6 text-sm transition-colors"
           >
             <ArrowLeft size={16} />

@@ -105,10 +105,10 @@ describe('Navbar', () => {
     expect(logoLink).toBeInTheDocument();
   });
 
-  it('login link points to /login', () => {
+  it('login link points to /connexion', () => {
     renderNavbar();
     const loginLink = screen.getByText('Se connecter').closest('a');
-    expect(loginLink).toHaveAttribute('href', '/login');
+    expect(loginLink).toHaveAttribute('href', '/connexion');
   });
 
   it('closes mobile menu on second click', () => {

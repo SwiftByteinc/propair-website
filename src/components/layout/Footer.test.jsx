@@ -98,10 +98,10 @@ describe('Footer', () => {
     expect(link).toHaveAttribute('href', '/refund');
   });
 
-  it('Connexion link points to /login', () => {
+  it('Connexion link points to /connexion', () => {
     renderFooter();
     const link = screen.getByText('Connexion').closest('a');
-    expect(link).toHaveAttribute('href', '/login');
+    expect(link).toHaveAttribute('href', '/connexion');
   });
 
   it('FAQ link points to pricing page', () => {

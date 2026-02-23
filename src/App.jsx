@@ -112,6 +112,7 @@ function App() {
 
               {/* Auth Pages */}
               <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+              <Route path="/connexion" element={<AuthLayout><Login /></AuthLayout>} />
               <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
               <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
 

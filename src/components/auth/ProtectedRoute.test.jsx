@@ -31,7 +31,7 @@ function renderProtected(authValue) {
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<div>Login Page</div>} />
+        <Route path="/connexion" element={<div>Login Page</div>} />
       </Routes>
     </MemoryRouter></LanguageProvider>
   );

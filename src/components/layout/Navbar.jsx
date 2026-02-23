@@ -179,7 +179,7 @@ export default function Navbar() {
                 </Link>
               ) : (
                 <Link
-                  to="/login"
+                  to="/connexion"
                   className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all outline-none"
                 >
                   <LogIn size={16} aria-hidden="true" />
@@ -299,7 +299,7 @@ export default function Navbar() {
                   </Link>
                 ) : (
                   <Link
-                    to="/login"
+                    to="/connexion"
                     onClick={() => setIsOpen(false)}
                     className="flex items-center justify-center gap-2 w-full px-5 py-3.5 text-sm font-semibold bg-slate-900 text-white rounded-xl hover:bg-black transition-all shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                   >
