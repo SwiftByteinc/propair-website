@@ -22,6 +22,7 @@ const entrepreneurUser = {
   email: 'nicolas@test.com',
   role: 'entrepreneur',
   isPro: true,
+  activated: true,
 };
 
 const clientUser = {
@@ -30,6 +31,7 @@ const clientUser = {
   email: 'marie@test.com',
   role: 'client',
   isPro: false,
+  activated: false,
 };
 
 function renderSidebar(user = entrepreneurUser, props = {}) {
@@ -68,8 +70,8 @@ describe('Sidebar', () => {
     expect(screen.getByText('Pro activé')).toBeInTheDocument();
   });
 
-  it('shows Pro non activé badge for non-Pro entrepreneur', () => {
-    renderSidebar({ ...entrepreneurUser, isPro: false });
+  it('shows Pro non activé badge for non-activated entrepreneur', () => {
+    renderSidebar({ ...entrepreneurUser, activated: false });
 
     expect(screen.getByText('Pro non activé')).toBeInTheDocument();
   });

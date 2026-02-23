@@ -95,18 +95,18 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
 
           {/* Status Badge */}
           <div className={`mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${
-            user?.isPro
-              ? 'bg-teal-700/10 text-teal-700'
-              : isEntrepreneur
-                ? 'bg-amber-50 text-amber-600'
-                : 'bg-slate-100 text-slate-600'
+            isEntrepreneur
+              ? user?.activated
+                ? 'bg-teal-700/10 text-teal-700'
+                : 'bg-amber-50 text-amber-600'
+              : 'bg-slate-100 text-slate-600'
           }`}>
-            {user?.isPro ? <Crown size={12} /> : <Zap size={12} />}
-            {user?.isPro
-              ? t('dashboard.statusPro')
-              : isEntrepreneur
-                ? t('dashboard.statusProInactive')
-                : t('dashboard.statusClient')}
+            {isEntrepreneur && user?.activated ? <Crown size={12} /> : <Zap size={12} />}
+            {isEntrepreneur
+              ? user?.activated
+                ? t('dashboard.statusPro')
+                : t('dashboard.statusProInactive')
+              : t('dashboard.statusClient')}
           </div>
         </div>
 
