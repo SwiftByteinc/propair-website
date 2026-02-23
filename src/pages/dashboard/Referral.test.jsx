@@ -143,8 +143,8 @@ describe('Referral Page', () => {
 
     expect(screen.getByText('Historique')).toBeInTheDocument();
     // Emails are masked: first 2 chars + ***@ + domain (appear in both desktop table and mobile cards)
-    expect(screen.getAllByText('a@***@test.com').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('b@***@test.com').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('a***@test.com').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('b***@test.com').length).toBeGreaterThanOrEqual(1);
   });
 
   it('shows correct type badges in history', () => {
@@ -209,11 +209,11 @@ describe('Referral Page', () => {
       loading: true,
     });
 
-    renderReferral();
+    const { container } = renderReferral();
 
-    // Loading shows dashes
-    const dashes = screen.getAllByText('-');
-    expect(dashes.length).toBeGreaterThan(0);
+    // Loading shows skeleton loaders instead of values
+    const skeletons = container.querySelectorAll('.animate-pulse');
+    expect(skeletons.length).toBeGreaterThan(0);
   });
 
   it('shows entrepreneur-specific help text', () => {
@@ -276,9 +276,9 @@ describe('Referral Page', () => {
       referralList: [],
       loading: true,
     });
-    renderReferral();
-    const dashes = screen.getAllByText('-');
-    expect(dashes.length).toBeGreaterThanOrEqual(3);
+    const { container } = renderReferral();
+    const skeletons = container.querySelectorAll('.animate-pulse');
+    expect(skeletons.length).toBeGreaterThanOrEqual(3);
   });
 
   it('shows progress section with correct labels', () => {

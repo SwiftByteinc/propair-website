@@ -84,12 +84,9 @@ export default function Security() {
       if (error) {
         setError(error.message);
       } else {
-        setSuccess(t('dashboard.successPasswordChanged'));
+        toast.success(t('dashboard.successPasswordChanged'));
         setPasswords({ current: '', new: '', confirm: '' });
-        setTimeout(() => {
-          setShowPasswordForm(false);
-          setSuccess('');
-        }, 2000);
+        setShowPasswordForm(false);
       }
     } catch {
       setError(t('dashboard.errorGeneric'));
@@ -143,6 +140,7 @@ export default function Security() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
@@ -179,7 +177,7 @@ export default function Security() {
         >
           <button
             onClick={() => setShowPasswordForm(!showPasswordForm)}
-            className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
+            className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
           >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -253,7 +251,8 @@ export default function Security() {
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600"
+                          aria-label={showPassword ? t('dashboard.hidePassword') : t('dashboard.showPassword')}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
                         >
                           {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                         </button>
@@ -269,6 +268,7 @@ export default function Security() {
                         onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 text-sm transition-all"
                         placeholder="••••••••"
+                        autoComplete="new-password"
                       />
                     </div>
                   </div>
@@ -276,7 +276,7 @@ export default function Security() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 active:scale-[0.98]"
                   >
                     {loading ? (
                       <>
@@ -297,7 +297,7 @@ export default function Security() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.15 }}
           className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
         >
           <div className="px-6 py-4 flex items-center justify-between">
@@ -312,7 +312,7 @@ export default function Security() {
             </div>
             <button
               onClick={() => setShowDeleteModal(true)}
-              className="text-xs font-semibold text-red-500 hover:text-red-600 transition-colors"
+              className="text-xs font-semibold text-red-500 hover:text-red-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
             >
               {t('dashboard.deleteBtn')}
             </button>
@@ -346,10 +346,11 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
     if (!modal) return;
 
     const focusableEls = modal.querySelectorAll('button:not([disabled])');
+    if (focusableEls.length === 0) return;
     const firstEl = focusableEls[0];
     const lastEl = focusableEls[focusableEls.length - 1];
 
-    firstEl?.focus();
+    firstEl.focus();
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -403,14 +404,14 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
           <button
             onClick={onClose}
             disabled={isDeleting}
-            className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50"
+            className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 active:scale-[0.98]"
           >
             {t('dashboard.cancelBtn')}
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 active:scale-[0.98]"
           >
             {isDeleting ? (
               <>

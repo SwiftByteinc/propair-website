@@ -116,7 +116,7 @@ describe('Sidebar', () => {
   it('renders back button', () => {
     renderSidebar();
 
-    expect(screen.getByText('Retour')).toBeInTheDocument();
+    expect(screen.getByText('Retour')).toBeInTheDocument(); // from t('dashboard.sideBack')
   });
 
   it('Accueil link points to /portal', () => {

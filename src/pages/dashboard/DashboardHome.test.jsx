@@ -68,7 +68,7 @@ describe('DashboardHome', () => {
           role: 'entrepreneur',
           isPro: false,
           referral_code: 'NICOLAS123',
-          trial_connections_count: 1,
+          leads_used: 1,
         },
         isPro: false,
       });
@@ -132,7 +132,7 @@ describe('DashboardHome', () => {
           role: 'entrepreneur',
           isPro: true,
           referral_code: 'NICOLAS123',
-          trial_connections_count: 0,
+          leads_used: 0,
         },
         isPro: true,
       });
@@ -164,7 +164,7 @@ describe('DashboardHome', () => {
           role: 'client',
           isPro: false,
           referral_code: 'JEAN456',
-          trial_connections_count: 0,
+          leads_used: 0,
         },
         isPro: false,
       });
@@ -197,7 +197,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 3,
+          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 3,
         },
         isPro: false,
       });
@@ -213,7 +213,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 3,
+          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 3,
         },
         isPro: false,
       });
@@ -225,7 +225,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'TEST999', trial_connections_count: 1,
+          role: 'entrepreneur', isPro: false, referral_code: 'TEST999', leads_used: 1,
         },
         isPro: false,
       });
@@ -240,7 +240,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'abc-123', full_name: 'Test User', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'CODE', trial_connections_count: 0,
+          role: 'entrepreneur', isPro: false, referral_code: 'CODE', leads_used: 0,
         },
         isPro: false,
       });
@@ -252,7 +252,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', trial_connections_count: 1,
+          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 1,
         },
         isPro: false,
       });
@@ -268,7 +268,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: true, referral_code: 'NICOLAS123', trial_connections_count: 0,
+          role: 'entrepreneur', isPro: true, referral_code: 'NICOLAS123', leads_used: 0,
         },
         isPro: true,
       });
@@ -280,7 +280,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
-          role: 'client', isPro: false, referral_code: 'JEAN456', trial_connections_count: 0,
+          role: 'client', isPro: false, referral_code: 'JEAN456', leads_used: 0,
         },
         isPro: false,
       });
@@ -292,7 +292,7 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
-          role: 'client', isPro: false, referral_code: 'JEAN456', trial_connections_count: 0,
+          role: 'client', isPro: false, referral_code: 'JEAN456', leads_used: 0,
         },
         isPro: false,
       });

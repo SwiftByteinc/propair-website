@@ -5,10 +5,18 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Gift, Copy, Check, Users, CheckCircle, Clock,
-  Share2, Briefcase, ArrowRight, Award, Sparkles
+  Share2, Briefcase, ArrowRight, Award, Sparkles,
+  AlertTriangle, RefreshCw
 } from 'lucide-react';
 import { useReferralStats } from '../../hooks/useReferralStats';
 import { useLanguage } from '../../context/LanguageContext';
+
+/** Safely obfuscate an email for display (handles short local parts) */
+function obfuscateEmail(email) {
+  if (!email || !email.includes('@')) return null;
+  const [local, domain] = email.split('@');
+  return `${local.substring(0, Math.min(2, local.length))}***@${domain}`;
+}
 
 // Progress Bar component
 // eslint-disable-next-line no-unused-vars -- Icon is used in JSX below
@@ -67,7 +75,8 @@ export default function Referral() {
   const referralLink = `${window.location.origin}/login?ref__=${encodeURIComponent(referralCode)}`;
 
   // Fetch real referral stats from Supabase
-  const { stats, referralList, loading } = useReferralStats(user?.id);
+  const { stats, referralList, loading, error: referralError, refetch } = useReferralStats(user?.id);
+  if (import.meta.env.DEV && referralError) console.error('Referral stats error:', referralError);
   const { entreValidated, clientValidated: clientCount, entreMonths, clientMonths, earnedMonths: totalMonths } = stats;
 
   const copyLink = useCallback(async () => {
@@ -111,6 +120,22 @@ export default function Referral() {
         </p>
       </header>
 
+      {referralError && !loading && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 text-sm text-red-600">
+            <AlertTriangle size={16} className="shrink-0" />
+            {t('dashboard.statsError')}
+          </div>
+          <button
+            onClick={refetch}
+            className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 rounded"
+          >
+            <RefreshCw size={12} />
+            {t('dashboard.retry')}
+          </button>
+        </div>
+      )}
+
       <div className="space-y-6">
 
         {/* REWARDS & PROGRESSION */}
@@ -139,7 +164,7 @@ export default function Referral() {
               </div>
               <div className="text-right shrink-0">
                 <p className="text-2xl sm:text-3xl font-bold text-slate-900">
-                  {loading ? '-' : totalMonths}
+                  {loading ? <span className="inline-block w-8 h-7 bg-slate-100 rounded animate-pulse" /> : totalMonths}
                 </p>
                 <p className="text-[11px] text-slate-500 font-medium">{t('dashboard.months')}</p>
               </div>
@@ -214,7 +239,7 @@ export default function Referral() {
               <motion.button
                 onClick={copyLink}
                 whileTap={{ scale: 0.95 }}
-                className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
+                className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
                   copied
                     ? 'bg-teal-700 text-white'
                     : 'bg-slate-900 text-white hover:bg-black'
@@ -236,7 +261,7 @@ export default function Referral() {
               <motion.button
                 onClick={handleShare}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all"
+                className="py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
               >
                 <Share2 size={16} />
                 {t('dashboard.share')}
@@ -265,7 +290,7 @@ export default function Referral() {
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsSignedUp')}</span>
             </div>
             <p className="text-2xl font-bold text-slate-900">
-              {loading ? '-' : stats.totalReferrals}
+              {loading ? <span className="inline-block w-8 h-7 bg-slate-100 rounded animate-pulse" /> : stats.totalReferrals}
             </p>
           </div>
 
@@ -275,7 +300,7 @@ export default function Referral() {
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsValidated')}</span>
             </div>
             <p className="text-2xl font-bold text-teal-700">
-              {loading ? '-' : stats.validatedReferrals}
+              {loading ? <span className="inline-block w-8 h-7 bg-teal-700/10 rounded animate-pulse" /> : stats.validatedReferrals}
             </p>
           </div>
 
@@ -285,7 +310,7 @@ export default function Referral() {
               <span className="text-xs font-medium text-slate-500">{t('dashboard.statsPending')}</span>
             </div>
             <p className="text-2xl font-bold text-amber-600">
-              {loading ? '-' : stats.pendingReferrals}
+              {loading ? <span className="inline-block w-8 h-7 bg-amber-100 rounded animate-pulse" /> : stats.pendingReferrals}
             </p>
           </div>
         </motion.div>
@@ -372,9 +397,7 @@ export default function Referral() {
                         {new Date(ref.created_at).toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-CA')}
                       </td>
                       <td className="px-6 py-4 text-slate-900 font-medium">
-                        {ref.referee_email
-                          ? `${ref.referee_email.substring(0, 2)}***@${ref.referee_email.split('@')[1] || '***'}`
-                          : t('dashboard.emailHidden')}
+                        {obfuscateEmail(ref.referee_email) || t('dashboard.emailHidden')}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
@@ -454,7 +477,7 @@ export default function Referral() {
             <motion.button
               onClick={copyLink}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
             >
               <Copy size={16} />
               {t('dashboard.copyLink')}

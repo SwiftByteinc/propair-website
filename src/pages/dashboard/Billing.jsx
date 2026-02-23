@@ -8,7 +8,8 @@ import {
   ExternalLink,
   Loader2,
   Check,
-  Star
+  Star,
+  ChevronDown
 } from 'lucide-react';
 import { useToast } from '../../context/ToastContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -25,6 +26,7 @@ export default function Billing() {
   const [portalLoading, setPortalLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(null); // 'monthly' | 'annual' | null
   const [verifying, setVerifying] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
   const { isEarlyBird, remaining } = useEarlyBirdCount();
 
   // Keep refs to avoid stale closures in async polling
@@ -184,7 +186,7 @@ export default function Billing() {
                 <button
                   onClick={handleStripePortal}
                   disabled={portalLoading}
-                  className="px-6 py-3 bg-white text-slate-700 rounded-xl font-semibold text-sm border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-2 disabled:opacity-50"
+                  className="px-6 py-3 bg-white text-slate-700 rounded-xl font-semibold text-sm border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-2 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
                 >
                   {portalLoading ? (
                     <Loader2 size={14} className="animate-spin" />
@@ -200,7 +202,7 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.05 }}
               className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden"
             >
               <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-3">
@@ -214,7 +216,7 @@ export default function Billing() {
                 <button
                   onClick={handleStripePortal}
                   disabled={portalLoading}
-                  className="text-teal-700 font-semibold hover:underline"
+                  className="text-teal-700 font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
                 >
                   {t('dashboard.openPortal')}
                 </button>
@@ -267,23 +269,32 @@ export default function Billing() {
                   </div>
                 )}
 
-                <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
-                  {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check size={12} className="text-teal-700" />
+                <div className="mb-6 pt-6 border-t border-slate-100">
+                  <button
+                    onClick={() => setShowFeatures(!showFeatures)}
+                    className="md:hidden flex items-center gap-1.5 text-xs font-medium text-teal-700 mb-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
+                  >
+                    {showFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
+                    <ChevronDown size={14} className={`transition-transform ${showFeatures ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`${showFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
+                    <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
+                    {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check size={12} className="text-teal-700" />
+                        </div>
+                        <span className="text-slate-600 text-sm">{feat}</span>
                       </div>
-                      <span className="text-slate-600 text-sm">{feat}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
 
               <button
                 onClick={() => handleCheckout('annual')}
                 disabled={checkoutLoading !== null}
-                className="w-full py-3.5 px-6 font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-6 font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
               >
                 {checkoutLoading === 'annual' && <Loader2 size={18} className="animate-spin" />}
                 {t('dashboard.chooseAnnual')}
@@ -296,7 +307,7 @@ export default function Billing() {
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.05 }}
               className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/60 shadow-sm flex flex-col justify-between"
             >
               <div>
@@ -308,23 +319,32 @@ export default function Billing() {
                   <span className="text-sm text-slate-500">{t('pricing.monthlyPeriod')}</span>
                 </div>
 
-                <div className="space-y-3 mb-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
-                  {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check size={12} className="text-teal-700" />
+                <div className="mb-6 pt-6 border-t border-slate-100">
+                  <button
+                    onClick={() => setShowFeatures(!showFeatures)}
+                    className="md:hidden flex items-center gap-1.5 text-xs font-medium text-teal-700 mb-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
+                  >
+                    {showFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
+                    <ChevronDown size={14} className={`transition-transform ${showFeatures ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`${showFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
+                    <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
+                    {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 bg-teal-700/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check size={12} className="text-teal-700" />
+                        </div>
+                        <span className="text-slate-600 text-sm">{feat}</span>
                       </div>
-                      <span className="text-slate-600 text-sm">{feat}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
 
               <button
                 onClick={() => handleCheckout('monthly')}
                 disabled={checkoutLoading !== null}
-                className="w-full py-3.5 px-6 font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-6 font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
               >
                 {checkoutLoading === 'monthly' && <Loader2 size={18} className="animate-spin" />}
                 {t('dashboard.chooseMonthly')}

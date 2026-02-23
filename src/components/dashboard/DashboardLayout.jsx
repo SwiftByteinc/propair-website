@@ -73,7 +73,7 @@ export default function DashboardLayout() {
       referral_code: profile?.referral_code,
       pro_months_balance: profile?.pro_months_balance || 0,
       is_verified: profile?.is_verified || false,
-      trial_connections_count: profile?.trial_connections_count || 0,
+      leads_used: profile?.leads_used || 0,
       subscription_status: subscription?.status,
       subscription_end: subscription?.current_period_end,
       email_confirmed_at: user.email_confirmed_at

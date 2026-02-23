@@ -23,6 +23,14 @@ vi.mock('../context/AuthContext', () => ({
   useAuth: () => ({ user: null }),
 }));
 
+// Mock IntersectionObserver (not available in jsdom)
+globalThis.IntersectionObserver = class {
+  constructor(cb) { globalThis.__ioCallback = cb; }
+  observe() {}
+  disconnect() {}
+  unobserve() {}
+};
+
 function renderPricing() {
   return render(
     <HelmetProvider>
@@ -79,9 +87,9 @@ describe('Pricing', () => {
     expect(btn.closest('button')).toBeInTheDocument();
   });
 
-  it('renders Choisir le mensuel button', () => {
+  it('renders monthly CTA button', () => {
     renderPricing();
-    const btn = screen.getByText('Choisir le mensuel');
+    const btn = screen.getByText('Continuer avec le mensuel');
     expect(btn.closest('button')).toBeInTheDocument();
   });
 

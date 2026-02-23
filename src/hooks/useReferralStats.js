@@ -15,6 +15,7 @@ export function useReferralStats(userId) {
   const [referralList, setReferralList] = useState([]); // Pour afficher la liste
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     if (!userId || !supabase) {
@@ -81,7 +82,9 @@ export function useReferralStats(userId) {
     fetchReferralData();
 
     return () => { isMounted = false; };
-  }, [userId]);
+  }, [userId, refreshKey]);
 
-  return { stats, referralList, loading, error };
+  const refetch = () => setRefreshKey(k => k + 1);
+
+  return { stats, referralList, loading, error, refetch };
 }

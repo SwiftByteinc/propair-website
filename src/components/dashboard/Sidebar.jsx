@@ -70,10 +70,10 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         <div className="h-16 px-6 flex items-center border-b border-slate-50">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors text-sm"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 rounded-lg"
           >
-            <ChevronLeft size={18} />
-            <span>Retour</span>
+            <ChevronLeft size={16} />
+            <span>{t('dashboard.sideBack')}</span>
           </button>
         </div>
 
@@ -129,7 +129,7 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         <div className="p-4 border-t border-slate-50">
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
           >
             <LogOut size={18} />
             {t('dashboard.signOut')}

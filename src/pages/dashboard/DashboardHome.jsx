@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { copyToClipboard } from '../../lib/clipboard';
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Crown,
   Zap,
@@ -62,17 +62,18 @@ export default function DashboardHome() {
   }, [isPro, toast, t]);
 
   // Stats réelles
-  const { stats: referralStats, loading: loadingStats } = useReferralStats(user?.id);
+  const { stats: referralStats, loading: loadingStats, error: referralError } = useReferralStats(user?.id);
+  if (import.meta.env.DEV && referralError) console.error('Referral stats error:', referralError);
 
   // Données utilisateur
   const connectionsTotal = 3; // Configurable plus tard via API
 
   // Sécurisation XSS : Encode le code de parrainage
-  const referralCode = encodeURIComponent(user?.referral_code || 'PROPAIR2024');
+  const referralCode = encodeURIComponent(user?.referral_code || 'PROPAIR');
   const referralLink = `${window.location.origin}/login?ref__=${referralCode}`;
   const referralGoal = 3;
 
-  const connectionsUsed = user?.trial_connections_count || 0;
+  const connectionsUsed = user?.leads_used || 0;
   const connectionsRemaining = user?.isPro ? 999 : Math.max(0, connectionsTotal - connectionsUsed);
 
   const referralCount = loadingStats ? 0 : (referralStats?.validatedReferrals || 0);
@@ -97,13 +98,17 @@ export default function DashboardHome() {
   // Show loading overlay when checkout session is being created
   if (checkoutLoading) {
     return (
-      <div className="p-4 sm:p-6 md:p-8 max-w-4xl flex items-center justify-center min-h-[50vh]">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="p-4 sm:p-6 md:p-8 max-w-4xl flex items-center justify-center min-h-[50vh]"
+      >
         <div className="text-center">
           <Loader2 size={32} className="animate-spin mx-auto text-teal-700 mb-4" />
           <p className="font-semibold text-slate-900">{t('dashboard.redirectingToCheckout')}</p>
           <p className="text-sm text-slate-500 mt-1">{t('dashboard.pleaseWait')}</p>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
@@ -129,7 +134,7 @@ export default function DashboardHome() {
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: 0.05 }}
         className={`rounded-2xl p-6 mb-6 ${
           user?.isPro
             ? 'bg-teal-700/10 border border-teal-700/20'
@@ -177,7 +182,7 @@ export default function DashboardHome() {
 
           <button
             onClick={handleStripeAction}
-            className={`px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all ${
+            className={`px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
               user?.isPro
                 ? 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
                 : 'bg-slate-900 text-white hover:bg-black shadow-lg shadow-slate-900/10'
@@ -197,7 +202,7 @@ export default function DashboardHome() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
             className="bg-white rounded-2xl border border-slate-100/60 shadow-sm overflow-hidden mb-6"
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
@@ -207,7 +212,7 @@ export default function DashboardHome() {
                 </div>
                 <h2 className="font-semibold text-slate-900">{t('dashboard.referralSection')}</h2>
               </div>
-              <Link to="/portal/referral" className="text-xs font-semibold text-teal-700 hover:text-teal-700">
+              <Link to="/portal/referral" className="text-xs font-semibold text-teal-700 hover:text-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 rounded">
                 {t('dashboard.seeAll')}
               </Link>
             </div>
@@ -224,7 +229,7 @@ export default function DashboardHome() {
                   <motion.button
                     onClick={copyReferralLink}
                     whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all ${
+                    className={`px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
                       copied
                         ? 'bg-teal-700 text-white'
                         : 'bg-slate-900 text-white hover:bg-black'
@@ -270,12 +275,12 @@ export default function DashboardHome() {
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.15 }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             <Link
               to="/portal/billing"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
+              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
             >
               <CreditCard size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.subscriptionLink')}</p>
@@ -284,7 +289,7 @@ export default function DashboardHome() {
 
             <a
               href="mailto:support@propairapp.com"
-              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
+              className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
             >
               <HelpCircle size={20} className="text-slate-500 group-hover:text-teal-700 mb-2" />
               <p className="font-semibold text-sm text-slate-900">{t('dashboard.supportLink')}</p>
@@ -315,11 +320,11 @@ export default function DashboardHome() {
           </motion.section>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+             <Link to="/about" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
                 <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>
              </Link>
-             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+             <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-100/60 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
                 <Gift size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.referralLink')}</p>
              </Link>

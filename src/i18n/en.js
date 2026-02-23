@@ -136,7 +136,7 @@ const en = {
     monthlyTagline: 'Total freedom, no commitment.',
     monthlyPrice: '$24',
     monthlyPeriod: '/mo + tax',
-    monthlyCta: 'Choose monthly',
+    monthlyCta: 'Continue with monthly',
     monthlyIncluded: 'Same features as the annual plan',
     insiderTitle: 'Did you know?',
     insiderDesc1: 'Stripe fees cost',
@@ -571,7 +571,14 @@ const en = {
     userFallback: 'User',
     statusPro: 'Pro',
     statusTrial: 'Trial',
+    sideBack: 'Back',
     signOut: 'Sign out',
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
+    statsError: 'Unable to load statistics',
+    retry: 'Retry',
+    showFeatures: 'Show features',
+    hideFeatures: 'Hide features',
 
     // DashboardHome
     homeTitle: 'Home — My ProPair Space',
