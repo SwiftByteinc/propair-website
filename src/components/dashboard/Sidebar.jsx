@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Home,
   CreditCard,
@@ -11,6 +11,28 @@ import {
   Zap
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+
+function SidebarAvatar({ name, src }) {
+  const [imgError, setImgError] = useState(false);
+  const initial = name?.charAt(0) || 'U';
+
+  if (src && !imgError) {
+    return (
+      <img
+        src={src}
+        alt=""
+        onError={() => setImgError(true)}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+    );
+  }
+
+  return (
+    <div className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold text-sm">
+      {initial}
+    </div>
+  );
+}
 
 export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
   const { t } = useLanguage();
@@ -80,9 +102,8 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         {/* User Card */}
         <div className="p-6 border-b border-slate-50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold text-sm">
-              {user?.full_name?.charAt(0) || 'U'}
-            </div>
+            <SidebarAvatar name={user?.full_name} src={user?.avatar_url} />
+
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm text-slate-900 truncate">
                 {user?.full_name || t('dashboard.userFallback')}

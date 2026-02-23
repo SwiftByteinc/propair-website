@@ -12,19 +12,54 @@ function DashboardSkeleton() {
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar skeleton - hidden on mobile */}
       <aside className="hidden md:block w-64 h-screen bg-white border-r border-slate-100 fixed left-0 top-0">
-        <div className="p-6 space-y-4 animate-pulse">
-          <div className="h-8 bg-slate-100 rounded-lg w-32" />
-          <div className="h-12 bg-slate-100 rounded-full w-12" />
-          <div className="h-4 bg-slate-100 rounded w-full" />
-          <div className="h-4 bg-slate-100 rounded w-2/3" />
+        <div className="animate-pulse">
+          {/* Back button area */}
+          <div className="h-16 px-6 flex items-center border-b border-slate-50">
+            <div className="h-4 bg-slate-100 rounded w-16" />
+          </div>
+          {/* User card */}
+          <div className="p-6 border-b border-slate-50">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-slate-100 rounded-full shrink-0" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 bg-slate-100 rounded w-28" />
+                <div className="h-3 bg-slate-100 rounded w-36" />
+              </div>
+            </div>
+            <div className="mt-4 h-6 bg-slate-100 rounded-full w-24" />
+          </div>
+          {/* Nav links */}
+          <div className="p-4 space-y-2">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="h-11 bg-slate-50 rounded-xl" />
+            ))}
+          </div>
         </div>
       </aside>
+
+      {/* Mobile header skeleton */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
+        <div className="w-11 h-11 bg-slate-100 rounded-xl animate-pulse" />
+        <div className="h-4 bg-slate-100 rounded w-24 ml-3 animate-pulse" />
+      </div>
+
       {/* Main skeleton */}
-      <main className="md:ml-64 flex-1 p-8">
+      <main className="md:ml-64 flex-1 p-4 sm:p-6 md:p-8 pt-18 md:pt-8 max-w-4xl">
         <div className="animate-pulse space-y-6">
-          <div className="h-8 bg-slate-100 rounded-lg w-64" />
-          <div className="h-32 bg-slate-100 rounded-2xl" />
-          <div className="h-48 bg-slate-100 rounded-2xl" />
+          {/* Header */}
+          <div>
+            <div className="h-7 bg-slate-100 rounded-lg w-56 mb-2" />
+            <div className="h-4 bg-slate-100 rounded w-72" />
+          </div>
+          {/* Status card */}
+          <div className="h-24 bg-slate-100 rounded-2xl" />
+          {/* Content card */}
+          <div className="h-44 bg-slate-100 rounded-2xl" />
+          {/* Quick links */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="h-20 bg-slate-100 rounded-xl" />
+            <div className="h-20 bg-slate-100 rounded-xl" />
+          </div>
         </div>
       </main>
     </div>
@@ -75,6 +110,9 @@ export default function DashboardLayout() {
       is_verified: profile?.is_verified || false,
       activated: profile?.activated || false,
       leads_used: profile?.leads_used || 0,
+      avatar_url: (profile?.user_role === 'entrepreneur'
+        ? profile?.profile_customization?.logo_image
+        : profile?.profile_customization?.profile_photo) || null,
       subscription_status: subscription?.status,
       subscription_end: subscription?.current_period_end,
       email_confirmed_at: user.email_confirmed_at
