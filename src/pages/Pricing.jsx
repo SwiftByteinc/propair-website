@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check, Zap, Shield, Bell, Users, Star, Heart,
   MessageSquare, Briefcase, CreditCard,
-  Smartphone, ArrowRight, ChevronDown, Loader2, Clover, RefreshCw
+  Smartphone, ArrowRight, ChevronDown, Loader2, RefreshCw, TrendingDown
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
@@ -22,32 +22,6 @@ export default function Pricing() {
   const toast = useToast();
   const { remaining, isEarlyBird } = useEarlyBirdCount();
 
-  // Clover nudge: appears 5s after the monthly card enters viewport
-  const monthlyRef = useRef(null);
-  const [showClover, setShowClover] = useState(false);
-
-  useEffect(() => {
-    const el = monthlyRef.current;
-    if (!el) return;
-
-    let timer;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          timer = setTimeout(() => setShowClover(true), 5000);
-        } else {
-          clearTimeout(timer);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      clearTimeout(timer);
-    };
-  }, []);
 
   const handlePlanClick = async (plan) => {
     if (!user) {
@@ -290,8 +264,9 @@ export default function Pricing() {
           </div>
 
           {/* CARTE DROITE : MENSUEL */}
-          <div ref={monthlyRef} className="h-full flex flex-col">
-            <div className="bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-md shadow-slate-200/40 flex-1 overflow-hidden">
+          <div className="h-full flex flex-col">
+            <div className="relative bg-white rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-md shadow-slate-200/40 flex-1 overflow-hidden">
+              {/* Contenu de la carte (visible derrière l'overlay) */}
               <h3 className="text-2xl font-semibold text-slate-900 mb-2">{t('pricing.monthlyTitle')}</h3>
               <p className="text-slate-500 mb-6">{t('pricing.monthlyTagline')}</p>
 
@@ -300,41 +275,40 @@ export default function Pricing() {
                 <span className="text-sm text-slate-500">{t('pricing.monthlyPeriod')}</span>
               </div>
 
-              <button
-                onClick={() => handlePlanClick('monthly')}
-                disabled={checkoutLoading !== null}
-                className="w-full py-3 px-6 text-center text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {checkoutLoading === 'monthly' && <Loader2 size={20} className="animate-spin" />}
-                {t('pricing.monthlyCta')}
-              </button>
-
               <div className="flex items-center gap-2 text-sm text-slate-500 mt-4">
                 <Check size={16} className="text-teal-700" />
                 <span>{t('pricing.monthlyIncluded')}</span>
               </div>
 
-              {/* Clover nudge — appears 5s after section enters viewport */}
-              <AnimatePresence>
-                {showClover && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="mt-6 p-3 bg-teal-700/10 rounded-xl border border-teal-700/20"
-                  >
-                    <div className="flex items-start gap-2">
-                      <Clover size={16} className="text-teal-700 mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-xs font-semibold text-teal-700">{t('pricing.insiderTitle')}</p>
-                        <p className="text-xs text-slate-600 mt-1">
-                          {t('pricing.insiderNote')}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Overlay semi-transparent */}
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center p-6 sm:p-8">
+                <TrendingDown size={28} className="text-teal-700 mb-4" />
+                <h4 className="text-lg font-bold text-slate-900 mb-4 text-center">{t('pricing.overlayTitle')}</h4>
+
+                {/* Comparaison frais */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="text-center">
+                    <span className="block text-2xl font-bold text-red-500">{t('pricing.overlayHighlight1')}</span>
+                    <span className="text-xs text-slate-500">{t('pricing.overlayLabel1')}</span>
+                  </div>
+                  <ArrowRight size={20} className="text-slate-400" />
+                  <div className="text-center">
+                    <span className="block text-2xl font-bold text-teal-700">{t('pricing.overlayHighlight2')}</span>
+                    <span className="text-xs text-slate-500">{t('pricing.overlayLabel2')}</span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-slate-600 text-center mb-8 max-w-xs leading-relaxed">{t('pricing.overlayDesc')}</p>
+
+                <button
+                  onClick={() => handlePlanClick('monthly')}
+                  disabled={checkoutLoading !== null}
+                  className="py-3 px-6 text-center text-sm font-medium text-slate-500 hover:text-slate-700 border border-slate-200 rounded-xl transition-colors active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {checkoutLoading === 'monthly' && <Loader2 size={20} className="animate-spin" />}
+                  {t('pricing.monthlyCta')}
+                </button>
+              </div>
 
             </div>
           </div>
