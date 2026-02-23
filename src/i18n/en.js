@@ -1045,7 +1045,7 @@ const en = {
     s1Email: 'support@propairapp.com',
     s1Phone: '819 481-0882',
     s1Director: 'Nicolas Lepage, President and Founder',
-    s1NEQ: 'NEQ Number: [To be completed]',
+    s1NEQ: 'NEQ Number: 1181530685',
 
     s2Title: '2. Hosting',
     s2P1: 'The Site is hosted by:',
