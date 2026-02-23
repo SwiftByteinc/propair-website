@@ -113,11 +113,10 @@ describe('Sidebar', () => {
     expect(backdrop).toBeInTheDocument();
   });
 
-  it('renders logo image', () => {
+  it('renders back button', () => {
     renderSidebar();
 
-    const logo = screen.getByAltText('ProPair');
-    expect(logo).toHaveAttribute('src', '/images/logo_ProPair.jpg');
+    expect(screen.getByText('Retour')).toBeInTheDocument();
   });
 
   it('Accueil link points to /portal', () => {

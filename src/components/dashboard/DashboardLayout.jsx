@@ -9,7 +9,7 @@ import Sidebar from './Sidebar';
 // Skeleton loader for initial auth loading
 function DashboardSkeleton() {
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex">
+    <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar skeleton - hidden on mobile */}
       <aside className="hidden md:block w-64 h-screen bg-white border-r border-slate-100 fixed left-0 top-0">
         <div className="p-6 space-y-4 animate-pulse">
@@ -103,7 +103,7 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA]">
+    <div className="min-h-screen bg-slate-50">
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>

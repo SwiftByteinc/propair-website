@@ -66,7 +66,7 @@ describe('About', () => {
   it('renders 4 values', () => {
     renderAbout();
     expect(screen.getByText('Sauver du temps')).toBeInTheDocument();
-    expect(screen.getByText('Faits pour le terrain')).toBeInTheDocument();
+    expect(screen.getByText('Fait pour le terrain')).toBeInTheDocument();
     expect(screen.getByText('Ancré à Magog')).toBeInTheDocument();
     expect(screen.getByText('Zéro commission')).toBeInTheDocument();
   });

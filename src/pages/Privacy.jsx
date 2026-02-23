@@ -8,9 +8,9 @@ export default function Privacy() {
         canonical="/privacy"
         description="Politique de confidentialité de ProPair. Gestion des renseignements personnels conformément à la Loi 25, LPRPDE et RGPD."
       />
-      <article className="max-w-3xl mx-auto text-sm text-gray-800 leading-relaxed font-serif">
+      <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Politique de confidentialité</h1>
-        <p className="text-center text-xs text-gray-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">1. Introduction</h2>

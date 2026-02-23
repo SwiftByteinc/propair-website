@@ -45,18 +45,17 @@ describe('Login Page', () => {
     vi.clearAllMocks();
   });
 
-  it('renders login page correctly', () => {
+  it('renders signup page by default', () => {
     renderWithRouter(<Login />);
 
-    // Check main heading
-    expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
+    // Check main heading (signup is default)
+    expect(screen.getByRole('heading', { name: /créer mon compte/i })).toBeInTheDocument();
 
-    // Check email and password fields exist
+    // Check all signup fields exist
+    expect(screen.getByPlaceholderText('Votre nom complet')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Adresse courriel')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Mot de passe')).toBeInTheDocument();
-
-    // Check submit button
-    expect(screen.getByRole('button', { name: /se connecter/i })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Confirmer le mot de passe')).toBeInTheDocument();
   });
 
   it('renders social login buttons', () => {
@@ -67,20 +66,20 @@ describe('Login Page', () => {
     expect(screen.getByRole('button', { name: /apple/i })).toBeInTheDocument();
   });
 
-  it('toggles between login and signup mode', () => {
+  it('toggles between signup and login mode', () => {
     renderWithRouter(<Login />);
 
-    // Initially in login mode
-    expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
+    // Initially in signup mode
+    expect(screen.getByRole('heading', { name: /créer mon compte/i })).toBeInTheDocument();
 
-    // Click to switch to signup
-    const toggleButton = screen.getByRole('button', { name: /s'inscrire/i });
+    // Click to switch to login
+    const toggleButton = screen.getByRole('button', { name: /se connecter/i });
     fireEvent.click(toggleButton);
 
-    // Now should show signup mode
-    expect(screen.getByText('Créer un compte')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Votre nom complet')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Confirmer le mot de passe')).toBeInTheDocument();
+    // Now should show login mode
+    expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Votre nom complet')).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Confirmer le mot de passe')).not.toBeInTheDocument();
   });
 
   it('shows password toggle button', () => {
@@ -98,6 +97,9 @@ describe('Login Page', () => {
 
   it('has forgot password link in login mode', () => {
     renderWithRouter(<Login />);
+
+    // Switch to login mode first
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
 
     expect(screen.getByText('Mot de passe oublié ?')).toBeInTheDocument();
   });
@@ -143,29 +145,35 @@ describe('Login Page', () => {
 
   it('forgot password link points to /forgot-password', () => {
     renderWithRouter(<Login />);
+    // Switch to login mode
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
     const link = screen.getByText('Mot de passe oublié ?').closest('a');
     expect(link).toHaveAttribute('href', '/forgot-password');
   });
 
   it('signup mode shows name field', () => {
     renderWithRouter(<Login />);
-    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
+    // Already in signup mode by default
     expect(screen.getByPlaceholderText('Votre nom complet')).toBeInTheDocument();
   });
 
   it('signup mode shows confirm password field', () => {
     renderWithRouter(<Login />);
-    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
+    // Already in signup mode by default
     expect(screen.getByPlaceholderText('Confirmer le mot de passe')).toBeInTheDocument();
   });
 
   it('login mode does not show name field', () => {
     renderWithRouter(<Login />);
+    // Switch to login mode
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
     expect(screen.queryByPlaceholderText('Votre nom complet')).not.toBeInTheDocument();
   });
 
   it('login mode does not show confirm password', () => {
     renderWithRouter(<Login />);
+    // Switch to login mode
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
     expect(screen.queryByPlaceholderText('Confirmer le mot de passe')).not.toBeInTheDocument();
   });
 
@@ -174,11 +182,13 @@ describe('Login Page', () => {
     expect(screen.getByText('ou par courriel')).toBeInTheDocument();
   });
 
-  it('switching to signup then back restores login mode', () => {
+  it('switching to login then back restores signup mode', () => {
     renderWithRouter(<Login />);
-    fireEvent.click(screen.getByRole('button', { name: /s'inscrire/i }));
-    expect(screen.getByText('Créer un compte')).toBeInTheDocument();
+    // Switch to login
     fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
     expect(screen.getByText('Bon retour parmi nous')).toBeInTheDocument();
+    // Switch back to signup
+    fireEvent.click(screen.getByRole('button', { name: /créer mon compte/i }));
+    expect(screen.getByRole('heading', { name: /créer mon compte/i })).toBeInTheDocument();
   });
 });

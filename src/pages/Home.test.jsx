@@ -31,7 +31,7 @@ describe('Home', () => {
 
   it('renders hero subtitle', () => {
     renderHome();
-    expect(screen.getByText(/La plateforme qui remplace les appels/)).toBeInTheDocument();
+    expect(screen.getByText(/Trouvez le bon pro/)).toBeInTheDocument();
   });
 
   it('renders value proposition badges', () => {

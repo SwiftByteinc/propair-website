@@ -66,14 +66,14 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         md:translate-x-0
       `}>
 
-        {/* Logo & Back */}
+        {/* Back */}
         <div className="h-16 px-6 flex items-center border-b border-slate-50">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-600 transition-colors text-sm"
           >
             <ChevronLeft size={18} />
-            <img src="/images/logo_ProPair.jpg" alt="ProPair" width="60" height="28" className="h-7" />
+            <span>Retour</span>
           </button>
         </div>
 

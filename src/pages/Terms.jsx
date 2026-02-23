@@ -8,9 +8,9 @@ export default function Terms() {
         canonical="/terms"
         description="Conditions générales d'utilisation de la plateforme ProPair. Règles, droits et obligations des utilisateurs."
       />
-      <article className="max-w-3xl mx-auto text-sm text-gray-800 leading-relaxed font-serif">
+      <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Conditions d'utilisation</h1>
-        <p className="text-center text-xs text-gray-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">1. Nature du service et admissibilité</h2>

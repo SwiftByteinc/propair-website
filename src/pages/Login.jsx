@@ -23,7 +23,7 @@ export default function Login() {
   // Support both ?ref__= and ?ref= (rétrocompatibilité)
   const refCode = searchParams.get('ref__') || searchParams.get('ref');
 
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [checkoutRedirecting, setCheckoutRedirecting] = useState(false);
@@ -40,11 +40,13 @@ export default function Login() {
   // The global capture (useReferralCapture in App.jsx) handles localStorage storage.
   // No need to duplicate in sessionStorage — getStoredReferralCode() is the canonical source.
 
-  // Auto-switch to signup if mode=signup or a plan is specified from Pricing page
+  // Auto-switch mode based on URL params
   useEffect(() => {
     const mode = searchParams.get('mode');
     const plan = searchParams.get('plan');
-    if (mode === 'signup' || plan) {
+    if (mode === 'login') {
+      setIsLogin(true);
+    } else if (mode === 'signup' || plan) {
       setIsLogin(false);
     }
   }, [searchParams]);
