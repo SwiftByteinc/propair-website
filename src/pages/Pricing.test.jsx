@@ -95,7 +95,7 @@ describe('Pricing', () => {
 
   it('renders Offre Lancement badge', () => {
     renderPricing();
-    expect(screen.getByText('Tarif Fondateur')).toBeInTheDocument();
+    expect(screen.getByText('Accès Pionnier')).toBeInTheDocument();
   });
 
   it('renders discount badge', () => {
@@ -160,7 +160,7 @@ describe('Pricing', () => {
 
   it('renders Offre Lancement badge on annual card', () => {
     renderPricing();
-    expect(screen.getByText('Tarif Fondateur')).toBeInTheDocument();
+    expect(screen.getByText('Accès Pionnier')).toBeInTheDocument();
   });
 
   it('renders annual card discount text', () => {

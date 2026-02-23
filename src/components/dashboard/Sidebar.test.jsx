@@ -62,16 +62,22 @@ describe('Sidebar', () => {
     expect(screen.getByText('N')).toBeInTheDocument();
   });
 
-  it('shows Pro badge for Pro users', () => {
+  it('shows Pro activé badge for Pro entrepreneur', () => {
     renderSidebar(entrepreneurUser);
 
-    expect(screen.getByText('Pro')).toBeInTheDocument();
+    expect(screen.getByText('Pro activé')).toBeInTheDocument();
   });
 
-  it('shows Essai badge for non-Pro users', () => {
+  it('shows Pro non activé badge for non-Pro entrepreneur', () => {
+    renderSidebar({ ...entrepreneurUser, isPro: false });
+
+    expect(screen.getByText('Pro non activé')).toBeInTheDocument();
+  });
+
+  it('shows Client badge for client users', () => {
     renderSidebar(clientUser);
 
-    expect(screen.getByText('Essai')).toBeInTheDocument();
+    expect(screen.getByText('Client')).toBeInTheDocument();
   });
 
   it('renders entrepreneur navigation links', () => {

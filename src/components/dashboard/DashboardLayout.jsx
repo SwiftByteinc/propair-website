@@ -68,6 +68,7 @@ export default function DashboardLayout() {
       id: user.id,
       email: user.email || profile?.email,
       full_name: profile?.full_name || user.user_metadata?.full_name || t('dashboard.userFallback'),
+      company_name: profile?.company_name || null,
       role: profile?.user_role || 'client',
       isPro: isPro,
       referral_code: profile?.referral_code,

@@ -81,11 +81,11 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
         <div className="p-6 border-b border-slate-50">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold text-sm">
-              {user?.full_name?.charAt(0) || 'U'}
+              {(user?.company_name || user?.full_name)?.charAt(0) || 'U'}
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm text-slate-900 truncate">
-                {user?.full_name || t('dashboard.userFallback')}
+                {user?.company_name || user?.full_name || t('dashboard.userFallback')}
               </p>
               <p className="text-xs text-slate-500 truncate">
                 {user?.email || ''}
@@ -97,10 +97,16 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
           <div className={`mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold ${
             user?.isPro
               ? 'bg-teal-700/10 text-teal-700'
-              : 'bg-amber-50 text-amber-600'
+              : isEntrepreneur
+                ? 'bg-amber-50 text-amber-600'
+                : 'bg-slate-100 text-slate-600'
           }`}>
             {user?.isPro ? <Crown size={12} /> : <Zap size={12} />}
-            {user?.isPro ? t('dashboard.statusPro') : t('dashboard.statusTrial')}
+            {user?.isPro
+              ? t('dashboard.statusPro')
+              : isEntrepreneur
+                ? t('dashboard.statusProInactive')
+                : t('dashboard.statusClient')}
           </div>
         </div>
 
