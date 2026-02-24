@@ -1153,6 +1153,27 @@ const fr = {
     s7RelatedTerms: 'Conditions d\'utilisation du Site',
     s7RelatedPrivacy: 'Politique de confidentialité du Site',
   },
+
+  deleteAccountPage: {
+    title: 'Supprimer mon compte',
+    seoDesc: 'Demandez la suppression de votre compte ProPair et de vos données personnelles.',
+    intro: 'Entrez l\'adresse courriel associée à votre compte ProPair pour demander sa suppression.',
+    emailPlaceholder: 'Adresse courriel du compte',
+    emailAriaLabel: 'Adresse courriel du compte à supprimer',
+    submitBtn: 'Demander la suppression',
+    invalidEmail: 'Veuillez entrer une adresse courriel valide.',
+    successTitle: 'Demande envoyée',
+    successDesc: 'Votre demande de suppression a été transmise à notre équipe. Vous recevrez un courriel de confirmation sous 48 heures.',
+    successNote: 'Vérifiez votre boîte de courriels indésirables si vous ne recevez pas de réponse.',
+    infoTitle: 'Ce qui se passe quand vous supprimez votre compte',
+    infoItems: [
+      'Votre profil, messages, photos, avis et connexions sont supprimés définitivement.',
+      'Un délai de grâce de 30 jours s\'applique — vous pouvez annuler en vous reconnectant.',
+      'Les données anonymisées peuvent être conservées pour la prévention de fraude (Loi 25 du Québec).',
+      'Vous recevrez un courriel de confirmation une fois la demande traitée.',
+    ],
+    privacyLink: 'Politique de confidentialité',
+  },
 };
 
 export default fr;

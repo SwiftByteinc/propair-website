@@ -1153,6 +1153,27 @@ const en = {
     s7RelatedTerms: 'Website Terms of Use',
     s7RelatedPrivacy: 'Website Privacy Policy',
   },
+
+  deleteAccountPage: {
+    title: 'Delete my account',
+    seoDesc: 'Request the deletion of your ProPair account and personal data.',
+    intro: 'Enter the email address associated with your ProPair account to request its deletion.',
+    emailPlaceholder: 'Account email address',
+    emailAriaLabel: 'Email address of the account to delete',
+    submitBtn: 'Request account deletion',
+    invalidEmail: 'Please enter a valid email address.',
+    successTitle: 'Request sent',
+    successDesc: 'Your deletion request has been sent to our team. You will receive a confirmation email within 48 hours.',
+    successNote: 'Check your spam folder if you don\'t receive a response.',
+    infoTitle: 'What happens when you delete your account',
+    infoItems: [
+      'Your profile, messages, photos, reviews, and connections are permanently deleted.',
+      'A 30-day grace period applies — you can cancel by logging back in.',
+      'Anonymized data may be retained for fraud prevention (Law 25, Quebec).',
+      'You will receive a confirmation email once the request is processed.',
+    ],
+    privacyLink: 'Privacy Policy',
+  },
 };
 
 export default en;

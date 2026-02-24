@@ -24,6 +24,7 @@ const Terms = lazy(() => import('./pages/Terms'));
 const Refund = lazy(() => import('./pages/Refund'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Parrainage = lazy(() => import('./pages/Parrainage'));
+const DeleteAccount = lazy(() => import('./pages/DeleteAccount'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Website legal pages
@@ -129,6 +130,7 @@ function App() {
               <Route path="/connexion" element={<AuthLayout><Login /></AuthLayout>} />
               <Route path="/forgot-password" element={<AuthLayout><ForgotPassword /></AuthLayout>} />
               <Route path="/update-password" element={<AuthLayout><UpdatePassword /></AuthLayout>} />
+              <Route path="/delete-account" element={<AuthLayout><DeleteAccount /></AuthLayout>} />
 
               {/* Portal (Protected) */}
               <Route path="/portal" element={
