@@ -280,8 +280,24 @@ export default function Pricing() {
                 <span>{t('pricing.monthlyIncluded')}</span>
               </div>
 
-              {/* Overlay semi-transparent */}
-              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center p-6 sm:p-8">
+              {/* Mobile CTA (visible only on small screens where overlay is hidden) */}
+              <div className="md:hidden mt-6 space-y-3">
+                <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 rounded-xl p-3">
+                  <TrendingDown size={14} className="text-teal-700 shrink-0" />
+                  <span>{t('pricing.overlayDesc')}</span>
+                </div>
+                <button
+                  onClick={() => handlePlanClick('monthly')}
+                  disabled={checkoutLoading !== null}
+                  className="w-full py-3 px-6 text-center text-sm font-medium text-slate-600 hover:text-slate-800 border border-slate-200 rounded-xl transition-colors active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {checkoutLoading === 'monthly' && <Loader2 size={16} className="animate-spin" />}
+                  {t('pricing.monthlyCta')}
+                </button>
+              </div>
+
+              {/* Overlay semi-transparent — hidden on mobile, shown on md+ */}
+              <div className="hidden md:flex absolute inset-0 bg-white/80 backdrop-blur-sm rounded-2xl flex-col items-center justify-center p-6 sm:p-8">
                 <TrendingDown size={28} className="text-teal-700 mb-4" />
                 <h4 className="text-lg font-bold text-slate-900 mb-4 text-center">{t('pricing.overlayTitle')}</h4>
 

@@ -233,7 +233,7 @@ export default function UpdatePassword() {
                       placeholder={t('updatePassword.newPasswordPlaceholder')}
                       aria-label={t('updatePassword.newPasswordAria')}
                       autoComplete="new-password"
-                      className="w-full pl-11 pr-11 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
+                      className="w-full pl-11 pr-11 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                       required
                       minLength={8}
                       disabled={loading}
@@ -261,7 +261,7 @@ export default function UpdatePassword() {
                       placeholder={t('updatePassword.confirmPasswordPlaceholder')}
                       aria-label={t('updatePassword.confirmPasswordAria')}
                       autoComplete="new-password"
-                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
+                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                       required
                       disabled={loading}
                     />

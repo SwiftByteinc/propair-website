@@ -37,17 +37,17 @@ export default function Footer() {
             <h3 className="font-semibold text-slate-900 mb-6">{t('footer.productTitle')}</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/pricing" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/pricing" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded">
                   {t('footer.productPricing')}
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/about" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded">
                   {t('footer.productAbout')}
                 </Link>
               </li>
               <li>
-                <Link to="/pricing#faq" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/pricing#faq" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded">
                   {t('footer.productFaq')}
                 </Link>
               </li>
@@ -59,12 +59,12 @@ export default function Footer() {
             <h3 className="font-semibold text-slate-900 mb-6">{t('footer.companyTitle')}</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/contact" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/contact" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded">
                   {t('footer.companyContact')}
                 </Link>
               </li>
               <li>
-                <Link to="/connexion" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block">
+                <Link to="/connexion" className="text-slate-600 hover:text-teal-700 transition-colors py-1 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded">
                   {t('footer.companyLogin')}
                 </Link>
               </li>
@@ -107,25 +107,30 @@ export default function Footer() {
           <p className="text-slate-500 text-sm">
             {t('footer.copyright', { year: currentYear })}
           </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
-            <Link to="/site/privacy" className="hover:text-teal-700 transition-colors py-1">
+          <div className="flex flex-wrap justify-center items-center gap-x-1.5 gap-y-1 text-sm text-slate-500">
+            <Link to="/site/privacy" className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1">
               {t('footer.legalPrivacy')}
             </Link>
-            <Link to="/site/terms" className="hover:text-teal-700 transition-colors py-1">
+            <span className="text-slate-300" aria-hidden="true">·</span>
+            <Link to="/site/terms" className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1">
               {t('footer.legalTerms')}
             </Link>
-            <Link to="/site/cookies" className="hover:text-teal-700 transition-colors py-1">
+            <span className="text-slate-300" aria-hidden="true">·</span>
+            <Link to="/site/cookies" className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1">
               {t('footer.legalCookies')}
             </Link>
-            <Link to="/site/legal" className="hover:text-teal-700 transition-colors py-1">
+            <span className="text-slate-300" aria-hidden="true">·</span>
+            <Link to="/site/legal" className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1">
               {t('footer.legalNotice')}
             </Link>
-            <Link to="/site/refund" className="hover:text-teal-700 transition-colors py-1">
+            <span className="text-slate-300" aria-hidden="true">·</span>
+            <Link to="/site/refund" className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1">
               {t('footer.legalRefund')}
             </Link>
+            <span className="text-slate-300" aria-hidden="true">·</span>
             <button
               onClick={() => window.dispatchEvent(new Event('cookie-consent-reset'))}
-              className="hover:text-teal-700 transition-colors py-1"
+              className="hover:text-teal-700 hover:underline underline-offset-2 transition-colors py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded px-1"
             >
               {t('footer.cookiePreferences')}
             </button>

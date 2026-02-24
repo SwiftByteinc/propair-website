@@ -177,7 +177,7 @@ export default function Login() {
     }
   };
 
-  const inputClass = "w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm";
+  const inputClass = "w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm";
 
   // Show loading screen while redirecting to Stripe after login
   if (checkoutRedirecting) {
@@ -299,7 +299,7 @@ export default function Login() {
           {!isLogin && (
             <div className="relative">
               <label htmlFor="name" className="sr-only">{t('login.nameLabel')}</label>
-              <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+              <User size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type="text"
                 id="name"
@@ -318,7 +318,7 @@ export default function Login() {
           {/* Email */}
           <div className="relative">
             <label htmlFor="email" className="sr-only">{t('login.emailLabel')}</label>
-            <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+            <Mail size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="email"
               id="email"
@@ -337,7 +337,7 @@ export default function Login() {
           <div>
             <div className="relative">
               <label htmlFor="password" className="sr-only">{t('login.passwordLabel')}</label>
-              <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+              <Lock size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
@@ -346,7 +346,7 @@ export default function Login() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder={t('login.passwordPlaceholder')}
                 autoComplete={isLogin ? "current-password" : "new-password"}
-                className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm"
+                className="w-full pl-11 pr-11 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all text-sm"
                 required
                 disabled={loading}
               />
@@ -356,7 +356,7 @@ export default function Login() {
                 aria-label={showPassword ? t('login.hidePassword') : t('login.showPassword')}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors"
               >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
             {!isLogin && (
@@ -368,7 +368,7 @@ export default function Login() {
           {!isLogin && (
             <div className="relative">
               <label htmlFor="confirmPassword" className="sr-only">{t('login.confirmPasswordLabel')}</label>
-              <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+              <Lock size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="confirmPassword"
@@ -404,7 +404,7 @@ export default function Login() {
             ) : (
               <>
                 {isLogin ? t('login.loginBtn') : t('login.signupBtn')}
-                <ArrowRight size={16} />
+                <ArrowRight size={20} />
               </>
             )}
           </button>

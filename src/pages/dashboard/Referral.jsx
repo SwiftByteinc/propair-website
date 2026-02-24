@@ -239,7 +239,7 @@ export default function Referral() {
               <motion.button
                 onClick={copyLink}
                 whileTap={{ scale: 0.95 }}
-                className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
+                className={`py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
                   copied
                     ? 'bg-teal-700 text-white'
                     : 'bg-slate-900 text-white hover:bg-black'

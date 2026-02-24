@@ -138,7 +138,7 @@ export default function Contact() {
 
             {sent ? (
               <div className="bg-teal-700/10 border border-teal-700/20 rounded-2xl p-8 text-center" role="status" aria-live="polite" aria-atomic="true">
-                <div className="w-14 h-14 bg-teal-700/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-teal-700/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail size={24} className="text-teal-700" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('contact.sentTitle')}</h3>
@@ -161,7 +161,7 @@ export default function Contact() {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-900 mb-2">
-                      {t('contact.formName')}
+                      {t('contact.formName')} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
@@ -170,12 +170,12 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={t('contact.formNamePlaceholder')}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     />
                   </div>
                   <div>
                     <label htmlFor="contact-email" className="block text-sm font-semibold text-slate-900 mb-2">
-                      {t('contact.formEmail')}
+                      {t('contact.formEmail')} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="email"
@@ -184,14 +184,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder={t('contact.formEmailPlaceholder')}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="contact-subject" className="block text-sm font-semibold text-slate-900 mb-2">
-                    {t('contact.formSubject')}
+                    {t('contact.formSubject')} <span className="text-red-400">*</span>
                   </label>
                   <select
                     id="contact-subject"
@@ -212,7 +212,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="contact-message" className="block text-sm font-semibold text-slate-900 mb-2">
-                    {t('contact.formMessage')}
+                    {t('contact.formMessage')} <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     id="contact-message"
@@ -221,7 +221,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder={t('contact.formMessagePlaceholder')}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all resize-none"
                   />
                 </div>
 

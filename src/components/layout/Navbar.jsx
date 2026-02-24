@@ -90,7 +90,7 @@ export default function Navbar() {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-teal-700 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-teal-700 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg focus:ring-2 focus:ring-teal-700 focus:ring-offset-2"
       >
         {t('nav.skipToContent')}
       </a>
@@ -158,7 +158,7 @@ export default function Navbar() {
               {/* Language Toggle */}
               <button
                 onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-                className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors px-2 py-1 rounded-lg hover:bg-slate-100"
+                className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors px-2 py-1 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30"
                 aria-label={lang === 'fr' ? t('nav.switchToEnglish') : t('nav.switchToFrench')}
               >
                 {lang === 'fr' ? 'EN' : 'FR'}
@@ -180,7 +180,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   to="/connexion"
-                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all outline-none"
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30"
                 >
                   <LogIn size={16} aria-hidden="true" />
                   {t('nav.login')}

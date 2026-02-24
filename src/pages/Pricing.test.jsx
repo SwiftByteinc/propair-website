@@ -89,8 +89,8 @@ describe('Pricing', () => {
 
   it('renders monthly CTA button', () => {
     renderPricing();
-    const btn = screen.getByText('Continuer avec le mensuel');
-    expect(btn.closest('button')).toBeInTheDocument();
+    const btns = screen.getAllByText('Continuer avec le mensuel');
+    expect(btns[0].closest('button')).toBeInTheDocument();
   });
 
   it('renders Offre Lancement badge', () => {

@@ -48,10 +48,10 @@ describe('Contact', () => {
 
   it('renders contact form with all fields', () => {
     renderContact();
-    expect(screen.getByLabelText('Nom complet')).toBeInTheDocument();
-    expect(screen.getByLabelText('Courriel')).toBeInTheDocument();
-    expect(screen.getByLabelText('Sujet')).toBeInTheDocument();
-    expect(screen.getByLabelText('Message')).toBeInTheDocument();
+    expect(screen.getByLabelText(/Nom complet/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Courriel/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Sujet/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Message/)).toBeInTheDocument();
   });
 
   it('renders submit button', () => {
@@ -63,10 +63,10 @@ describe('Contact', () => {
     vi.useFakeTimers();
     renderContact();
 
-    fireEvent.change(screen.getByLabelText('Nom complet'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('Courriel'), { target: { value: 'test@test.com' } });
-    fireEvent.change(screen.getByLabelText('Sujet'), { target: { value: 'Question générale' } });
-    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Hello' } });
+    fireEvent.change(screen.getByLabelText(/Nom complet/), { target: { value: 'Test User' } });
+    fireEvent.change(screen.getByLabelText(/Courriel/), { target: { value: 'test@test.com' } });
+    fireEvent.change(screen.getByLabelText(/Sujet/), { target: { value: 'Question générale' } });
+    fireEvent.change(screen.getByLabelText(/Message/), { target: { value: 'Hello' } });
 
     fireEvent.submit(screen.getByText('Envoyer le message').closest('form'));
 

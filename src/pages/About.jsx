@@ -242,14 +242,14 @@ export default function About() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/login?mode=signup"
-              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
             >
               {t('about.ctaSignup')}
               <ArrowRight size={20} />
             </Link>
             <Link
               to="/pricing"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-semibold py-4 px-8 rounded-2xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-semibold py-4 px-8 rounded-xl hover:border-slate-300 hover:text-slate-900 transition-all active:scale-[0.98]"
             >
               {t('about.ctaLearnMore')}
             </Link>

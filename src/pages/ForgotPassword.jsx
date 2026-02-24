@@ -86,7 +86,7 @@ export default function ForgotPassword() {
               animate={{ opacity: 1, scale: 1 }}
               className="bg-teal-700/10 p-6 rounded-2xl border border-teal-700/20 text-center"
             >
-              <div className="w-16 h-16 bg-teal-700/15 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-teal-700/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send size={32} className="text-teal-700" />
               </div>
               <h2 className="text-lg font-semibold text-slate-900 mb-2">{t('forgotPassword.sentTitle')}</h2>
@@ -123,7 +123,7 @@ export default function ForgotPassword() {
                     placeholder="nom@exemple.com"
                     aria-label={t('forgotPassword.emailAria')}
                     autoComplete="email"
-                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
                     required
                     disabled={loading}
                   />
