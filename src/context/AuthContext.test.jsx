@@ -166,7 +166,7 @@ describe('AuthContext', () => {
     expect(mockSignUp).toHaveBeenCalledWith({
       email: 'new@test.com',
       password: 'password123',
-      options: { data: { full_name: 'Test Name' } },
+      options: { data: { full_name: 'Test Name', user_role: 'client' } },
     });
   });
 

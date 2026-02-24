@@ -191,4 +191,45 @@ describe('Login Page', () => {
     fireEvent.click(screen.getByRole('button', { name: /créer mon compte/i }));
     expect(screen.getByRole('heading', { name: /créer mon compte/i })).toBeInTheDocument();
   });
+
+  it('renders role selector in signup mode', () => {
+    renderWithRouter(<Login />);
+    expect(screen.getByText('Je suis')).toBeInTheDocument();
+    const entrepreneurBtn = screen.getByRole('radio', { name: /^entrepreneur/i });
+    const clientBtn = screen.getByRole('radio', { name: /^client/i });
+    expect(entrepreneurBtn).toBeInTheDocument();
+    expect(clientBtn).toBeInTheDocument();
+    // Client selected by default
+    expect(clientBtn).toHaveAttribute('aria-checked', 'true');
+    expect(entrepreneurBtn).toHaveAttribute('aria-checked', 'false');
+  });
+
+  it('does not render role selector in login mode', () => {
+    renderWithRouter(<Login />);
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
+    expect(screen.queryByText('Je suis')).not.toBeInTheDocument();
+  });
+
+  it('allows selecting entrepreneur role', () => {
+    renderWithRouter(<Login />);
+    const entrepreneurBtn = screen.getByRole('radio', { name: /^entrepreneur/i });
+    fireEvent.click(entrepreneurBtn);
+    expect(entrepreneurBtn).toHaveAttribute('aria-checked', 'true');
+    const clientBtn = screen.getByRole('radio', { name: /^client/i });
+    expect(clientBtn).toHaveAttribute('aria-checked', 'false');
+  });
+
+  it('resets role to client when switching to login and back', () => {
+    renderWithRouter(<Login />);
+    // Select entrepreneur
+    fireEvent.click(screen.getByRole('radio', { name: /^entrepreneur/i }));
+    expect(screen.getByRole('radio', { name: /^entrepreneur/i })).toHaveAttribute('aria-checked', 'true');
+    // Switch to login
+    fireEvent.click(screen.getByRole('button', { name: /se connecter/i }));
+    // Switch back to signup
+    fireEvent.click(screen.getByRole('button', { name: /créer mon compte/i }));
+    // Should be back to client default
+    expect(screen.getByRole('radio', { name: /^client/i })).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByRole('radio', { name: /^entrepreneur/i })).toHaveAttribute('aria-checked', 'false');
+  });
 });

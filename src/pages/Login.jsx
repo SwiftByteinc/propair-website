@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle, Briefcase } from 'lucide-react';
 import { usePostHog } from '@posthog/react';
 import { useAuth } from '../context/AuthContext';
 import { getStoredReferralCode } from '../hooks/useReferralCapture';
@@ -34,6 +34,7 @@ export default function Login() {
     name: '',
     confirmPassword: ''
   });
+  const [userRole, setUserRole] = useState('client');
   const failedAttempts = useRef(0);
   const lockoutUntil = useRef(0);
 
@@ -132,10 +133,11 @@ export default function Login() {
           formData.email,
           formData.password,
           formData.name,
-          storedRefCode
+          storedRefCode,
+          userRole
         );
         if (error) throw error;
-        posthog?.capture('user_signed_up', { method: 'email', has_referral: !!storedRefCode });
+        posthog?.capture('user_signed_up', { method: 'email', has_referral: !!storedRefCode, user_role: userRole });
         // Preserve selected plan for post-signup checkout
         const plan = searchParams.get('plan');
         if (plan && ['monthly', 'annual'].includes(plan)) {
@@ -295,6 +297,61 @@ export default function Login() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-3.5">
+          {/* Role Selector (signup only) */}
+          {!isLogin && (
+            <fieldset className="mb-1">
+              <legend className="text-sm font-medium text-slate-700 mb-2">
+                {t('login.roleLabel')}
+              </legend>
+              <div
+                role="radiogroup"
+                aria-label={t('login.roleAriaLabel')}
+                className="grid grid-cols-2 gap-2.5"
+              >
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={userRole === 'entrepreneur'}
+                  onClick={() => setUserRole('entrepreneur')}
+                  disabled={loading}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-center cursor-pointer
+                    ${userRole === 'entrepreneur'
+                      ? 'border-slate-900 bg-slate-50 ring-2 ring-slate-900/10'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                    } disabled:opacity-50`}
+                >
+                  <Briefcase size={20} className={userRole === 'entrepreneur' ? 'text-slate-900' : 'text-slate-400'} />
+                  <span className={`text-sm font-semibold ${userRole === 'entrepreneur' ? 'text-slate-900' : 'text-slate-600'}`}>
+                    {t('login.roleEntrepreneur')}
+                  </span>
+                  <span className="text-xs text-slate-500">
+                    {t('login.roleEntrepreneurDesc')}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={userRole === 'client'}
+                  onClick={() => setUserRole('client')}
+                  disabled={loading}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-center cursor-pointer
+                    ${userRole === 'client'
+                      ? 'border-slate-900 bg-slate-50 ring-2 ring-slate-900/10'
+                      : 'border-slate-200 bg-white hover:border-slate-300'
+                    } disabled:opacity-50`}
+                >
+                  <User size={20} className={userRole === 'client' ? 'text-slate-900' : 'text-slate-400'} />
+                  <span className={`text-sm font-semibold ${userRole === 'client' ? 'text-slate-900' : 'text-slate-600'}`}>
+                    {t('login.roleClient')}
+                  </span>
+                  <span className="text-xs text-slate-500">
+                    {t('login.roleClientDesc')}
+                  </span>
+                </button>
+              </div>
+            </fieldset>
+          )}
+
           {/* Name field (signup only) */}
           {!isLogin && (
             <div className="relative">
@@ -419,6 +476,7 @@ export default function Login() {
               setIsLogin(!isLogin);
               setError('');
               setFormData({ email: '', password: '', name: '', confirmPassword: '' });
+              setUserRole('client');
             }}
             className="ml-1 text-slate-900 font-semibold hover:underline"
             disabled={loading}

@@ -72,6 +72,24 @@ export function AuthProvider({ children }) {
         setProfile(createFallbackProfile(userData));
       } else {
         setProfile(profileData);
+
+        // Safety net: sync user_role from metadata if trigger didn't set it
+        const metaRole = userData.user_metadata?.user_role;
+        if (
+          metaRole &&
+          (metaRole === 'entrepreneur' || metaRole === 'client') &&
+          metaRole !== profileData.user_role
+        ) {
+          supabase
+            .from('profiles')
+            .update({ user_role: metaRole })
+            .eq('id', userData.id)
+            .then(({ error: syncErr }) => {
+              if (!syncErr) {
+                setProfile(prev => prev ? { ...prev, user_role: metaRole } : prev);
+              }
+            });
+        }
       }
 
       const { data: subData } = subResult;
@@ -272,14 +290,14 @@ export function AuthProvider({ children }) {
     return await supabase.auth.signInWithPassword({ email, password });
   }, []);
 
-  const signUp = useCallback(async (email, password, fullName, referralCode = null) => {
+  const signUp = useCallback(async (email, password, fullName, referralCode = null, userRole = 'client') => {
     if (!supabase) return { error: { message: 'Service unavailable' } };
 
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { full_name: fullName }
+        data: { full_name: fullName, user_role: userRole }
       }
     });
 
