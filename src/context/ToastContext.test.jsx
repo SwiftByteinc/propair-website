@@ -169,7 +169,7 @@ describe('ToastContext', () => {
     expect(screen.getByText('Error!')).toBeInTheDocument();
   });
 
-  it('auto-removes error toast after 4 seconds', () => {
+  it('error toast persists after 4 seconds (requires manual dismiss)', () => {
     render(
       <LanguageProvider>
         <ToastProvider>
@@ -185,7 +185,7 @@ describe('ToastContext', () => {
       vi.advanceTimersByTime(4000);
     });
 
-    expect(screen.queryByText('Error!')).not.toBeInTheDocument();
+    expect(screen.getByText('Error!')).toBeInTheDocument();
   });
 
   it('auto-removes info toast after 4 seconds', () => {

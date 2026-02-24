@@ -14,7 +14,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 function SidebarAvatar({ name, src }) {
   const [imgError, setImgError] = useState(false);
-  const initial = name?.charAt(0) || 'U';
+  const initial = name?.trim()?.charAt(0) || 'U';
 
   if (src && !imgError) {
     return (

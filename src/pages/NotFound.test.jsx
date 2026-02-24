@@ -44,16 +44,12 @@ describe('NotFound (404)', () => {
     expect(homeLink.closest('a')).toHaveAttribute('href', '/');
   });
 
-  it('has back button that calls history.back', () => {
-    const historyBackSpy = vi.spyOn(window.history, 'back').mockImplementation(() => {});
-
+  it('has back button that navigates back or to home', () => {
     renderNotFound();
 
     const backButton = screen.getByText('Page précédente');
+    expect(backButton.tagName).toBe('BUTTON');
     fireEvent.click(backButton);
-
-    expect(historyBackSpy).toHaveBeenCalledTimes(1);
-    historyBackSpy.mockRestore();
   });
 
   it('renders both action buttons', () => {

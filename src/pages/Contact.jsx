@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock, CreditCard, Shield, ArrowRight, Send, Loader2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, CreditCard, Shield, ArrowRight, Send } from 'lucide-react';
 import { usePostHog } from '@posthog/react';
 import SEO from '../components/SEO';
 import { useLanguage } from '../context/LanguageContext';
@@ -10,7 +10,6 @@ export default function Contact() {
   const { t } = useLanguage();
   const posthog = usePostHog();
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const channels = [
@@ -54,21 +53,16 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSending(true);
     posthog?.capture('contact_form_submitted', { subject: formData.subject });
 
-    // Ouvre le client email avec les infos pré-remplies
+    // Build mailto link with pre-filled info
     const subject = encodeURIComponent(formData.subject || 'Question depuis le site web');
     const body = encodeURIComponent(
       `Nom : ${formData.name}\nCourriel : ${formData.email}\n\n${formData.message}`
     );
     window.location.href = `mailto:support@propairapp.com?subject=${subject}&body=${body}`;
 
-    // Feedback visuel
-    setTimeout(() => {
-      setSending(false);
-      setSent(true);
-    }, 500);
+    setSent(true);
   };
 
   return (
@@ -233,18 +227,12 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={sending}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-slate-900 hover:bg-black text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/10 disabled:opacity-50 active:scale-[0.98]"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-slate-900 hover:bg-black text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/10 active:scale-[0.98]"
                 >
-                  {sending ? (
-                    <Loader2 size={20} className="animate-spin" />
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      {t('contact.formSubmit')}
-                    </>
-                  )}
+                  <Send size={20} />
+                  {t('contact.formSubmit')}
                 </button>
+                <p className="text-xs text-slate-500 mt-2">{t('contact.formMailtoHint')}</p>
               </form>
             )}
           </motion.div>
@@ -300,14 +288,14 @@ export default function Contact() {
                   <ArrowRight size={16} />
                 </Link>
                 <Link
-                  to="/refund"
+                  to="/site/refund"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-700 transition-colors"
                 >
                   <span>{t('contact.quickRefund')}</span>
                   <ArrowRight size={16} />
                 </Link>
                 <Link
-                  to="/privacy"
+                  to="/site/privacy"
                   className="flex items-center justify-between text-sm text-slate-600 hover:text-teal-700 transition-colors"
                 >
                   <span>{t('contact.quickPrivacy')}</span>

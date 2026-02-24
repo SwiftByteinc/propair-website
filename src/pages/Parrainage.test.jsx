@@ -110,11 +110,11 @@ describe('Parrainage (Public Page)', () => {
       expect(screen.getByText('Créer mon compte')).toBeInTheDocument();
     });
 
-    it('CTA links to login page', () => {
+    it('CTA links to login page with signup mode', () => {
       renderParrainage();
 
       const ctaLink = screen.getByText('Créer mon compte').closest('a');
-      expect(ctaLink).toHaveAttribute('href', '/login');
+      expect(ctaLink).toHaveAttribute('href', '/login?mode=signup');
     });
   });
 
@@ -174,7 +174,7 @@ describe('Parrainage (Public Page)', () => {
     it('CTA link to login has correct href', () => {
       renderParrainage();
       const ctaLink = screen.getByText('Créer mon compte').closest('a');
-      expect(ctaLink).toHaveAttribute('href', '/login');
+      expect(ctaLink).toHaveAttribute('href', '/login?mode=signup');
     });
 
     it('renders Partagez votre code step', () => {

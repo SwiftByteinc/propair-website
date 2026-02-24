@@ -26,7 +26,8 @@ export default function Billing() {
   const [portalLoading, setPortalLoading] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(null); // 'monthly' | 'annual' | null
   const [verifying, setVerifying] = useState(false);
-  const [showFeatures, setShowFeatures] = useState(false);
+  const [showAnnualFeatures, setShowAnnualFeatures] = useState(false);
+  const [showMonthlyFeatures, setShowMonthlyFeatures] = useState(false);
   const { isEarlyBird, remaining } = useEarlyBirdCount();
 
   // Keep refs to avoid stale closures in async polling
@@ -271,13 +272,13 @@ export default function Billing() {
 
                 <div className="mb-6 pt-6 border-t border-slate-100">
                   <button
-                    onClick={() => setShowFeatures(!showFeatures)}
+                    onClick={() => setShowAnnualFeatures(!showAnnualFeatures)}
                     className="md:hidden flex items-center gap-1.5 text-xs font-medium text-teal-700 mb-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
                   >
-                    {showFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
-                    <ChevronDown size={16} className={`transition-transform ${showFeatures ? 'rotate-180' : ''}`} />
+                    {showAnnualFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
+                    <ChevronDown size={16} className={`transition-transform ${showAnnualFeatures ? 'rotate-180' : ''}`} />
                   </button>
-                  <div className={`${showFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
+                  <div className={`${showAnnualFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
                     <p className="text-xs font-medium text-slate-500">{t('pricing.annualAllIncluded')}</p>
                     {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                       <div key={i} className="flex items-start gap-2.5">
@@ -320,13 +321,13 @@ export default function Billing() {
 
                 <div className="mb-6 pt-6 border-t border-slate-100">
                   <button
-                    onClick={() => setShowFeatures(!showFeatures)}
+                    onClick={() => setShowMonthlyFeatures(!showMonthlyFeatures)}
                     className="md:hidden flex items-center gap-1.5 text-xs font-medium text-teal-700 mb-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 rounded"
                   >
-                    {showFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
-                    <ChevronDown size={16} className={`transition-transform ${showFeatures ? 'rotate-180' : ''}`} />
+                    {showMonthlyFeatures ? t('dashboard.hideFeatures') : t('dashboard.showFeatures')}
+                    <ChevronDown size={16} className={`transition-transform ${showMonthlyFeatures ? 'rotate-180' : ''}`} />
                   </button>
-                  <div className={`${showFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
+                  <div className={`${showMonthlyFeatures ? 'block' : 'hidden'} md:block space-y-3`}>
                     <p className="text-xs font-medium text-slate-500">{t('pricing.monthlyIncluded')}</p>
                     {[t('pricing.feature1'), t('pricing.feature2'), t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature5')].map((feat, i) => (
                       <div key={i} className="flex items-start gap-2.5">

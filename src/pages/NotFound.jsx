@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AlertCircle, ArrowLeft, Home } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 
 export default function NotFound() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   return (
     <div className="font-sans min-h-[70vh] flex items-center justify-center px-4 py-16">
       <SEO noIndex />
@@ -40,7 +41,7 @@ export default function NotFound() {
             {t('notFound.homeBtn')}
           </Link>
           <button
-            onClick={() => window.history.back()}
+            onClick={() => window.history.length > 1 ? navigate(-1) : navigate('/')}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl transition-colors border border-slate-200 hover:border-slate-300"
           >
             <ArrowLeft size={20} />

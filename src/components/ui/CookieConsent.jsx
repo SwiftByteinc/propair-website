@@ -17,6 +17,15 @@ export default function CookieConsent() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleReset = () => {
+      localStorage.removeItem(STORAGE_KEYS.COOKIE_CONSENT);
+      setIsVisible(true);
+    };
+    window.addEventListener('cookie-consent-reset', handleReset);
+    return () => window.removeEventListener('cookie-consent-reset', handleReset);
+  }, []);
+
   const handleAccept = () => {
     localStorage.setItem(STORAGE_KEYS.COOKIE_CONSENT, 'accepted');
     posthog.opt_in_capturing();

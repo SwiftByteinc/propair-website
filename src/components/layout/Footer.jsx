@@ -123,6 +123,12 @@ export default function Footer() {
             <Link to="/site/refund" className="hover:text-teal-700 transition-colors py-1">
               {t('footer.legalRefund')}
             </Link>
+            <button
+              onClick={() => window.dispatchEvent(new Event('cookie-consent-reset'))}
+              className="hover:text-teal-700 transition-colors py-1"
+            >
+              {t('footer.cookiePreferences')}
+            </button>
           </div>
         </div>
       </div>

@@ -241,6 +241,10 @@ describe('Security', () => {
     renderSecurity();
     fireEvent.click(screen.getAllByText('Supprimer')[0]);
 
+    // Type confirmation word to enable delete button
+    const confirmInput = screen.getByPlaceholderText('SUPPRIMER');
+    fireEvent.change(confirmInput, { target: { value: 'SUPPRIMER' } });
+
     // Click the delete button in the modal
     const modalButtons = screen.getAllByText('Supprimer');
     const modalDeleteBtn = modalButtons[modalButtons.length - 1];

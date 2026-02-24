@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-3 border-teal-700/20 border-t-teal-700 rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-teal-700/20 border-t-teal-700 rounded-full animate-spin" />
           <span className="text-sm text-slate-500">{t('common.verifying')}</span>
         </div>
       </div>

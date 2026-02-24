@@ -36,6 +36,9 @@ export default function Security() {
     confirm: ''
   });
 
+  // Detect if user signed up via OAuth (no password set)
+  const isOAuthOnly = user?.app_metadata?.provider && user.app_metadata.provider !== 'email';
+
   // Real verification status from Supabase auth metadata
   const verification = {
     email: {
@@ -168,13 +171,24 @@ export default function Security() {
           </div>
         </motion.section>
 
-        {/* Password - Collapsible */}
+        {/* Password - Collapsible (hidden for OAuth-only accounts) */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/40 overflow-hidden"
         >
+          {isOAuthOnly ? (
+            <div className="px-6 py-4 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
+                <Lock size={16} className="text-slate-500" />
+              </div>
+              <div>
+                <p className="font-semibold text-slate-900">{t('dashboard.password')}</p>
+                <p className="text-xs text-slate-500">{t('dashboard.oauthNoPassword')}</p>
+              </div>
+            </div>
+          ) : (
           <button
             onClick={() => setShowPasswordForm(!showPasswordForm)}
             className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2"
@@ -195,6 +209,7 @@ export default function Security() {
               <ChevronDown size={20} className="text-slate-500" />
             </motion.div>
           </button>
+          )}
 
           <AnimatePresence>
             {showPasswordForm && (
@@ -340,6 +355,10 @@ export default function Security() {
 }
 
 function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
+  const [confirmText, setConfirmText] = useState('');
+  const confirmWord = t('dashboard.deleteConfirmWord');
+  const canDelete = confirmText === confirmWord;
+
   // Focus trap: keep focus inside modal
   useEffect(() => {
     const modal = modalRef.current;
@@ -397,9 +416,23 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
         <h3 id="delete-title" className="text-lg font-semibold text-center text-slate-900 mb-2">
           {t('dashboard.deleteModalTitle')}
         </h3>
-        <p id="delete-desc" className="text-center text-sm text-slate-500 mb-6">
+        <p id="delete-desc" className="text-center text-sm text-slate-500 mb-4">
           {t('dashboard.deleteModalDesc')}
         </p>
+        <div className="mb-4">
+          <label htmlFor="delete-confirm" className="block text-xs font-medium text-slate-500 mb-1.5">
+            {t('dashboard.deleteConfirmLabel')}
+          </label>
+          <input
+            id="delete-confirm"
+            type="text"
+            value={confirmText}
+            onChange={(e) => setConfirmText(e.target.value)}
+            placeholder={confirmWord}
+            autoComplete="off"
+            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-red-400 focus:ring-2 focus:ring-red-400/10 text-sm transition-all"
+          />
+        </div>
         <div className="flex gap-3">
           <button
             onClick={onClose}
@@ -410,7 +443,7 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
           </button>
           <button
             onClick={onDelete}
-            disabled={isDeleting}
+            disabled={isDeleting || !canDelete}
             className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 active:scale-[0.98]"
           >
             {isDeleting ? (

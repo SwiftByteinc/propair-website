@@ -246,6 +246,7 @@ const fr = {
     formMessage: 'Message',
     formMessagePlaceholder: 'Décrivez votre question ou problème...',
     formSubmit: 'Envoyer le message',
+    formMailtoHint: 'Ceci ouvrira votre application de courriel avec le message pré-rempli.',
     sentTitle: 'Votre client courriel s\'est ouvert',
     sentDesc: 'Envoyez le message depuis votre application de courriel. Nous vous répondrons sous 24h ouvrables.',
     sentFallback: 'Si rien ne s\'est ouvert, écrivez directement à',
@@ -298,6 +299,7 @@ const fr = {
     ctaLoggedIn: 'Commencez à parrainer',
     ctaLoggedInDesc: 'Accédez à votre tableau de bord pour copier votre lien de parrainage et suivre vos récompenses.',
     ctaLoggedInBtn: 'Mon tableau de bord',
+    yourLink: 'Votre lien de parrainage',
     ctaLoggedOut: 'Prêt à gagner des mois gratuits ?',
     ctaLoggedOutDesc: 'Créez votre compte gratuitement et accédez à votre code de parrainage personnel.',
     ctaLoggedOutBtn: 'Créer mon compte',
@@ -321,6 +323,7 @@ const fr = {
     legalCookies: 'Cookies',
     legalNotice: 'Mentions légales',
     legalRefund: 'Remboursement',
+    cookiePreferences: 'Gérer les cookies',
   },
 
   login: {
@@ -734,6 +737,9 @@ const fr = {
     deleting: 'Suppression...',
     deleteError: 'Erreur lors de la suppression. Veuillez contacter support@propairapp.com',
     serviceUnavailable: 'Service non disponible',
+    oauthNoPassword: 'Votre compte utilise la connexion via Google ou Apple. Aucun mot de passe à gérer.',
+    deleteConfirmLabel: 'Tapez SUPPRIMER pour confirmer',
+    deleteConfirmWord: 'SUPPRIMER',
   },
 
   // ═══════════════════════════════════════════════

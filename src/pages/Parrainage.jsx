@@ -1,8 +1,9 @@
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Gift, Users, Briefcase, Award, ArrowRight,
-  Share2, CheckCircle, Sparkles
+  Share2, CheckCircle, Sparkles, Copy, Check
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useAuth } from '../context/AuthContext';
@@ -11,6 +12,21 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Parrainage() {
   const { t } = useLanguage();
   const { user } = useAuth();
+  const [copied, setCopied] = useState(false);
+
+  const referralCode = user?.referral_code;
+  const referralLink = referralCode
+    ? `${window.location.origin}/login?ref__=${encodeURIComponent(referralCode)}`
+    : null;
+
+  const copyLink = useCallback(async () => {
+    if (!referralLink) return;
+    try {
+      await navigator.clipboard.writeText(referralLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard may not be available */ }
+  }, [referralLink]);
 
   const steps = [
     {
@@ -203,8 +219,23 @@ export default function Parrainage() {
           <p className="text-slate-400 text-sm mb-6 max-w-md mx-auto">
             {user ? t('parrainage.ctaLoggedInDesc') : t('parrainage.ctaLoggedOutDesc')}
           </p>
+          {user && referralLink && (
+            <div className="mb-6 max-w-md mx-auto">
+              <p className="text-slate-400 text-xs mb-2">{t('parrainage.yourLink')}</p>
+              <div className="flex items-center gap-2 bg-white/10 rounded-xl px-4 py-3">
+                <span className="text-white text-sm font-mono truncate flex-1">{referralLink}</span>
+                <button
+                  onClick={copyLink}
+                  className="shrink-0 text-white/70 hover:text-white transition-colors"
+                  aria-label={copied ? t('dashboard.copiedLabel') : t('dashboard.copyLink')}
+                >
+                  {copied ? <Check size={16} /> : <Copy size={16} />}
+                </button>
+              </div>
+            </div>
+          )}
           <Link
-            to={user ? '/portal/referral' : '/login'}
+            to={user ? '/portal/referral' : '/login?mode=signup'}
             className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-900 font-bold py-3.5 px-8 rounded-xl transition-all active:scale-[0.98]"
           >
             {user ? t('parrainage.ctaLoggedInBtn') : t('parrainage.ctaLoggedOutBtn')}

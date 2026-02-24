@@ -246,6 +246,7 @@ const en = {
     formMessage: 'Message',
     formMessagePlaceholder: 'Describe your question or issue...',
     formSubmit: 'Send message',
+    formMailtoHint: 'This will open your email app with the message pre-filled.',
     sentTitle: 'Your email client has opened',
     sentDesc: 'Send the message from your email application. We\'ll reply within 24 business hours.',
     sentFallback: 'If nothing opened, write directly to',
@@ -298,6 +299,7 @@ const en = {
     ctaLoggedIn: 'Start referring',
     ctaLoggedInDesc: 'Go to your dashboard to copy your referral link and track your rewards.',
     ctaLoggedInBtn: 'My dashboard',
+    yourLink: 'Your referral link',
     ctaLoggedOut: 'Ready to earn free months?',
     ctaLoggedOutDesc: 'Create your account for free and access your personal referral code.',
     ctaLoggedOutBtn: 'Create my account',
@@ -321,6 +323,7 @@ const en = {
     legalCookies: 'Cookies',
     legalNotice: 'Legal Notice',
     legalRefund: 'Refund',
+    cookiePreferences: 'Cookie preferences',
   },
 
   login: {
@@ -734,6 +737,9 @@ const en = {
     deleting: 'Deleting...',
     deleteError: 'Error during deletion. Please contact support@propairapp.com',
     serviceUnavailable: 'Service unavailable',
+    oauthNoPassword: 'Your account uses Google or Apple sign-in. No password to manage.',
+    deleteConfirmLabel: 'Type DELETE to confirm',
+    deleteConfirmWord: 'DELETE',
   },
 
   // ═══════════════════════════════════════════════

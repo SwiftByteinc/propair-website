@@ -33,11 +33,14 @@ export function ToastProvider({ children }) {
     const id = ++toastCounter;
     setToasts((prev) => [...prev, { id, message, type }]);
 
-    const timerId = setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-      timersRef.current.delete(id);
-    }, 4000);
-    timersRef.current.set(id, timerId);
+    // Error toasts persist until manually dismissed
+    if (type !== 'error') {
+      const timerId = setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+        timersRef.current.delete(id);
+      }, 4000);
+      timersRef.current.set(id, timerId);
+    }
   }, []);
 
   const removeToast = useCallback((id) => {
