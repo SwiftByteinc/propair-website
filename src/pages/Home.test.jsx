@@ -44,12 +44,12 @@ describe('Home', () => {
   it('renders CTA buttons', () => {
     renderHome();
     expect(screen.getByText("Télécharger l'app")).toBeInTheDocument();
-    expect(screen.getByText('Espace Pro')).toBeInTheDocument();
+    expect(screen.getByText('Tarifs Pro')).toBeInTheDocument();
   });
 
-  it('renders Espace Pro link to /pricing', () => {
+  it('renders Tarifs Pro link to /pricing', () => {
     renderHome();
-    const link = screen.getByText('Espace Pro').closest('a');
+    const link = screen.getByText('Tarifs Pro').closest('a');
     expect(link).toHaveAttribute('href', '/pricing');
   });
 

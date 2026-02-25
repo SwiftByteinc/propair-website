@@ -12,7 +12,7 @@ function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar skeleton - hidden on mobile */}
-      <aside className="hidden md:block w-64 h-dvh bg-white border-r border-slate-100 fixed left-0 top-0">
+      <aside className="hidden md:block w-64 h-dvh bg-white border-l border-slate-100 fixed right-0 top-0">
         <div className="animate-pulse">
           {/* Back button area */}
           <div className="h-16 px-6 flex items-center border-b border-slate-50">
@@ -39,13 +39,13 @@ function DashboardSkeleton() {
       </aside>
 
       {/* Mobile header skeleton */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 z-30">
+        <div className="h-4 bg-slate-100 rounded w-24 animate-pulse" />
         <div className="w-11 h-11 bg-slate-100 rounded-xl animate-pulse" />
-        <div className="h-4 bg-slate-100 rounded w-24 ml-3 animate-pulse" />
       </div>
 
       {/* Main skeleton */}
-      <main className="md:ml-64 flex-1 p-4 sm:p-6 md:p-8 pt-18 md:pt-8 max-w-4xl">
+      <main className="md:mr-64 flex-1 p-4 sm:p-6 md:p-8 pt-18 md:pt-8 max-w-4xl">
         <div className="animate-pulse space-y-6">
           {/* Header */}
           <div>
@@ -155,7 +155,8 @@ export default function DashboardLayout() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       {/* Mobile header with hamburger */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center px-4 z-30">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 z-30">
+        <span className="font-semibold text-sm text-slate-900 truncate">{pageTitle}</span>
         <button
           onClick={() => setSidebarOpen(true)}
           className="w-11 h-11 flex items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100"
@@ -163,7 +164,6 @@ export default function DashboardLayout() {
         >
           <Menu size={20} />
         </button>
-        <span className="font-semibold text-sm text-slate-900 ml-3 truncate">{pageTitle}</span>
       </div>
 
       {/* Sidebar */}
@@ -175,7 +175,7 @@ export default function DashboardLayout() {
       />
 
       {/* Main Content Area */}
-      <main className="md:ml-64 min-h-screen pt-14 md:pt-0">
+      <main className="md:mr-64 min-h-screen pt-14 md:pt-0">
         <Outlet context={{ user: userData, profile, subscription, isPro }} />
       </main>
     </div>

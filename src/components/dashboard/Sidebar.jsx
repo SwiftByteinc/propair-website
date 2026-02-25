@@ -82,9 +82,9 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
       )}
 
       <aside className={`
-        w-64 h-dvh bg-white border-r border-slate-100 flex flex-col fixed left-0 top-0 z-50
+        w-64 h-dvh bg-white border-l border-slate-100 flex flex-col fixed right-0 top-0 z-50
         transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         md:translate-x-0
       `}>
 
