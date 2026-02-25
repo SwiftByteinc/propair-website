@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Mail, Trash2, Send, AlertCircle, Shield } from 'lucide-react';
 import { usePostHog } from '@posthog/react';
 import { useLanguage } from '../context/LanguageContext';
 import SEO from '../components/SEO';
@@ -35,149 +32,80 @@ export default function DeleteAccount() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 font-sans">
+    <div className="min-h-screen bg-white py-12 px-4 sm:px-8">
       <SEO
         title={t('deleteAccountPage.title')}
         canonical="/delete-account"
         description={t('deleteAccountPage.seoDesc')}
       />
-      <div className="w-full max-w-md flex flex-col items-center">
-        {/* Logo */}
-        <Link to="/" className="flex justify-center mb-8">
-          <img
-            src="/images/logo_ProPair.jpg"
-            alt="ProPair"
-            width="120"
-            height="56"
-            className="h-12 w-auto"
-          />
-        </Link>
+      <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
+        <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">
+          {t('deleteAccountPage.title')}
+        </h1>
+        <p className="text-center text-xs text-slate-500 mb-8">ProPair — privacy@propairapp.com</p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
-        >
-          {sent ? (
-            /* Success State */
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center"
+        {sent ? (
+          <section className="mb-6">
+            <h2 className="font-bold mb-1">{t('deleteAccountPage.successTitle')}</h2>
+            <p className="mb-2">{t('deleteAccountPage.successDesc')}</p>
+            <p className="mb-4 text-xs italic">{t('deleteAccountPage.successNote')}</p>
+            <button
+              onClick={() => {
+                setSent(false);
+                setEmail('');
+              }}
+              className="text-sm underline text-slate-600 hover:text-slate-900"
             >
-              <div className="w-16 h-16 bg-teal-700/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Send size={28} className="text-teal-700" />
-              </div>
-              <h1 className="text-2xl font-bold text-slate-900 mb-2">
-                {t('deleteAccountPage.successTitle')}
-              </h1>
-              <p className="text-slate-500 mb-4">
-                {t('deleteAccountPage.successDesc')}
-              </p>
-              <p className="text-sm text-slate-400">
-                {t('deleteAccountPage.successNote')}
-              </p>
+              {t('deleteAccountPage.submitBtn')}
+            </button>
+          </section>
+        ) : (
+          <>
+            <section className="mb-6">
+              <h2 className="font-bold mb-1">1. {t('deleteAccountPage.infoTitle')}</h2>
+              <ul className="list-disc pl-5 mb-2 space-y-1">
+                {t('deleteAccountPage.infoItems').map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </section>
 
-              <button
-                onClick={() => {
-                  setSent(false);
-                  setEmail('');
-                }}
-                className="mt-6 text-teal-700 hover:text-teal-800 font-medium transition-colors text-sm"
-              >
-                {t('common.backToHomeArrow')}
-              </button>
-            </motion.div>
-          ) : (
-            /* Form */
-            <>
-              <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Trash2 size={28} className="text-red-600" />
-              </div>
+            <section className="mb-6">
+              <h2 className="font-bold mb-1">2. {t('deleteAccountPage.submitBtn')}</h2>
+              <p className="mb-3">{t('deleteAccountPage.intro')}</p>
 
-              <h1 className="text-2xl font-bold text-slate-900 text-center mb-2">
-                {t('deleteAccountPage.title')}
-              </h1>
-              <p className="text-slate-500 text-center mb-6 text-sm">
-                {t('deleteAccountPage.intro')}
-              </p>
-
-              {/* Error Message */}
               <div aria-live="polite" aria-atomic="true">
                 {error && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-600 text-sm" role="alert">
-                    <AlertCircle size={20} className="shrink-0" />
-                    {error}
-                  </div>
+                  <p className="mb-3 text-red-600 text-sm" role="alert">{error}</p>
                 )}
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative">
-                  <Mail size={20} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
-                  <input
-                    type="email"
-                    id="delete-email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t('deleteAccountPage.emailPlaceholder')}
-                    aria-label={t('deleteAccountPage.emailAriaLabel')}
-                    autoComplete="email"
-                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-500 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition-all"
-                    required
-                  />
-                </div>
-
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="delete-email" className="block font-bold mb-1">
+                  {t('deleteAccountPage.emailAriaLabel')}
+                </label>
+                <input
+                  type="email"
+                  id="delete-email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('deleteAccountPage.emailPlaceholder')}
+                  autoComplete="email"
+                  className="w-full px-3 py-2 border border-slate-300 rounded text-sm font-sans text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:outline-none mb-3"
+                  required
+                />
                 <button
                   type="submit"
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-600/10 active:scale-[0.98]"
+                  className="px-4 py-2 bg-slate-800 text-white text-sm font-sans rounded hover:bg-slate-900 transition-colors"
                 >
                   {t('deleteAccountPage.submitBtn')}
                 </button>
               </form>
-
-              {/* Separator */}
-              <div className="border-t border-slate-100 my-6" />
-
-              {/* Info Section */}
-              <div>
-                <h2 className="text-sm font-semibold text-slate-900 mb-3">
-                  {t('deleteAccountPage.infoTitle')}
-                </h2>
-                <ul className="space-y-2.5">
-                  {t('deleteAccountPage.infoItems').map((item, i) => (
-                    <li key={i} className="flex gap-2.5 text-sm text-slate-600">
-                      <span className="text-slate-300 mt-0.5 shrink-0">&bull;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Privacy Policy Link */}
-              <div className="mt-6 pt-4 border-t border-slate-100">
-                <Link
-                  to="/site/privacy"
-                  className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-teal-700 transition-colors"
-                >
-                  <Shield size={14} />
-                  {t('deleteAccountPage.privacyLink')}
-                </Link>
-              </div>
-            </>
-          )}
-        </motion.div>
-
-        {/* Back to home */}
-        {!sent && (
-          <div className="text-center mt-8">
-            <Link to="/" className="text-sm text-slate-500 hover:text-slate-600 transition-colors">
-              {t('common.backToHomeArrow')}
-            </Link>
-          </div>
+            </section>
+          </>
         )}
-      </div>
+      </article>
     </div>
   );
 }

@@ -14,7 +14,7 @@ const createFallbackProfile = (userData) => ({
   id: userData?.id || 'unknown',
   email: userData?.email || '',
   full_name: userData?.user_metadata?.full_name || userData?.email?.split('@')[0] || 'Utilisateur',
-  user_role: 'client',
+  user_role: userData?.user_metadata?.user_role || 'client',
   referral_code: null,
   pro_months_balance: 0,
   is_verified: false,
@@ -80,15 +80,13 @@ export function AuthProvider({ children }) {
           (metaRole === 'entrepreneur' || metaRole === 'client') &&
           metaRole !== profileData.user_role
         ) {
-          supabase
+          const { error: syncErr } = await supabase
             .from('profiles')
             .update({ user_role: metaRole })
-            .eq('id', userData.id)
-            .then(({ error: syncErr }) => {
-              if (!syncErr) {
-                setProfile(prev => prev ? { ...prev, user_role: metaRole } : prev);
-              }
-            });
+            .eq('id', userData.id);
+          if (!syncErr) {
+            setProfile(prev => prev ? { ...prev, user_role: metaRole } : prev);
+          }
         }
       }
 
@@ -300,6 +298,15 @@ export function AuthProvider({ children }) {
         data: { full_name: fullName, user_role: userRole }
       }
     });
+
+    // Immediately sync user_role to the profile created by the trigger
+    // (trigger doesn't set user_role, so it's NULL — we fix it here)
+    if (data?.user && !error) {
+      await supabase
+        .from('profiles')
+        .update({ user_role: userRole })
+        .eq('id', data.user.id);
+    }
 
     if (data?.user && referralCode) {
       sessionStorage.setItem(STORAGE_KEYS.PENDING_REFERRAL, JSON.stringify({

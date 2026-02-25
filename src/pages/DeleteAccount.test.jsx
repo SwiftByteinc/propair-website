@@ -3,13 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import DeleteAccount from './DeleteAccount';
 import { LanguageProvider } from '../context/LanguageContext';
 
-// Mock framer-motion
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-  },
-}));
-
 // Mock SEO component
 vi.mock('../components/SEO', () => ({
   default: () => null,
@@ -52,17 +45,6 @@ describe('DeleteAccount Page', () => {
     expect(screen.getByText(/loi 25 du québec/i)).toBeInTheDocument();
   });
 
-  it('renders privacy policy link', () => {
-    renderPage();
-    const link = screen.getByText(/politique de confidentialité/i).closest('a');
-    expect(link).toHaveAttribute('href', '/site/privacy');
-  });
-
-  it('renders back to home link', () => {
-    renderPage();
-    expect(screen.getByText(/retour à l'accueil/i)).toBeInTheDocument();
-  });
-
   it('shows success state after form submission', () => {
     renderPage();
     const input = screen.getByPlaceholderText(/adresse courriel du compte/i);
@@ -82,9 +64,9 @@ describe('DeleteAccount Page', () => {
     expect(screen.getByText(/veuillez entrer une adresse courriel valide/i)).toBeInTheDocument();
   });
 
-  it('renders ProPair logo linking to home', () => {
+  it('has no links to other pages', () => {
     renderPage();
-    const logo = screen.getByAltText('ProPair');
-    expect(logo.closest('a')).toHaveAttribute('href', '/');
+    const links = screen.queryAllByRole('link');
+    expect(links).toHaveLength(0);
   });
 });

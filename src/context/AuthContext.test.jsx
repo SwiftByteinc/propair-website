@@ -153,8 +153,11 @@ describe('AuthContext', () => {
     }, { timeout: 7000 });
   });
 
-  it('exposes signUp function that calls supabase', async () => {
+  it('exposes signUp function that calls supabase and syncs user_role', async () => {
     mockSignUp.mockResolvedValue({ data: { user: { id: '2' } }, error: null });
+    const mockEq = vi.fn().mockResolvedValue({ error: null });
+    const mockUpdate = vi.fn().mockReturnValue({ eq: mockEq });
+    mockFrom.mockReturnValue({ update: mockUpdate });
     const authRef = { current: null };
     render(
       <AuthProvider><Grabber onAuth={(auth) => { authRef.current = auth; }} /></AuthProvider>
@@ -168,6 +171,10 @@ describe('AuthContext', () => {
       password: 'password123',
       options: { data: { full_name: 'Test Name', user_role: 'client' } },
     });
+    // Verify immediate user_role sync after signup
+    expect(mockFrom).toHaveBeenCalledWith('profiles');
+    expect(mockUpdate).toHaveBeenCalledWith({ user_role: 'client' });
+    expect(mockEq).toHaveBeenCalledWith('id', '2');
   });
 
   it('exposes signInWithOAuth function', async () => {
