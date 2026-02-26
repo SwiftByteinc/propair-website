@@ -10,7 +10,8 @@ export default function Privacy() {
       />
       <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Politique de confidentialité</h1>
-        <p className="text-center text-xs text-slate-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-1">Version 1.0 — Février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-8">Loi 25 | LPRPDE | RGPD</p>
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">1. Introduction</h2>
@@ -71,7 +72,6 @@ export default function Privacy() {
 
           <h3 className="font-semibold mt-3 mb-1">3.3 Renseignements collectés via des tiers</h3>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
-            <li>Authentification Google/Apple : nom et courriel associés à votre compte</li>
             <li>Vérification de licences professionnelles (RBQ)</li>
           </ul>
 
@@ -122,13 +122,16 @@ export default function Privacy() {
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">6. Conservation des données</h2>
+          <p className="mb-1"><strong>Compte actif :</strong> vos données sont conservées tant que votre compte est actif.</p>
+          <p className="mb-1"><strong>Compte inactif :</strong> après 3 ans d'inactivité, nous vous aviserons avant de procéder à la suppression.</p>
+          <p className="mb-1"><strong>Suppression de compte :</strong> lorsque vous demandez la suppression via l'Application (Paramètres → Supprimer mon compte) ou par courriel à privacy@propairapp.com, le processus suivant s'applique :</p>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
-            <li><strong>Compte actif :</strong> vos données sont conservées tant que votre compte est actif.</li>
-            <li><strong>Compte inactif :</strong> après 3 ans d'inactivité, nous vous aviserons avant de procéder à la suppression.</li>
-            <li><strong>Suppression de compte :</strong> lorsque vous demandez la suppression via l'Application (Paramètres → Supprimer mon compte) ou par courriel à privacy@propairapp.com, un délai de grâce de 30 jours s'applique. Passé ce délai, toutes vos données personnelles sont supprimées de façon permanente.</li>
-            <li><strong>Données analytiques :</strong> les données d'utilisation anonymisées peuvent être conservées jusqu'à 12 mois.</li>
-            <li><strong>Messages :</strong> les conversations sont supprimées avec le compte. Les messages reçus par d'autres utilisateurs restent visibles dans leur propre compte.</li>
+            <li><strong>Supprimées immédiatement :</strong> messages, connexions, demandes clients, fichiers, avis, badges, notifications et toute donnée de profil professionnel (nom d'entreprise, localisation, métier, biographie, portfolio).</li>
+            <li><strong>Conservées 30 jours (zone de réactivation) :</strong> nom complet, adresse courriel, numéro de téléphone, date de naissance, préférences de consentement. Ces données minimales permettent la réactivation de votre compte si vous vous reconnectez dans ce délai.</li>
+            <li><strong>Après 30 jours :</strong> toutes les données restantes sont supprimées de façon permanente et irréversible, y compris votre identifiant d'authentification.</li>
           </ul>
+          <p className="mb-1"><strong>Données analytiques :</strong> les données d'utilisation anonymisées peuvent être conservées jusqu'à 12 mois.</p>
+          <p><strong>Messages :</strong> les conversations sont supprimées avec le compte. Les messages reçus par d'autres utilisateurs restent visibles dans leur propre compte.</p>
         </section>
 
         <section className="mb-6">
@@ -164,7 +167,7 @@ export default function Privacy() {
             <li><strong>Désindexation :</strong> demander la cessation de la diffusion de vos renseignements</li>
           </ul>
           <p className="mb-2">
-            <strong>Suppression de compte :</strong> Vous pouvez supprimer votre compte directement dans les paramètres de l'Application ou sur simple demande à privacy@propairapp.com. Vos données seront supprimées dans un délai de 30 jours.
+            <strong>Suppression de compte :</strong> Vous pouvez supprimer votre compte directement dans les paramètres de l'Application. Vos données liées à votre activité (messages, profil) sont supprimées immédiatement, tandis que vos informations de base sont conservées pendant un délai de grâce de 30 jours (voir section 6). Pour une suppression immédiate et totale sans délai de grâce, contactez support@propairapp.com ou le 819-481-0882.
           </p>
           <p>
             Pour exercer tout autre droit, contactez-nous à privacy@propairapp.com. Nous répondrons dans un délai maximal de 30 jours.
@@ -209,6 +212,7 @@ export default function Privacy() {
           <p>
             Nous pouvons mettre à jour la présente politique. En cas de modification substantielle, nous vous en informerons par notification dans l'Application au moins 15 jours avant l'entrée en vigueur des changements. L'utilisation continue de l'Application après ce délai constitue votre acceptation de la politique modifiée.
           </p>
+          <p className="mt-2 text-xs text-slate-500">Version : 1.0 — Dernière mise à jour : février 2026</p>
         </section>
 
         <section className="mb-6">

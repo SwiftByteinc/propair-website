@@ -10,7 +10,8 @@ export default function Terms() {
       />
       <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Conditions d'utilisation</h1>
-        <p className="text-center text-xs text-slate-500 mb-8">Version 1.0 — Dernière mise à jour : février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-1">Version 1.0 — Février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-8">Juridiction : Québec, Canada</p>
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">1. Nature du service et admissibilité</h2>
@@ -33,7 +34,7 @@ export default function Terms() {
           <p className="mb-1"><strong>2.1 Création de compte</strong> — Vous pouvez créer un compte en tant que client ou entrepreneur. Chaque utilisateur ne peut détenir qu'un seul compte actif.</p>
           <p className="mb-1"><strong>2.2 Sécurité du compte</strong> — Vous êtes responsable de la confidentialité de vos identifiants de connexion. Toute activité effectuée sous votre compte est votre responsabilité.</p>
           <p className="mb-1"><strong>2.3 Vérification</strong> — Les entrepreneurs peuvent soumettre leur numéro RBQ (Régie du bâtiment du Québec) à des fins de vérification. Le badge « Vérifié » ne constitue pas une garantie de qualité des travaux.</p>
-          <p><strong>2.4 Suppression de compte</strong> — Vous pouvez demander la suppression de votre compte à tout moment via Paramètres → Supprimer mon compte, ou par courriel à privacy@propairapp.com. Un délai de grâce de 30 jours s'applique. Passé ce délai, la suppression est irréversible.</p>
+          <p><strong>2.4 Suppression de compte</strong> — Vous pouvez demander la suppression de votre compte à tout moment via Paramètres → Supprimer mon compte. Un délai de grâce de 30 jours s'applique, durant lequel vous pouvez annuler la suppression simplement en vous reconnectant à l'Application. Passé ce délai, la suppression est irréversible. Pour une suppression immédiate sans délai de grâce, contactez-nous à support@propairapp.com ou au 819-481-0882.</p>
         </section>
 
         <section className="mb-6">
@@ -185,6 +186,7 @@ export default function Terms() {
           <p>
             Nous pouvons modifier les présentes Conditions à tout moment. Les modifications substantielles vous seront communiquées par notification dans l'Application au moins 15 jours avant leur entrée en vigueur. L'utilisation continue de l'Application après ce délai constitue votre acceptation des Conditions modifiées.
           </p>
+          <p className="mt-2 text-xs text-slate-500">Version : 1.0 — Dernière mise à jour : février 2026</p>
         </section>
 
         <section className="mb-6">

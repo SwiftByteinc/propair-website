@@ -147,23 +147,22 @@ describe('Security', () => {
     expect(screen.getByText('Action irréversible')).toBeInTheDocument();
   });
 
-  it('opens delete confirmation modal', () => {
+  it('opens delete confirmation modal (step 1)', () => {
     renderSecurity();
-    // The button text in the danger zone is just "Supprimer"
     const deleteButtons = screen.getAllByText('Supprimer');
-    // Click the one in the danger zone (not in modal)
     fireEvent.click(deleteButtons[0]);
-    expect(screen.getByText('Supprimer le compte ?')).toBeInTheDocument();
-    expect(screen.getByText(/Toutes vos données seront définitivement supprimées/)).toBeInTheDocument();
+    expect(screen.getByText(/seront supprimées immédiatement/)).toBeInTheDocument();
+    expect(screen.getByText(/conservées 30 jours/)).toBeInTheDocument();
+    expect(screen.getByText('Continuer')).toBeInTheDocument();
   });
 
   it('cancel closes modal', () => {
     renderSecurity();
     fireEvent.click(screen.getAllByText('Supprimer')[0]);
-    expect(screen.getByText('Supprimer le compte ?')).toBeInTheDocument();
+    expect(screen.getByText('Continuer')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Annuler'));
-    expect(screen.queryByText('Supprimer le compte ?')).not.toBeInTheDocument();
+    expect(screen.queryByText('Continuer')).not.toBeInTheDocument();
   });
 
   it('renders RGPD notice', () => {
@@ -234,18 +233,23 @@ describe('Security', () => {
   it('modal shows warning about permanent deletion', () => {
     renderSecurity();
     fireEvent.click(screen.getAllByText('Supprimer')[0]);
-    expect(screen.getByText(/définitivement supprimées/)).toBeInTheDocument();
+    expect(screen.getByText(/définitivement effacées/)).toBeInTheDocument();
   });
 
-  it('delete button in modal triggers account deletion', async () => {
+  it('step 2 shows final confirmation after clicking continue', () => {
     renderSecurity();
     fireEvent.click(screen.getAllByText('Supprimer')[0]);
+    fireEvent.click(screen.getByText('Continuer'));
+    expect(screen.getByText('Confirmation finale')).toBeInTheDocument();
+    expect(screen.getByText(/définitive après 30 jours/)).toBeInTheDocument();
+  });
 
-    // Type confirmation word to enable delete button
-    const confirmInput = screen.getByPlaceholderText('SUPPRIMER');
-    fireEvent.change(confirmInput, { target: { value: 'SUPPRIMER' } });
+  it('delete button in step 2 triggers account deletion', async () => {
+    renderSecurity();
+    fireEvent.click(screen.getAllByText('Supprimer')[0]);
+    fireEvent.click(screen.getByText('Continuer'));
 
-    // Click the delete button in the modal
+    // Click the delete button in step 2
     const modalButtons = screen.getAllByText('Supprimer');
     const modalDeleteBtn = modalButtons[modalButtons.length - 1];
     fireEvent.click(modalDeleteBtn);

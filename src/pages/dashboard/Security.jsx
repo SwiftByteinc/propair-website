@@ -355,9 +355,7 @@ export default function Security() {
 }
 
 function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
-  const [confirmText, setConfirmText] = useState('');
-  const confirmWord = t('dashboard.deleteConfirmWord');
-  const canDelete = confirmText === confirmWord;
+  const [step, setStep] = useState(1);
 
   // Focus trap: keep focus inside modal
   useEffect(() => {
@@ -393,7 +391,7 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
 
     modal.addEventListener('keydown', handleKeyDown);
     return () => modal.removeEventListener('keydown', handleKeyDown);
-  }, [modalRef, onClose, isDeleting]);
+  }, [modalRef, onClose, isDeleting, step]);
 
   return (
     <div
@@ -413,49 +411,79 @@ function DeleteModal({ modalRef, isDeleting, onClose, onDelete, t }) {
         <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
           <Trash2 size={24} />
         </div>
-        <h3 id="delete-title" className="text-lg font-semibold text-center text-slate-900 mb-2">
-          {t('dashboard.deleteModalTitle')}
-        </h3>
-        <p id="delete-desc" className="text-center text-sm text-slate-500 mb-4">
-          {t('dashboard.deleteModalDesc')}
-        </p>
-        <div className="mb-4">
-          <label htmlFor="delete-confirm" className="block text-xs font-medium text-slate-500 mb-1.5">
-            {t('dashboard.deleteConfirmLabel')}
-          </label>
-          <input
-            id="delete-confirm"
-            type="text"
-            value={confirmText}
-            onChange={(e) => setConfirmText(e.target.value)}
-            placeholder={confirmWord}
-            autoComplete="off"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-red-400 focus:ring-2 focus:ring-red-400/10 text-sm transition-all"
-          />
-        </div>
-        <div className="flex gap-3">
-          <button
-            onClick={onClose}
-            disabled={isDeleting}
-            className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 active:scale-[0.98]"
-          >
-            {t('dashboard.cancelBtn')}
-          </button>
-          <button
-            onClick={onDelete}
-            disabled={isDeleting || !canDelete}
-            className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 active:scale-[0.98]"
-          >
-            {isDeleting ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                {t('dashboard.deleting')}
-              </>
-            ) : (
-              t('dashboard.deleteBtn')
-            )}
-          </button>
-        </div>
+
+        {step === 1 ? (
+          <>
+            <h3 id="delete-title" className="text-lg font-semibold text-center text-slate-900 mb-4">
+              {t('dashboard.deleteModalTitle')}
+            </h3>
+            <ul id="delete-desc" className="text-sm text-slate-600 space-y-3 mb-6">
+              <li className="flex gap-2">
+                <span className="text-red-400 shrink-0">•</span>
+                {t('dashboard.deleteModalItem1')}
+              </li>
+              <li className="flex gap-2">
+                <span className="text-red-400 shrink-0">•</span>
+                {t('dashboard.deleteModalItem2')}
+              </li>
+              <li className="flex gap-2">
+                <span className="text-red-400 shrink-0">•</span>
+                {t('dashboard.deleteModalItem3')}
+              </li>
+            </ul>
+            <div className="flex gap-3">
+              <button
+                onClick={onClose}
+                className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 active:scale-[0.98]"
+              >
+                {t('dashboard.cancelBtn')}
+              </button>
+              <button
+                onClick={() => setStep(2)}
+                className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 active:scale-[0.98]"
+              >
+                {t('dashboard.deleteModalContinue')}
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h3 id="delete-title" className="text-lg font-semibold text-center text-slate-900 mb-4">
+              {t('dashboard.deleteModalFinalTitle')}
+            </h3>
+            <div id="delete-desc" className="text-sm text-slate-600 space-y-2 mb-2">
+              <p>{t('dashboard.deleteModalFinalP1')}</p>
+              <p>{t('dashboard.deleteModalFinalP2')}</p>
+            </div>
+            <div className="text-sm text-slate-600 mb-6">
+              <p className="mb-1">{t('dashboard.deleteModalFinalP3')}</p>
+              <p className="text-xs text-slate-500">support@propairapp.com · 819-481-0882</p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={onClose}
+                disabled={isDeleting}
+                className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 active:scale-[0.98]"
+              >
+                {t('dashboard.cancelBtn')}
+              </button>
+              <button
+                onClick={onDelete}
+                disabled={isDeleting}
+                className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 active:scale-[0.98]"
+              >
+                {isDeleting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    {t('dashboard.deleting')}
+                  </>
+                ) : (
+                  t('dashboard.deleteBtn')
+                )}
+              </button>
+            </div>
+          </>
+        )}
       </motion.div>
     </div>
   );
