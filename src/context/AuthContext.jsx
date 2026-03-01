@@ -124,11 +124,11 @@ export function AuthProvider({ children }) {
   const processReferral = useCallback(async (currentUser) => {
     if (!supabase || !currentUser || referralProcessed.current) return;
 
+    let pending;
     try {
       const pendingRaw = sessionStorage.getItem(STORAGE_KEYS.PENDING_REFERRAL);
       if (!pendingRaw) return;
 
-      let pending;
       try {
         pending = JSON.parse(pendingRaw);
       } catch {

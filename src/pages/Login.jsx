@@ -78,7 +78,7 @@ export default function Login() {
 
     const from = location.state?.from?.pathname || '/portal';
     navigate(from, { replace: true });
-  }, [user, navigate, location.state]);
+  }, [user, navigate, location.state, t, toast]);
 
   // --- VALIDATION LOGIC ---
   const validateForm = () => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Gift, Link2, Sparkles, Rocket, Heart, Check } from 'lucide-react';
@@ -18,16 +18,12 @@ function getStoredVotes() {
 
 export default function ComingSoon() {
   const { t } = useLanguage();
-  const [joined, setJoined] = useState(false);
-  const [votes, setVotes] = useState({});
-
-  // Restore persisted state
-  useEffect(() => {
-    try {
-      setJoined(localStorage.getItem(WAITLIST_KEY) === 'true');
-      setVotes(getStoredVotes());
-    } catch { /* localStorage unavailable */ }
-  }, []);
+  const [joined, setJoined] = useState(() => {
+    try { return localStorage.getItem(WAITLIST_KEY) === 'true'; } catch { return false; }
+  });
+  const [votes, setVotes] = useState(() => {
+    try { return getStoredVotes(); } catch { return {}; }
+  });
 
   const handleJoinWaitlist = () => {
     if (joined) return;
