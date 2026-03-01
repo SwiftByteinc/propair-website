@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   Home,
   CreditCard,
-  Gift,
+  Rocket, // FEATURE_FLAG: V2_REFERRAL — was Gift
   Shield,
   LogOut,
   ChevronLeft,
@@ -43,14 +43,16 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
   const entrepreneurLinks = [
     { to: '/portal', icon: Home, label: t('dashboard.sideHome'), end: true },
     { to: '/portal/billing', icon: CreditCard, label: t('dashboard.sideBillingEntrep') },
-    { to: '/portal/referral', icon: Gift, label: t('dashboard.sideReferral') },
+    // FEATURE_FLAG: V2_REFERRAL — was { icon: Gift, label: t('dashboard.sideReferral') }
+    { to: '/portal/referral', icon: Rocket, label: t('dashboard.sideComingSoon'), badge: t('dashboard.badgeSoon') },
     { to: '/portal/security', icon: Shield, label: t('dashboard.sideSecurity') },
   ];
 
   const clientLinks = [
     { to: '/portal', icon: Home, label: t('dashboard.sideHome'), end: true },
     { to: '/portal/billing', icon: CreditCard, label: t('dashboard.sideBillingClient') },
-    { to: '/portal/referral', icon: Gift, label: t('dashboard.sideReferral') },
+    // FEATURE_FLAG: V2_REFERRAL — was { icon: Gift, label: t('dashboard.sideReferral') }
+    { to: '/portal/referral', icon: Rocket, label: t('dashboard.sideComingSoon'), badge: t('dashboard.badgeSoon') },
     { to: '/portal/security', icon: Shield, label: t('dashboard.sideSecurity') },
   ];
 
@@ -147,7 +149,12 @@ export default function Sidebar({ user, onSignOut, isOpen, onClose }) {
               `}
             >
               <link.icon size={20} />
-              {link.label}
+              <span className="flex-1">{link.label}</span>
+              {link.badge && (
+                <span className="text-[10px] font-semibold bg-teal-700/10 text-teal-700 px-1.5 py-0.5 rounded-full">
+                  {link.badge}
+                </span>
+              )}
             </NavLink>
           ))}
         </nav>

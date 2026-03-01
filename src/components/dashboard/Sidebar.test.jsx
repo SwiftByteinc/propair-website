@@ -8,6 +8,7 @@ vi.mock('lucide-react', () => ({
   Home: () => <span>HomeIcon</span>,
   CreditCard: () => <span>CreditCardIcon</span>,
   Gift: () => <span>GiftIcon</span>,
+  Rocket: () => <span>RocketIcon</span>,
   Shield: () => <span>ShieldIcon</span>,
   LogOut: () => <span>LogOutIcon</span>,
   ChevronLeft: () => <span>ChevronLeftIcon</span>,
@@ -87,7 +88,7 @@ describe('Sidebar', () => {
 
     expect(screen.getByText('Accueil')).toBeInTheDocument();
     expect(screen.getByText('Abonnement & Factures')).toBeInTheDocument();
-    expect(screen.getByText('Parrainage')).toBeInTheDocument();
+    expect(screen.getByText('À venir')).toBeInTheDocument();
     expect(screen.getByText('Sécurité')).toBeInTheDocument();
   });
 
@@ -96,7 +97,7 @@ describe('Sidebar', () => {
 
     expect(screen.getByText('Accueil')).toBeInTheDocument();
     expect(screen.getByText('Abonnement')).toBeInTheDocument();
-    expect(screen.getByText('Parrainage')).toBeInTheDocument();
+    expect(screen.getByText('À venir')).toBeInTheDocument();
     expect(screen.getByText('Sécurité')).toBeInTheDocument();
   });
 
@@ -139,9 +140,9 @@ describe('Sidebar', () => {
     expect(link).toHaveAttribute('href', '/portal/security');
   });
 
-  it('Parrainage link points to /portal/referral', () => {
+  it('À venir link points to /portal/referral', () => {
     renderSidebar();
-    const link = screen.getByText('Parrainage').closest('a');
+    const link = screen.getByText('À venir').closest('a');
     expect(link).toHaveAttribute('href', '/portal/referral');
   });
 

@@ -16,6 +16,9 @@ serve(async (req) => {
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
   )
 
+  // Referral credit amount per month (in cents). Default: 4999 = 49.99$ CAD
+  const REFERRAL_CREDIT_PER_MONTH = parseInt(Deno.env.get('REFERRAL_CREDIT_PER_MONTH') ?? '4999', 10)
+
   // 1. Verify webhook signature
   const signature = req.headers.get('stripe-signature')
   if (!signature) {
@@ -67,6 +70,126 @@ serve(async (req) => {
     else console.log(`Referral validation check completed for ${userId}`)
   }
 
+  // Helper: apply Stripe Customer Balance credits for a validated entrepreneur referral
+  // Uses stripe_credited flag to prevent duplicate credits on repeated webhook events
+  const applyReferralStripeCredits = async (refereeUserId: string) => {
+    try {
+      // Find the validated referral for this referee that hasn't been credited yet
+      const { data: referralEvent, error: lookupErr } = await supabaseAdmin
+        .from('referral_events')
+        .select('id, referrer_id, referee_type')
+        .eq('referee_id', refereeUserId)
+        .eq('status', 'validated')
+        .eq('stripe_credited', false)
+        .maybeSingle()
+
+      if (lookupErr) {
+        console.error(`Referral credit lookup error for ${refereeUserId}:`, lookupErr)
+        return
+      }
+
+      // No uncredited referral found (already credited or no referral exists)
+      if (!referralEvent) return
+
+      // Only entrepreneur referrals get immediate Stripe credits
+      if (referralEvent.referee_type !== 'entrepreneur') return
+
+      // Credit the REFERRER: +3 months
+      const { data: referrerProfile } = await supabaseAdmin
+        .from('profiles')
+        .select('stripe_customer_id')
+        .eq('id', referralEvent.referrer_id)
+        .single()
+
+      if (referrerProfile?.stripe_customer_id) {
+        const referrerCredit = REFERRAL_CREDIT_PER_MONTH * 3
+        await stripe.customers.createBalanceTransaction(
+          referrerProfile.stripe_customer_id,
+          {
+            amount: -referrerCredit, // Negative = credit in favor of customer
+            currency: 'cad',
+            description: 'Récompense parrainage ProPair – 3 mois offerts',
+          }
+        )
+        console.log(`Stripe credit applied: -${referrerCredit} to referrer ${referralEvent.referrer_id}`)
+      } else {
+        // Referrer has no Stripe customer yet — pro_months_balance is already set by the RPC,
+        // stored credits will be applied when they subscribe (see applyStoredReferralCredits)
+        console.log(`Referrer ${referralEvent.referrer_id} has no Stripe customer — credits stored in pro_months_balance`)
+      }
+
+      // Credit the REFEREE (filleul): +2 months
+      const { data: refereeProfile } = await supabaseAdmin
+        .from('profiles')
+        .select('stripe_customer_id')
+        .eq('id', refereeUserId)
+        .single()
+
+      if (refereeProfile?.stripe_customer_id) {
+        const refereeCredit = REFERRAL_CREDIT_PER_MONTH * 2
+        await stripe.customers.createBalanceTransaction(
+          refereeProfile.stripe_customer_id,
+          {
+            amount: -refereeCredit,
+            currency: 'cad',
+            description: 'Bonus filleul ProPair – 2 mois offerts',
+          }
+        )
+        console.log(`Stripe credit applied: -${refereeCredit} to referee ${refereeUserId}`)
+      }
+
+      // Mark as credited to prevent duplicate credits
+      await supabaseAdmin
+        .from('referral_events')
+        .update({ stripe_credited: true })
+        .eq('id', referralEvent.id)
+
+      console.log(`Referral event ${referralEvent.id} marked as stripe_credited`)
+
+    } catch (err) {
+      // Non-blocking: log error but don't fail the webhook
+      console.error(`Error applying referral Stripe credits for ${refereeUserId}:`, err)
+    }
+  }
+
+  // Helper: apply stored pro_months_balance as Stripe Customer Balance on first checkout
+  // Handles the case where a user accumulated referral months before subscribing
+  const applyStoredReferralCredits = async (userId: string) => {
+    try {
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('pro_months_balance, stripe_customer_id')
+        .eq('id', userId)
+        .single()
+
+      if (!profile?.stripe_customer_id || !profile?.pro_months_balance || profile.pro_months_balance <= 0) {
+        return
+      }
+
+      const creditAmount = REFERRAL_CREDIT_PER_MONTH * profile.pro_months_balance
+
+      await stripe.customers.createBalanceTransaction(
+        profile.stripe_customer_id,
+        {
+          amount: -creditAmount,
+          currency: 'cad',
+          description: `Crédit parrainage ProPair – ${profile.pro_months_balance} mois accumulés`,
+        }
+      )
+
+      // Reset balance to zero (credits are now in Stripe)
+      await supabaseAdmin
+        .from('profiles')
+        .update({ pro_months_balance: 0 })
+        .eq('id', userId)
+
+      console.log(`Applied ${profile.pro_months_balance} stored months (${creditAmount} cents) as Stripe credit for ${userId}`)
+
+    } catch (err) {
+      console.error(`Error applying stored referral credits for ${userId}:`, err)
+    }
+  }
+
   try {
     switch (event.type) {
       case 'checkout.session.completed': {
@@ -106,6 +229,13 @@ serve(async (req) => {
 
         // Validate any pending entrepreneur referral for this user
         await validatePendingReferrals(userId)
+
+        // Apply Stripe Customer Balance credits for the validated referral
+        await applyReferralStripeCredits(userId)
+
+        // Apply any stored referral months accumulated before subscribing
+        await applyStoredReferralCredits(userId)
+
         break
       }
 
@@ -144,6 +274,9 @@ serve(async (req) => {
         // Validate pending referral only on real payment (not trialing)
         if (subscription.status === 'active') {
           await validatePendingReferrals(userId)
+
+          // Apply Stripe Customer Balance credits for the validated referral
+          await applyReferralStripeCredits(userId)
         }
         break
       }

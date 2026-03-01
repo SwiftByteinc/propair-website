@@ -202,7 +202,11 @@ export function AuthProvider({ children }) {
       clearStoredReferralCode();
 
     } catch (err) {
-      if (import.meta.env.DEV) console.error('Referral processing error:', err);
+      posthog.capture('referral_processing_error', {
+        error: err?.message || 'Unknown error',
+        referral_code: pending?.code,
+        user_id: currentUser?.id,
+      });
       clearStoredReferralCode();
     }
   }, []);

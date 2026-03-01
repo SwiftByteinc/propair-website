@@ -10,7 +10,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import CookieConsent from './components/ui/CookieConsent';
 import StructuredData from './components/seo/StructuredData';
-import { useReferralCapture } from './hooks/useReferralCapture';
+// FEATURE_FLAG: V2_REFERRAL — import { useReferralCapture } from './hooks/useReferralCapture';
 
 // --- LAZY LOADING (Code Splitting P1) ---
 const Home = lazy(() => import('./pages/Home'));
@@ -23,7 +23,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Refund = lazy(() => import('./pages/Refund'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Parrainage = lazy(() => import('./pages/Parrainage'));
+// FEATURE_FLAG: V2_REFERRAL — const Parrainage = lazy(() => import('./pages/Parrainage'));
 const DeleteAccount = lazy(() => import('./pages/DeleteAccount'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -38,7 +38,8 @@ const SiteRefund = lazy(() => import('./pages/site/SiteRefund'));
 const DashboardLayout = lazy(() => import('./components/dashboard/DashboardLayout'));
 const DashboardHome = lazy(() => import('./pages/dashboard/DashboardHome'));
 const Billing = lazy(() => import('./pages/dashboard/Billing'));
-const Referral = lazy(() => import('./pages/dashboard/Referral'));
+// FEATURE_FLAG: V2_REFERRAL — const Referral = lazy(() => import('./pages/dashboard/Referral'));
+const ComingSoon = lazy(() => import('./pages/dashboard/ComingSoon'));
 const Security = lazy(() => import('./pages/dashboard/Security'));
 
 // Loader optimisé
@@ -58,7 +59,7 @@ function ScrollToTop() {
   const { pathname } = useLocation();
   const posthog = usePostHog();
   const prevPath = useRef(pathname);
-  useReferralCapture(); // Capture ?ref__= ou ?ref= depuis n'importe quelle page
+  // FEATURE_FLAG: V2_REFERRAL — useReferralCapture();
   useEffect(() => {
     window.scrollTo(0, 0);
     // Track SPA page views on route change (skip initial — PostHog handles that)
@@ -116,7 +117,7 @@ function App() {
               <Route path="/terms" element={<AuthLayout><Terms /></AuthLayout>} />
               <Route path="/refund" element={<AuthLayout><Refund /></AuthLayout>} />
               <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
-              <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} />
+              {/* FEATURE_FLAG: V2_REFERRAL — <Route path="/parrainage" element={<MainLayout><Parrainage /></MainLayout>} /> */}
 
               {/* Website Legal Pages (with nav/footer) */}
               <Route path="/site/privacy" element={<MainLayout><SitePrivacy /></MainLayout>} />
@@ -142,7 +143,8 @@ function App() {
               }>
                 <Route index element={<DashboardHome />} />
                 <Route path="billing" element={<Billing />} />
-                <Route path="referral" element={<Referral />} />
+                {/* FEATURE_FLAG: V2_REFERRAL — <Route path="referral" element={<Referral />} /> */}
+                <Route path="referral" element={<ComingSoon />} />
                 <Route path="security" element={<Security />} />
               </Route>
 

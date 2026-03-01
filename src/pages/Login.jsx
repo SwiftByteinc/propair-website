@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader2, AlertCircle, CheckCircle, Briefcase } from 'lucide-react';
 import { usePostHog } from '@posthog/react';
 import { useAuth } from '../context/AuthContext';
-import { getStoredReferralCode } from '../hooks/useReferralCapture';
+// FEATURE_FLAG: V2_REFERRAL — import { getStoredReferralCode } from '../hooks/useReferralCapture';
 import { STORAGE_KEYS } from '../lib/constants';
 import { supabase } from '../lib/supabase';
 import SEO from '../components/SEO';
@@ -20,8 +20,7 @@ export default function Login() {
   const posthog = usePostHog();
   const toast = useToast();
 
-  // Support both ?ref__= and ?ref= (rétrocompatibilité)
-  const refCode = searchParams.get('ref__') || searchParams.get('ref');
+  // FEATURE_FLAG: V2_REFERRAL — const refCode = searchParams.get('ref__') || searchParams.get('ref');
 
   const [isLogin, setIsLogin] = useState(location.pathname === '/connexion');
   const [showPassword, setShowPassword] = useState(false);
@@ -128,16 +127,16 @@ export default function Login() {
         if (error) throw error;
         posthog?.capture('user_logged_in', { method: 'email' });
       } else {
-        const storedRefCode = refCode || getStoredReferralCode();
+        // FEATURE_FLAG: V2_REFERRAL — const storedRefCode = refCode || getStoredReferralCode();
         const { error } = await signUp(
           formData.email,
           formData.password,
           formData.name,
-          storedRefCode,
+          null, // FEATURE_FLAG: V2_REFERRAL — was storedRefCode
           userRole
         );
         if (error) throw error;
-        posthog?.capture('user_signed_up', { method: 'email', has_referral: !!storedRefCode, user_role: userRole });
+        posthog?.capture('user_signed_up', { method: 'email', user_role: userRole });
         // Preserve selected plan for post-signup checkout
         const plan = searchParams.get('plan');
         if (plan && ['monthly', 'annual'].includes(plan)) {
@@ -221,7 +220,7 @@ export default function Login() {
         transition={{ duration: 0.4 }}
         className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-6 sm:p-8"
       >
-        {/* Referral Badge */}
+        {/* FEATURE_FLAG: V2_REFERRAL — Referral Badge (dormant)
         {(refCode || getStoredReferralCode()) && (
           <div className="mb-6 p-3.5 bg-teal-700/10 border border-teal-700/20 rounded-xl flex items-start gap-3">
             <CheckCircle size={20} className="text-teal-700 mt-0.5 shrink-0" />

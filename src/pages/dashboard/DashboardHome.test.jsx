@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import DashboardHome from './DashboardHome';
@@ -19,11 +19,6 @@ vi.mock('react-router-dom', async () => {
   return { ...actual, useOutletContext: () => mockOutletContext() };
 });
 
-const mockUseReferralStats = vi.fn();
-vi.mock('../../hooks/useReferralStats', () => ({
-  useReferralStats: (...args) => mockUseReferralStats(...args),
-}));
-
 const mockToast = { success: vi.fn(), error: vi.fn(), info: vi.fn() };
 vi.mock('../../context/ToastContext', () => ({
   useToast: () => mockToast,
@@ -33,10 +28,6 @@ vi.mock('../../context/ToastContext', () => ({
 vi.mock('../../lib/supabase', () => ({
   supabase: { functions: { invoke: vi.fn().mockResolvedValue({ data: null, error: null }) } },
 }));
-
-Object.assign(navigator, {
-  clipboard: { writeText: vi.fn().mockResolvedValue(undefined) },
-});
 
 function renderDashboardHome() {
   return render(
@@ -51,11 +42,6 @@ function renderDashboardHome() {
 describe('DashboardHome', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockUseReferralStats.mockReturnValue({
-      stats: { totalReferrals: 2, validatedReferrals: 1, pendingReferrals: 1, earnedMonths: 0 },
-      referralList: [],
-      loading: false,
-    });
   });
 
   describe('entrepreneur user', () => {
@@ -67,7 +53,6 @@ describe('DashboardHome', () => {
           email: 'test@test.com',
           role: 'entrepreneur',
           isPro: false,
-          referral_code: 'NICOLAS123',
           leads_used: 1,
         },
         isPro: false,
@@ -84,29 +69,16 @@ describe('DashboardHome', () => {
       expect(screen.getByText('Votre tour de contrôle ProPair.')).toBeInTheDocument();
     });
 
-    it('shows referral module', () => {
+    it('shows Coming Soon section instead of referral', () => {
       renderDashboardHome();
-      expect(screen.getByText('Parrainage')).toBeInTheDocument();
-      expect(screen.getByText('Votre lien unique')).toBeInTheDocument();
+      expect(screen.getByText('À venir')).toBeInTheDocument();
+      expect(screen.getByText('Bientôt')).toBeInTheDocument();
     });
 
-    it('shows referral link with encoded code', () => {
+    it('shows Coming Soon description and link', () => {
       renderDashboardHome();
-      expect(screen.getByText(/ref__=NICOLAS123/)).toBeInTheDocument();
-    });
-
-    it('copy button copies referral link', () => {
-      renderDashboardHome();
-      fireEvent.click(screen.getByText('Copier'));
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-        expect.stringContaining('ref__=NICOLAS123')
-      );
-    });
-
-    it('shows referral progress', () => {
-      renderDashboardHome();
-      expect(screen.getByText('1/3')).toBeInTheDocument();
-      expect(screen.getByText(/Encore 2 parrainage/)).toBeInTheDocument();
+      expect(screen.getByText(/On prépare de nouvelles fonctionnalités/)).toBeInTheDocument();
+      expect(screen.getByText('Voir les nouveautés')).toBeInTheDocument();
     });
 
     it('shows Mode Essai for non-pro user', () => {
@@ -120,6 +92,12 @@ describe('DashboardHome', () => {
       expect(screen.getByText('Abonnement')).toBeInTheDocument();
       expect(screen.getByText('Support')).toBeInTheDocument();
     });
+
+    it('does not show referral module', () => {
+      renderDashboardHome();
+      expect(screen.queryByText('Votre lien unique')).not.toBeInTheDocument();
+      expect(screen.queryByText('Copier')).not.toBeInTheDocument();
+    });
   });
 
   describe('entrepreneur pro user', () => {
@@ -131,7 +109,6 @@ describe('DashboardHome', () => {
           email: 'test@test.com',
           role: 'entrepreneur',
           isPro: true,
-          referral_code: 'NICOLAS123',
           leads_used: 0,
         },
         isPro: true,
@@ -163,7 +140,6 @@ describe('DashboardHome', () => {
           email: 'jean@test.com',
           role: 'client',
           isPro: false,
-          referral_code: 'JEAN456',
           leads_used: 0,
         },
         isPro: false,
@@ -180,10 +156,11 @@ describe('DashboardHome', () => {
       expect(screen.getByText('Espace Client')).toBeInTheDocument();
     });
 
-    it('shows client navigation links', () => {
+    it('shows client navigation links with Coming Soon', () => {
       renderDashboardHome();
       expect(screen.getByText('À propos')).toBeInTheDocument();
-      expect(screen.getByText('Parrainage')).toBeInTheDocument();
+      expect(screen.getByText('À venir')).toBeInTheDocument();
+      expect(screen.getByText('Bientôt')).toBeInTheDocument();
     });
 
     it('does not show referral module', () => {
@@ -193,27 +170,11 @@ describe('DashboardHome', () => {
   });
 
   describe('edge cases', () => {
-    it('shows 0 referrals progress when no referrals', () => {
-      mockOutletContext.mockReturnValue({
-        user: {
-          id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 3,
-        },
-        isPro: false,
-      });
-      mockUseReferralStats.mockReturnValue({
-        stats: { totalReferrals: 0, validatedReferrals: 0, pendingReferrals: 0, earnedMonths: 0 },
-        referralList: [], loading: false,
-      });
-      renderDashboardHome();
-      expect(screen.getByText('0/3')).toBeInTheDocument();
-    });
-
     it('shows 0 connexion(s) restante(s) when trials exhausted', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 3,
+          role: 'entrepreneur', isPro: false, leads_used: 3,
         },
         isPro: false,
       });
@@ -221,54 +182,11 @@ describe('DashboardHome', () => {
       expect(screen.getByText('0 connexion(s) restante(s)')).toBeInTheDocument();
     });
 
-    it('copy button calls clipboard with referral link', () => {
-      mockOutletContext.mockReturnValue({
-        user: {
-          id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'TEST999', leads_used: 1,
-        },
-        isPro: false,
-      });
-      renderDashboardHome();
-      fireEvent.click(screen.getByText('Copier'));
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-        expect.stringContaining('ref__=TEST999')
-      );
-    });
-
-    it('calls useReferralStats with user id', () => {
-      mockOutletContext.mockReturnValue({
-        user: {
-          id: 'abc-123', full_name: 'Test User', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'CODE', leads_used: 0,
-        },
-        isPro: false,
-      });
-      renderDashboardHome();
-      expect(mockUseReferralStats).toHaveBeenCalledWith('abc-123');
-    });
-
-    it('shows referral progress 3/3 when 3 validated', () => {
-      mockOutletContext.mockReturnValue({
-        user: {
-          id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: false, referral_code: 'NICOLAS123', leads_used: 1,
-        },
-        isPro: false,
-      });
-      mockUseReferralStats.mockReturnValue({
-        stats: { totalReferrals: 3, validatedReferrals: 3, pendingReferrals: 0, earnedMonths: 6 },
-        referralList: [], loading: false,
-      });
-      renderDashboardHome();
-      expect(screen.getByText('3/3')).toBeInTheDocument();
-    });
-
     it('pro user does not show Mode Essai', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-1', full_name: 'Nicolas Lepage', email: 'test@test.com',
-          role: 'entrepreneur', isPro: true, referral_code: 'NICOLAS123', leads_used: 0,
+          role: 'entrepreneur', isPro: true, leads_used: 0,
         },
         isPro: true,
       });
@@ -280,24 +198,12 @@ describe('DashboardHome', () => {
       mockOutletContext.mockReturnValue({
         user: {
           id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
-          role: 'client', isPro: false, referral_code: 'JEAN456', leads_used: 0,
+          role: 'client', isPro: false, leads_used: 0,
         },
         isPro: false,
       });
       renderDashboardHome();
       expect(screen.getByText(/Mode Essai/)).toBeInTheDocument();
-    });
-
-    it('client user does not show referral progress', () => {
-      mockOutletContext.mockReturnValue({
-        user: {
-          id: 'user-2', full_name: 'Jean Tremblay', email: 'jean@test.com',
-          role: 'client', isPro: false, referral_code: 'JEAN456', leads_used: 0,
-        },
-        isPro: false,
-      });
-      renderDashboardHome();
-      expect(screen.queryByText(/Encore \d+ parrainage/)).not.toBeInTheDocument();
     });
   });
 });

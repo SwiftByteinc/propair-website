@@ -39,7 +39,7 @@ describe('Navbar', () => {
     expect(screen.getAllByText('Accueil').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('À propos').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Tarifs Pro').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Parrainage').length).toBeGreaterThanOrEqual(1);
+    // FEATURE_FLAG: V2_REFERRAL — Parrainage link removed from navbar
     expect(screen.getAllByText('Contact').length).toBeGreaterThanOrEqual(1);
   });
 

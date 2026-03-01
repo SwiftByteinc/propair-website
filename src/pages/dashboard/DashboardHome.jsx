@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
-import { copyToClipboard } from '../../lib/clipboard';
 import { Helmet } from 'react-helmet-async';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Crown,
   Zap,
-  Gift,
-  Copy,
-  Check,
+  Rocket,
   ChevronRight,
   CreditCard,
   Users,
@@ -17,7 +14,8 @@ import {
   Shield,
   Loader2
 } from 'lucide-react';
-import { useReferralStats } from '../../hooks/useReferralStats';
+// FEATURE_FLAG: V2_REFERRAL — import { useReferralStats } from '../../hooks/useReferralStats';
+// FEATURE_FLAG: V2_REFERRAL — import { copyToClipboard } from '../../lib/clipboard';
 import { useToast } from '../../context/ToastContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { STORAGE_KEYS } from '../../lib/constants';
@@ -28,7 +26,6 @@ export default function DashboardHome() {
   const { user, isPro } = useOutletContext();
   const toast = useToast();
   const isEntrepreneur = user?.role === 'entrepreneur';
-  const [copied, setCopied] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   // Process pending plan from signup flow (auto-redirect to Stripe Checkout)
@@ -61,29 +58,10 @@ export default function DashboardHome() {
     startCheckout();
   }, [isPro, toast, t]);
 
-  // Stats réelles
-  const { stats: referralStats, loading: loadingStats, error: referralError } = useReferralStats(user?.id);
-  if (import.meta.env.DEV && referralError) console.error('Referral stats error:', referralError);
-
   // Données utilisateur
   const connectionsTotal = 3; // Configurable plus tard via API
-
-  // Sécurisation XSS : Encode le code de parrainage
-  const referralCode = encodeURIComponent(user?.referral_code || 'PROPAIR');
-  const referralLink = `${window.location.origin}/login?ref__=${referralCode}`;
-  const referralGoal = 3;
-
   const connectionsUsed = user?.leads_used || 0;
   const connectionsRemaining = user?.isPro ? 999 : Math.max(0, connectionsTotal - connectionsUsed);
-
-  const referralCount = loadingStats ? 0 : (referralStats?.validatedReferrals || 0);
-
-  const copyReferralLink = async () => {
-    await copyToClipboard(referralLink);
-    setCopied(true);
-    toast.success(t('dashboard.linkCopied'));
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const navigate = useNavigate();
 
@@ -198,7 +176,7 @@ export default function DashboardHome() {
       {/* DASHBOARD CONTENT */}
       {isEntrepreneur ? (
         <>
-          {/* REFERRAL MODULE */}
+          {/* FEATURE_FLAG: V2_REFERRAL — was REFERRAL MODULE, replaced by Coming Soon teaser */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -207,67 +185,25 @@ export default function DashboardHome() {
           >
             <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
-                  <Gift size={16} className="text-slate-600" />
+                <div className="w-8 h-8 rounded-lg bg-teal-700/10 flex items-center justify-center">
+                  <Rocket size={16} className="text-teal-700" />
                 </div>
-                <h2 className="font-semibold text-slate-900">{t('dashboard.referralSection')}</h2>
+                <h2 className="font-semibold text-slate-900">{t('dashboard.comingSoonSection')}</h2>
               </div>
-              <Link to="/portal/referral" className="text-xs font-semibold text-teal-700 hover:text-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 rounded">
-                {t('dashboard.seeAll')}
-              </Link>
+              <span className="text-[10px] font-semibold bg-teal-700/10 text-teal-700 px-2 py-0.5 rounded-full">
+                {t('dashboard.badgeSoon')}
+              </span>
             </div>
 
-            <div className="p-6 space-y-5">
-              <div>
-                <label className="text-xs font-medium text-slate-500 block mb-2">
-                  {t('dashboard.yourUniqueLink')}
-                </label>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-sm font-mono text-slate-600 truncate">
-                    {referralLink}
-                  </div>
-                  <motion.button
-                    onClick={copyReferralLink}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 ${
-                      copied
-                        ? 'bg-teal-700 text-white'
-                        : 'bg-slate-900 text-white hover:bg-black'
-                    }`}
-                  >
-                    {copied ? <Check size={16} /> : <Copy size={16} />}
-                    {copied ? t('dashboard.copied') : t('dashboard.copy')}
-                  </motion.button>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-slate-500">
-                    {t('dashboard.freeMonthGoal')}
-                  </span>
-                  <span className="text-sm font-bold text-slate-900">
-                    {loadingStats ? (
-                      <span className="inline-block w-8 h-4 bg-slate-100 rounded animate-pulse" />
-                    ) : (
-                      <>{referralCount}/{referralGoal}</>
-                    )}
-                  </span>
-                </div>
-                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min((referralCount / referralGoal) * 100, 100)}%` }}
-                    className="h-full bg-teal-700 rounded-full"
-                  />
-                </div>
-                <p className="text-xs text-slate-500 mt-2">
-                  {referralGoal - referralCount > 0
-                    ? t('dashboard.moreReferralsNeeded', { count: referralGoal - referralCount })
-                    : t('dashboard.freeMonthUnlocked')
-                  }
-                </p>
-              </div>
+            <div className="p-6">
+              <p className="text-sm text-slate-600 mb-4">{t('dashboard.comingSoonHomeDesc')}</p>
+              <Link
+                to="/portal/referral"
+                className="text-sm font-semibold text-teal-700 hover:text-teal-800 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2 rounded"
+              >
+                {t('dashboard.comingSoonHomeLink')}
+                <ChevronRight size={14} />
+              </Link>
             </div>
           </motion.section>
 
@@ -324,9 +260,11 @@ export default function DashboardHome() {
                 <Briefcase size={20} className="text-slate-500 mb-2" />
                 <p className="font-semibold text-sm">{t('dashboard.aboutLink')}</p>
              </Link>
+             {/* FEATURE_FLAG: V2_REFERRAL — was referral link */}
              <Link to="/portal/referral" className="p-4 bg-white rounded-xl border border-slate-200 shadow-md shadow-slate-200/40 hover:shadow-md hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2">
-                <Gift size={20} className="text-slate-500 mb-2" />
-                <p className="font-semibold text-sm">{t('dashboard.referralLink')}</p>
+                <Rocket size={20} className="text-teal-700 mb-2" />
+                <p className="font-semibold text-sm">{t('dashboard.sideComingSoon')}</p>
+                <p className="text-[10px] font-semibold text-teal-700 mt-1">{t('dashboard.badgeSoon')}</p>
              </Link>
           </div>
         </>

@@ -16,7 +16,7 @@ export default function Navbar() {
     { name: t('nav.home'), path: '/' },
     { name: t('nav.about'), path: '/about' },
     { name: t('nav.pricing'), path: '/pricing' },
-    { name: t('nav.referral'), path: '/parrainage' },
+    // FEATURE_FLAG: V2_REFERRAL — { name: t('nav.referral'), path: '/parrainage' },
     { name: t('nav.contact'), path: '/contact' },
   ];
 

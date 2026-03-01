@@ -172,14 +172,15 @@ describe('App routing', () => {
     expect(await screen.findByText('Contact Page')).toBeInTheDocument();
   });
 
-  it('renders Parrainage page', async () => {
+  // FEATURE_FLAG: V2_REFERRAL — Parrainage route is dormant
+  it('renders NotFound for dormant /parrainage route', async () => {
     window.history.pushState({}, '', '/parrainage');
     render(
       <HelmetProvider>
         <App />
       </HelmetProvider>
     );
-    expect(await screen.findByText('Parrainage Page')).toBeInTheDocument();
+    expect(await screen.findByText('NotFound Page')).toBeInTheDocument();
   });
 
   it('renders NotFound for unknown routes', async () => {
