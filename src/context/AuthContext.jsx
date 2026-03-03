@@ -274,7 +274,13 @@ export function AuthProvider({ children }) {
           setSubscription(null);
         }
 
-        setLoading(false);
+        // Don't set loading=false for INITIAL_SESSION — initializeAuth handles
+        // the initial load (including profile fetch). Setting it here would
+        // create a window where profile is null but loading is false, causing
+        // the dashboard to briefly render with role='client' for everyone.
+        if (event !== 'INITIAL_SESSION') {
+          setLoading(false);
+        }
       });
       authListener = data.subscription;
     }

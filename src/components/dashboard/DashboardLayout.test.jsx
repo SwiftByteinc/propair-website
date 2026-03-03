@@ -220,12 +220,15 @@ describe('DashboardLayout', () => {
     expect(screen.getByTestId('outlet')).toBeInTheDocument();
   });
 
-  it('handles null profile gracefully', () => {
+  it('shows skeleton when profile is null (guards race condition)', () => {
+    // When user is set but profile hasn't loaded yet, show skeleton instead of
+    // rendering with role='client' fallback (would incorrectly show client view).
     mockUseAuth.mockReturnValue({
       user: { id: '1', email: 'test@test.com', user_metadata: { full_name: 'From Meta' }, email_confirmed_at: '2026-01-01' },
       profile: null, subscription: null, loading: false, profileLoading: false, isPro: false, signOut: vi.fn(),
     });
     renderDashboard();
-    expect(screen.getByText('Sidebar for From Meta')).toBeInTheDocument();
+    expect(screen.queryByTestId('sidebar')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('outlet')).not.toBeInTheDocument();
   });
 });

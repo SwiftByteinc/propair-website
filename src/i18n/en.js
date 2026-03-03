@@ -341,6 +341,8 @@ const en = {
     roleClient: 'Client',
     roleClientDesc: 'Find an entrepreneur',
     roleAriaLabel: 'Account type selection',
+    continueWithGoogle: 'Continue with Google',
+    continueWithApple: 'Continue with Apple',
     orByEmail: 'or by email',
     namePlaceholder: 'Your full name',
     nameLabel: 'Full name',

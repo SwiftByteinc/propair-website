@@ -139,8 +139,9 @@ export default function DashboardLayout() {
     return t('dashboard.sideHome');
   }, [location.pathname, t, userData?.role]);
 
-  // Show skeleton while loading
-  if (loading || profileLoading) {
+  // Show skeleton while loading or if profile hasn't been fetched yet
+  // (guards against race conditions where loading=false before profile arrives)
+  if (loading || profileLoading || (user && !profile)) {
     return <DashboardSkeleton />;
   }
 
