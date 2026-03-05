@@ -7,11 +7,12 @@ export default function Privacy() {
         title="Politique de confidentialité — ProPair"
         canonical="/privacy"
         description="Politique de confidentialité de ProPair. Gestion des renseignements personnels conformément à la Loi 25, LPRPDE et RGPD."
+        noIndex={true}
       />
       <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Politique de confidentialité</h1>
-        <p className="text-center text-xs text-slate-500 mb-1">Version 1.0 — Février 2026</p>
-        <p className="text-center text-xs text-slate-500 mb-8">Loi 25 | LPRPDE | RGPD</p>
+        <p className="text-center text-xs text-slate-500 mb-1">Version 1.1 — Mars 2026 — SwiftByte inc. / ProPair™</p>
+        <p className="text-center text-xs text-slate-500 mb-8">Loi 25 • LPRPDE • RGPD</p>
 
         <section className="mb-6">
           <h2 className="font-bold mb-1">1. Introduction</h2>
@@ -63,7 +64,7 @@ export default function Privacy() {
           <h3 className="font-semibold mt-3 mb-1">3.2 Renseignements recueillis automatiquement</h3>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
             <li>Données d'utilisation : pages consultées, actions effectuées, durée des sessions (PostHog)</li>
-            <li>Données de diagnostic : rapports d'erreurs anonymisés, échantillonnage de 20 % (Sentry)</li>
+            <li>Données de diagnostic : rapports d'erreurs liés à votre identifiant utilisateur (Sentry)</li>
             <li>Données de localisation : position approximative, uniquement avec votre autorisation explicite</li>
             <li>Identifiant d'appareil : jeton de notification push (Expo Push Notifications)</li>
             <li>Adresse IP et journaux d'accès</li>
@@ -73,11 +74,12 @@ export default function Privacy() {
           <h3 className="font-semibold mt-3 mb-1">3.3 Renseignements collectés via des tiers</h3>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
             <li>Vérification de licences professionnelles (RBQ)</li>
+            <li>Statut des abonnements et transactions (Apple App Store / Google Play via RevenueCat)</li>
           </ul>
 
           <h3 className="font-semibold mt-3 mb-1">3.4 Données stockées localement sur votre appareil</h3>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
-            <li>AsyncStorage : préférences de langue, drapeaux d'état</li>
+            <li>AsyncStorage : profil en cache (durée de 4 heures), file d'attente des messages hors ligne, accusés de lecture, cache de géocodage (adresses et coordonnées, 7 jours), préférences de langue et d'état.</li>
             <li>SecureStore : jetons d'authentification chiffrés (ne quittent jamais votre appareil)</li>
           </ul>
         </section>
@@ -87,6 +89,7 @@ export default function Privacy() {
           <p className="mb-2">Nous utilisons vos renseignements aux fins suivantes :</p>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
             <li>Créer et gérer votre compte utilisateur</li>
+            <li>Gérer les abonnements payants et traiter les achats intégrés (via l'App Store et Google Play)</li>
             <li>Permettre la mise en relation entre clients et entrepreneurs</li>
             <li>Afficher les résultats de recherche pertinents selon votre localisation et vos préférences</li>
             <li>Calculer des scores de compatibilité (algorithme de mise en relation automatisé)</li>
@@ -107,14 +110,12 @@ export default function Privacy() {
           <p className="mb-2">Nous les partageons uniquement avec les tiers suivants, strictement nécessaires au fonctionnement du Service :</p>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
             <li><strong>Supabase</strong> — Hébergement, base de données, authentification. Toutes les données de compte et de contenu. AWS (États-Unis).</li>
-            <li><strong>Sentry</strong> — Suivi d'erreurs. Données de diagnostic anonymisées (20 % des sessions). États-Unis.</li>
-            <li><strong>PostHog</strong> — Analytique. Événements d'utilisation anonymisés. Union européenne.</li>
-            <li><strong>Expo (EAS)</strong> — Mises à jour OTA, notifications push. Jeton de notification, métadonnées d'appareil. États-Unis.</li>
-            <li><strong>Google (Gemini AI)</strong> — Assistance à la rédaction. Texte des descriptions de projets soumis par l'utilisateur ; aucune donnée identifiante n'est transmise. États-Unis.</li>
+            <li><strong>RevenueCat</strong> — Gestion des abonnements. Reçoit votre identifiant utilisateur et traite les données de transaction App Store/Google Play. (États-Unis).</li>
+            <li><strong>Sentry</strong> — Suivi d'erreurs. Transmet systématiquement votre identifiant utilisateur pour la résolution de bogues. Votre courriel est inclus uniquement si vous avez consenti à l'analytique. (États-Unis).</li>
+            <li><strong>PostHog</strong> — Analytique. Événements d'utilisation pseudonymisés (liés à votre courriel, nom et rôle) uniquement si vous avez donné votre consentement analytique. (Union européenne).</li>
+            <li><strong>Nominatim (OpenStreetMap)</strong> — Géocodage. Reçoit les adresses saisies pour les convertir en coordonnées GPS. (Union européenne / Royaume-Uni).</li>
+            <li><strong>Expo (EAS)</strong> — Mises à jour OTA, notifications push. Jeton de notification, métadonnées d'appareil. (États-Unis).</li>
           </ul>
-          <p className="mb-2">
-            Les données transmises à Google Gemini sont traitées conformément aux conditions d'utilisation de l'API Google Cloud et ne sont pas utilisées par Google pour entraîner ses modèles d'intelligence artificielle.
-          </p>
           <p>
             Nous pouvons également divulguer vos renseignements si la loi l'exige ou sur ordonnance d'un tribunal compétent.
           </p>
@@ -130,7 +131,7 @@ export default function Privacy() {
             <li><strong>Conservées 30 jours (zone de réactivation) :</strong> nom complet, adresse courriel, numéro de téléphone, date de naissance, préférences de consentement. Ces données minimales permettent la réactivation de votre compte si vous vous reconnectez dans ce délai.</li>
             <li><strong>Après 30 jours :</strong> toutes les données restantes sont supprimées de façon permanente et irréversible, y compris votre identifiant d'authentification.</li>
           </ul>
-          <p className="mb-1"><strong>Données analytiques :</strong> les données d'utilisation anonymisées peuvent être conservées jusqu'à 12 mois.</p>
+          <p className="mb-1"><strong>Données analytiques :</strong> les données d'utilisation peuvent être conservées jusqu'à 12 mois.</p>
           <p><strong>Messages :</strong> les conversations sont supprimées avec le compte. Les messages reçus par d'autres utilisateurs restent visibles dans leur propre compte.</p>
         </section>
 
@@ -138,6 +139,7 @@ export default function Privacy() {
           <h2 className="font-bold mb-1">7. Sécurité et incidents</h2>
 
           <h3 className="font-semibold mt-3 mb-1">7.1 Mesures de sécurité</h3>
+          <p className="mb-1">Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles :</p>
           <ul className="list-disc pl-6 mb-2 space-y-0.5">
             <li>Chiffrement des données en transit (TLS 1.3) et au repos (AES-256)</li>
             <li>Authentification sécurisée via Supabase Auth avec jetons JWT</li>
@@ -164,10 +166,10 @@ export default function Privacy() {
             <li><strong>Portabilité :</strong> recevoir vos données dans un format structuré et lisible (JSON)</li>
             <li><strong>Retrait du consentement :</strong> retirer votre consentement à tout moment</li>
             <li><strong>Opposition :</strong> vous opposer au traitement de vos données</li>
-            <li><strong>Désindexation :</strong> demander la cessation de la diffusion de vos renseignements</li>
+            <li><strong>Désinscription :</strong> demander la cessation de la diffusion de vos renseignements</li>
           </ul>
           <p className="mb-2">
-            <strong>Suppression de compte :</strong> Vous pouvez supprimer votre compte directement dans les paramètres de l'Application. Vos données liées à votre activité (messages, profil) sont supprimées immédiatement, tandis que vos informations de base sont conservées pendant un délai de grâce de 30 jours (voir section 6). Pour une suppression immédiate et totale sans délai de grâce, contactez support@propairapp.com ou le 819-481-0882.
+            <strong>Suppression de compte :</strong> Vous pouvez supprimer votre compte directement dans les paramètres de l'Application. Vos données liées à votre activité (messages, connexions, profil professionnel) sont supprimées immédiatement, tandis que vos informations de base sont conservées pendant un délai de grâce de 30 jours (voir section 6). Pour une suppression immédiate et totale sans délai de grâce, contactez support@propairapp.com ou le 819-481-0882.
           </p>
           <p>
             Pour exercer tout autre droit, contactez-nous à privacy@propairapp.com. Nous répondrons dans un délai maximal de 30 jours.
@@ -202,9 +204,9 @@ export default function Privacy() {
         <section className="mb-6">
           <h2 className="font-bold mb-1">11. Transferts internationaux</h2>
           <p className="mb-2">
-            Certains de nos fournisseurs de services (Supabase, Sentry, Expo, Google) sont situés aux États-Unis. Ces transferts sont encadrés par des clauses contractuelles types et les certifications de conformité des fournisseurs concernés. Nous nous assurons que ces tiers respectent des standards de protection équivalents à ceux de la Loi 25.
+            Certains de nos fournisseurs de services (Supabase, Sentry, Expo, RevenueCat) sont situés aux États-Unis. Ces transferts sont encadrés par des clauses contractuelles types et les certifications de conformité des fournisseurs concernés. Nous nous assurons que ces tiers respectent des standards de protection équivalents à ceux de la Loi 25.
           </p>
-          <p>PostHog (analytique) est hébergé dans l'Union européenne.</p>
+          <p>PostHog (analytique) et Nominatim (géocodage) sont hébergés dans l'Union européenne ou au Royaume-Uni.</p>
         </section>
 
         <section className="mb-6">
@@ -212,7 +214,7 @@ export default function Privacy() {
           <p>
             Nous pouvons mettre à jour la présente politique. En cas de modification substantielle, nous vous en informerons par notification dans l'Application au moins 15 jours avant l'entrée en vigueur des changements. L'utilisation continue de l'Application après ce délai constitue votre acceptation de la politique modifiée.
           </p>
-          <p className="mt-2 text-xs text-slate-500">Version : 1.0 — Dernière mise à jour : février 2026</p>
+          <p className="mt-2 text-xs text-slate-500">Version : 1.1 — Dernière mise à jour : mars 2026</p>
         </section>
 
         <section className="mb-6">
@@ -227,6 +229,7 @@ export default function Privacy() {
           <p>
             Si vous n'êtes pas satisfait de notre réponse, vous pouvez déposer une plainte auprès de la Commission d'accès à l'information du Québec (CAI) : www.cai.gouv.qc.ca
           </p>
+          <p className="mt-2 text-xs text-slate-500">Version web : propairapp.com/privacy</p>
         </section>
       </article>
     </div>

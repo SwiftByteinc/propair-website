@@ -10,7 +10,7 @@ export default function Terms() {
       />
       <article className="max-w-3xl mx-auto text-sm text-slate-800 leading-relaxed font-serif">
         <h1 className="text-xl font-bold text-center mb-1 uppercase tracking-wide">Conditions d'utilisation</h1>
-        <p className="text-center text-xs text-slate-500 mb-1">Version 1.0 — Février 2026</p>
+        <p className="text-center text-xs text-slate-500 mb-1">Version 1.0 — Mars 2026 — SwiftByte inc. / ProPair™</p>
         <p className="text-center text-xs text-slate-500 mb-8">Juridiction : Québec, Canada</p>
 
         <section className="mb-6">
@@ -62,9 +62,19 @@ export default function Terms() {
           <p className="mb-1">
             <strong>4.2 Indépendance des contrats</strong> — ProPair n'est pas partie aux contrats de travaux. Les ententes sont conclues directement entre les utilisateurs. ProPair facilite la mise en relation entre utilisateurs, et non la conclusion d'un contrat de service entre eux.
           </p>
-          <p>
+          <p className="mb-1">
             <strong>4.3 Assistance</strong> — Pour toute question relative à votre compte ou à l'accès aux fonctionnalités, contactez-nous à support@propairapp.com. Nous nous engageons à répondre dans un délai de 15 jours ouvrables.
           </p>
+          <p>
+            <strong>4.4 Abonnements payants et facturation</strong> — L'Application propose des abonnements payants auto-renouvelables pour les entrepreneurs (Statut Pro).
+          </p>
+          <ul className="list-disc pl-6 mt-1 space-y-0.5">
+            <li>Le paiement sera facturé sur votre compte Apple ID ou Google Play à la confirmation de l'achat.</li>
+            <li>L'abonnement se renouvelle automatiquement à moins que le renouvellement automatique ne soit désactivé au moins 24 heures avant la fin de la période en cours.</li>
+            <li>Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours, au tarif du plan sélectionné.</li>
+            <li>Les abonnements et le renouvellement automatique peuvent être gérés ou désactivés en accédant aux paramètres de votre compte Apple ou Google Play après l'achat.</li>
+            <li>Les abonnements Pro sont individuels, liés à un profil d'entreprise unique, et ne sont pas éligibles au Partage familial (Family Sharing). Toute portion inutilisée d'une période d'essai gratuit, si offerte, sera perdue lors de l'achat d'un abonnement.</li>
+          </ul>
         </section>
 
         <section className="mb-6">
@@ -75,6 +85,7 @@ export default function Terms() {
             <li>Utiliser l'Application uniquement aux fins prévues</li>
             <li>Respecter les autres utilisateurs dans toutes vos communications</li>
             <li>Ne pas publier de contenu illicite, diffamatoire, harcelant ou discriminatoire</li>
+            <li>Ne pas téléverser des images inappropriées, à caractère sexuel, violent ou offensant</li>
             <li>Ne pas usurper l'identité d'une autre personne ou entité</li>
             <li>Ne pas utiliser l'Application à des fins commerciales non autorisées</li>
             <li>Ne pas tenter de contourner les mesures de sécurité</li>
@@ -88,13 +99,10 @@ export default function Terms() {
             <strong>6.1 Propriété</strong> — Vous conservez la propriété du contenu que vous publiez. En publiant du contenu, vous nous accordez une licence non exclusive, mondiale, libre de redevances pour afficher et distribuer ce contenu dans le cadre de l'Application.
           </p>
           <p className="mb-1">
-            <strong>6.2 Modération</strong> — Nous nous réservons le droit de retirer tout contenu qui enfreint les présentes Conditions, sans préavis.
-          </p>
-          <p className="mb-1">
-            <strong>6.3 Avis et évaluations</strong> — Les avis doivent refléter une expérience réelle. Les faux avis ou les avis destinés à nuire à un concurrent sont interdits et entraîneront la suspension du compte.
+            <strong>6.2 Modération et signalement</strong> — Nous nous réservons le droit de retirer tout contenu qui enfreint les présentes Conditions, sans préavis. L'Application met à la disposition des utilisateurs des outils intégrés pour signaler tout contenu ou comportement inapproprié, et pour bloquer les utilisateurs abusifs. Tout signalement sera traité par notre équipe dans les meilleurs délais, et les contrevenants s'exposent à une suspension immédiate de leur compte.
           </p>
           <p>
-            <strong>6.4 Assistance par Intelligence Artificielle (IA)</strong> — L'Application peut proposer des fonctionnalités assistées par l'intelligence artificielle (ex: aide à la rédaction de descriptions). Le contenu généré par l'IA est fourni à titre indicatif et de suggestion uniquement. Vous demeurez l'unique responsable de la révision, de l'exactitude et de la publication finale de tout contenu généré à l'aide de ces outils. ProPair ne garantit pas l'exactitude, la pertinence ou la légalité du contenu généré par l'IA et décline toute responsabilité quant à son utilisation.
+            <strong>6.3 Avis et évaluations</strong> — Les avis doivent refléter une expérience réelle. Les faux avis ou les avis destinés à nuire à un concurrent sont interdits et entraîneront la suspension du compte.
           </p>
         </section>
 
@@ -186,7 +194,7 @@ export default function Terms() {
           <p>
             Nous pouvons modifier les présentes Conditions à tout moment. Les modifications substantielles vous seront communiquées par notification dans l'Application au moins 15 jours avant leur entrée en vigueur. L'utilisation continue de l'Application après ce délai constitue votre acceptation des Conditions modifiées.
           </p>
-          <p className="mt-2 text-xs text-slate-500">Version : 1.0 — Dernière mise à jour : février 2026</p>
+          <p className="mt-2 text-xs text-slate-500">Version : 1.0 — Dernière mise à jour : mars 2026</p>
         </section>
 
         <section className="mb-6">
@@ -215,7 +223,7 @@ export default function Terms() {
             SwiftByte inc. (exploitant de ProPair)<br />
             528 Rue Castle, Magog, QC<br />
             support@propairapp.com<br />
-            propairapp.com
+            propairapp.com/terms
           </address>
         </section>
       </article>

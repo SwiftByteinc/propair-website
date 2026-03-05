@@ -22,7 +22,7 @@ describe('Privacy', () => {
 
   it('renders version info', () => {
     renderPrivacy();
-    expect(screen.getByText(/Version 1\.0/)).toBeInTheDocument();
+    expect(screen.getByText(/Version 1\./)).toBeInTheDocument();
   });
 
   it('renders Introduction section', () => {
